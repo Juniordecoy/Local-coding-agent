@@ -1,0 +1,3 @@
+Junior is building a local AI coding assistant.
+The assistant will eventually help with Flask projects.
+The system uses Ollama and Python.
