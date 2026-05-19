@@ -45,12 +45,53 @@ def explain_command(user_message):
 
     return ai_message
 
+def read_command(user_message):
+    filename = user_message.replace("read ", "", 1)
+
+    ai_message = analyze_file(filename)
+
+    return ai_message
+
+def search_command(user_message):
+    keyword = user_message.replace("search ", "", 1)
+
+    matches = search_project_files(keyword)
+
+    if not matches:
+        return "No matching files found."
+
+    result = "MATCHING FILES:\n"
+
+    for match in matches:
+        result += f"- {match}\n"
+
+    return result
+
+def debug_search_command(user_message):
+    keyword = user_message.replace("debug search ", "", 1)
+
+    matches = search_project_files_with_scores(keyword)
+
+    if not matches:
+        return "No matching files found."
+
+    result = "DEBUG SEARCH RESULTS:\n"
+
+    for match in matches:
+        result += f"- {match['file']} | score: {match['score']}\n"
+
+    return result
+
 ARGUMENT_COMMANDS = {
+    "debug search ": debug_search_command,
     "explain ": explain_command,
+    "read ": read_command,
+    "search ": search_command,
 }
 
 COMMANDS = {
     "summarize project": summarize_project,
+    "analyze project": analyze_project,
     "files": show_files
 }
 
@@ -64,39 +105,6 @@ while True:
         save_memory(messages)
         print("Memory saved. Goodbye.")
         break
-
-    if user_message.startswith("debug search "):
-        keyword = user_message.replace("debug search ", "", 1)
-
-        matches = search_project_files_with_scores(keyword)
-
-        print("\nDEBUG SEARCH RESULTS:")
-
-        if matches:
-            for match in matches:
-                print(f"- {match['file']} | score: {match['score']}")
-        else:
-            print("No matching files found.")
-
-        print()
-        continue
-
-    if user_message.startswith("search "):
-        keyword = user_message.replace("search ", "", 1)
-
-        matches = search_project_files(keyword)
-
-        print("\nMATCHING FILES:")
-
-        if matches:
-            for match in matches:
-                print(f"- {match}")
-        else:
-            print("No matching files found.")
-
-        print()
-
-        continue
 
     command_handled = False
 
@@ -116,22 +124,6 @@ while True:
         result = COMMANDS[user_message.lower()]()
 
         print(f"\nRESULT:\n{result}\n")
-
-        continue
-
-    if user_message.lower() == "analyze project":
-        ai_message = analyze_project()
-
-        print(f"\nPROJECT ANALYSIS:\n{ai_message}\n")
-
-        continue
-
-    if user_message.startswith("read "):
-        filename = user_message.replace("read ", "", 1)
-
-        ai_message = analyze_file(filename)
-
-        print(f"\nAI FILE ANALYSIS:\n{ai_message}\n")
 
         continue
 
