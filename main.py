@@ -1,6 +1,7 @@
 from ai import ask_ai, chat_with_memory
 from memory import load_memory, save_memory
 from file_tools import read_notes, read_file, list_project_files, search_project_files, search_project_files_with_scores
+from workflows import explain_file, summarize_project, analyze_project, analyze_file, answer_about_main_file, answer_with_auto_retrieval
 
 notes = read_notes()
 
@@ -26,6 +27,32 @@ AUTO_RETRIEVAL_KEYWORDS = [
     "notes",
     "project"
 ]
+
+def show_files():
+    files = list_project_files()
+
+    result = "PROJECT FILES:\n"
+
+    for file in files:
+        result += f"- {file}\n"
+
+    return result
+
+def explain_command(user_message):
+    filename = user_message.replace("explain ", "", 1)
+
+    ai_message = explain_file(filename)
+
+    return ai_message
+
+ARGUMENT_COMMANDS = {
+    "explain ": explain_command,
+}
+
+COMMANDS = {
+    "summarize project": summarize_project,
+    "files": show_files
+}
 
 print("Local AI Assistant")
 print("Type 'exit' to quit.\n")
@@ -71,170 +98,60 @@ while True:
 
         continue
 
-    if user_message.lower() == "files":
-        files = list_project_files()
+    command_handled = False
 
-        print("\nPROJECT FILES:")
-        for file in files:
-            print(f"- {file}")
+    for command, handler in ARGUMENT_COMMANDS.items():
+        if user_message.startswith(command):
+            result = handler(user_message)
 
-        print()
+            print(f"\nRESULT:\n{result}\n")
+
+            command_handled = True
+            break
+
+    if command_handled:
         continue
 
-    if user_message.lower() == "summarize project":
-        files = list_project_files()
+    if user_message.lower() in COMMANDS:
+        result = COMMANDS[user_message.lower()]()
 
-        project_context = ""
-
-        for file in files:
-            if file.endswith((".py", ".txt")):
-                file_content = read_file(file)
-
-                project_context += f"\n--- {file} ---\n"
-                project_context += file_content
-                project_context += "\n"
-
-        ai_message = ask_ai(
-            system_prompt=(
-                "You are a careful coding tutor. "
-                "Only explain the code that is actually provided."
-            ),
-            user_prompt=project_context
-        )
-
-        print(f"\nPROJECT SUMMARY:\n{ai_message}\n")
+        print(f"\nRESULT:\n{result}\n")
 
         continue
 
     if user_message.lower() == "analyze project":
-        files = list_project_files()
-
-        project_context = "Project Files and Contents:\n\n"
-
-        for file in files:
-            if file.endswith((".py", ".txt")):
-                file_content = read_file(file)
-
-                project_context += f"--- {file} ---\n"
-                project_context += file_content
-                project_context += "\n\n"
-
-        ai_message = ask_ai(
-            system_prompt=(
-                "You are a careful coding tutor. "
-                "Only explain the code that is actually provided."
-            ),
-            user_prompt=project_context
-        )
+        ai_message = analyze_project()
 
         print(f"\nPROJECT ANALYSIS:\n{ai_message}\n")
-
-        continue
-
-    if user_message.startswith("explain "):
-        filename = user_message.replace("explain ", "", 1)
-
-        file_content = read_file(filename)
-
-        tool_message = (
-            f"Filename: {filename}\n\n"
-            "Explain this file in a focused, beginner-friendly way.\n"
-            "Do not invent anything not shown in the file.\n\n"
-            f"File contents:\n{file_content}"
-        )
-
-        ai_message = ask_ai(
-            system_prompt=(
-                "You are a careful coding tutor. "
-                "Only explain the code that is actually provided."
-            ),
-            user_prompt=tool_message
-        )
-
-        print(f"\nCODE EXPLANATION:\n{ai_message}\n")
 
         continue
 
     if user_message.startswith("read "):
         filename = user_message.replace("read ", "", 1)
 
-        file_content = read_file(filename)
-
-        tool_message = (
-            f"The user asked to read the file: {filename}\n\n"
-            f"File contents:\n{file_content}"
-        )
-
-        ai_message = ask_ai(
-            system_prompt=(
-                "You are a careful coding tutor. "
-                "Only explain the code that is actually provided."
-            ),
-            user_prompt=tool_message
-        )
+        ai_message = analyze_file(filename)
 
         print(f"\nAI FILE ANALYSIS:\n{ai_message}\n")
 
         continue
 
     if "main.py" in user_message:
-        file_content = read_file("main.py")
-
-        tool_message = (
-            "The user is asking about main.py.\n\n"
-            f"Filename: main.py\n\n"
-            f"Actual file contents start below:\n\n"
-            f"{file_content}\n\n"
-            f"Actual file contents end here."
-        )
-
-
-        ai_message = ask_ai(
-            system_prompt=(
-                "You are a careful coding tutor. "
-                "Only explain the code that is actually provided."
-            ),
-            user_prompt=tool_message
-        )
-
+        ai_message = answer_about_main_file()
 
         print(f"\nAI RESPONSE:\n{ai_message}\n")
 
         continue
 
     if any(word in user_message.lower() for word in AUTO_RETRIEVAL_KEYWORDS):
-        matches = []
-
-        for keyword in AUTO_RETRIEVAL_KEYWORDS:
-            if keyword in user_message.lower():
-                matches.extend(search_project_files(keyword))
-
-        matches = list(dict.fromkeys(matches))
-        matches = matches[:3]
+        matches, ai_message = answer_with_auto_retrieval(
+            user_message=user_message,
+            keywords=AUTO_RETRIEVAL_KEYWORDS
+        )
 
         print("\nUSING FILES:")
         for match in matches:
             print(f"- {match}")
         print()
-
-        project_context = ""
-
-        for match in matches:
-            content = read_file(match)
-
-            project_context += f"\n--- {match} ---\n"
-            project_context += content
-            project_context += "\n"
-
-
-        ai_message = ask_ai(
-            system_prompt=(
-                "You are a careful coding tutor. "
-                "Only explain the code that is actually provided."
-            ),
-            user_prompt=project_context
-        )
-
 
         print(f"\nAI RESPONSE:\n{ai_message}\n")
 
