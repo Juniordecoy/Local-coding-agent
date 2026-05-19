@@ -1,4 +1,4 @@
-from ai import ask_ai, chat_with_memory
+from ai import ask_ai, chat_with_memory, choose_tool
 from memory import load_memory, save_memory
 from file_tools import read_notes, read_file, list_project_files, search_project_files, search_project_files_with_scores
 from workflows import explain_file, summarize_project, analyze_project, analyze_file, answer_about_main_file, answer_with_auto_retrieval
@@ -82,11 +82,28 @@ def debug_search_command(user_message):
 
     return result
 
+def run_tool(tool_name, tool_input):
+    if tool_name not in TOOLS:
+        return f"Unknown tool: {tool_name}"
+
+    tool_function = TOOLS[tool_name]
+
+    if tool_name == "list_project_files":
+        return tool_function()
+
+    return tool_function(tool_input)
+
 ARGUMENT_COMMANDS = {
     "debug search ": debug_search_command,
     "explain ": explain_command,
     "read ": read_command,
     "search ": search_command,
+}
+
+TOOLS = {
+    "read_file": read_file,
+    "list_project_files": list_project_files,
+    "search_project_files": search_project_files,
 }
 
 COMMANDS = {
@@ -105,6 +122,48 @@ while True:
         save_memory(messages)
         print("Memory saved. Goodbye.")
         break
+
+    if user_message.startswith("choose tool "):
+        request = user_message.replace("choose tool ", "", 1)
+
+        chosen_tool = choose_tool(
+            user_message=request,
+            available_tools=TOOLS.keys()
+        )
+
+        print(f"\nCHOSEN TOOL: {chosen_tool}\n")
+
+        continue
+
+    if user_message.startswith("run tool "):
+        tool_name = user_message.replace("run tool ", "", 1)
+
+        result = run_tool(
+            tool_name=tool_name,
+            tool_input="main.py"
+        )
+
+        print(f"\nTOOL RESULT:\n{result}\n")
+
+        continue
+
+    if user_message.startswith("agent "):
+        request = user_message.replace("agent ", "", 1)
+
+        chosen_tool = choose_tool(
+            user_message=request,
+            available_tools=TOOLS.keys()
+        )
+
+        tool_result = run_tool(
+            tool_name=chosen_tool,
+            tool_input="main.py"
+        )
+
+        print(f"\nCHOSEN TOOL: {chosen_tool}")
+        print(f"\nTOOL RESULT:\n{tool_result}\n")
+
+        continue
 
     command_handled = False
 
