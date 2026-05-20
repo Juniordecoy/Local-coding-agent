@@ -148,3 +148,36 @@ def answer_with_auto_retrieval(user_message, keywords):
     )
 
     return matches, ai_message
+
+def multi_file_agent_answer(user_message, search_keyword):
+    search_results = search_project_files(search_keyword)
+
+    if not search_results:
+        return [], "No files found."
+
+    top_files = search_results[:2]
+
+    combined_context = ""
+
+    for file in top_files:
+        file_content = read_file(file)
+
+        combined_context += f"\n--- {file} ---\n"
+        combined_context += file_content
+        combined_context += "\n"
+
+    ai_message = ask_ai(
+        system_prompt=(
+            "You are a careful coding assistant. "
+            "Answer the user's question using only the provided project files. "
+            "Do not explain general computer science concepts unless the files discuss them. "
+            "Focus on what this project's code is doing."
+        ),
+        user_prompt=(
+            f"User question:\n{user_message}\n\n"
+            f"Files used: {top_files}\n\n"
+            f"Combined file contents:\n{combined_context}"
+        )
+    )
+
+    return top_files, ai_message

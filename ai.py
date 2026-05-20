@@ -53,3 +53,30 @@ def choose_tool(user_message, available_tools):
     )
 
     return response["message"]["content"].strip()
+
+def choose_tool_input(user_message, chosen_tool):
+    response = ollama.chat(
+        model=MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You choose the input argument for a tool. "
+                    "Only reply with the input value. "
+                    "Do not explain."
+                )
+            },
+            {
+                "role": "user",
+                "content": (
+                    f"Chosen tool: {chosen_tool}\n"
+                    f"User request: {user_message}\n\n"
+                    "If the tool is read_file, return an exact filename from the project, like memory.py, main.py, or notes.txt. Do not return descriptions like ""memory file"". "
+                    "If the tool is search_project_files, return the search keyword. "
+                    "If the tool is list_project_files, return none."
+                )
+            }
+        ]
+    )
+
+    return response["message"]["content"].strip()
