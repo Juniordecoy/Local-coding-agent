@@ -201,64 +201,7 @@ COMMANDS = {
     "clear working memory": clear_working_memory,
 }
 
-print("Local AI Assistant")
-print("Type 'exit' to quit.\n")
-
-while True:
-    user_message = input("You: ")
-
-    if user_message.lower() == "exit":
-        save_memory(messages)
-        print("Memory saved. Goodbye.")
-        break
-
-    if user_message.startswith("choose tool "):
-        request = user_message.replace("choose tool ", "", 1)
-
-        chosen_tool = choose_tool(
-            user_message=request,
-            available_tools=TOOLS.keys()
-        )
-
-        print(f"\nCHOSEN TOOL: {chosen_tool}\n")
-
-        continue
-
-    if user_message.startswith("run tool "):
-        tool_name = user_message.replace("run tool ", "", 1)
-
-        result = run_tool(
-            tool_name=tool_name,
-            tool_input="main.py"
-        )
-
-        print(f"\nTOOL RESULT:\n{result}\n")
-
-        continue
-
-    if user_message.startswith("agent "):
-        request = user_message.replace("agent ", "", 1)
-
-        chosen_tool = choose_tool(
-            user_message=request,
-            available_tools=TOOLS.keys()
-        )
-
-        tool_input = choose_tool_input(
-            user_message=request,
-            chosen_tool=chosen_tool
-        )
-
-        tool_result = run_tool(
-            tool_name=chosen_tool,
-            tool_input=tool_input
-        )
-
-        print(f"\nCHOSEN TOOL: {chosen_tool}")
-        print(f"\nTOOL INPUT: {tool_input}")
-
-        continue
-
+def handle_user_message(user_message):
     if user_message.startswith("multi agent "):
         request = user_message.replace("multi agent ", "", 1)
 
@@ -273,64 +216,12 @@ while True:
 
         remember_working("last_files_used", top_files)
 
-        print(f"\nSEARCH KEYWORD: {search_keyword}")
-
-        print("\nFILES USED:")
-        for file in top_files:
-            print(f"- {file}")
-
-        print(f"\nMULTI-STEP AGENT RESPONSE:\n{ai_message}\n")
-
-        continue
-
-    command_handled = False
-
-    if user_message.lower() in COMMANDS:
-        result = COMMANDS[user_message.lower()]()
-
-        print(f"\nRESULT:\n{result}\n")
-
-        continue
-
-    for command, handler in ARGUMENT_COMMANDS.items():
-        if user_message.startswith(command):
-            result = handler(user_message)
-
-            print(f"\nRESULT:\n{result}\n")
-
-            command_handled = True
-            break
-
-    if command_handled:
-        continue
-
-    if "main.py" in user_message:
-        ai_message = answer_about_main_file()
-
-        remember_working("last_search_keyword", "main.py")
-        remember_working("last_files_used", ["main.py"])
-
-        print(f"\nAI RESPONSE:\n{ai_message}\n")
-
-        continue
-
-    if any(word in user_message.lower() for word in AUTO_RETRIEVAL_KEYWORDS):
-        matches, ai_message = answer_with_auto_retrieval(
-            user_message=user_message,
-            keywords=AUTO_RETRIEVAL_KEYWORDS
-        )
-
-        remember_working("last_files_used", matches)
-        remember_working("last_search_keyword", user_message)
-
-        print("\nUSING FILES:")
-        for match in matches:
-            print(f"- {match}")
-        print()
-
-        print(f"\nAI RESPONSE:\n{ai_message}\n")
-
-        continue
+        return {
+            "type": "multi_agent",
+            "response": ai_message,
+            "search_keyword": search_keyword,
+            "files_used": top_files
+        }
 
     messages.append({
         "role": "user",
@@ -339,11 +230,141 @@ while True:
 
     ai_message = chat_with_memory(messages)
 
-    print(f"\nAI: {ai_message}\n")
-
     messages.append({
         "role": "assistant",
         "content": ai_message
     })
 
     save_memory(messages)
+
+    return {
+        "type": "chat",
+        "response": ai_message,
+        "search_keyword": None,
+        "files_used": []
+    }
+
+if __name__ == "__main__":
+    print("Local AI Assistant")
+    print("Type 'exit' to quit.\n")
+
+    while True:
+        user_message = input("You: ")
+
+        if user_message.lower() == "exit":
+            save_memory(messages)
+            print("Memory saved. Goodbye.")
+            break
+
+        if user_message.startswith("choose tool "):
+            request = user_message.replace("choose tool ", "", 1)
+
+            chosen_tool = choose_tool(
+                user_message=request,
+                available_tools=TOOLS.keys()
+            )
+
+            print(f"\nCHOSEN TOOL: {chosen_tool}\n")
+
+            continue
+
+        if user_message.startswith("run tool "):
+            tool_name = user_message.replace("run tool ", "", 1)
+
+            result = run_tool(
+                tool_name=tool_name,
+                tool_input="main.py"
+            )
+
+            print(f"\nTOOL RESULT:\n{result}\n")
+
+            continue
+
+        if user_message.startswith("agent "):
+            request = user_message.replace("agent ", "", 1)
+
+            chosen_tool = choose_tool(
+                user_message=request,
+                available_tools=TOOLS.keys()
+            )
+
+            tool_input = choose_tool_input(
+                user_message=request,
+                chosen_tool=chosen_tool
+            )
+
+            tool_result = run_tool(
+                tool_name=chosen_tool,
+                tool_input=tool_input
+            )
+
+            print(f"\nCHOSEN TOOL: {chosen_tool}")
+            print(f"\nTOOL INPUT: {tool_input}")
+
+            continue
+
+        if user_message.startswith("multi agent "):
+            result = handle_user_message(user_message)
+
+            print(f"\nSEARCH KEYWORD: {result['search_keyword']}")
+
+            print("\nFILES USED:")
+            for file in result["files_used"]:
+                print(f"- {file}")
+
+            print(f"\nMULTI-STEP AGENT RESPONSE:\n{result['response']}\n")
+
+            continue
+
+        command_handled = False
+
+        if user_message.lower() in COMMANDS:
+            result = COMMANDS[user_message.lower()]()
+
+            print(f"\nRESULT:\n{result}\n")
+
+            continue
+
+        for command, handler in ARGUMENT_COMMANDS.items():
+            if user_message.startswith(command):
+                result = handler(user_message)
+
+                print(f"\nRESULT:\n{result}\n")
+
+                command_handled = True
+                break
+
+        if command_handled:
+            continue
+
+        if "main.py" in user_message:
+            ai_message = answer_about_main_file()
+
+            remember_working("last_search_keyword", "main.py")
+            remember_working("last_files_used", ["main.py"])
+
+            print(f"\nAI RESPONSE:\n{ai_message}\n")
+
+            continue
+
+        if any(word in user_message.lower() for word in AUTO_RETRIEVAL_KEYWORDS):
+            matches, ai_message = answer_with_auto_retrieval(
+                user_message=user_message,
+                keywords=AUTO_RETRIEVAL_KEYWORDS
+            )
+
+            remember_working("last_files_used", matches)
+            remember_working("last_search_keyword", user_message)
+
+            print("\nUSING FILES:")
+            for match in matches:
+                print(f"- {match}")
+            print()
+
+            print(f"\nAI RESPONSE:\n{ai_message}\n")
+
+            continue
+
+        result = handle_user_message(user_message)
+
+        print(f"\nAI: {result['response']}\n")

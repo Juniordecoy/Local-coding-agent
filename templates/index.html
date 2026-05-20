@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local AI Control Room</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Local AI Control Room</h1>
+
+    <div class="agent-zones">
+
+        <div class="agent-card {{ agent_status.chat }}">
+            <div>Chat Agent</div>
+            <span class="status-dot"></span>
+            <small>{{ agent_status.chat }}</small>
+        </div>
+
+        <div class="agent-card {{ agent_status.file }}">
+            <div>File Agent</div>
+            <span class="status-dot"></span>
+            <small>{{ agent_status.file }}</small>
+        </div>
+
+        <div class="agent-card {{ agent_status.memory }}">
+            <div>Memory Agent</div>
+            <span class="status-dot"></span>
+            <small>{{ agent_status.memory }}</small>
+        </div>
+
+        <div class="agent-card {{ agent_status.tool }}">
+            <div>Tool Agent</div>
+            <span class="status-dot"></span>
+            <small>{{ agent_status.tool }}</small>
+        </div>
+
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div class="panel">
+
+            <h2>Command Input</h2>
+
+            <form method="POST">
+                <textarea name="user_message" rows="4" cols="60" placeholder="Talk to your AI...">{{ user_message }}</textarea>
+                <br>
+                <button type="submit">Send</button>
+            </form>
+
+            {% if activity_log %}
+                <h2>Agent Activity</h2>
+
+                <div class="response-box">
+                    {% for item in activity_log %}
+                        <div>• {{ item }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if files_used %}
+                <h2>Files Used</h2>
+
+                <div class="response-box">
+                    {% for file in files_used %}
+                        <div>- {{ file }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+        </div>
+
+        <div class="panel">
+
+            <h2>AI Response</h2>
+
+            <div class="response-box">
+                {{ ai_response }}
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>
