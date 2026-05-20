@@ -220,7 +220,13 @@ def handle_user_message(user_message):
             "type": "multi_agent",
             "response": ai_message,
             "search_keyword": search_keyword,
-            "files_used": top_files
+            "files_used": top_files,
+            "activity_events": [
+                "tool_agent:routed request",
+                "file_agent:searched project files",
+                "chat_agent:generated response",
+                "memory_agent:saved working memory"
+            ]
         }
 
     messages.append({
@@ -241,7 +247,11 @@ def handle_user_message(user_message):
         "type": "chat",
         "response": ai_message,
         "search_keyword": None,
-        "files_used": []
+        "files_used": [],
+        "activity_events": [
+            "chat_agent:generated response",
+            "memory_agent:saved conversation"
+        ]
     }
 
 if __name__ == "__main__":

@@ -5,80 +5,91 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Local AI Control Room</h1>
+    <div class="control-room-layout">
+        <div class="side-panel">
 
-    <div class="agent-zones">
+            <div class="side-block">
+                <h2>Command Input</h2>
 
-        <div class="agent-card {{ agent_status.chat }}">
-            <div>Chat Agent</div>
-            <span class="status-dot"></span>
-            <small>{{ agent_status.chat }}</small>
-        </div>
+                <form id="chat-form">
+                    <textarea id="user_message" name="user_message" rows="4" cols="60" placeholder="Talk to your AI...">{{ user_message }}</textarea>
+                    <br>
+                    <button type="submit">Send</button>
+                    <button type="button" id="voice-btn">🎙 Talk</button>
+                    <div id="voice-status" class="mini-status"></div>
+                </form>
+            </div>
 
-        <div class="agent-card {{ agent_status.file }}">
-            <div>File Agent</div>
-            <span class="status-dot"></span>
-            <small>{{ agent_status.file }}</small>
-        </div>
-
-        <div class="agent-card {{ agent_status.memory }}">
-            <div>Memory Agent</div>
-            <span class="status-dot"></span>
-            <small>{{ agent_status.memory }}</small>
-        </div>
-
-        <div class="agent-card {{ agent_status.tool }}">
-            <div>Tool Agent</div>
-            <span class="status-dot"></span>
-            <small>{{ agent_status.tool }}</small>
-        </div>
-
-    </div>
-
-    <div class="dashboard-grid">
-
-        <div class="panel">
-
-            <h2>Command Input</h2>
-
-            <form method="POST">
-                <textarea name="user_message" rows="4" cols="60" placeholder="Talk to your AI...">{{ user_message }}</textarea>
-                <br>
-                <button type="submit">Send</button>
-            </form>
-
-            {% if activity_log %}
+            <div class="side-block">
                 <h2>Agent Activity</h2>
 
-                <div class="response-box">
+                <div class="response-box" id="activity-log">
                     {% for item in activity_log %}
                         <div>• {{ item }}</div>
                     {% endfor %}
                 </div>
-            {% endif %}
+            </div>
 
-            {% if files_used %}
+            <div class="side-block">
                 <h2>Files Used</h2>
 
-                <div class="response-box">
+                <div class="response-box" id="files-used">
                     {% for file in files_used %}
                         <div>- {{ file }}</div>
                     {% endfor %}
                 </div>
-            {% endif %}
+            </div>
 
-        </div>
+            <div class="side-block">
+                <h2>AI Response</h2>
 
-        <div class="panel">
-
-            <h2>AI Response</h2>
-
-            <div class="response-box">
-                {{ ai_response }}
+                <button type="button" id="speak-btn">🔊 Speak Response</button>
+                <div class="response-box" id="ai-response">
+                    {{ ai_response }}
+                </div>
             </div>
 
         </div>
 
+        <div class="environment-panel">
+
+            <h2>AI Control Room</h2>
+
+            <div class="agent-zones">
+
+                <div id="chat-agent" class="agent-card {{ agent_status.chat }}">
+                    <div>Chat Agent</div>
+                    <span class="status-dot"></span>
+                    <small>{{ agent_status.chat }}</small>
+                </div>
+
+                <div id="file-agent" class="agent-card {{ agent_status.file }}">
+                    <div>File Agent</div>
+                    <span class="status-dot"></span>
+                    <small>{{ agent_status.file }}</small>
+                </div>
+
+                <div id="memory-agent" class="agent-card {{ agent_status.memory }}">
+                    <div>Memory Agent</div>
+                    <span class="status-dot"></span>
+                    <small>{{ agent_status.memory }}</small>
+                </div>
+
+                <div id="tool-agent" class="agent-card {{ agent_status.tool }}">
+                    <div>Tool Agent</div>
+                    <span class="status-dot"></span>
+                    <small>{{ agent_status.tool }}</small>
+                </div>
+
+            </div>
+            <div class="virtual-stage">
+                <div class="stage-agent stage-chat">Chat</div>
+                <div class="stage-agent stage-file">File</div>
+                <div class="stage-agent stage-memory">Memory</div>
+                <div class="stage-agent stage-tool">Tool</div>
+            </div>
+        </div>
     </div>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>

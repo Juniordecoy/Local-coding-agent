@@ -7,7 +7,9 @@ MEMORY_FILE = Path("memory.json")
 def load_memory():
     if MEMORY_FILE.exists():
         with open(MEMORY_FILE, "r", encoding="utf-8") as file:
-            return json.load(file)
+            messages = json.load(file)
+
+        return messages[-12:]
 
     return []
 
