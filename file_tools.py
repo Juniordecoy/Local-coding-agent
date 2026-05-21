@@ -1,6 +1,8 @@
 from pathlib import Path
+from project_config import TARGET_PROJECT_DIR
 
-NOTES_FILE = Path("notes.txt")
+
+NOTES_FILE = TARGET_PROJECT_DIR / "notes.txt"
 
 
 def read_notes():
@@ -11,7 +13,7 @@ def read_notes():
     return ""
 
 def read_file(filename):
-    file_path = Path(filename)
+    file_path = TARGET_PROJECT_DIR / filename
 
     if file_path.exists():
         with open(file_path, "r", encoding="utf-8") as file:
@@ -42,7 +44,7 @@ def list_project_files():
         "memory.json"
     }
 
-    for item in Path(".").rglob("*"):
+    for item in TARGET_PROJECT_DIR.rglob("*"):
 
         if any(part in ignored_dirs for part in item.parts):
             continue
@@ -51,7 +53,8 @@ def list_project_files():
             continue
 
         if item.is_file() and item.suffix in allowed_extensions:
-            files.append(str(item))
+            relative_path = item.relative_to(TARGET_PROJECT_DIR)
+            files.append(str(relative_path))
 
     return files
 

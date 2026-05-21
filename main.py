@@ -13,17 +13,18 @@ from working_memory import remember_working, get_working, clear_working
 from web_tools import (
     show_web_files, summarize_web_structure,
     trace_frontend_connections, summarize_python_files,
-    find_text_usage, find_function_usage,
-    trace_button, trace_route, trace_endpoint,
-    trace_id
+    project_file_counts, largest_files
 )
 from command_handlers import (
-    find_usage_command,
-    find_function_command,
-    trace_button_command,
-    trace_route_command,
-    trace_endpoint_command,
-    trace_id_command
+    find_usage_command, find_function_command, trace_button_command, trace_route_command, trace_endpoint_command,
+    trace_id_command, explain_file_role_command, file_complexity_command, list_routes_command, route_summary_command,
+    route_detail_command, route_full_command, route_templates_command, template_routes_command, template_extends_command,
+    template_blocks_command, template_forms_command, template_inputs_command, template_required_command,
+    template_hidden_command, template_honeypot_command, route_form_map_command, route_fields_command, route_emails_command,
+    route_redirects_command, route_files_command, route_security_command, route_warnings_command, route_report_command,
+    project_architecture_command, project_health_command, project_focus_command, or_routes_command, or_report_command,
+    or_templates_detail_command, or_form_fields_command, or_required_fields_command, or_route_reports_command,
+    template_form_actions_command, form_action_route_command, template_action_map_command
 )
 
 
@@ -201,16 +202,19 @@ def clear_working_memory():
     return "Working memory cleared."
 
 ARGUMENT_COMMANDS = {
-    "debug search ": debug_search_command,
-    "explain ": explain_command,
-    "read ": read_command,
-    "search ": search_command,
-    "find usage ": find_usage_command,
-    "find function ": find_function_command,
-    "trace button ": trace_button_command,
-    "trace route ": trace_route_command,
-    "trace endpoint ": trace_endpoint_command,
-    "trace id ": trace_id_command,
+    "debug search ": debug_search_command, "explain file ": explain_file_role_command, "explain ": explain_command,
+    "read ": read_command, "search ": search_command, "find usage ": find_usage_command, "find function ": find_function_command,
+    "trace button ": trace_button_command, "trace route ": trace_route_command, "trace endpoint ": trace_endpoint_command,
+    "trace id ": trace_id_command, "file complexity ": file_complexity_command, "list routes ": list_routes_command,
+    "route summary ": route_summary_command, "route detail ": route_detail_command, "route full ": route_full_command,
+    "route templates ": route_templates_command, "template routes ": template_routes_command, "template extends ": template_extends_command,
+    "template blocks ": template_blocks_command, "template forms ": template_forms_command, "template inputs ": template_inputs_command,
+    "template required ": template_required_command, "template hidden ": template_hidden_command, "template honeypot ": template_honeypot_command,
+    "route form map ": route_form_map_command, "route fields ": route_fields_command, "route emails ": route_emails_command,
+    "route redirects ": route_redirects_command, "route files ": route_files_command, "route security ": route_security_command,
+    "route warnings ": route_warnings_command, "route report ": route_report_command, "or routes ": or_routes_command,
+    "or report ": or_report_command, "or route reports ": or_route_reports_command, "template form actions ": template_form_actions_command,
+    "form action route ": form_action_route_command, "template action map ": template_action_map_command,
 }
 
 TOOLS = {
@@ -220,19 +224,13 @@ TOOLS = {
 }
 
 COMMANDS = {
-    "summarize project": summarize_project,
-    "analyze project": analyze_project,
-    "files": show_files,
-    "working memory": show_working_memory,
-    "explain last file": explain_last_file,
-    "explain first file": explain_first_file,
-    "explain second file": explain_second_file,
-    "explain third file": explain_third_file,
-    "clear working memory": clear_working_memory,
-    "web files": show_web_files,
-    "web summary": summarize_web_structure,
-    "frontend connections": trace_frontend_connections,
-    "python files": summarize_python_files,
+    "summarize project": summarize_project, "analyze project": analyze_project, "files": show_files, "working memory": show_working_memory,
+    "explain last file": explain_last_file, "explain first file": explain_first_file, "explain second file": explain_second_file,
+    "explain third file": explain_third_file, "clear working memory": clear_working_memory, "web files": show_web_files,
+    "web summary": summarize_web_structure, "frontend connections": trace_frontend_connections, "python files": summarize_python_files,
+    "project file counts": project_file_counts, "largest files": largest_files, "project architecture": project_architecture_command,
+    "project health": project_health_command, "project focus": project_focus_command, "or templates detail": or_templates_detail_command,
+    "or form fields": or_form_fields_command, "or required fields": or_required_fields_command,
 }
 
 def handle_user_message(user_message):
