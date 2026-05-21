@@ -1,8 +1,32 @@
 from ai import ask_ai, chat_with_memory, choose_tool, choose_tool_input
 from memory import load_memory, save_memory
-from file_tools import read_notes, read_file, list_project_files, search_project_files, search_project_files_with_scores
-from workflows import explain_file, summarize_project, analyze_project, analyze_file, answer_about_main_file, answer_with_auto_retrieval, multi_file_agent_answer
+from file_tools import (
+    read_notes, read_file, list_project_files,
+    search_project_files, search_project_files_with_scores
+)
+from workflows import (
+    explain_file, summarize_project, analyze_project,
+    analyze_file, answer_about_main_file, answer_with_auto_retrieval,
+    multi_file_agent_answer
+)
 from working_memory import remember_working, get_working, clear_working
+from web_tools import (
+    show_web_files, summarize_web_structure,
+    trace_frontend_connections, summarize_python_files,
+    find_text_usage, find_function_usage,
+    trace_button, trace_route, trace_endpoint,
+    trace_id
+)
+from command_handlers import (
+    find_usage_command,
+    find_function_command,
+    trace_button_command,
+    trace_route_command,
+    trace_endpoint_command,
+    trace_id_command
+)
+
+
 
 notes = read_notes()
 
@@ -181,6 +205,12 @@ ARGUMENT_COMMANDS = {
     "explain ": explain_command,
     "read ": read_command,
     "search ": search_command,
+    "find usage ": find_usage_command,
+    "find function ": find_function_command,
+    "trace button ": trace_button_command,
+    "trace route ": trace_route_command,
+    "trace endpoint ": trace_endpoint_command,
+    "trace id ": trace_id_command,
 }
 
 TOOLS = {
@@ -199,6 +229,10 @@ COMMANDS = {
     "explain second file": explain_second_file,
     "explain third file": explain_third_file,
     "clear working memory": clear_working_memory,
+    "web files": show_web_files,
+    "web summary": summarize_web_structure,
+    "frontend connections": trace_frontend_connections,
+    "python files": summarize_python_files,
 }
 
 def handle_user_message(user_message):
