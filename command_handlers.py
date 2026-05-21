@@ -1,12 +1,15 @@
+from write_tools import draft_html_template, draft_flask_route, draft_css_file, draft_js_file, draft_page_bundle
 from web_tools import (
     find_text_usage, find_function_usage, trace_button, trace_route, trace_endpoint, trace_id, explain_file_role,
     file_complexity, list_routes, route_summary, route_detail, route_full, route_templates, template_routes, template_extends,
     template_blocks, template_forms, template_inputs, template_required, template_hidden, template_honeypot, route_form_map,
     route_fields, route_emails, route_redirects, route_files, route_security, route_warnings, route_report, project_architecture,
     project_health, project_focus, or_routes, or_report, or_templates_detail, or_form_fields, or_required_fields,
-    or_route_reports, template_form_actions, form_action_route, template_action_map
+    or_route_reports, template_form_actions, form_action_route, template_action_map,
 )
 
+
+###------------------------- Web Tools ------------------------###
 
 def find_usage_command(user_message):
     search_text = user_message.replace("find usage ", "", 1)
@@ -288,3 +291,92 @@ def template_action_map_command(user_message):
     template_file = parts[1]
 
     return template_action_map(app_file, template_file)
+
+
+
+
+
+###------------------------- Write Tools ------------------------###
+
+def draft_template_command(user_message):
+    parts = user_message.replace("draft template ", "", 1).split(" ", 1)
+
+    if len(parts) < 2:
+        return "Usage: draft template <filename> <title>"
+
+    filename = parts[0]
+    title = parts[1]
+
+    return draft_html_template(filename, title)
+
+def draft_route_command(user_message):
+    parts = user_message.split()
+
+    if len(parts) < 4:
+        return (
+            "Usage:\n"
+            "draft route route_name template_name.html"
+        )
+
+    route_name = parts[2]
+    template_name = parts[3]
+
+    result = draft_flask_route(
+        route_name=route_name,
+        template_name=template_name
+    )
+
+    return result
+
+def draft_css_command(user_message):
+    parts = user_message.split()
+
+    if len(parts) < 3:
+        return (
+            "Usage:\n"
+            "draft css filename.css"
+        )
+
+    filename = parts[2]
+
+    result = draft_css_file(
+        filename=filename
+    )
+
+    return result
+
+def draft_js_command(user_message):
+    parts = user_message.split()
+
+    if len(parts) < 3:
+        return (
+            "Usage:\n"
+            "draft js filename.js"
+        )
+
+    filename = parts[2]
+
+    result = draft_js_file(
+        filename=filename
+    )
+
+    return result
+
+def draft_page_bundle_command(user_message):
+    parts = user_message.split()
+
+    if len(parts) < 5:
+        return (
+            "Usage:\n"
+            "draft page bundle page_name Page Title"
+        )
+
+    page_name = parts[3]
+    page_title = " ".join(parts[4:])
+
+    result = draft_page_bundle(
+        page_name=page_name,
+        page_title=page_title
+    )
+
+    return result

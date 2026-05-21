@@ -24,7 +24,8 @@ from command_handlers import (
     route_redirects_command, route_files_command, route_security_command, route_warnings_command, route_report_command,
     project_architecture_command, project_health_command, project_focus_command, or_routes_command, or_report_command,
     or_templates_detail_command, or_form_fields_command, or_required_fields_command, or_route_reports_command,
-    template_form_actions_command, form_action_route_command, template_action_map_command
+    template_form_actions_command, form_action_route_command, template_action_map_command, draft_template_command,
+    draft_route_command, draft_css_command, draft_js_command, draft_page_bundle_command,
 )
 
 
@@ -214,7 +215,8 @@ ARGUMENT_COMMANDS = {
     "route redirects ": route_redirects_command, "route files ": route_files_command, "route security ": route_security_command,
     "route warnings ": route_warnings_command, "route report ": route_report_command, "or routes ": or_routes_command,
     "or report ": or_report_command, "or route reports ": or_route_reports_command, "template form actions ": template_form_actions_command,
-    "form action route ": form_action_route_command, "template action map ": template_action_map_command,
+    "form action route ": form_action_route_command, "template action map ": template_action_map_command, "draft template ": draft_template_command,
+    "draft route ": draft_route_command, "draft css ": draft_css_command, "draft js ": draft_js_command, "draft page bundle ": draft_page_bundle_command,
 }
 
 TOOLS = {
