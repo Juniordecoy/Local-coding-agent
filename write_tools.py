@@ -1,5 +1,6 @@
 from ai import ask_ai
 from review_config import REVIEW_DIR
+from validation_tools import validate_draft_content
 
 
 def save_review_draft(filename, content):
@@ -160,14 +161,20 @@ Page title: {page_title}
 User request: {user_request}
 
 Rules:
-- Extend base.html
-- Use block title and block content
-- Include a form if the request needs one
-- Include a honeypot field named do_not_fill
-- Use url_for('{page_name}') for the form action
-- Link to CSS file: {css_filename}
-- Link to JS file: {js_filename}
-- Return only the HTML code
+- Return ONLY raw Jinja/HTML code.
+- Do not use markdown fences.
+- Do not explain the code.
+- Must start with: {{% extends "base.html" %}}
+- Must include: {{% block title %}}{page_title}{{% endblock %}}
+- Must include: {{% block content %}}
+- Must end with: {{% endblock %}}
+- Include a visible form if the request needs one.
+- Include employee name input with id="employee_name" and name="employee_name".
+- Include date input with id="quiz_date" and name="quiz_date".
+- Include honeypot input named do_not_fill.
+- Use action="{{{{ url_for('{page_name}') }}}}".
+- Link CSS with url_for('static', filename='css/{css_filename}').
+- Link JS with url_for('static', filename='js/{js_filename}').
 """
 
     css_prompt = f"""
@@ -191,9 +198,15 @@ Page title: {page_title}
 User request: {user_request}
 
 Rules:
-- Add submit protection so the button disables after submit
-- Keep it safe and simple
-- Return only JavaScript code
+- Return ONLY raw JavaScript code.
+- Do not use markdown fences.
+- Do not explain the code.
+- Do not treat honeypot like a checkbox.
+- Honeypot is a hidden text input named do_not_fill.
+- Use DOMContentLoaded listener.
+- Add submit protection that disables the submit button after form submit.
+- Use querySelector instead of getElementById where possible.
+- Keep code simple and production-safe.
 """
 
     route_prompt = f"""
@@ -204,11 +217,19 @@ Template: {html_filename}
 User request: {user_request}
 
 Rules:
-- Use @app.route("/{page_name}", methods=["GET", "POST"])
-- Use request.form.to_dict()
-- Check honeypot field do_not_fill
-- Return render_template("{html_filename}") on GET
-- Return only Python code
+- Return ONLY route code.
+- Do not use markdown fences.
+- Do not explain the code.
+- Do not import Flask.
+- Do not create app = Flask(__name__).
+- Do not include app.run().
+- Assume app, request, and render_template already exist.
+- Use @app.route("/{page_name}", methods=["GET", "POST"]).
+- On POST, use form_data = request.form.to_dict().
+- Check honeypot with: if form_data.get("do_not_fill"):
+- If honeypot has value, return "Blocked", 400.
+- On successful POST, render template with success=True and form_data=form_data.
+- On GET, render template with success=False.
 """
 
     html_content = ask_ai(
@@ -241,12 +262,26 @@ Rules:
     js_content = add_review_header(js_filename, js_content)
     route_content = add_review_header(route_filename, route_content)
 
+    validation_report = build_validation_report([
+        (html_filename, html_content),
+        (css_filename, css_content),
+        (js_filename, js_content),
+        (route_filename, route_content),
+    ])
+
     results = []
 
     results.append(save_review_draft(html_filename, html_content))
     results.append(save_review_draft(css_filename, css_content))
     results.append(save_review_draft(js_filename, js_content))
     results.append(save_review_draft(route_filename, route_content))
+
+    results.append(
+        save_review_draft(
+            f"{page_name}_VALIDATION_REPORT.txt",
+            validation_report
+        )
+    )
 
     return "\n".join(results)
 
@@ -300,3 +335,118 @@ Do not paste into production until reviewed.
 """
 
     return header + content
+
+def build_validation_report(file_results):
+    report_lines = ["AI DRAFT VALIDATION REPORT", ""]
+
+    for filename, content in file_results:
+        warnings = validate_draft_content(filename, content)
+
+        report_lines.append(f"{filename}:")
+
+        if warnings:
+            for warning in warnings:
+                report_lines.append(f"- WARNING: {warning}")
+        else:
+            report_lines.append("- No major warnings found.")
+
+        report_lines.append("")
+
+    return "\n".join(report_lines)
+
+def draft_ai_html_file(page_name, page_title, user_request):
+    html_filename = f"{page_name}.html"
+
+    html_prompt = f"""
+Create a real Flask/Jinja HTML page.
+
+Page name: {page_name}
+Page title: {page_title}
+User request: {user_request}
+
+Rules:
+- Return ONLY raw Jinja/HTML code.
+- Do not use markdown fences.
+- Do not explain the code.
+- Must start with: {{% extends "base.html" %}}
+- Must include: {{% block title %}}{page_title}{{% endblock %}}
+- After the title block, immediately start:
+  {{% block content %}}
+- Do NOT create <body>, <html>, or <head> tags.
+- All visible page content must exist inside the content block.
+- The LAST line of the template must be:
+  {{% endblock %}}
+- Include semantic HTML structure.
+- Include proper labels and accessible inputs.
+- Honeypot must be hidden from users with style="display:none;".
+- Use url_for('{page_name}') for forms.
+- Link CSS using:
+  {{{{ url_for('static', filename='css/{page_name}.css') }}}}
+- Link JS using:
+  {{{{ url_for('static', filename='js/{page_name}.js') }}}}
+"""
+
+    html_content = ask_ai(
+        "You are an expert Flask/Jinja HTML developer. Return only valid HTML/Jinja code.",
+        html_prompt
+    )
+
+    html_content = clean_ai_code(html_content)
+
+    html_content = add_review_header(
+        html_filename,
+        html_content
+    )
+
+    validation_report = build_validation_report([
+        (html_filename, html_content),
+    ])
+
+    results = []
+
+    results.append(
+        save_review_draft(
+            html_filename,
+            html_content
+        )
+    )
+
+    results.append(
+        save_review_draft(
+            f"{page_name}_HTML_VALIDATION.txt",
+            validation_report
+        )
+    )
+
+    return "\n".join(results)
+
+def draft_ai_code_review(filename, code_content, validation_content=""):
+    review_filename = filename.replace(".", "_") + "_PATCH_REVIEW.txt"
+
+    review_prompt = f"""
+Review this generated draft file and propose fixes.
+
+Filename: {filename}
+
+Validation report:
+{validation_content}
+
+Code:
+{code_content}
+
+Rules:
+- Do not rewrite production files.
+- Identify the problems clearly.
+- Provide corrected code in one clean code block.
+- Focus only on this file.
+- Keep the review practical and beginner-friendly.
+"""
+
+    review_content = ask_ai(
+        "You are a careful senior code reviewer for Flask/Jinja/HTML/CSS/JS/Python drafts.",
+        review_prompt
+    )
+
+    review_content = clean_ai_code(review_content)
+
+    return save_review_draft(review_filename, review_content)

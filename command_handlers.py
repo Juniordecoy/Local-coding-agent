@@ -1,5 +1,7 @@
+from review_config import REVIEW_DIR
 from write_tools import (
-    draft_html_template, draft_flask_route, draft_css_file, draft_js_file, draft_page_bundle, draft_ai_page_bundle
+    draft_html_template, draft_flask_route, draft_css_file, draft_js_file, draft_page_bundle, draft_ai_page_bundle, draft_ai_html_file,
+    draft_ai_code_review,
 )
 from web_tools import (
     find_text_usage, find_function_usage, trace_button, trace_route, trace_endpoint, trace_id, explain_file_role,
@@ -410,3 +412,61 @@ def draft_ai_page_command(user_message):
     )
 
     return result
+
+def draft_ai_html_command(user_message):
+    if "|" not in user_message:
+        return (
+            "Usage:\n"
+            "draft ai html page_name Page Title | page instructions"
+        )
+
+    left_side, user_request = user_message.split("|", 1)
+
+    parts = left_side.split()
+
+    if len(parts) < 5:
+        return (
+            "Usage:\n"
+            "draft ai html page_name Page Title | page instructions"
+        )
+
+    page_name = parts[3]
+    page_title = " ".join(parts[4:]).strip()
+
+    return draft_ai_html_file(
+        page_name=page_name,
+        page_title=page_title,
+        user_request=user_request.strip()
+    )
+
+def review_draft_command(user_message):
+    parts = user_message.split()
+
+    if len(parts) < 4:
+        return (
+            "Usage:\n"
+            "review draft html filename.html"
+        )
+
+    filename = parts[3]
+
+    draft_path = REVIEW_DIR / filename
+
+    if not draft_path.exists():
+        return f"Draft file not found: {draft_path}"
+
+    code_content = draft_path.read_text(encoding="utf-8")
+
+    validation_filename = filename.replace(".html", "_HTML_VALIDATION.txt")
+    validation_path = REVIEW_DIR / validation_filename
+
+    validation_content = ""
+
+    if validation_path.exists():
+        validation_content = validation_path.read_text(encoding="utf-8")
+
+    return draft_ai_code_review(
+        filename=filename,
+        code_content=code_content,
+        validation_content=validation_content
+    )

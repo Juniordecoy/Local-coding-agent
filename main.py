@@ -26,6 +26,7 @@ from command_handlers import (
     or_templates_detail_command, or_form_fields_command, or_required_fields_command, or_route_reports_command,
     template_form_actions_command, form_action_route_command, template_action_map_command, draft_template_command,
     draft_route_command, draft_css_command, draft_js_command, draft_page_bundle_command, draft_ai_page_command,
+    draft_ai_html_command, review_draft_command,
 )
 
 
@@ -217,7 +218,7 @@ ARGUMENT_COMMANDS = {
     "or report ": or_report_command, "or route reports ": or_route_reports_command, "template form actions ": template_form_actions_command,
     "form action route ": form_action_route_command, "template action map ": template_action_map_command, "draft template ": draft_template_command,
     "draft route ": draft_route_command, "draft css ": draft_css_command, "draft js ": draft_js_command, "draft page bundle ": draft_page_bundle_command,
-    "draft ai page ": draft_ai_page_command,
+    "draft ai page ": draft_ai_page_command, "draft ai html ": draft_ai_html_command, "review draft ": review_draft_command,
 }
 
 TOOLS = {
