@@ -1,4 +1,6 @@
-from write_tools import draft_html_template, draft_flask_route, draft_css_file, draft_js_file, draft_page_bundle
+from write_tools import (
+    draft_html_template, draft_flask_route, draft_css_file, draft_js_file, draft_page_bundle, draft_ai_page_bundle
+)
 from web_tools import (
     find_text_usage, find_function_usage, trace_button, trace_route, trace_endpoint, trace_id, explain_file_role,
     file_complexity, list_routes, route_summary, route_detail, route_full, route_templates, template_routes, template_extends,
@@ -377,6 +379,34 @@ def draft_page_bundle_command(user_message):
     result = draft_page_bundle(
         page_name=page_name,
         page_title=page_title
+    )
+
+    return result
+
+def draft_ai_page_command(user_message):
+    if "|" not in user_message:
+        return (
+            "Usage:\n"
+            "draft ai page page_name Page Title | page instructions"
+        )
+
+    left_side, user_request = user_message.split("|", 1)
+
+    parts = left_side.split()
+
+    if len(parts) < 5:
+        return (
+            "Usage:\n"
+            "draft ai page page_name Page Title | page instructions"
+        )
+
+    page_name = parts[3]
+    page_title = " ".join(parts[4:]).strip()
+
+    result = draft_ai_page_bundle(
+        page_name=page_name,
+        page_title=page_title,
+        user_request=user_request.strip()
     )
 
     return result
