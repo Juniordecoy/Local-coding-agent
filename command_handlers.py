@@ -3,7 +3,7 @@ from review_config import REVIEW_DIR
 from project_rules import get_base_template_rules
 from write_tools import (
     save_review_draft, draft_html_template, draft_flask_route, draft_css_file, draft_js_file, draft_page_bundle, draft_ai_page_bundle,
-    draft_ai_html_file, draft_ai_code_review, draft_validator_driven_review, draft_single_warning_review
+    draft_ai_html_file, draft_ai_code_review, draft_validator_driven_review, draft_single_warning_review, build_validation_report, draft_quiz_from_reference
 )
 from web_tools import (
     find_text_usage, find_function_usage, trace_button, trace_route, trace_endpoint, trace_id, explain_file_role,
@@ -649,4 +649,71 @@ def review_validator_warning_command(user_message):
         code_content=code_content,
         validation_content=validation_content,
         warning_number=warning_number
+    )
+
+def validate_draft_command(user_message):
+    parts = user_message.split()
+
+    if len(parts) < 3:
+        return (
+            "Usage:\n"
+            "validate draft filename.html"
+        )
+
+    filename = parts[2]
+
+    draft_path = REVIEW_DIR / filename
+
+    if not draft_path.exists():
+        return f"Draft file not found: {draft_path}"
+
+    content = draft_path.read_text(encoding="utf-8")
+
+    report = build_validation_report([
+        (filename, content)
+    ])
+
+    report_filename = filename.replace(".", "_") + "_VALIDATION.txt"
+
+    return save_review_draft(
+        report_filename,
+        report
+    )
+
+def draft_quiz_from_reference_command(user_message):
+    if "|" not in user_message:
+        return (
+            "Usage:\n"
+            "draft quiz from reference reference_file.html | new_quiz_name | New Quiz Title | questions"
+        )
+
+    left_side, questions = user_message.split("|", 1)
+
+    parts = left_side.split()
+
+    if len(parts) < 5:
+        return (
+            "Usage:\n"
+            "draft quiz from reference reference_file.html | new_quiz_name | New Quiz Title | questions"
+        )
+
+    reference_html = parts[4].strip()
+
+    remaining_parts = questions.split("|")
+
+    if len(remaining_parts) < 3:
+        return (
+            "Usage:\n"
+            "draft quiz from reference reference_file.html | new_quiz_name | New Quiz Title | questions"
+        )
+
+    new_quiz_name = remaining_parts[0].strip()
+    new_quiz_title = remaining_parts[1].strip()
+    new_questions = remaining_parts[2].strip()
+
+    return draft_quiz_from_reference(
+        reference_html=reference_html,
+        new_quiz_name=new_quiz_name,
+        new_quiz_title=new_quiz_title,
+        new_questions=new_questions
     )

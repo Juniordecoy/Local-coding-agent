@@ -1,3 +1,8 @@
+from html_validation_rules import validate_html_rules
+from flask_validation_rules import validate_flask_rules
+from js_validation_rules import validate_js_rules
+from quiz_validation_rules import validate_quiz_rules
+
 def validate_draft_content(filename, content):
     warnings = []
 
@@ -10,79 +15,24 @@ def validate_draft_content(filename, content):
         warnings.append("May contain AI explanation text.")
 
     if lower_filename.endswith(".html"):
-        if "{% extends" not in content:
-            warnings.append("HTML/Jinja missing {% extends %}.")
+        warnings.extend(
+            validate_html_rules(content)
+        )
 
-        if "{% extends" in content:
-            if "<html" in content.lower():
-                warnings.append("Child template extends base.html but includes an <html> tag.")
-
-            if "<body" in content.lower():
-                warnings.append("Child template extends base.html but includes a <body> tag.")
-
-            if "<head" in content.lower():
-                warnings.append("Child template extends base.html but includes a <head> tag.")
-
-            if "<!doctype html" in content.lower():
-                warnings.append(
-                    "Child template extends base.html but includes <!DOCTYPE html>."
-                )
-
-        if "{% extends" in content and "<!DOCTYPE html>" in content:
-            warnings.append("Child template extends base.html but includes <!DOCTYPE html>.")
-
-        if "{% block content" not in content:
-            warnings.append("HTML/Jinja missing content block.")
-
-        if "{% endblock" not in content:
-            warnings.append("HTML/Jinja missing endblock.")
-
-        if "<form" in content and "do_not_fill" not in content:
-            warnings.append("Form page missing honeypot field.")
-
-        if "form.hidden_tag()" in content:
-            warnings.append("HTML uses form.hidden_tag(), but draft routes do not provide a WTForms form object.")
-
-        if 'name="do_not_fill"' in content and "display:none" not in content and "hidden" not in content:
-            warnings.append("Honeypot field may be visible; it should be hidden from real users.")
-
-        if "csrf_token" in content:
-            warnings.append(
-                "Template contains Django csrf_token syntax. "
-                "Remove csrf_token entirely for this project unless Flask-WTF was explicitly requested."
-            )
-
-        if "{{ employee_name }}" in content or "{{ date }}" in content:
-            warnings.append(
-                "Template expects employee_name/date variables that may not be provided by the Flask route. "
-                "Use real input fields instead, unless the route explicitly sends these variables."
+        if "quiz" in lower_filename:
+            warnings.extend(
+                validate_quiz_rules(content)
             )
 
     if lower_filename.endswith(".py"):
-        if "@app.route" not in content:
-            warnings.append("Python route draft missing @app.route.")
-
-        if "request.form" in content and "do_not_fill" not in content:
-            warnings.append("Form route may be missing honeypot check.")
-
-        if "if 'do_not_fill' in form_data" in content:
-            warnings.append("Bad honeypot check: field existence is not enough; check value instead.")
-
-        if "app.run(" in content:
-            warnings.append("Route draft should not include app.run().")
-
-        if "from flask import Flask" in content:
-            warnings.append("Route draft should not create a new Flask app.")
-
-        if '"form_data": form_data' in content and 'form_data = request.form.to_dict()' in content:
-            warnings.append("Route may use form_data outside POST before it is defined on GET.")
+        warnings.extend(
+            validate_flask_rules(content)
+        )
 
     if lower_filename.endswith(".js"):
-        if "getElementById" in content:
-            warnings.append("JS uses getElementById; verify matching IDs exist in HTML.")
-
-        if ".checked" in content and "do_not_fill" in content:
-            warnings.append("Honeypot is being treated like a checkbox.")
+        warnings.extend(
+            validate_js_rules(content)
+        )
 
     return warnings
 
@@ -121,6 +71,10 @@ def extract_validation_warnings(validation_content):
             warning = clean_line.replace("- WARNING:", "", 1).strip()
             warnings.append(warning)
 
+        if clean_line.startswith("- ERROR:"):
+            warning = clean_line.replace("- ERROR:", "", 1).strip()
+            warnings.append(warning)
+
     return warnings
 
 def extract_validation_warning_by_index(validation_content, index):
@@ -131,4 +85,42 @@ def extract_validation_warning_by_index(validation_content, index):
 
     return warnings[index]
 
+def validate_patch_content(content):
+    warnings = []
 
+    if "csrf_token" in content:
+        warnings.append(
+            "[PATCH] Patch still contains csrf_token syntax after validator review."
+        )
+
+    if "<html" in content.lower() and "{% extends" in content:
+        warnings.append(
+            "[PATCH] Patch introduces full HTML tags into inherited template."
+        )
+
+    if "| safe" in content:
+        warnings.append(
+            "[PATCH] Patch introduces Jinja |safe filter which may bypass escaping."
+        )
+
+    if "url_for('safety_quiz_may_submission')" in content:
+        warnings.append(
+            "[PATCH] Patch introduced unknown route safety_quiz_may_submission."
+        )
+
+    if "{{ employee_name" in content:
+        warnings.append(
+            "[PATCH] Patch replaced input fields with template variables."
+        )
+
+    if "{{ comment" in content:
+        warnings.append(
+            "[PATCH] Patch replaced textarea input with template variable output."
+        )
+
+    if "form-group row" in content:
+        warnings.append(
+            "[PATCH] Patch introduced Bootstrap layout patterns not requested by project."
+        )
+
+    return warnings

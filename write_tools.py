@@ -1,6 +1,10 @@
 from ai import ask_ai
+from pathlib import Path
 from review_config import REVIEW_DIR
-from validation_tools import validate_draft_content, validate_draft_content_detailed, extract_validation_warnings, extract_validation_warning_by_index
+from validation_tools import (
+    validate_draft_content_detailed, extract_validation_warnings, extract_validation_warning_by_index,
+    validate_patch_content
+)
 
 
 def save_review_draft(filename, content):
@@ -591,5 +595,149 @@ PATCH:
 
     review_content = clean_ai_code(review_content)
 
+    patch_warnings = validate_patch_content(review_content)
+
+    if patch_warnings:
+        review_content += "\n\nPATCH VALIDATION WARNINGS:\n"
+
+        for warning in patch_warnings:
+            review_content += f"- {warning}\n"
+
     return save_review_draft(review_filename, review_content)
 
+def draft_quiz_from_reference(
+    reference_html,
+    new_quiz_name,
+    new_quiz_title,
+    new_questions
+):
+    reference_path = REVIEW_DIR / reference_html
+
+    if not reference_path.exists():
+        return f"Reference quiz not found: {reference_path}"
+
+    reference_content = reference_path.read_text(encoding="utf-8")
+
+    prompt = f"""
+You are creating a new safety quiz page.
+
+Follow the reference quiz structure EXACTLY.
+
+Preserve:
+- wrapper structure
+- classes
+- form layout
+- honeypot layout
+- button structure
+- quiz formatting
+
+Only replace:
+- quiz title
+- visible quiz heading text
+- questions
+- answers
+
+REFERENCE QUIZ:
+{reference_content}
+
+NEW QUIZ NAME:
+{new_quiz_name}
+
+NEW QUIZ TITLE:
+{new_quiz_title}
+
+NEW QUESTIONS:
+{new_questions}
+
+Question Input Format:
+- Questions may contain:
+  - Q1:
+  - A.
+  - B.
+  - C.
+  - D.
+- Convert these into the same radio button structure used in the reference quiz.
+- Preserve the existing formatting style exactly.
+
+Answer Key Rules:
+- If an ANSWER line is provided, do not display it on the page.
+- Keep the answer value letters as radio values: a, b, c, d.
+- Do not add scoring logic unless explicitly requested.
+- Do not change the visible quiz format to show correct answers.
+
+Open-Ended Question Rules:
+- Questions without A/B/C/D answer choices should use textarea fields.
+- Preserve the same textarea structure used in the reference quiz.
+- Textarea questions should still follow q-number naming patterns.
+
+Question Rules:
+- Multiple choice questions must use radio buttons.
+- Preserve the existing q1/q2/q3 naming pattern.
+- Preserve the existing label structure.
+- Preserve required attributes on the first radio option.
+- Open-ended questions should use textarea fields.
+- Keep the same quiz formatting style as the reference file.
+
+Rules:
+- Return ONLY raw Jinja/HTML.
+- Do not explain.
+- Do not redesign.
+- Keep the same formatting patterns.
+- Preserve the same class names.
+- Preserve the same honeypot pattern.
+- Preserve the same submit button structure.
+"""
+
+    quiz_content = ask_ai(
+        "You are an expert at maintaining existing Flask/Jinja quiz templates.",
+        prompt
+    )
+
+    quiz_content = clean_ai_code(quiz_content)
+
+    filename = f"{new_quiz_name}.html"
+
+    quiz_content = add_review_header(filename, quiz_content)
+
+    validation_report = build_validation_report([
+        (filename, quiz_content)
+    ])
+
+    results = []
+
+    answer_key = extract_answer_key(new_questions)
+
+    if answer_key:
+        results.append(
+            save_review_draft(
+                f"{new_quiz_name}_ANSWER_KEY.txt",
+                answer_key
+            )
+        )
+
+    results.append(
+        save_review_draft(filename, quiz_content)
+    )
+
+    results.append(
+        save_review_draft(
+            f"{new_quiz_name}_HTML_VALIDATION.txt",
+            validation_report
+        )
+    )
+
+    return "\n".join(results)
+
+def extract_answer_key(question_text):
+    answer_lines = []
+
+    for line in question_text.splitlines():
+        clean_line = line.strip()
+
+        if clean_line.upper().startswith("ANSWER:"):
+            answer_lines.append(clean_line)
+
+    if not answer_lines:
+        return ""
+
+    return "\n".join(answer_lines)
