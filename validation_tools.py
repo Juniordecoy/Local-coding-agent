@@ -13,6 +13,24 @@ def validate_draft_content(filename, content):
         if "{% extends" not in content:
             warnings.append("HTML/Jinja missing {% extends %}.")
 
+        if "{% extends" in content:
+            if "<html" in content.lower():
+                warnings.append("Child template extends base.html but includes an <html> tag.")
+
+            if "<body" in content.lower():
+                warnings.append("Child template extends base.html but includes a <body> tag.")
+
+            if "<head" in content.lower():
+                warnings.append("Child template extends base.html but includes a <head> tag.")
+
+            if "<!doctype html" in content.lower():
+                warnings.append(
+                    "Child template extends base.html but includes <!DOCTYPE html>."
+                )
+
+        if "{% extends" in content and "<!DOCTYPE html>" in content:
+            warnings.append("Child template extends base.html but includes <!DOCTYPE html>.")
+
         if "{% block content" not in content:
             warnings.append("HTML/Jinja missing content block.")
 
@@ -30,12 +48,14 @@ def validate_draft_content(filename, content):
 
         if "csrf_token" in content:
             warnings.append(
-                "Template may contain Django csrf_token syntax instead of Flask/Jinja patterns."
+                "Template contains Django csrf_token syntax. "
+                "Remove csrf_token entirely for this project unless Flask-WTF was explicitly requested."
             )
 
         if "{{ employee_name }}" in content or "{{ date }}" in content:
             warnings.append(
-                "Template expects variables that may not be provided by the Flask route."
+                "Template expects employee_name/date variables that may not be provided by the Flask route. "
+                "Use real input fields instead, unless the route explicitly sends these variables."
             )
 
     if lower_filename.endswith(".py"):
@@ -65,3 +85,50 @@ def validate_draft_content(filename, content):
             warnings.append("Honeypot is being treated like a checkbox.")
 
     return warnings
+
+def validate_draft_content_detailed(filename, content):
+    errors = []
+    warnings = []
+    info = []
+
+    basic_warnings = validate_draft_content(filename, content)
+
+    for warning in basic_warnings:
+        if (
+            "missing" in warning.lower()
+            or "includes an <html>" in warning
+            or "includes a <body>" in warning
+            or "includes a <head>" in warning
+            or "includes <!DOCTYPE html>" in warning
+        ):
+            errors.append(warning)
+        else:
+            warnings.append(warning)
+
+    return {
+        "errors": errors,
+        "warnings": warnings,
+        "info": info,
+    }
+
+def extract_validation_warnings(validation_content):
+    warnings = []
+
+    for line in validation_content.splitlines():
+        clean_line = line.strip()
+
+        if clean_line.startswith("- WARNING:"):
+            warning = clean_line.replace("- WARNING:", "", 1).strip()
+            warnings.append(warning)
+
+    return warnings
+
+def extract_validation_warning_by_index(validation_content, index):
+    warnings = extract_validation_warnings(validation_content)
+
+    if index < 0 or index >= len(warnings):
+        return None
+
+    return warnings[index]
+
+

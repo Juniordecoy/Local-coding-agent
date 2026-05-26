@@ -1,7 +1,9 @@
+from ai import ask_ai
 from review_config import REVIEW_DIR
+from project_rules import get_base_template_rules
 from write_tools import (
-    draft_html_template, draft_flask_route, draft_css_file, draft_js_file, draft_page_bundle, draft_ai_page_bundle, draft_ai_html_file,
-    draft_ai_code_review,
+    save_review_draft, draft_html_template, draft_flask_route, draft_css_file, draft_js_file, draft_page_bundle, draft_ai_page_bundle,
+    draft_ai_html_file, draft_ai_code_review, draft_validator_driven_review, draft_single_warning_review
 )
 from web_tools import (
     find_text_usage, find_function_usage, trace_button, trace_route, trace_endpoint, trace_id, explain_file_role,
@@ -469,4 +471,182 @@ def review_draft_command(user_message):
         filename=filename,
         code_content=code_content,
         validation_content=validation_content
+    )
+
+def review_html_structure_command(user_message):
+    parts = user_message.split()
+
+    if len(parts) < 4:
+        return (
+            "Usage:\n"
+            "review html structure filename.html"
+        )
+
+    filename = parts[3]
+
+    draft_path = REVIEW_DIR / filename
+
+    if not draft_path.exists():
+        return f"Draft file not found: {draft_path}"
+
+    code_content = draft_path.read_text(encoding="utf-8")
+
+    validation_filename = filename.replace(".html", "_HTML_VALIDATION.txt")
+    validation_path = REVIEW_DIR / validation_filename
+
+    validation_content = ""
+
+    if validation_path.exists():
+        validation_content = validation_path.read_text(encoding="utf-8")
+
+    base_template_rules = get_base_template_rules()
+
+    review_prompt = f"""
+Review this HTML/Jinja draft ONLY for structure problems.
+
+Filename:
+{filename}
+
+Validation report:
+{validation_content}
+
+Code:
+{code_content}
+
+Project Base Template Rules:
+{base_template_rules}
+
+Rules:
+- ONLY review HTML/Jinja structure issues.
+- Ignore security advice.
+- Ignore Flask-WTF.
+- Ignore CSRF systems.
+- Ignore accessibility suggestions.
+- Ignore styling suggestions.
+- Ignore JavaScript suggestions.
+- Do NOT redesign the page.
+- Keep fixes minimal.
+
+Focus on:
+- Jinja blocks
+- extends usage
+- form structure
+- broken template syntax
+- invalid nesting
+- missing content blocks
+- incorrect url_for usage
+
+Return format:
+ISSUE:
+FIX:
+PATCH:
+
+Project Structure Rules:
+- base.html already contains:
+  - <!DOCTYPE html>
+  - <html>
+  - <head>
+  - <body>
+
+- Child templates MUST NOT create:
+  - <!DOCTYPE html>
+  - <html>
+  - <head>
+  - <body>
+
+- Child templates should ONLY:
+  - extend base.html
+  - define Jinja blocks
+
+- A correct child template structure is:
+
+  {{% extends "base.html" %}}
+
+  {{% block title %}}
+  Page Title
+  {{% endblock %}}
+
+  {{% block content %}}
+  page content here
+  {{% endblock %}}
+
+- Do not recommend adding full HTML document tags.
+"""
+
+    review_content = ask_ai(
+        "You are a careful Flask/Jinja structure reviewer.",
+        review_prompt
+    )
+
+    review_filename = filename.replace(".", "_") + "_HTML_STRUCTURE_REVIEW.txt"
+
+    return save_review_draft(
+        review_filename,
+        review_content
+    )
+
+def review_validator_command(user_message):
+    parts = user_message.split()
+
+    if len(parts) < 3:
+        return (
+            "Usage:\n"
+            "review validator filename.html"
+        )
+
+    filename = parts[2]
+
+    draft_path = REVIEW_DIR / filename
+
+    if not draft_path.exists():
+        return f"Draft file not found: {draft_path}"
+
+    code_content = draft_path.read_text(encoding="utf-8")
+
+    validation_filename = filename.replace(".html", "_HTML_VALIDATION.txt")
+    validation_path = REVIEW_DIR / validation_filename
+
+    if not validation_path.exists():
+        return f"Validation report not found: {validation_path}"
+
+    validation_content = validation_path.read_text(encoding="utf-8")
+
+    return draft_validator_driven_review(
+        filename=filename,
+        code_content=code_content,
+        validation_content=validation_content
+    )
+
+def review_validator_warning_command(user_message):
+    parts = user_message.split()
+
+    if len(parts) < 5:
+        return (
+            "Usage:\n"
+            "review validator warning 1 filename.html"
+        )
+
+    warning_number = int(parts[3])
+    filename = parts[4]
+
+    draft_path = REVIEW_DIR / filename
+
+    if not draft_path.exists():
+        return f"Draft file not found: {draft_path}"
+
+    code_content = draft_path.read_text(encoding="utf-8")
+
+    validation_filename = filename.replace(".html", "_HTML_VALIDATION.txt")
+    validation_path = REVIEW_DIR / validation_filename
+
+    if not validation_path.exists():
+        return f"Validation report not found: {validation_path}"
+
+    validation_content = validation_path.read_text(encoding="utf-8")
+
+    return draft_single_warning_review(
+        filename=filename,
+        code_content=code_content,
+        validation_content=validation_content,
+        warning_number=warning_number
     )

@@ -1,6 +1,6 @@
 from ai import ask_ai
 from review_config import REVIEW_DIR
-from validation_tools import validate_draft_content
+from validation_tools import validate_draft_content, validate_draft_content_detailed, extract_validation_warnings, extract_validation_warning_by_index
 
 
 def save_review_draft(filename, content):
@@ -340,14 +340,26 @@ def build_validation_report(file_results):
     report_lines = ["AI DRAFT VALIDATION REPORT", ""]
 
     for filename, content in file_results:
-        warnings = validate_draft_content(filename, content)
+        result = validate_draft_content_detailed(filename, content)
 
         report_lines.append(f"{filename}:")
 
-        if warnings:
-            for warning in warnings:
+        if result["errors"]:
+            report_lines.append("ERRORS:")
+            for error in result["errors"]:
+                report_lines.append(f"- ERROR: {error}")
+
+        if result["warnings"]:
+            report_lines.append("WARNINGS:")
+            for warning in result["warnings"]:
                 report_lines.append(f"- WARNING: {warning}")
-        else:
+
+        if result["info"]:
+            report_lines.append("INFO:")
+            for item in result["info"]:
+                report_lines.append(f"- INFO: {item}")
+
+        if not result["errors"] and not result["warnings"] and not result["info"]:
             report_lines.append("- No major warnings found.")
 
         report_lines.append("")
@@ -424,7 +436,15 @@ def draft_ai_code_review(filename, code_content, validation_content=""):
     review_filename = filename.replace(".", "_") + "_PATCH_REVIEW.txt"
 
     review_prompt = f"""
-Review this generated draft file and propose fixes.
+Review this generated draft file.
+
+ONLY review issues explicitly listed in the validation report.
+
+Do NOT invent new issues.
+Do NOT suggest architectural improvements.
+Do NOT suggest framework changes.
+Do NOT suggest accessibility enhancements unless listed in the validation report.
+Do NOT suggest security systems unless listed in the validation report.
 
 Filename: {filename}
 
@@ -437,9 +457,27 @@ Code:
 Rules:
 - Do not rewrite production files.
 - Identify the problems clearly.
-- Provide corrected code in one clean code block.
+- Do NOT redesign the page.
+- Do NOT add new features.
+- Only fix issues found in the validation report.
+- Keep changes minimal and localized.
+- Preserve existing structure whenever possible.
+- Return:
+  ISSUE:
+  FIX:
+  PATCH:
+- PATCH should contain only the corrected sections.
 - Focus only on this file.
 - Keep the review practical and beginner-friendly.
+
+Project Constraints:
+- This project uses simple Flask/Jinja patterns.
+- Do NOT introduce Flask-WTF unless explicitly requested.
+- Do NOT introduce csrf_token systems unless explicitly requested.
+- Prefer plain HTML forms and request.form handling.
+- Keep patches compatible with existing lightweight portal architecture.
+- Do not redesign the framework stack.
+- Respect the current project style and simplicity.
 """
 
     review_content = ask_ai(
@@ -450,3 +488,108 @@ Rules:
     review_content = clean_ai_code(review_content)
 
     return save_review_draft(review_filename, review_content)
+
+def draft_validator_driven_review(filename, code_content, validation_content):
+    review_filename = filename.replace(".", "_") + "_VALIDATOR_REVIEW.txt"
+
+    warnings = extract_validation_warnings(validation_content)
+
+    if not warnings:
+        return save_review_draft(
+            review_filename,
+            "No validation warnings found. No patch needed."
+        )
+
+    warnings_text = "\n".join(f"- {warning}" for warning in warnings)
+
+    review_prompt = f"""
+You are reviewing a generated draft file.
+
+ONLY address these validator warnings:
+{warnings_text}
+
+Filename:
+{filename}
+
+Code:
+{code_content}
+
+Project Rules:
+- This is a Flask/Jinja project.
+- Child templates extend base.html.
+- Child templates must not include <!DOCTYPE html>, <html>, <head>, or <body>.
+- Do not use Django syntax.
+- Do not use Flask-WTF unless explicitly requested.
+- Do not add CSRF systems unless explicitly requested.
+- Do not invent extra issues.
+- Do not redesign the file.
+- Only patch the exact warning(s).
+
+Return format:
+WARNING:
+WHY IT MATTERS:
+PATCH:
+"""
+
+    review_content = ask_ai(
+        "You are a validator-driven patch reviewer. Only fix listed warnings.",
+        review_prompt
+    )
+
+    review_content = clean_ai_code(review_content)
+
+    return save_review_draft(review_filename, review_content)
+
+def draft_single_warning_review(filename, code_content, validation_content, warning_number):
+    review_filename = filename.replace(".", "_") + f"_WARNING_{warning_number}_REVIEW.txt"
+
+    warning_index = warning_number - 1
+
+    warning = extract_validation_warning_by_index(
+        validation_content,
+        warning_index
+    )
+
+    if not warning:
+        return save_review_draft(
+            review_filename,
+            f"No validation warning found at number {warning_number}."
+        )
+
+    review_prompt = f"""
+You are reviewing one validator warning from a generated draft file.
+
+ONLY address this warning:
+{warning}
+
+Filename:
+{filename}
+
+Code:
+{code_content}
+
+Project Rules:
+- This is a Flask/Jinja project.
+- Child templates extend base.html.
+- Child templates must not include <!DOCTYPE html>, <html>, <head>, or <body>.
+- Do not use Django syntax.
+- Do not use Flask-WTF unless explicitly requested.
+- Do not add CSRF systems unless explicitly requested.
+- Do not invent extra issues.
+- Do not redesign the file.
+- Only patch this exact warning.
+
+Return format:
+WARNING:
+PATCH:
+"""
+
+    review_content = ask_ai(
+        "You are a single-warning patch reviewer. Fix only the listed warning.",
+        review_prompt
+    )
+
+    review_content = clean_ai_code(review_content)
+
+    return save_review_draft(review_filename, review_content)
+
