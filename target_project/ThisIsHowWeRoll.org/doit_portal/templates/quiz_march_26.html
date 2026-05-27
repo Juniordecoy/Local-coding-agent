@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block title %}March Safety Quiz{% endblock %}
+
+{% block content %}
+
+<section class="panel">
+
+  <h2 class="panel-title">March 2026 Safety Quiz</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your quiz was submitted.</div>
+  {% endif %}
+
+  <form method="POST" class="quiz-form">
+
+    <div class="two-col">
+
+    <div>
+
+    <div class="field">
+      <label for="your_name"><span class="req"></span> Your name</label>
+      <input id="your_name" name="your_name" type="text" required>
+    </div>
+
+    <div class="field">
+      <label for="email"><span class="req"></span> Email</label>
+      <input id="email" name="email" type="text" required>
+    </div>
+
+    </div>
+
+    <div class="hq-q">
+      <p><strong>1. Fatigue while driving can be as dangerous as:</strong></p>
+
+      <label><input type="radio" name="q1" value="a" required> A. A flat tire</label>
+      <label><input type="radio" name="q1" value="b"> B. Driving under the influence of alcohol</label>
+      <label><input type="radio" name="q1" value="c"> C. A blown engine</label>
+      <label><input type="radio" name="q1" value="d"> D. Rainy weather</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>2. If you start to feel drowsy while driving:</strong></p>
+
+      <label><input type="radio" name="q2" value="a" required> A. Turn up the radio and keep driving</label>
+      <label><input type="radio" name="q2" value="b"> B. Stop at a safe location and rest</label>
+      <label><input type="radio" name="q2" value="c"> C. Open the windows and drive faster</label>
+      <label><input type="radio" name="q2" value="d"> D. Drink coffee and ignore it</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>3. Defensive driving means:</strong></p>
+
+      <label><input type="radio" name="q3" value="a" required> A. Always expecting the unexpected from other drivers</label>
+      <label><input type="radio" name="q3" value="b"> B. Only worrying about your own lane</label>
+      <label><input type="radio" name="q3" value="c"> C. Driving the speed limit exactly</label>
+      <label><input type="radio" name="q3" value="d"> D. Honking at other drivers to assert dominance</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>4. When approaching a construction zone:</strong></p>
+
+      <label><input type="radio" name="q4" value="a" required> A. Maintain speed and watch your mirrors</label>
+      <label><input type="radio" name="q4" value="b"> B. Slow down, watch for workers, and follow signs</label>
+      <label><input type="radio" name="q4" value="c"> C. Only worry if other trucks are present</label>
+      <label><input type="radio" name="q4" value="d"> D. Change lanes as quickly as possible</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>5. Driving in bad weather (rain, snow, fog) requires:</strong></p>
+
+      <label><input type="radio" name="q5" value="a" required> A. Higher speed to pass other vehicles quickly</label>
+      <label><input type="radio" name="q5" value="b"> B. Reducing speed, increasing following distance, and using lights properly</label>
+      <label><input type="radio" name="q5" value="c"> C. Relying solely on GPS</label>
+      <label><input type="radio" name="q5" value="d"> D. Ignoring weather if the deadline is tight</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>6. What is the ultimate goal every time you drive your truck?</strong></p>
+
+      <label><input type="radio" name="q6" value="a" required> A. Arrive first</label>
+      <label><input type="radio" name="q6" value="b"> B. Meet the schedule at all costs</label>
+      <label><input type="radio" name="q6" value="c"> C. Get home safely to your family</label>
+      <label><input type="radio" name="q6" value="d"> D. Avoid paying tolls</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>7. Why is it important to maintain safe following distance?</strong></p>
+
+      <label><input type="radio" name="q7" value="a" required> A. Reduces risk of rear-end collisions</label>
+      <label><input type="radio" name="q7" value="b"> B. Makes it easier to tailgate cars</label>
+      <label><input type="radio" name="q7" value="c"> C. Only matters in city traffic</label>
+      <label><input type="radio" name="q7" value="d"> D. Saves fuel</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>8. If another vehicle cuts in front of your vehicle unexpectedly, you should:</strong></p>
+
+      <label><input type="radio" name="q8" value="a" required> A. Honk aggressively</label>
+      <label><input type="radio" name="q8" value="b"> B. Slam on the brakes</label>
+      <label><input type="radio" name="q8" value="c"> C. Ease off the accelerator and maintain control</label>
+      <label><input type="radio" name="q8" value="d"> D. Speed up to pass them</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>9. Night driving requires:</strong></p>
+
+      <label><input type="radio" name="q9" value="a" required> A. Constant use of high beams</label>
+      <label><input type="radio" name="q9" value="b"> B. Reduced speed, alertness for fatigue, and proper use of headlights</label>
+      <label><input type="radio" name="q9" value="c"> C. Relying only on GPS</label>
+      <label><input type="radio" name="q9" value="d"> D. Following the car in front closely</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>10. How does staying hydrated and nourished affect driving safety?</strong></p>
+
+      <label><input type="radio" name="q10" value="a" required> A. Keeps energy and focus levels high</label>
+      <label><input type="radio" name="q10" value="b"> B. Has no effect on driving</label>
+      <label><input type="radio" name="q10" value="c"> C. Only matters for short trips</label>
+      <label><input type="radio" name="q10" value="d"> D. Makes fatigue worse</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>11. What’s your personal reason for making safety a priority on the road?</strong></p>
+      <textarea name="q11" rows="3" required></textarea>
+      </div>
+
+      <div style="position:absolute; left:-9999px;">
+        <input type="text" name="do_not_fill" autocomplete="off">
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Quiz</button>
+     </div>
+    </form>
+</section>
+
+{% endblock %}

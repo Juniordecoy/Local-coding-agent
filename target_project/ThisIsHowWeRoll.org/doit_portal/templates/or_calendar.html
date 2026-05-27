@@ -1,0 +1,279 @@
+{% extends "or_base.html" %}
+
+{% block content %}
+
+<div class="or-page">
+
+  <div class="or-card">
+    <div class="or-board-head">
+      <h2>OR Calendar Board</h2>
+
+      <button class="portal-btn btn-dark" type="button" id="openCampaignModal">
+        + Add Schedule Entry
+      </button>
+    </div>
+
+    <div class="or-month-toggle-bar">
+      <label><input type="checkbox" class="month-toggle" data-month="jan" checked> Jan</label>
+      <label><input type="checkbox" class="month-toggle" data-month="feb" checked> Feb</label>
+    </div>
+
+    <div class="or-filter-bar">
+      <input class="or-filter-input" data-col="0" placeholder="Search Notes">
+      <input class="or-filter-input" data-col="2" placeholder="Search City">
+      <input class="or-filter-input" data-col="3" placeholder="Search State">
+      <input class="or-filter-input" data-col="4" placeholder="Search Unit">
+      <input class="or-filter-input" data-col="5" placeholder="Search Driver">
+      <input class="or-filter-input" data-col="6" placeholder="Search Client">
+      <input class="or-filter-input" data-col="7" placeholder="Search Contract #">
+      <input class="or-filter-input" data-col="8" placeholder="Search Market">
+    </div>
+
+    <div class="or-workspace">
+      <table class="or-calendar-table">
+        <colgroup>
+          <col class="info-col notes-col">
+          <col class="info-col storage-col">
+          <col class="info-col city-col">
+          <col class="info-col state-col">
+          <col class="info-col unit-col">
+          <col class="info-col driver-col">
+          <col class="info-col client-col">
+          <col class="info-col contract-col">
+          <col class="info-col market-col">
+          <col class="info-col date-col">
+          <col class="info-col date-col">
+
+          {% for day in range(1, 32) %}
+            <col class="calendar-day-col">
+          {% endfor %}
+        </colgroup>
+
+        <thead>
+          <tr class="or-title-row">
+            <th>Notes</th>
+            <th>Storage</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Unit</th>
+            <th>Driver</th>
+            <th>Client</th>
+            <th>Contract #</th>
+            <th>Market</th>
+            <th>Start</th>
+            <th>End</th>
+
+            {% for day in range(1, 32) %}
+              {% set weekend_days = [3,4,10,11,17,18,24,25,31] %}
+
+              <th class="
+                 day-col
+                  month-jan
+                  {% if day in weekend_days %}
+                    weekend-col
+                  {% else %}
+                    weekday-col
+                  {% endif %}
+                "
+                data-month="jan">
+                {{ day }}
+              </th>
+            {% endfor %}
+
+            {% for day in range(1, 29) %}
+              {% set weekend_days = [1,7,8,14,15,21,22,28] %}
+
+              <th class="
+                  day-col
+                  month-feb
+                  {% if day in weekend_days %}
+                    weekend-col
+                  {% else %}
+                    weekday-col
+                  {% endif %}
+                "
+                data-month="feb">
+                {{ day }}
+              </th>
+            {% endfor %}
+          </tr>
+
+          <tr class="or-sub-row">
+            {% for col in range(0, 11) %}
+              <th>
+                <button class="filter-menu-btn sortable" data-col="{{ col }}" type="button">⇅</button>
+              </th>
+            {% endfor %}
+
+            {% for day in range(1, 32) %}
+              <th class="month-jan" data-month="jan">
+                <span class="month-mini-label">Jan</span>
+                <button class="filter-menu-btn sortable" data-col="{{ 10 + day }}" type="button">⇅</button>
+              </th>
+            {% endfor %}
+
+            {% for day in range(1, 29) %}
+              <th class="month-feb" data-month="feb">
+                <span class="month-mini-label">Feb</span>
+                <button class="filter-menu-btn sortable" data-col="{{ 41 + day }}" type="button">⇅</button>
+              </th>
+            {% endfor %}
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for row in calendar_rows %}
+            <tr>
+              <td>{{ row.notes }}</td>
+              <td>{{ row.storage }}</td>
+              <td>{{ row.city }}</td>
+              <td>{{ row.state }}</td>
+              <td>{{ row.unit }}</td>
+              <td>{{ row.driver }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="or-client-link edit-btn"
+                  data-id="{{ row.campaign_id }}"
+                  data-contract="{{ row.get('contract_number', '') }}"
+                  data-campaign="{{ row.campaign }}"
+                  data-city="{{ row.city }}"
+                  data-state="{{ row.state }}"
+                  data-start="{{ row.start_date }}"
+                  data-end="{{ row.end_date }}"
+                  data-notes="{{ row.notes }}"
+                >
+                  {{ row.campaign }}
+                </button>
+              </td>
+              <td>{{ row.contract_number }}</td>
+              <td>{{ row.city }}, {{ row.state }}</td>
+              <td>{{ row.start_date }}</td>
+              <td>{{ row.end_date }}</td>
+
+              {% for day in range(1, 32) %}
+                <td class="day-cell month-jan {% if day in weekend_days %}weekend-col{% else %}weekday-col{% endif %}" data-month="jan">
+                  {% set cell_date = "2026-01-" ~ ("%02d" % day) %}
+                  {% set saved_code = row.get("day_codes", {}).get(cell_date, "") %}
+
+                  <select
+                    class="or-day-select"
+                    data-campaign-id="{{ row.campaign_id }}"
+                    data-date="2026-01-{{ '%02d' % day }}"
+                  >
+                    <option value="" {% if saved_code == "" %}selected{% endif %}></option>
+                    <option value="1" {% if saved_code == "1" %}selected{% endif %}>1</option>
+                    <option value="2" {% if saved_code == "2" %}selected{% endif %}>2</option>
+                    <option value="3" {% if saved_code == "3" %}selected{% endif %}>3</option>
+                    <option value="S" {% if saved_code == "S" %}selected{% endif %}>S</option>
+                    <option value="O" {% if saved_code == "O" %}selected{% endif %}>O</option>
+                    <option value="X" {% if saved_code == "X" %}selected{% endif %}>X</option>
+                    <option value="XH" {% if saved_code == "XH" %}selected{% endif %}>XH</option>
+                    <option value="XTH" {% if saved_code == "XTH" %}selected{% endif %}>XTH</option>
+                    <option value="XT" {% if saved_code == "XT" %}selected{% endif %}>XT</option>
+                    <option value="A" {% if saved_code == "A" %}selected{% endif %}>A</option>
+                    <option value="B" {% if saved_code == "B" %}selected{% endif %}>B</option>
+                    <option value="P" {% if saved_code == "P" %}selected{% endif %}>P</option>
+                    <option value="T" {% if saved_code == "T" %}selected{% endif %}>T</option>
+                    <option value="TH" {% if saved_code == "TH" %}selected{% endif %}>TH</option>
+                    <option value="R1" {% if saved_code == "R1" %}selected{% endif %}>R1</option>
+                    <option value="R2" {% if saved_code == "R2" %}selected{% endif %}>R2</option>
+                    <option value="Z" {% if saved_code == "Z" %}selected{% endif %}>Z</option>
+                    <option value="H" {% if saved_code == "H" %}selected{% endif %}>H</option>
+                  </select>
+                </td>
+              {% endfor %}
+              {% for day in range(1, 29) %}
+                <td class="day-cell month-feb {% if day in weekend_days %}weekend-col{% else %}weekday-col{% endif %}" data-month="feb">
+                  {% set cell_date = "2026-02-" ~ ("%02d" % day) %}
+                  {% set saved_code = row.get("day_codes", {}).get(cell_date, "") %}
+
+                  <select
+                    class="or-day-select"
+                    data-campaign-id="{{ row.campaign_id }}"
+                    data-date="2026-02-{{ '%02d' % day }}"
+                  >
+                    <option value="" {% if saved_code == "" %}selected{% endif %}></option>
+                    <option value="1" {% if saved_code == "1" %}selected{% endif %}>1</option>
+                    <option value="2" {% if saved_code == "2" %}selected{% endif %}>2</option>
+                    <option value="3" {% if saved_code == "3" %}selected{% endif %}>3</option>
+                    <option value="S" {% if saved_code == "S" %}selected{% endif %}>S</option>
+                    <option value="O" {% if saved_code == "O" %}selected{% endif %}>O</option>
+                    <option value="X" {% if saved_code == "X" %}selected{% endif %}>X</option>
+                    <option value="XH" {% if saved_code == "XH" %}selected{% endif %}>XH</option>
+                    <option value="XTH" {% if saved_code == "XTH" %}selected{% endif %}>XTH</option>
+                    <option value="XT" {% if saved_code == "XT" %}selected{% endif %}>XT</option>
+                    <option value="A" {% if saved_code == "A" %}selected{% endif %}>A</option>
+                    <option value="B" {% if saved_code == "B" %}selected{% endif %}>B</option>
+                    <option value="P" {% if saved_code == "P" %}selected{% endif %}>P</option>
+                    <option value="T" {% if saved_code == "T" %}selected{% endif %}>T</option>
+                    <option value="TH" {% if saved_code == "TH" %}selected{% endif %}>TH</option>
+                    <option value="R1" {% if saved_code == "R1" %}selected{% endif %}>R1</option>
+                    <option value="R2" {% if saved_code == "R2" %}selected{% endif %}>R2</option>
+                    <option value="Z" {% if saved_code == "Z" %}selected{% endif %}>Z</option>
+                    <option value="H" {% if saved_code == "H" %}selected{% endif %}>H</option>
+                  </select>
+                </td>
+              {% endfor %}
+
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div id="campaignModal" class="or-modal">
+  <div class="or-modal-box">
+
+    <div class="or-modal-header">
+      <h2>Add or Edit Campaign</h2>
+      <button type="button" id="closeCampaignModal" class="or-modal-close">×</button>
+    </div>
+
+    <form method="POST" action="{{ url_for('or_add_campaign') }}">
+      <input type="hidden" name="campaign_id" id="campaign_id">
+      <label>Campaign Name</label>
+      <input type="text" name="campaign" required>
+
+      <label>Contract #</label>
+      <input type="text" name="contract_number" placeholder="12345">
+
+      <div class="or-field-row">
+        <div>
+          <label>Market / City</label>
+          <input type="text" name="city" placeholder="Miami" required>
+        </div>
+
+        <div>
+          <label>State</label>
+          <input type="text" name="state" placeholder="FL" maxlength="2" required>
+        </div>
+      </div>
+
+      <label>Start Date</label>
+      <input type="date" name="start_date" required>
+
+      <label>End Date</label>
+      <input type="date" name="end_date" required>
+
+      <label>Notes</label>
+      <textarea name="notes" rows="3"></textarea>
+
+      <div class="or-modal-actions">
+        <button type="submit" class="portal-btn btn-dark">
+          Save Edit
+        </button>
+
+        <button type="button" class="portal-btn btn-dark or-delete-btn" id="deleteCampaignBtn">
+          Delete
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

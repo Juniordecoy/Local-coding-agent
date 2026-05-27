@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% block title %}Merge PDFs{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Merge PDF Files</h2>
+
+  <p class="panel-subtitle">
+    Upload 2 or more PDF files, reorder them, then merge.
+  </p>
+
+  {% if error %}
+    <div class="flash error">{{ error }}</div>
+  {% endif %}
+
+  {% if ready and download_token %}
+    <div class="flash success">
+      Your merged PDF is ready.
+    </div>
+
+    <div class="forms-btnwrap">
+      <a class="panel-btn" href="{{ url_for('download_merged_pdf') }}">
+        Download merged PDF
+      </a>
+    </div>
+  {% endif %}
+
+  <form class="pdf-merge-form" method="POST" enctype="multipart/form-data">
+    <div class="quiz-block">
+      <label for="pdf_files">Select PDF files</label>
+      <input
+        id="pdf_files"
+        type="file"
+        name="pdf_files"
+        accept=".pdf,application/pdf"
+        multiple
+        required
+      >
+    </div>
+
+    <input type="hidden" name="file_order" id="file_order">
+
+    <div class="merge-file-list-wrap">
+      <p class="merge-file-list-title">Selected files</p>
+      <div id="mergeFileList" class="merge-file-list">
+        <p class="merge-empty">No files selected yet.</p>
+      </div>
+    </div>
+
+    <div class="quiz-block">
+      <button class="submit-btn" type="submit">Merge and Download</button>
+    </div>
+  </form>
+
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const fileInput = document.getElementById("pdf_files");
+  const fileList = document.getElementById("mergeFileList");
+  const fileOrderInput = document.getElementById("file_order");
+
+  let selectedOrder = [];
+
+  function formatSize(bytes) {
+    if (bytes < 1024) return bytes + " B";
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+    return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+  }
+
+  function updateHiddenOrder() {
+    fileOrderInput.value = selectedOrder.join(",");
+  }
+
+  function renderFileList() {
+    const files = Array.from(fileInput.files);
+
+    if (!files.length) {
+      fileList.innerHTML = '<p class="merge-empty">No files selected yet.</p>';
+      fileOrderInput.value = "";
+      return;
+    }
+
+    fileList.innerHTML = "";
+
+    selectedOrder.forEach((fileIndex, displayIndex) => {
+      const file = files[fileIndex];
+      if (!file) return;
+
+      const row = document.createElement("div");
+      row.className = "merge-file-row";
+
+      const info = document.createElement("div");
+      info.className = "merge-file-info";
+
+      const name = document.createElement("div");
+      name.className = "merge-file-name";
+      name.textContent = `${displayIndex + 1}. ${file.name}`;
+
+      const meta = document.createElement("div");
+      meta.className = "merge-file-meta";
+      meta.textContent = formatSize(file.size);
+
+      info.appendChild(name);
+      info.appendChild(meta);
+
+      const controls = document.createElement("div");
+      controls.className = "merge-file-controls";
+
+      const upBtn = document.createElement("button");
+      upBtn.type = "button";
+      upBtn.className = "merge-move-btn";
+      upBtn.textContent = "↑";
+      upBtn.disabled = displayIndex === 0;
+      upBtn.addEventListener("click", () => {
+        if (displayIndex > 0) {
+          [selectedOrder[displayIndex - 1], selectedOrder[displayIndex]] =
+            [selectedOrder[displayIndex], selectedOrder[displayIndex - 1]];
+          updateHiddenOrder();
+          renderFileList();
+        }
+      });
+
+      const downBtn = document.createElement("button");
+      downBtn.type = "button";
+      downBtn.className = "merge-move-btn";
+      downBtn.textContent = "↓";
+      downBtn.disabled = displayIndex === selectedOrder.length - 1;
+      downBtn.addEventListener("click", () => {
+        if (displayIndex < selectedOrder.length - 1) {
+          [selectedOrder[displayIndex + 1], selectedOrder[displayIndex]] =
+            [selectedOrder[displayIndex], selectedOrder[displayIndex + 1]];
+          updateHiddenOrder();
+          renderFileList();
+        }
+      });
+
+      controls.appendChild(upBtn);
+      controls.appendChild(downBtn);
+
+      row.appendChild(info);
+      row.appendChild(controls);
+      fileList.appendChild(row);
+    });
+
+    updateHiddenOrder();
+  }
+
+  fileInput.addEventListener("change", () => {
+    const files = Array.from(fileInput.files);
+    selectedOrder = files.map((_, index) => index);
+    renderFileList();
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}P.O.P Examples{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">P.O.P Examples</h2>
+  <p style="text-align:center; color:red; font-weight:600;">
+    This is how YOUR photos are used
+  </p>
+
+  <div class="pops-grid">
+
+    <a href="{{ url_for('static', filename='pdfs/underarmour.pdf') }}" target="_blank" class="pop-btn">Under Armour</a>
+
+    <a href="{{ url_for('static', filename='pdfs/jardines.pdf') }}" target="_blank" class="pop-btn">Jardines</a>
+
+    <a href="{{ url_for('static', filename='pdfs/grubhub.pdf') }}" target="_blank" class="pop-btn">Grubhub</a>
+
+    <a href="{{ url_for('static', filename='pdfs/goodhumor.pdf') }}" target="_blank" class="pop-btn">Good Humor</a>
+
+    <a href="{{ url_for('static', filename='pdfs/postgazette.pdf') }}" target="_blank" class="pop-btn">Post Gazette</a>
+
+    <a href="{{ url_for('static', filename='pdfs/gsk.pdf') }}" target="_blank" class="pop-btn">GSK</a>
+
+  </div>
+
+</section>
+{% endblock %}

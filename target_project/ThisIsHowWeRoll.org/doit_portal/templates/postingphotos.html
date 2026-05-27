@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}Posting Photos Upload{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Posting Photos Upload</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — Photos were uploaded.</div>
+  {% endif %}
+
+  <form class="photo-form" method="POST" action="{{ url_for('postingphotos') }}" enctype="multipart/form-data">
+
+    <div class="photo-grid">
+      <div>
+        <label><span class="req"></span> Driver's Name</label>
+        <input type="text" name="driver_name" required>
+      </div>
+
+      <div>
+        <label><span class="req"></span> Email</label>
+        <input type="email" name="email" required>
+      </div>
+
+      <div>
+        <label><span class="req"></span> Unit #</label>
+        <input type="text" name="unit" required>
+      </div>
+
+      <div>
+        <label><span class="req"></span> Campaign / City - i.e. Kraft/Orlando</label>
+        <input type="text" name="campaign_city" required>
+      </div>
+    </div>
+
+    <div class="upload-row">
+
+      <div class="upload-block">
+        <label class="file-btn">
+          <span class="req"></span> Driver Side Posting Photo
+          <input type="file" name="driver_side_photo" accept="image/*" required onchange="showFileName(this,'driver-file-name')">
+        </label>
+        <div class="file-name" id="driver-file-name"></div>
+      </div>
+
+      <div class="upload-block">
+        <label class="file-btn">
+          <span class="req"></span> Passenger Side Posting Photo
+          <input type="file" name="passenger_side_photo" accept="image/*" required onchange="showFileName(this,'passenger-file-name')">
+        </label>
+        <div class="file-name" id="passenger-file-name"></div>
+      </div>
+
+    </div>
+
+    <div class="notes-row">
+      <label>Notes</label>
+      <textarea name="notes" rows="3"></textarea>
+    </div>
+
+    <input type="hidden" name="submission_id" id="submission_id">
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button class="submit-btn" id="posting-submit-btn" type="submit">
+      Submit Photos
+    </button>
+
+    <div id="posting-submit-status" class="submit-status"></div>
+
+  </form>
+
+</section>
+
+<script>
+document.getElementById("submission_id").value =
+  Date.now().toString() + Math.random().toString(36).substring(2)
+
+function showFileName(input, targetId) {
+  const target = document.getElementById(targetId)
+
+  if (input.files.length > 0) {
+    target.textContent = "Selected: " + input.files[0].name
+  } else {
+    target.textContent = ""
+  }
+}
+
+const postingForm = document.querySelector(".photo-form")
+const submitBtn = document.getElementById("posting-submit-btn")
+const submitStatus = document.getElementById("posting-submit-status")
+
+if (postingForm) {
+  postingForm.addEventListener("submit", function () {
+    submitBtn.disabled = true
+    submitBtn.textContent = "Uploading photos..."
+    submitStatus.textContent = "Please wait. Do not refresh or press back while photos are uploading."
+  })
+}
+</script>
+
+{% endblock %}

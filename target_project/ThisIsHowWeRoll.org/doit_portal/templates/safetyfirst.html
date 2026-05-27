@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="panel">
+  <h1 class="sf-title">Safety First!</h1>
+
+  <!-- top wide buttons -->
+  <div class="sf-top">
+    <a class="sf-btn sf-btn--wide sf-btn--pink" href="{{ url_for('near_miss_reporting') }}">Anonymously report a Near Miss incident</a>
+    <a class="sf-btn sf-btn--wide sf-btn--pink" href="{{ url_for('samsara_notice') }}">Samsara Notice</a>
+  </div>
+
+  <!-- 2-column button grid -->
+  <div class="sf-grid">
+    <a class="sf-btn" href="{{ url_for('static', filename='pdfs/safe_driving_practice.pdf') }}"
+       target="_blank">Safe Driving Practices</a>
+    <a class="sf-btn" href="{{ url_for('static', filename='pdfs/tow_truck_bridge_warning.pdf') }}"
+       target="_blank">Tow Truck Bridge Warning</a>
+
+    <a class="sf-btn" href="{{ url_for('static', filename='pdfs/accident_protocol_checklist.pdf') }}"
+       target="_blank">Accident Protocol Checklist</a>
+    <a class="sf-btn" href="{{ url_for('static', filename='pdfs/accident_protocol_checklist_wallet.pdf') }}"
+       target="_blank">Accident Protocol Wallet Size</a>
+
+    <a class="sf-btn" href="{{ url_for('static', filename='pdfs/vehicle_accident_report.pdf') }}"
+       target="_blank">Vehicle Accident Report</a>
+    <a class="sf-btn" href="{{ url_for('static', filename='pdfs/accident_talking_points.pdf') }}"
+       target="_blank">Accident Talking Points</a>
+  </div>
+
+  <!-- quizzes section -->
+  <div class="sf-quiz-row">
+    <div class="sf-reading">
+      <div class="sf-reading-title">Reading Material (if applicable)</div>
+      <div class="sf-reading-sub">Please Read before taking the quiz</div>
+    </div>
+
+    <div class="sf-quizzes">
+      <div class="sf-quizzes-title">Latest Safety Quizzes</div>
+
+      <a class="sf-btn sf-btn--wide sf-btn--green" href="{{ url_for('monthly_quiz', month='may') }}">May 2026 Safety Quiz</a>
+      <a class="sf-btn sf-btn--wide" href="{{ url_for('monthly_quiz', month='april') }}">April 2026 Safety Quiz</a>
+    </div>
+  </div>
+
+  <div class="sf-bottom">
+    <a class="sf-btn sf-btn--wide sf-btn--pink" href="{{ url_for('static', filename='pdfs/log_instructions.pdf') }}"
+       target="_blank">LOG INSTRUCTIONS</a>
+  </div>
+</div>
+
+{% endblock %}

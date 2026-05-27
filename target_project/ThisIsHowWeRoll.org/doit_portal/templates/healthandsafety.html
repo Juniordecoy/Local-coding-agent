@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="panel">
+  <h1 class="hs-title">Health and Safety</h1>
+
+  <div class="hs-stack">
+    <a class="hs-btn hs-btn--accent" href="{{ url_for('health_crisis_2020') }}">2020 Health Crisis</a>
+    <a class="hs-btn" href="{{ url_for('safetyfirst') }}">Safety First</a>
+    <a class="hs-btn" href="#">Safety Awards</a>
+    <a class="hs-btn" href="{{ url_for('dot') }}">D.O.T. Info</a>
+    <a class="hs-btn" href="{{ url_for('safetyvideos') }}">Safety Videos</a>
+    <a class="hs-btn" href="{{ url_for('healthandfitness') }}">Health and Fitness</a>
+    <a class="hs-btn hs-btn--wide" href="{{ url_for('static', filename='pdfs/PERSONAL_CONVEYANCE.pdf') }}"
+       target="_blank">Personal Conveyance SOP</a>
+  </div>
+</div>
+
+{% endblock %}

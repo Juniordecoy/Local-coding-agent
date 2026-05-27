@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="lead-login-page">
+  <div class="lead-login-card">
+
+    <!-- Close X -->
+    <a href="{{ url_for('index') }}" class="close-x">✕</a>
+
+    <h1 class="login-title">Guest Area</h1>
+    <p class="login-sub">Please enter the password below.</p>
+
+    {% if error %}
+      <div class="login-error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" class="login-form">
+      <div class="login-field">
+        <input type="password" name="password" placeholder="Password" required>
+      </div>
+
+      <button type="submit" class="login-btn">Go</button>
+    </form>
+
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Forms{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Driver Forms</h2>
+
+  <div class="btn-stack">
+
+    <!-- You can color-highlight a button by adding: btn-pill--yellow / btn-pill--red -->
+
+    <a class="btn-pill btn-pill--yellow" href="https://app.signnow.com/rctapp/login" target="_blank" rel="noopener">
+      DMV Driver Cert Annual Review
+    </a>
+
+    <a class="btn-pill" href="{{ url_for('expense_form') }}">
+      Driver Expense form (digital)
+    </a>
+
+    <a class="btn-pill" href="{{ url_for('static', filename='pdfs/expense_form.pdf') }}" target="_blank" rel="noopener">
+      Driver Expense Form (print)
+    </a>
+
+    <a class="btn-pill" href="{{ url_for('static', filename='pdfs/time_record_instructions.pdf') }}" target="_blank" rel="noopener">
+      Time Record Instructions
+    </a>
+
+    <a class="btn-pill" href="{{ url_for('static', filename='excel/dot_hours_calculator.xlsx') }}" target="_blank" rel="noopener">
+      DOT Hours Calculator
+    </a>
+
+    <a class="btn-pill" href="{{ url_for('static', filename='pdfs/dot_exemption_form.pdf') }}" target="_blank" rel="noopener">
+      DOT Exemption Form
+    </a>
+
+    <!-- Internal example: Unit Condition Report you already have as /ucr -->
+    <!-- <a class="btn-pill" href="{{ url_for('ucr') }}">
+      Unit Condition Report
+    </a> -->
+
+    <a class="btn-pill" href="{{ url_for('accident_forms') }}">
+      Accident Forms
+    </a>
+
+    <a class="btn-pill" href="{{ url_for('static', filename='pdfs/nv-ca_milage_report.pdf') }}" target="_blank" rel="noopener">
+      NV/CA Apportioned Mileage Report
+    </a>
+
+    <a class="btn-pill" href="{{ url_for('static', filename='pdfs/quartely_checklist.pdf') }}" target="_blank" rel="noopener">
+      Quartely cab, deck, storage checklist
+    </a>
+
+    <a class="btn-pill" href="{{ url_for('static', filename='pdfs/xrs_cab_card.pdf') }}" target="_blank" rel="noopener">
+      XRS Cab Card
+    </a>
+
+    <a class="btn-pill btn-pill--red" href="https://pdf.ac/22frIy" target="_blank" rel="noopener">
+      Social Media Release Form
+    </a>
+
+  </div>
+
+</section>
+{% endblock %}

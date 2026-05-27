@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="page ojt-page">
+  <div class="panel">
+
+    <h1 class="page-title">O.J.T. Checklist</h1>
+
+    {% if submitted %}
+      <div class="success-msg">Submitted. Thank you!</div>
+    {% endif %}
+
+    <form class="ojt-form" method="post" action="{{ url_for('ojt_checklist') }}">
+      <!-- BASIC INFO -->
+      <div class="ojt-grid-2">
+        <div class="field">
+          <label for="your_name"><span class="req"></span> 1. Your name</label>
+          <input id="your_name" name="your_name" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="new_hire"><span class="req"></span> 2. New Hire</label>
+          <input id="new_hire" name="new_hire" type="text" required>
+        </div>
+
+        <div class="field ojt-span-2">
+          <label for="date_time"><span class="req"></span> 3. Date and Time</label>
+          <input id="date_time" name="date_time" type="datetime-local" required>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- QUESTIONS -->
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 4. Does driver know how to complete a proper pre/post inspection?</div>
+        <label class="opt"><input type="radio" name="q4_prepost" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q4_prepost" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 5. Does driver know how to complete a UCR? Did they submit one for your vehicle?</div>
+        <label class="opt"><input type="radio" name="q5_ucr" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q5_ucr" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 6. Is driver wearing proper work attire? Does driver understand our dress code?</div>
+        <label class="opt"><input type="radio" name="q6_attire" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q6_attire" value="No"> No</label>
+        <label class="opt"><input type="radio" name="q6_attire" value="Understands but is not in dress code"> Understands but is not in dress code</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 7. Does driver know where to locate the fuel separator, and how to drain it properly?</div>
+        <label class="opt"><input type="radio" name="q7_fuel_sep" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q7_fuel_sep" value="No"> No</label>
+        <label class="opt"><input type="radio" name="q7_fuel_sep" value="Gas unit explained"> We're in a gas unit, but I explained it to them</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 8. Does driver know where the in-cabin air filter is and how to check/clean it?</div>
+        <label class="opt"><input type="radio" name="q8_air_filter" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q8_air_filter" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 9. How many clips does driver think need to be with the unit? Do they understand why we need the proper amount?</div>
+        <input class="textline" type="text" name="q9_clips" required>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 10. Can driver successfully install vinyl clips, without struggle?</div>
+        <label class="opt"><input type="radio" name="q10_install_clips" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q10_install_clips" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 11. Can driver successfully hang vinyls on their own?</div>
+        <label class="opt"><input type="radio" name="q11_hang_vinyls" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q11_hang_vinyls" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 12. Did you cover troubleshooting issues with vinyls? How to re-tighten, check pulleys, etc.</div>
+        <label class="opt"><input type="radio" name="q12_troubleshoot" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q12_troubleshoot" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 13. Does driver know how to log in and properly use XRS, including changing rulesets and using personal conveyance?</div>
+        <label class="opt"><input type="radio" name="q13_xrs" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q13_xrs" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 14. Does driver know how to log-in and use Roadnet?</div>
+        <label class="opt"><input type="radio" name="q14_roadnet" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q14_roadnet" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 15. Does driver know how to log into and properly use the Paylocity app (including using proper labor codes)?</div>
+        <label class="opt"><input type="radio" name="q15_paylocity" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q15_paylocity" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 16. Does driver practice safe driving habits? Check all applicable</div>
+        <label class="opt"><input type="checkbox" name="q16_safe_backing" value="1"> Safe backing skills</label>
+        <label class="opt"><input type="checkbox" name="q16_height_clearance" value="1"> Watching height clearance (bridges, tree limbs, gas station awnings, etc)</label>
+        <label class="opt"><input type="checkbox" name="q16_tail_swing" value="1"> Watching for tail swing on turns</label>
+        <label class="opt"><input type="checkbox" name="q16_speed_limits" value="1"> Obey speed limits</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 17. Do you have any concerns about their driving?</div>
+        <textarea name="q17_concerns" rows="4" required></textarea>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 18. Does driver know and understand company max speed limits with/without vinyls?</div>
+        <label class="opt"><input type="radio" name="q18_max_speed" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q18_max_speed" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 19. Does driver know who their Lead Driver is, and have all of their contact info?</div>
+        <label class="opt"><input type="radio" name="q19_lead_driver" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q19_lead_driver" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 20. Does driver have their P.P.E. (personal protective equipment) Safety hat or vest?</div>
+        <label class="opt"><input type="radio" name="q20_ppe" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q20_ppe" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 21. Does driver know what posting photos are, and when/where to send them?</div>
+        <label class="opt"><input type="radio" name="q21_posting_photos" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q21_posting_photos" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 22. Does driver know when/where to send campaign photos?</div>
+        <label class="opt"><input type="radio" name="q22_campaign_photos" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q22_campaign_photos" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 23. What good photo taking tips did you give to the driver?</div>
+        <textarea name="q23_photo_tips" rows="4" required></textarea>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 24. Did you cover the importance of keeping a clean unit at all times? Inside and out, shiny wheels, clean windows, deck, cab, vinyls, etc.</div>
+        <label class="opt"><input type="radio" name="q24_clean_unit" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q24_clean_unit" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 25. Does driver know what to do, and who to call if their unit breaks down?</div>
+        <label class="opt"><input type="radio" name="q25_breakdown" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q25_breakdown" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 26. Does driver understand the accident protocol? importance of taking photos, etc</div>
+        <label class="opt"><input type="radio" name="q26_accident" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q26_accident" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 27. Does driver understand that they MUST have their routing printed out at all times? (Preferably in color)</div>
+        <label class="opt"><input type="radio" name="q27_routing_printed" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q27_routing_printed" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 28. Does driver understand what their geofence (overview) is?</div>
+        <label class="opt"><input type="radio" name="q28_geofence" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q28_geofence" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 29. Does driver understand the importance of checking their schedule every day, and why it's so important to start/stop on time?</div>
+        <label class="opt"><input type="radio" name="q29_schedule" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q29_schedule" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 30. Does driver know what extended stops are? and the importance of not having them/who to contact?</div>
+        <label class="opt"><input type="radio" name="q30_extended_stops" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q30_extended_stops" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 31. Does driver know/understand weather policy?</div>
+        <label class="opt"><input type="radio" name="q31_weather" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q31_weather" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 32. Does driver know the difference between the red and blue Comdata and OnRoad cards?</div>
+        <label class="opt"><input type="radio" name="q32_cards" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q32_cards" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 33. Does driver know how to fill out expense report, and when/where to submit it along with receipts?</div>
+        <label class="opt"><input type="radio" name="q33_expense" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q33_expense" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 34. Does driver know how to use the fuel card, and the importance of entering the correct mileage?</div>
+        <label class="opt"><input type="radio" name="q34_fuel_card" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q34_fuel_card" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 35. Does driver know not to be on a ladder, rear deck, or inside the box?</div>
+        <label class="opt"><input type="radio" name="q35_no_ladder" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q35_no_ladder" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 36. Does driver have a paper log book as required back up?</div>
+        <label class="opt"><input type="radio" name="q36_paper_log" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q36_paper_log" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 37. Did you remind the driver to complete the upcoming campaign questionnaire?</div>
+        <label class="opt"><input type="radio" name="q37_questionnaire" value="Yes" required> Yes</label>
+        <label class="opt"><input type="radio" name="q37_questionnaire" value="No"> No</label>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> 38. On a scale of 1–10 how confident are you about this driver running their first campaign?</div>
+        <div class="scale">
+          {% for n in range(1,11) %}
+            <label class="scale-opt">
+              <input type="radio" name="q38_confidence" value="{{n}}" required> {{n}}
+            </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-title">39. Any additional comments?</div>
+        <textarea name="q39_comments" rows="4"></textarea>
+      </div>
+
+      <div style="position:absolute; left:-9999px;">
+        <input type="text" name="do_not_fill" autocomplete="off">
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="submit-btn">Submit</button>
+      </div>
+
+    </form>
+
+  </div>
+</section>
+
+{% endblock %}

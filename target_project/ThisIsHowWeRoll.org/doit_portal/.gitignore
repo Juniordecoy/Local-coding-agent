@@ -1,0 +1,13 @@
+# Ignore my local-only folder
+dev_only/
+
+# Python basics
+__pycache__/
+*.pyc
+
+# PyCharm
+.idea/
+
+# Env
+.env
+venv/

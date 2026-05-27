@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}Week 8 Post Hire Test{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Week 8 Post Hire Test</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your test was submitted.</div>
+  {% endif %}
+
+  <form class="quiz-form" method="POST" action="{{ url_for('week_test', week=8) }}">
+
+    <div class="photo-grid">
+      <div class="field">
+        <label for="your_name"><span class="req"></span> Your name</label>
+        <input id="your_name" name="your_name" type="text" required>
+      </div>
+
+      <div class="field">
+        <label for="email"><span class="req"></span> Email</label>
+        <input id="email" name="email" type="text" required>
+      </div>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* Who is your "Mentor" Lead Driver?</label>
+
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Mark Hooper" required> Mark Hooper</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Jermaine Bridges"> Jermaine Bridges</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Gary Rausin"> Gary Rausin</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Rene Santiago"> Rene Santiago</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Carlos Villalobos"> Carlos Villalobos</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Robbie Lezama"> Robbie Lezama</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Cassandra Bell"> Cassandra Bell</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Michael Morales"> Michael Morales</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 1. It is acceptable for anyone to stand on the deck of the unit for a great photo opportunity.</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="True" required> A. True</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="False"> B. False</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 2. What do you do if there is any type of client event (not on your routing) that causes a delay, extended stop, or change in your route?</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="A" required> A. Don’t worry about it - the client is happy</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="B"> B. Immediately notify the GPS Coordinator and/or your Lead Driver</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="C"> C. Do not stop at any unapproved event unless it has been cleared by Operations</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="D"> D. Both B. and C.</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 3. How many points of contact must you maintain when entering or exiting a MAV?</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="A" required> A. 1</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="B"> B. 2</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="C"> C. 3</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="D"> D. 4</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 4. What is the required dress code for Drivers representing do it outdoors media?</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="A" required> A. Dark jeans or slacks, nice shirt (no T-shirts), closed-toe shoes</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="B"> B. Anything comfortable</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="C"> C. No clothing with logos</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="D"> D. Both A. and C.</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 5. How often must the fuel/water separator be drained in diesel units?</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="A" required> A. Once per month</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="B"> B. Daily, during pre-trip</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="C"> C. Only when the warning light appears</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="D"> D. Weekly</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 6. You are allowed to purchase alcoholic beverages while driving a mobile billboard:</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="A" required> A. As long as they’re stored in the rear storage area</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="B"> B. When using personal conveyance or heading to your hotel</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="C"> C. Never</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="D"> D. Both A. and B.</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 7. What should you do if a police officer or security personnel asks you to move your MAV?</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="A" required> A. Do what they ask; immediately notify your Lead Driver or GPS Coordinator</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="B"> B. Move and return to the spot later</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="C"> C. Explain that you’re there on behalf of the client</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 8. When traveling M2M, I should do the following:</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="A" required> A. Plan my route ahead of time and leave early in case there are any delays</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="B"> B. Rest is important so sleep in and leave whenever</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="C"> C. Wait until I’m ready to stop for the night to call my Lead for a hotel</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="D"> D. Both B. and C.</label>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+
+  </form>
+
+</section>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Accident Forms{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Accident Forms</h2>
+
+  <div class="btn-stack">
+
+    <!-- You can color-highlight a button by adding: btn-pill--yellow / btn-pill--red -->
+
+    <a class="btn-pill btn-pill--yellow" href="{{ url_for('vehicle_accident_report') }}">
+      Digital - Accident Form
+    </a>
+
+    <a class="btn-pill" href="{{ url_for('static', filename='pdfs/accident_form.pdf') }}" target="_blank" rel="noopener">
+      Paper - Accident Form
+    </a>
+
+    <a class="btn-pill" href="{{ url_for('static', filename='pdfs/accident_protocol_checklist.pdf') }}" target="_blank" rel="noopener">
+      Accident Protocol
+    </a>
+
+    <a class="btn-pill" href="{{ url_for('static', filename='pdfs/accident_protocol_checklist_wallet.pdf') }}" target="_blank" rel="noopener">
+      Accident Protocol Wallet Sized
+    </a>
+
+  </div>
+
+</section>
+{% endblock %}

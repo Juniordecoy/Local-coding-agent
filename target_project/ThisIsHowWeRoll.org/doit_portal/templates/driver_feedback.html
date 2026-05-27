@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+{% block title %}Driver Evaluation Feedback Form{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Driver Evaluation Feedback Form</h2>
+
+  <p class="feedback-note">
+    On a scale of 1 – 5 with 5 being Excellent, please rate the Driver on each of the criteria listed.
+    You may use "unknown" if you have no knowledge for a listed criteria. Additional comments may be made below.
+  </p>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your feedback was submitted.</div>
+  {% endif %}
+
+  <form class="quiz-form" method="POST" action="{{ url_for('driver_feedback') }}">
+
+    <div class="photo-grid">
+      <div class="field">
+        <label for="your_name"><span class="req"></span> Your Name</label>
+        <input id="your_name" name="your_name" type="text" required>
+      </div>
+
+      <div class="field">
+        <label for="driver_name"><span class="req"></span> Driver's name</label>
+        <input id="driver_name" name="driver_name" type="text" required>
+      </div>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Quality of Work</p>
+      <label><input type="radio" name="quality_of_work" value="1" required> 1</label>
+      <label><input type="radio" name="quality_of_work" value="2"> 2</label>
+      <label><input type="radio" name="quality_of_work" value="3"> 3</label>
+      <label><input type="radio" name="quality_of_work" value="4"> 4</label>
+      <label><input type="radio" name="quality_of_work" value="5"> 5</label>
+      <label><input type="radio" name="quality_of_work" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Safety</p>
+      <label><input type="radio" name="safety" value="1" required> 1</label>
+      <label><input type="radio" name="safety" value="2"> 2</label>
+      <label><input type="radio" name="safety" value="3"> 3</label>
+      <label><input type="radio" name="safety" value="4"> 4</label>
+      <label><input type="radio" name="safety" value="5"> 5</label>
+      <label><input type="radio" name="safety" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Communication</p>
+      <label><input type="radio" name="communication" value="1" required> 1</label>
+      <label><input type="radio" name="communication" value="2"> 2</label>
+      <label><input type="radio" name="communication" value="3"> 3</label>
+      <label><input type="radio" name="communication" value="4"> 4</label>
+      <label><input type="radio" name="communication" value="5"> 5</label>
+      <label><input type="radio" name="communication" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Dependability</p>
+      <label><input type="radio" name="dependability" value="1" required> 1</label>
+      <label><input type="radio" name="dependability" value="2"> 2</label>
+      <label><input type="radio" name="dependability" value="3"> 3</label>
+      <label><input type="radio" name="dependability" value="4"> 4</label>
+      <label><input type="radio" name="dependability" value="5"> 5</label>
+      <label><input type="radio" name="dependability" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Professionalism</p>
+      <label><input type="radio" name="professionalism" value="1" required> 1</label>
+      <label><input type="radio" name="professionalism" value="2"> 2</label>
+      <label><input type="radio" name="professionalism" value="3"> 3</label>
+      <label><input type="radio" name="professionalism" value="4"> 4</label>
+      <label><input type="radio" name="professionalism" value="5"> 5</label>
+      <label><input type="radio" name="professionalism" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Team Player</p>
+      <label><input type="radio" name="team_player" value="1" required> 1</label>
+      <label><input type="radio" name="team_player" value="2"> 2</label>
+      <label><input type="radio" name="team_player" value="3"> 3</label>
+      <label><input type="radio" name="team_player" value="4"> 4</label>
+      <label><input type="radio" name="team_player" value="5"> 5</label>
+      <label><input type="radio" name="team_player" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Vehicle Condition</p>
+      <label><input type="radio" name="vehicle_condition" value="1" required> 1</label>
+      <label><input type="radio" name="vehicle_condition" value="2"> 2</label>
+      <label><input type="radio" name="vehicle_condition" value="3"> 3</label>
+      <label><input type="radio" name="vehicle_condition" value="4"> 4</label>
+      <label><input type="radio" name="vehicle_condition" value="5"> 5</label>
+      <label><input type="radio" name="vehicle_condition" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Adheres to Dress Code</p>
+      <label><input type="radio" name="dress_code" value="1" required> 1</label>
+      <label><input type="radio" name="dress_code" value="2"> 2</label>
+      <label><input type="radio" name="dress_code" value="3"> 3</label>
+      <label><input type="radio" name="dress_code" value="4"> 4</label>
+      <label><input type="radio" name="dress_code" value="5"> 5</label>
+      <label><input type="radio" name="dress_code" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Understands the Business</p>
+      <label><input type="radio" name="understands_business" value="1" required> 1</label>
+      <label><input type="radio" name="understands_business" value="2"> 2</label>
+      <label><input type="radio" name="understands_business" value="3"> 3</label>
+      <label><input type="radio" name="understands_business" value="4"> 4</label>
+      <label><input type="radio" name="understands_business" value="5"> 5</label>
+      <label><input type="radio" name="understands_business" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Asks Meaningful Questions</p>
+      <label><input type="radio" name="meaningful_questions" value="1" required> 1</label>
+      <label><input type="radio" name="meaningful_questions" value="2"> 2</label>
+      <label><input type="radio" name="meaningful_questions" value="3"> 3</label>
+      <label><input type="radio" name="meaningful_questions" value="4"> 4</label>
+      <label><input type="radio" name="meaningful_questions" value="5"> 5</label>
+      <label><input type="radio" name="meaningful_questions" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Accepts Coaching Well</p>
+      <label><input type="radio" name="accepts_coaching" value="1" required> 1</label>
+      <label><input type="radio" name="accepts_coaching" value="2"> 2</label>
+      <label><input type="radio" name="accepts_coaching" value="3"> 3</label>
+      <label><input type="radio" name="accepts_coaching" value="4"> 4</label>
+      <label><input type="radio" name="accepts_coaching" value="5"> 5</label>
+      <label><input type="radio" name="accepts_coaching" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Technological Expertise</p>
+      <label><input type="radio" name="technological_expertise" value="1" required> 1</label>
+      <label><input type="radio" name="technological_expertise" value="2"> 2</label>
+      <label><input type="radio" name="technological_expertise" value="3"> 3</label>
+      <label><input type="radio" name="technological_expertise" value="4"> 4</label>
+      <label><input type="radio" name="technological_expertise" value="5"> 5</label>
+      <label><input type="radio" name="technological_expertise" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Has Printed Copy of Route</p>
+      <label><input type="radio" name="printed_route" value="1" required> 1</label>
+      <label><input type="radio" name="printed_route" value="2"> 2</label>
+      <label><input type="radio" name="printed_route" value="3"> 3</label>
+      <label><input type="radio" name="printed_route" value="4"> 4</label>
+      <label><input type="radio" name="printed_route" value="5"> 5</label>
+      <label><input type="radio" name="printed_route" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Retains Information</p>
+      <label><input type="radio" name="retains_information" value="1" required> 1</label>
+      <label><input type="radio" name="retains_information" value="2"> 2</label>
+      <label><input type="radio" name="retains_information" value="3"> 3</label>
+      <label><input type="radio" name="retains_information" value="4"> 4</label>
+      <label><input type="radio" name="retains_information" value="5"> 5</label>
+      <label><input type="radio" name="retains_information" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Has Sense of Urgency</p>
+      <label><input type="radio" name="sense_of_urgency" value="1" required> 1</label>
+      <label><input type="radio" name="sense_of_urgency" value="2"> 2</label>
+      <label><input type="radio" name="sense_of_urgency" value="3"> 3</label>
+      <label><input type="radio" name="sense_of_urgency" value="4"> 4</label>
+      <label><input type="radio" name="sense_of_urgency" value="5"> 5</label>
+      <label><input type="radio" name="sense_of_urgency" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Follows Chain of Command</p>
+      <label><input type="radio" name="chain_of_command" value="1" required> 1</label>
+      <label><input type="radio" name="chain_of_command" value="2"> 2</label>
+      <label><input type="radio" name="chain_of_command" value="3"> 3</label>
+      <label><input type="radio" name="chain_of_command" value="4"> 4</label>
+      <label><input type="radio" name="chain_of_command" value="5"> 5</label>
+      <label><input type="radio" name="chain_of_command" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span> Keeps Best Interest of Client in Mind</p>
+      <label><input type="radio" name="client_interest" value="1" required> 1</label>
+      <label><input type="radio" name="client_interest" value="2"> 2</label>
+      <label><input type="radio" name="client_interest" value="3"> 3</label>
+      <label><input type="radio" name="client_interest" value="4"> 4</label>
+      <label><input type="radio" name="client_interest" value="5"> 5</label>
+      <label><input type="radio" name="client_interest" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="field">
+      <label for="comments">Any additional comments can be typed here if applicable</label>
+      <textarea id="comments" name="comments" rows="4"></textarea>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="company" autocomplete="off">
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+
+  </form>
+
+</section>
+{% endblock %}

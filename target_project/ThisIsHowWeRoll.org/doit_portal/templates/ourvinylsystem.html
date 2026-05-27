@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Our Vinyl System{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Our Vinyl System</h2>
+
+  <div class="btn-stack">
+
+    <a class="btn-pill"
+      href="{{ url_for('static', filename='pdfs/Vinyl_Banner_Instruction.pdf') }}"
+      target="_blank">
+      Step by Step Installation Instructions
+    </a>
+
+    <div class="btn-row">
+      <a class="btn-pill btn-pill--sm"
+        href="{{ url_for('static', filename='pdfs/Vinyl_Specs.pdf') }}"
+        target="_blank">
+        Vinyl Specs
+      </a>
+
+      <a class="btn-pill btn-pill--sm"
+        href="{{ url_for('static', filename='pdfs/Corner_Specs.pdf') }}"
+        target="_blank">
+        Corner Specs
+      </a>
+    </div>
+
+  </div>
+
+  <div class="video-stack">
+
+    <div class="video-frame">
+      <iframe
+        src="https://www.youtube.com/embed/4xPdsqlurwQ"
+        title="QuickFlex Poster Clip"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="video-frame">
+      <iframe
+        src="https://www.youtube.com/embed/4mpMnqBwse4"
+        title="QuickFlex Truck Graphic"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+
+</section>
+{% endblock %}

@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% block title %}Samsara Notice{% endblock %}
+
+{% block content %}
+
+<section class="panel">
+
+{% if submitted %}
+<div class="success-msg">Samsara Notice Submitted</div>
+{% endif %}
+
+<h2 class="panel-title">Samsara Notice</h2>
+
+<div class="notice-text">
+
+<p><strong>Dear Valued Driver Team,</strong></p>
+
+<p>
+As part of our ongoing commitment to your safety and the protection of our fleet,
+we are implementing Samsara AI dashcams in all do it outdoors media vehicles.
+These advanced systems are designed to help protect you on the road and promote safer driving practices.
+</p>
+
+<h3>Purpose of Implementation</h3>
+
+<p>The Samsara AI dashcam system serves multiple purposes:</p>
+
+<ul>
+<li>Protecting drivers from false claims in case of accidents</li>
+<li>Promoting safer driving habits</li>
+<li>Reducing accident rates and insurance claims</li>
+<li>Providing valuable coaching opportunities for professional development</li>
+</ul>
+
+<h3>Driver Behaviors Monitored by the Samsara System</h3>
+
+<p>The Samsara AI dashcams use advanced technology to detect and record specific driving behaviors.</p>
+
+<h4>1. Distracted Driving</h4>
+
+<ul>
+<li>Using a handheld electronic device while driving</li>
+<li>Eating or drinking while the vehicle is in motion</li>
+<li>Looking away from the road for extended periods</li>
+</ul>
+
+<h4>2. Following Distance Violations</h4>
+
+<ul>
+<li>Tailgating or maintaining unsafe following distances from vehicles ahead</li>
+</ul>
+
+<h4>3. Seatbelt Compliance</h4>
+
+<ul>
+<li>Driving without properly fastened seatbelts</li>
+</ul>
+
+<h4>4. Signs of Fatigue or Drowsiness</h4>
+
+<ul>
+<li>Head nodding</li>
+<li>Prolonged yawning</li>
+<li>Face rubbing</li>
+</ul>
+
+<h4>5. Defensive Driving Actions</h4>
+
+<ul>
+<li>The system also records positive defensive driving behaviors</li>
+</ul>
+
+<h3>What Happens After Detection</h3>
+
+<ol>
+<li>You may receive real-time in-cab audio alerts</li>
+<li>Safety events may be reviewed by management</li>
+<li>Footage may be used for coaching purposes</li>
+</ol>
+
+<h3>Privacy and Support</h3>
+
+<p>
+These cameras are not designed for continuous monitoring but rather to capture safety-related events.
+The system is here to protect you and improve our safety culture.
+</p>
+
+<p>
+If you have questions please contact your supervisor or the Field Safety Manager.
+</p>
+
+</div>
+
+
+<form method="POST" class="quiz-form">
+
+<div class="photo-grid">
+<div class="field">
+<label for="your_name"><span class="req"></span> Your name</label>
+<input id="your_name" name="your_name" type="text" required>
+</div>
+
+<div class="field">
+<label for="email"><span class="req"></span> Email</label>
+<input id="email" name="email" type="text" required>
+</div>
+</div>
+
+
+<div class="hq-q">
+<p><strong>*1. The purpose of the Samsara AI dashcam is to promote safe driving habits.</strong></p>
+
+<label><input type="radio" name="q1" value="true" required> True</label>
+<label><input type="radio" name="q1" value="false"> False</label>
+</div>
+
+
+<div class="hq-q">
+<p><strong>*2. Samsara's distracted driving detection can identify cell phone use.</strong></p>
+
+<label><input type="radio" name="q2" value="true" required> True</label>
+<label><input type="radio" name="q2" value="false"> False</label>
+</div>
+
+
+<div class="hq-q">
+<p><strong>*3. The Following Distance Violation feature detects tailgating.</strong></p>
+
+<label><input type="radio" name="q3" value="true" required> True</label>
+<label><input type="radio" name="q3" value="false"> False</label>
+</div>
+
+
+<div class="hq-q">
+<p><strong>*4. Drivers may receive real-time in-cab audio alerts.</strong></p>
+
+<label><input type="radio" name="q4" value="true" required> True</label>
+<label><input type="radio" name="q4" value="false"> False</label>
+</div>
+
+<div class="hq-q">
+<p><strong>*5. Have you read and understood all of the information provided?</strong></p>
+
+<label><input type="radio" name="q5" value="yes" required> Yes</label>
+<label><input type="radio" name="q5" value="no"> No</label>
+</div>
+
+<div style="position:absolute; left:-9999px;">
+  <input type="text" name="do_not_fill" autocomplete="off">
+</div>
+
+<button type="submit" class="submit-btn">Submit</button>
+
+</form>
+
+</section>
+
+{% endblock %}

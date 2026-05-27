@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Preferred Shops and Washes{% endblock %}
+
+{% block content %}
+<section class="panel shops-page">
+  <h2 class="panel-title">Preferred Shops and Washes</h2>
+
+  <div class="state-jump-wrap">
+    <label for="stateJump" class="state-jump-label">Jump to a state</label>
+    <select id="stateJump" class="state-jump-select">
+      <option value="">Select a state</option>
+      {% for state in states_data %}
+        <option value="{{ state.anchor }}">{{ state.state }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <p class="shops-subtitle">
+    Use the Go button to open the address in Google Maps.
+  </p>
+
+
+  {% for state in states_data %}
+    <div class="state-block" id="{{ state.anchor }}">
+      <h3 class="state-title">{{ state.state }}</h3>
+
+      <div class="state-sections">
+
+        <div class="shop-section">
+          <h4 class="section-head">Preferred Shops</h4>
+
+          {% if state.shops %}
+            <div class="shop-list">
+              {% for place in state.shops %}
+                <div class="shop-card">
+                  <div class="shop-market">{{ place.market }}</div>
+                  <div class="shop-name">{{ place.name }}</div>
+                  <div class="shop-address">{{ place.address }}</div>
+                  {% if place.phone %}
+                    <div class="shop-phone">{{ place.phone }}</div>
+                  {% endif %}
+                  <a class="shop-go-btn" href="{{ place.maps_url }}" target="_blank">Go</a>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="shop-empty">No preferred shops listed for this state yet.</div>
+          {% endif %}
+        </div>
+
+        <div class="shop-section">
+          <h4 class="section-head">Truck Washes</h4>
+
+          {% if state.washes %}
+            <div class="shop-list">
+              {% for place in state.washes %}
+                <div class="shop-card">
+                  <div class="shop-market">{{ place.market }}</div>
+                  <div class="shop-name">{{ place.name }}</div>
+                  <div class="shop-address">{{ place.address }}</div>
+                  {% if place.phone %}
+                    <div class="shop-phone">{{ place.phone }}</div>
+                  {% endif %}
+                  <a class="shop-go-btn" href="{{ place.maps_url }}" target="_blank">Go</a>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="shop-empty">No truck washes listed for this state yet.</div>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+  {% endfor %}
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+  const stateJump = document.getElementById("stateJump");
+
+  stateJump.addEventListener("change", function () {
+    const targetId = this.value;
+    if (!targetId) return;
+
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+</script>
+{% endblock %}

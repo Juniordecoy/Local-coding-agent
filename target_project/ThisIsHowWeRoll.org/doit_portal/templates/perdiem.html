@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="panel">
+  <h1 class="perdiem-title">
+    Per Diem
+  </h1>
+
+  <div class="perdiem-buttons">
+    <!-- Replace the href targets with your real PDF routes or files -->
+    <!-- <a class="btn-tile" href="/static/pdfs/onroad-card-faq.pdf" target="_blank" rel="noopener">
+      OnRoad Card FAQ
+    </a>
+
+    <a class="btn-tile" href="/static/pdfs/onroad-app-instructions.pdf" target="_blank" rel="noopener">
+      OnRoad APP Instructions
+    </a>
+
+    <a class="btn-tile" href="/static/pdfs/using-the-onroad-app.pdf" target="_blank" rel="noopener">
+      Using the OnRoad APP
+    </a>
+
+    <a class="btn-tile" href="/static/pdfs/onroad_fees_information.pdf" target="_blank" rel="noopener">
+      OnRoad Fees Information
+    </a> -->
+  </div>
+
+  <div class="perdiem-card">
+    <div class="perdiem-card-head">Premium Cities</div>
+
+    <div class="perdiem-row">
+      <div class="perdiem-rate">$35</div>
+      <div class="perdiem-info">Base</div>
+    </div>
+
+    <div class="perdiem-row">
+      <div class="perdiem-rate">$40</div>
+      <div class="perdiem-info">CA except LA/SF, Houston</div>
+    </div>
+
+    <div class="perdiem-row">
+      <div class="perdiem-rate">$50</div>
+      <div class="perdiem-info">Boston, Chicago, DC, Metro NJ, Los Angeles &amp; San Francisco</div>
+    </div>
+
+    <div class="perdiem-row">
+      <div class="perdiem-rate">$70</div>
+      <div class="perdiem-info">NYC (5 boroughs)</div>
+    </div>
+
+    <div class="perdiem-row perdiem-note-row">
+      <div class="perdiem-rate">$80</div>
+      <div class="perdiem-info">Max per diem in a week: $560 total as of 10/01/25</div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

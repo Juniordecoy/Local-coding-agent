@@ -1,0 +1,11 @@
+gunicorn==21.2.0
+Bootstrap_Flask==2.3.3
+Flask==2.3.2
+WTForms==3.0.1
+Flask_WTF==1.2.2
+pytz==2024.1
+resend==2.23.0
+reportlab==4.4.1
+
+pypdf
+cryptography>=3.1

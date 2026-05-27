@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% block title %}DOT Compliance Test{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">DOT Compliance Test</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your test was submitted.</div>
+  {% endif %}
+
+  <form class="ojt-form" method="POST" action="{{ url_for('dot_compliance_test') }}" enctype="multipart/form-data">
+
+    <div class="ojt-grid-2">
+      <div class="field">
+        <label for="your_name"><span class="req"></span>Your name</label>
+        <input id="your_name" name="your_name" type="text" required>
+      </div>
+
+      <div class="field">
+        <label for="new_hire"><span class="req"></span>New Hire</label>
+        <input id="new_hire" name="new_hire" type="text" required>
+      </div>
+
+      <div class="field ojt-span-2">
+        <label for="date_time"><span class="req"></span>Date and Time</label>
+        <input id="date_time" name="date_time" type="datetime-local" required>
+      </div>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 1. As a do it outdoors Driver, you must fill out a DOT Log:</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="a" required> a) Every day you drive a mobile billboard</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="b"> b) Weekdays only</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="c"> c) When driving Market-to-Market</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="d"> d) Only when driving on a campaign</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 2. When filling out a DOT Log, you must account for and enter all time for:</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="a" required> a) Sleeping</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="b"> b) Driving</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="c"> c) On-the-clock (not driving)</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="d"> d) You must account for all of the above (a 24 hour period)</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 3. True or False? You should fill out your entire DOT Log (all entries for current day) at the end of the day.</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="a" required> a) True</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="b"> b) False</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 4. How many consecutive hours are you allowed to be “ON DUTY”?</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="a" required> a) 8 hours</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="b"> b) 10 Hours</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="c"> c) 12 Hours</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="d"> d) 14 Hours</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 5. After you have clocked out for the day, how many hours must you be “OFF DUTY” before operating a DOT vehicle?</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="a" required> a) 8 consecutive hours</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="b"> b) 10 consecutive hours</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="c"> c) 12 consecutive hours</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="d"> d) 14 consecutive hours</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 6. True or False? After driving for 11 hours, you must stop and reset with 10 consecutive hours “OFF DUTY”.</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="a" required> a) True</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="b"> b) False</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 7. If you are “OFF DUTY”, you may only use the vehicle for:</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="a" required> a) Personal Conveyance “ONLY” for personal errands within a 20 mile roundtrip</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="b"> b) Getting fuel or vehicle supplies</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="c"> c) You may not use the vehicle for ANY reason while Off Duty</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 8. What will you write in the space labeled “Shipper &amp; Commodity”?</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="a" required> a) Your name</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="b"> b) do it outdoors</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="c"> c) The campaign/client’s name</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 9. What will you write in the space labeled “Home Terminal Address”?</label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="a" required> a) Your campaign hotel address</label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="b"> b) The address of your reporting hub (always York)</label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="c"> c) Your home address</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 10. True/False: When you are on a multiple day trip, in the spaces labeled “To” and “From,” you should write in your beginning location and final destination for your entire trip.</label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="a" required> a) True</label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="b"> b) False</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 11. You need to add “Remarks” to your documented time when:</label>
+      <label class="quiz-opt"><input type="radio" name="q11" value="a" required> a) Whenever you document ANY change of duty</label>
+      <label class="quiz-opt"><input type="radio" name="q11" value="b"> b) Just a description of your actions</label>
+      <label class="quiz-opt"><input type="radio" name="q11" value="c"> c) Just the name of the city and state you are in</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 12. Your “Remarks” should include:</label>
+      <label class="quiz-opt"><input type="radio" name="q12" value="a" required> a) The name of the city and state you are in, and a description of your actions</label>
+      <label class="quiz-opt"><input type="radio" name="q12" value="b"> b) Just a description of your actions</label>
+      <label class="quiz-opt"><input type="radio" name="q12" value="c"> c) Just the name of the city and state you are in</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 13. Your Pre-Trip and Post-Trip Inspections are considered:</label>
+      <label class="quiz-opt"><input type="radio" name="q13" value="a" required> a) ON-DUTY (Driving)</label>
+      <label class="quiz-opt"><input type="radio" name="q13" value="b"> b) ON-DUTY (Not Driving)</label>
+      <label class="quiz-opt"><input type="radio" name="q13" value="c"> c) OFF-DUTY</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 14. While driving market-to-market — If you go into a restaurant to eat, during one of your breaks you are considered:</label>
+      <label class="quiz-opt"><input type="radio" name="q14" value="a" required> a) ON-DUTY (Driving)</label>
+      <label class="quiz-opt"><input type="radio" name="q14" value="b"> b) ON-DUTY (Not Driving)</label>
+      <label class="quiz-opt"><input type="radio" name="q14" value="c"> c) OFF-DUTY</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 15. If you stop the vehicle to get fuel, you are:</label>
+      <label class="quiz-opt"><input type="radio" name="q15" value="a" required> a) ON-DUTY (Driving)</label>
+      <label class="quiz-opt"><input type="radio" name="q15" value="b"> b) ON-DUTY (Not Driving)</label>
+      <label class="quiz-opt"><input type="radio" name="q15" value="c"> c) OFF-DUTY</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 16. If you are taking a break to make phone calls, and you remain in the vehicle, you are:</label>
+      <label class="quiz-opt"><input type="radio" name="q16" value="a" required> a) ON-DUTY (Driving)</label>
+      <label class="quiz-opt"><input type="radio" name="q16" value="b"> b) ON-DUTY (Not Driving)</label>
+      <label class="quiz-opt"><input type="radio" name="q16" value="c"> c) OFF-DUTY</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 17. When you are adding up your total hours for the day, it should always equal:</label>
+      <label class="quiz-opt"><input type="radio" name="q17" value="a" required> a) 14 hours</label>
+      <label class="quiz-opt"><input type="radio" name="q17" value="b"> b) 24 hours</label>
+      <label class="quiz-opt"><input type="radio" name="q17" value="c"> c) The total number of hours you spent driving</label>
+      <label class="quiz-opt"><input type="radio" name="q17" value="d"> d) The total number of hours you spent on the clock</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 18. Which copy of the DOT Log do you mail in to the office?</label>
+      <label class="quiz-opt"><input type="radio" name="q18" value="a" required> a) White copy (original)</label>
+      <label class="quiz-opt"><input type="radio" name="q18" value="b"> b) Yellow copy</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 19. How long must you retain your copy of the DOT Log?</label>
+      <label class="quiz-opt"><input type="radio" name="q19" value="a" required> a) Until the book is full</label>
+      <label class="quiz-opt"><input type="radio" name="q19" value="b"> b) 30 days</label>
+      <label class="quiz-opt"><input type="radio" name="q19" value="c"> c) 14 days</label>
+      <label class="quiz-opt"><input type="radio" name="q19" value="d"> d) 8 days</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 20. If you are on a four day trip, you have to sign the DOT log on the _________?</label>
+      <label class="quiz-opt"><input type="radio" name="q20" value="a" required> a) First day</label>
+      <label class="quiz-opt"><input type="radio" name="q20" value="b"> b) Second day</label>
+      <label class="quiz-opt"><input type="radio" name="q20" value="c"> c) Third day</label>
+      <label class="quiz-opt"><input type="radio" name="q20" value="d"> d) Fourth day</label>
+      <label class="quiz-opt"><input type="radio" name="q20" value="e"> e) All of the above</label>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 21. Mock Trip (Market-to-Market) — Read carefully and complete the Log Book example by hand.</label>
+
+      <div class="mocktrip">
+        <ul>
+          <li>The date is Sunday 2/17/16</li>
+          <li>This is your first day back at work after 2 off days</li>
+          <li>The time is 8:00 AM local time</li>
+          <li>You are driving unit #117</li>
+          <li>The client we are working for is Sprint</li>
+          <li>Your beginning mileage is 36256</li>
+          <li>You are traveling market-to-market from Las Vegas to Salt Lake City, Utah.</li>
+          <li>You arrive at the Las Vegas office at 8:00 AM and begin your pre trip inspection.</li>
+          <li>At 8:15 AM you head north on I–15 toward Salt Lake City.</li>
+          <li>At 10:00 AM you come to the AZ/UT port of entry where they pull you in and instruct you to bring all documents in.</li>
+          <li>At 10:15 AM you are back on I-15 north.</li>
+          <li>At 11:15 AM you have come to Cedar City, UT where you stop for fuel and lunch.</li>
+          <li>At 12:00 PM you continue north on I-15.</li>
+          <li>At 2:45 PM you are entering Provo, UT where you stop for fuel.</li>
+          <li>At 3:00 PM you continue north on I-15 and arrive in Salt Lake City at 3:45 PM.</li>
+          <li>At 3:45 PM you started and completed the 15 minute post trip and end your day.</li>
+          <li>At 4:00 PM you end your day</li>
+          <li>Total miles driven today: 435 miles</li>
+        </ul>
+      </div>
+
+      <label class="quiz-q" style="margin-top:12px;">Upload / Notes (for now):</label>
+      <textarea name="q21_notes" rows="4" placeholder="Type notes or confirmation here..." required></textarea>
+
+      <!-- optional placeholder for later -->
+      <div style="margin-top:10px;">
+        <label>Optional: upload a photo/PDF of your completed log example</label>
+        <input type="file" name="q22_file">
+      </div>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button class="submit-btn" type="submit">Submit</button>
+
+  </form>
+
+</section>
+{% endblock %}

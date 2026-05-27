@@ -1,9 +1,13 @@
 from ai import ask_ai
 from review_config import REVIEW_DIR
 from project_rules import get_base_template_rules
+from file_tools import search_project_files_with_scores, list_project_files, search_project_files
+from workflows import explain_file, analyze_file
+from working_memory import get_working, clear_working
 from write_tools import (
     save_review_draft, draft_html_template, draft_flask_route, draft_css_file, draft_js_file, draft_page_bundle, draft_ai_page_bundle,
-    draft_ai_html_file, draft_ai_code_review, draft_validator_driven_review, draft_single_warning_review, build_validation_report, draft_quiz_from_reference
+    draft_ai_html_file, draft_ai_code_review, draft_validator_driven_review, draft_single_warning_review, build_validation_report,
+    draft_quiz_from_reference, draft_quiz_from_file,
 )
 from web_tools import (
     find_text_usage, find_function_usage, trace_button, trace_route, trace_endpoint, trace_id, explain_file_role,
@@ -14,6 +18,113 @@ from web_tools import (
     or_route_reports, template_form_actions, form_action_route, template_action_map,
 )
 
+###------------------------- Main Tools ------------------------###
+
+def show_files():
+    files = list_project_files()
+
+    result = "PROJECT FILES:\n"
+
+    for file in files:
+        result += f"- {file}\n"
+
+    return result
+
+def explain_command(user_message):
+    filename = user_message.replace("explain ", "", 1)
+
+    ai_message = explain_file(filename)
+
+    return ai_message
+
+def read_command(user_message):
+    filename = user_message.replace("read ", "", 1)
+
+    ai_message = analyze_file(filename)
+
+    return ai_message
+
+def search_command(user_message):
+    keyword = user_message.replace("search ", "", 1)
+
+    matches = search_project_files(keyword)
+
+    if not matches:
+        return "No matching files found."
+
+    result = "MATCHING FILES:\n"
+
+    for match in matches:
+        result += f"- {match}\n"
+
+    return result
+
+def debug_search_command(user_message):
+    keyword = user_message.replace("debug search ", "", 1)
+
+    matches = search_project_files_with_scores(keyword)
+
+    if not matches:
+        return "No matching files found."
+
+    result = "DEBUG SEARCH RESULTS:\n"
+
+    for match in matches:
+        result += f"- {match['file']} | score: {match['score']}\n"
+
+    return result
+
+def show_working_memory():
+    return {
+        "current_task": get_working("current_task"),
+        "last_search_keyword": get_working("last_search_keyword"),
+        "last_files_used": get_working("last_files_used"),
+    }
+
+def explain_last_file():
+    files = get_working("last_files_used")
+
+    if not files:
+        return "No recent files found in working memory. Run a multi agent question first."
+
+    last_file = files[0]
+
+    print(f"\nDEBUG - explaining file: {last_file}")
+
+    return explain_file(last_file)
+
+def explain_file_by_number(file_number):
+    files = get_working("last_files_used")
+
+    if not files:
+        return "No recent files found in working memory. Run a multi agent question first."
+
+    index = file_number - 1
+
+    if index < 0 or index >= len(files):
+        return f"That file number is not available. Last files used: {files}"
+
+    selected_file = files[index]
+
+    print(f"\nDEBUG - explaining file: {selected_file}")
+
+    return explain_file(selected_file)
+
+def explain_first_file():
+    return explain_file_by_number(1)
+
+
+def explain_second_file():
+    return explain_file_by_number(2)
+
+
+def explain_third_file():
+    return explain_file_by_number(3)
+
+def clear_working_memory():
+    clear_working()
+
+    return "Working memory cleared."
 
 ###------------------------- Web Tools ------------------------###
 
@@ -753,4 +864,27 @@ def draft_quiz_from_reference_command(user_message):
         new_quiz_name=new_quiz_name,
         new_quiz_title=new_quiz_title,
         new_questions=new_questions
+    )
+
+def draft_quiz_from_file_command(user_message):
+    command_text = user_message.replace("draft quiz from file", "", 1).strip()
+
+    parts = command_text.split("|")
+
+    if len(parts) < 4:
+        return (
+            "Usage:\n"
+            "draft quiz from file reference_file.html | new_quiz_name | New Quiz Title | question_file.txt"
+        )
+
+    reference_html = parts[0].strip()
+    new_quiz_name = parts[1].strip()
+    new_quiz_title = parts[2].strip()
+    question_file = parts[3].strip()
+
+    return draft_quiz_from_file(
+        reference_html=reference_html,
+        new_quiz_name=new_quiz_name,
+        new_quiz_title=new_quiz_title,
+        question_file=question_file
     )

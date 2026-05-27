@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block title %}Vinyl Troubleshooting{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Troubleshooting your vinyls</h2>
+  <p class="panel-subtitle">
+    Some tips and tricks if you are having issues getting your vinyls to install correctly
+  </p>
+
+  <div class="btn-stack" style="margin-top:14px;">
+    <a class="btn-pill"
+      href="{{ url_for('static', filename='pdfs/Vinyl_Trouble_Shooting.pdf') }}"
+      target="_blank">
+      Vinyl system Troubleshooting guide
+    </a>
+  </div>
+
+  <p class="hover-hint">Hover over the image for description</p>
+
+  <!-- Gallery -->
+  <div class="gallery">
+
+  <figure class="gallery-main">
+    <button class="gallery-arrow gallery-arrow--left" type="button" id="prevBtn" aria-label="Previous image">
+      &#10094;
+    </button>
+
+    <img id="mainImage"
+         src="{{ url_for('static', filename='img/vinyl_troubleshooting/cable_not_over_top_pulley_wheel.png') }}"
+         alt="Vinyl troubleshooting image"
+         title="Cable is not over the top pulley wheel">
+
+    <button class="gallery-arrow gallery-arrow--right" type="button" id="nextBtn" aria-label="Next image">
+      &#10095;
+    </button>
+  </figure>
+
+  <p id="mainCaption" class="gallery-caption">
+    Cable is not over the top pulley wheel
+  </p>
+
+  <div class="gallery-thumbs">
+    <button class="thumb is-active"
+            type="button"
+            data-full="{{ url_for('static', filename='img/vinyl_troubleshooting/cable_not_over_top_pulley_wheel.png') }}"
+            data-title="Cable is not over the top pulley wheel">
+      <img src="{{ url_for('static', filename='img/vinyl_troubleshooting/cable_not_over_top_pulley_wheel.png') }}" alt="thumb 1">
+    </button>
+
+    <button class="thumb" type="button"
+            data-full="{{ url_for('static', filename='img/vinyl_troubleshooting/vinyl_not_tight_enough.png') }}"
+            data-title="Vinyl is not tight enough">
+      <img src="{{ url_for('static', filename='img/vinyl_troubleshooting/vinyl_not_tight_enough.png') }}" alt="thumb 2">
+    </button>
+
+    <button class="thumb" type="button"
+            data-full="{{ url_for('static', filename='img/vinyl_troubleshooting/clips_not_attached_to_the_cable.png') }}"
+            data-title="Clips are not attached to the cable correctly">
+      <img src="{{ url_for('static', filename='img/vinyl_troubleshooting/clips_not_attached_to_the_cable.png') }}" alt="thumb 3">
+    </button>
+
+    <button class="thumb" type="button"
+            data-full="{{ url_for('static', filename='img/vinyl_troubleshooting/vinyls_too_tight.png') }}"
+            data-title="Vinyls are too tight">
+      <img src="{{ url_for('static', filename='img/vinyl_troubleshooting/vinyls_too_tight.png') }}" alt="thumb 4">
+    </button>
+
+    <button class="thumb" type="button"
+            data-full="{{ url_for('static', filename='img/vinyl_troubleshooting/bent_brackets_1.png') }}"
+            data-title="Bent bracket example 1">
+      <img src="{{ url_for('static', filename='img/vinyl_troubleshooting/bent_brackets_1.png') }}" alt="thumb 5">
+    </button>
+
+    <button class="thumb" type="button"
+            data-full="{{ url_for('static', filename='img/vinyl_troubleshooting/bent_brackets_2.png') }}"
+            data-title="Bent bracket example 2">
+      <img src="{{ url_for('static', filename='img/vinyl_troubleshooting/bent_brackets_2.png') }}" alt="thumb 6">
+    </button>
+
+    <button class="thumb" type="button"
+            data-full="{{ url_for('static', filename='img/vinyl_troubleshooting/clip_too_far_on_vinyl.png') }}"
+            data-title="Clip is too far on the vinyl">
+      <img src="{{ url_for('static', filename='img/vinyl_troubleshooting/clip_too_far_on_vinyl.png') }}" alt="thumb 7">
+    </button>
+
+    <button class="thumb" type="button"
+            data-full="{{ url_for('static', filename='img/vinyl_troubleshooting/crooked_clip.png') }}"
+            data-title="Crooked clip installation">
+      <img src="{{ url_for('static', filename='img/vinyl_troubleshooting/crooked_clip.png') }}" alt="thumb 8">
+    </button>
+
+    <button class="thumb" type="button"
+            data-full="{{ url_for('static', filename='img/vinyl_troubleshooting/perfect_clip_installation.png') }}"
+            data-title="Perfect clip installation">
+      <img src="{{ url_for('static', filename='img/vinyl_troubleshooting/perfect_clip_installation.png') }}" alt="thumb 9">
+    </button>
+  </div>
+
+</div>
+
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const mainImage = document.getElementById("mainImage");
+  const mainCaption = document.getElementById("mainCaption");
+  const thumbs = Array.from(document.querySelectorAll(".thumb"));
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  let currentIndex = thumbs.findIndex(btn => btn.classList.contains("is-active"));
+  if (currentIndex === -1) currentIndex = 0;
+
+  function showImage(index) {
+    const btn = thumbs[index];
+    if (!btn) return;
+
+    thumbs.forEach(b => b.classList.remove("is-active"));
+    btn.classList.add("is-active");
+
+    const full = btn.getAttribute("data-full");
+    const title = btn.getAttribute("data-title") || "";
+
+    mainImage.src = full;
+    mainImage.alt = title || "Vinyl troubleshooting image";
+    mainImage.title = title;
+    mainCaption.textContent = title;
+
+    currentIndex = index;
+  }
+
+  thumbs.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      showImage(index);
+    });
+  });
+
+  prevBtn.addEventListener("click", () => {
+    const newIndex = (currentIndex - 1 + thumbs.length) % thumbs.length;
+    showImage(newIndex);
+  });
+
+  nextBtn.addEventListener("click", () => {
+    const newIndex = (currentIndex + 1) % thumbs.length;
+    showImage(newIndex);
+  });
+</script>
+{% endblock %}

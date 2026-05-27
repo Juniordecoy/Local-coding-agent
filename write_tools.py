@@ -1,6 +1,7 @@
 from ai import ask_ai
 from pathlib import Path
 from review_config import REVIEW_DIR
+from read_tools import read_quiz_question_file
 from validation_tools import (
     validate_draft_content_detailed, extract_validation_warnings, extract_validation_warning_by_index,
     validate_patch_content
@@ -763,6 +764,24 @@ def draft_quiz_from_reference(
     )
 
     return "\n".join(results)
+
+def draft_quiz_from_file(
+    reference_html,
+    new_quiz_name,
+    new_quiz_title,
+    question_file
+):
+    question_text = read_quiz_question_file(question_file)
+
+    if not question_text:
+        return f"Could not read question file: {question_file}"
+
+    return draft_quiz_from_reference(
+        reference_html=reference_html,
+        new_quiz_name=new_quiz_name,
+        new_quiz_title=new_quiz_title,
+        new_questions=question_text
+    )
 
 def parse_quiz_questions(question_text):
     questions = []

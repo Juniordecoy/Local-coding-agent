@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Employee Navigator{% endblock %}
+
+{% block content %}
+<div class="panel">
+  <h1 class="page-title">Employee Navigator</h1>
+
+  <div class="en-buttons">
+
+    <!-- Main Website -->
+    <a class="panel-btn btn-accent" style="width:60%;"
+       href="https://www.employeenavigator.com/benefits/Account/Login"
+       target="_blank"
+       rel="noopener">
+       Employee Navigator Website
+    </a>
+
+    <!-- Register Instructions -->
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='pdfs/employee_nav_instructions2.pdf') }}"
+       target="_blank"
+       rel="noopener">
+       Instructions – Register for Employee Navigator
+    </a>
+
+    <!-- Beneficiary Instructions -->
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='pdfs/employee_nav_benefits.pdf') }}"
+       target="_blank"
+       rel="noopener">
+       Instructions – Updating your Beneficiary
+    </a>
+
+  </div>
+</div>
+{% endblock %}

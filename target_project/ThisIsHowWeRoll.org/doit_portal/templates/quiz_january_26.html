@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% block title %}January Safety Quiz{% endblock %}
+
+{% block content %}
+
+<section class="panel">
+
+  <h2 class="panel-title">January 2026 Safety Quiz</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your quiz was submitted.</div>
+  {% endif %}
+
+    <form method="POST" class="quiz-form">
+
+    <div class="two-col">
+
+    <div>
+
+    <div class="field">
+    <label for="your_name"><span class="req"></span> Your name</label>
+    <input id="your_name" name="your_name" type="text" required>
+    </div>
+
+    <div class="field">
+    <label for="email"><span class="req"></span> Email</label>
+    <input id="email" name="email" type="text" required>
+    </div>
+
+    </div>
+
+
+    <div class="hq-q">
+    <p><strong>1. What does DOT stand for?</strong></p>
+
+    <label><input type="radio" name="q1" value="a" required> A. Department of Traffic</label>
+    <label><input type="radio" name="q1" value="b"> B. Department of Transportation</label>
+    <label><input type="radio" name="q1" value="c"> C. Division of Trucks</label>
+    <label><input type="radio" name="q1" value="d"> D. Department of Transit</label>
+    </div>
+
+
+    <div class="hq-q">
+    <p><strong>2. What is the maximum driving time allowed before a 30-minute break is required?</strong></p>
+
+    <label><input type="radio" name="q2" value="a" required> A. 8 hours</label>
+    <label><input type="radio" name="q2" value="b"> B. 6 hours</label>
+    <label><input type="radio" name="q2" value="c"> C. 7 hours</label>
+    <label><input type="radio" name="q2" value="d"> D. 10 hours</label>
+    </div>
+
+
+    <div class="hq-q">
+    <p><strong>3. How many total hours may a driver drive within a 14-hour on-duty window?</strong></p>
+
+    <label><input type="radio" name="q3" value="a" required> A. 12 hours</label>
+    <label><input type="radio" name="q3" value="b"> B. 11 hours</label>
+    <label><input type="radio" name="q3" value="c"> C. 10 hours</label>
+    <label><input type="radio" name="q3" value="d"> D. 14 hours</label>
+    </div>
+
+
+    <div class="hq-q">
+    <p><strong>4. What is the minimum off-duty time required before starting a new driving shift?</strong></p>
+
+    <label><input type="radio" name="q4" value="a" required> A. 8 consecutive hours</label>
+    <label><input type="radio" name="q4" value="b"> B. 9 consecutive hours</label>
+    <label><input type="radio" name="q4" value="c"> C. 12 consecutive hours</label>
+    <label><input type="radio" name="q4" value="d"> D. 10 consecutive hours</label>
+    </div>
+
+
+    <div class="hq-q">
+    <p><strong>5. Which document must a driver carry to prove medical qualification?</strong></p>
+
+    <label><input type="radio" name="q5" value="a" required> A. Vehicle registration</label>
+    <label><input type="radio" name="q5" value="b"> B. Bill of lading</label>
+    <label><input type="radio" name="q5" value="c"> C. Your Campaign Routing</label>
+    <label><input type="radio" name="q5" value="d"> D. Medical Examiner’s Certificate</label>
+    </div>
+
+
+    <div class="hq-q">
+    <p><strong>6. When is a pre-trip inspection required?</strong></p>
+
+    <label><input type="radio" name="q6" value="a" required> A. Before starting a trip</label>
+    <label><input type="radio" name="q6" value="b"> B. Once per week</label>
+    <label><input type="radio" name="q6" value="c"> C. After your campaign is over</label>
+    <label><input type="radio" name="q6" value="d"> D. Only if crossing state lines</label>
+    </div>
+
+
+    <div class="hq-q">
+    <p><strong>7. What should a driver do if they are approaching the HOS limit?</strong></p>
+
+    <label><input type="radio" name="q7" value="a" required> A. Continue driving</label>
+    <label><input type="radio" name="q7" value="b"> B. Pull over and take the required break</label>
+    <label><input type="radio" name="q7" value="c"> C. Skip the break if traffic is light</label>
+    <label><input type="radio" name="q7" value="d"> D. Ask another driver to log their hours</label>
+    </div>
+
+
+    <div class="hq-q">
+    <p><strong>8. What does an ELD track?</strong></p>
+
+    <label><input type="radio" name="q8" value="a" required> A. Campaign photos submitted</label>
+    <label><input type="radio" name="q8" value="b"> B. Driver hours and vehicle movement</label>
+    <label><input type="radio" name="q8" value="c"> C. Fuel usage</label>
+    <label><input type="radio" name="q8" value="d"> D. Speed limits</label>
+    </div>
+
+
+    <div class="hq-q">
+    <p><strong>9. What is considered a DOT-regulated vehicle?</strong></p>
+
+    <label><input type="radio" name="q9" value="a" required> A. Personal vehicles only</label>
+    <label><input type="radio" name="q9" value="b"> B. Motorcycles</label>
+    <label><input type="radio" name="q9" value="c"> C. Any vehicle over 10,001 lbs used in commerce</label>
+    </div>
+
+
+    <div class="hq-q">
+    <p><strong>10. What should a driver do if declared “out of service”?</strong></p>
+
+    <label><input type="radio" name="q10" value="a" required> A. Switch drivers mid-route</label>
+    <label><input type="radio" name="q10" value="b"> B. Continue driving carefully</label>
+    <label><input type="radio" name="q10" value="c"> C. Stop driving until the issue is corrected</label>
+    <label><input type="radio" name="q10" value="d"> D. Call Ghostbusters</label>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button type="submit" class="submit-btn">Submit Quiz</button>
+
+    </div>
+    </form>
+
+</section>
+
+{% endblock %}

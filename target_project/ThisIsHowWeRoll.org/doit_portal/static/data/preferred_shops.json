@@ -1,0 +1,1119 @@
+[
+  {
+    "state": "Alabama",
+    "shops": [],
+    "washes": [
+      {
+        "market": "Birmingham",
+        "name": "Turnipseed Truck Wash",
+        "address": "1215 Bankhead Hwy W, Birmingham, AL 35204",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Arizona",
+    "shops": [
+      {
+        "market": "Phoenix",
+        "name": "Chapman Chevrolet (SW Phoenix)",
+        "address": "6011 South Kyrene Rd, Tempe, AZ 85283",
+        "phone": ""
+      },
+      {
+        "market": "Tucson",
+        "name": "Vanguard Truck Center (Isuzu)",
+        "address": "1111 E Benson Hwy, Tucson, AZ 85713",
+        "phone": "(520) 791-0300"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Phoenix",
+        "name": "Danny's Truck Wash (West Phoenix)",
+        "address": "925 101st Ave, Avondale, AZ 85323",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Arkansas",
+    "shops": [
+      {
+        "market": "Fayetteville",
+        "name": "Freightliner",
+        "address": "2675 West Sunset Ave, Springdale, AR 72762",
+        "phone": "(479) 751-4551"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Fayetteville",
+        "name": "Car Wash City",
+        "address": "105 Overland Ave, Lowell, AR 72725",
+        "phone": ""
+      },
+      {
+        "market": "Little Rock",
+        "name": "Blue Beacon",
+        "address": "3210 Valentine Rd, North Little Rock, AR 72117",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "California",
+    "shops": [
+      {
+        "market": "Bakersfield",
+        "name": "3 Way Chevrolet",
+        "address": "4501 Wible Rd, Bakersfield, CA 93313",
+        "phone": "(661) 283-3300"
+      },
+      {
+        "market": "Los Angeles",
+        "name": "Worthington Ford",
+        "address": "2800 N Bellflower Blvd, Long Beach, CA 90815",
+        "phone": "(562) 420-3333"
+      },
+      {
+        "market": "Los Angeles",
+        "name": "Rush Truck Centers",
+        "address": "14490 Slover Ave, Fontana, CA 92337",
+        "phone": "(909) 574-1600"
+      },
+      {
+        "market": "Sacramento",
+        "name": "North Valley Isuzu",
+        "address": "3115 Coke St, W Sacramento, CA 95691",
+        "phone": "(916) 374-8850"
+      },
+      {
+        "market": "Sacramento",
+        "name": "Riverview Int'l Trucks",
+        "address": "2445 Evergreen Ave, W Sacramento, CA 95691",
+        "phone": "(916) 371-3110"
+      },
+      {
+        "market": "San Diego",
+        "name": "Draco Isuzu",
+        "address": "7424 Mission Gorge Rd, San Diego, CA 92120",
+        "phone": "619-287-7300"
+      },
+      {
+        "market": "San Francisco/Oakland",
+        "name": "Monarch Truck Center",
+        "address": "29899 Union City Blvd, Union City, CA 94587",
+        "phone": "(519) 471-5530"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Bakersfield",
+        "name": "Royal Truck Wash",
+        "address": "8427 Kimber Ave, Bakersfield, CA 93307",
+        "phone": ""
+      },
+      {
+        "market": "Los Angeles",
+        "name": "Moderns Coin-Op Car Wash",
+        "address": "6701 Paramount Blvd, Long Beach, CA 90805",
+        "phone": ""
+      },
+      {
+        "market": "Los Angeles",
+        "name": "Blue Beacon",
+        "address": "1630 McGarry St, Los Angeles, CA 90021",
+        "phone": ""
+      },
+      {
+        "market": "Los Angeles",
+        "name": "BJ Truck Wash",
+        "address": "12715 S Main St, Los Angeles, CA 90061",
+        "phone": ""
+      },
+      {
+        "market": "Los Angeles",
+        "name": "Tustin Bay Wash (Orange County)",
+        "address": "101 N Tustin Ave, Tustin, CA 92780",
+        "phone": ""
+      },
+      {
+        "market": "Sacramento",
+        "name": "7 Day tire and car wash",
+        "address": "4849 47th Ave, Sacramento, CA 95824",
+        "phone": ""
+      },
+      {
+        "market": "San Diego",
+        "name": "South Buggy Bath Car Wash",
+        "address": "2925 Beyer Blvd, San Diego, CA 92154",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Colorado",
+    "shops": [
+      {
+        "market": "Denver",
+        "name": "Reliance Truck and Auto",
+        "address": "2180 W Yale Ave, Englewood, CO 80110",
+        "phone": "(303) 781-0161"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Denver",
+        "name": "Lowry Car Wash",
+        "address": "9640 E Alameda Ave, Denver, CO 80247",
+        "phone": ""
+      },
+      {
+        "market": "Denver",
+        "name": "Meadow Pointe Autowash",
+        "address": "7596 W 92nd Ave, Westminster, CO 80021",
+        "phone": ""
+      },
+      {
+        "market": "Denver",
+        "name": "Oxford Car Wash",
+        "address": "4088 S Federal Blvd, Englewood, CO 80110",
+        "phone": ""
+      },
+      {
+        "market": "Front Range (North/Northwest of Denver)",
+        "name": "Truck Wash",
+        "address": "15730 Frontage Rd S, Fort Collins, CO 80524",
+        "phone": ""
+      },
+      {
+        "market": "Front Range (North/Northwest of Denver)",
+        "name": "Gunbarrel Wash",
+        "address": "6590 Odell Pl, Boulder, CO 80301",
+        "phone": ""
+      },
+      {
+        "market": "Front Range (North/Northwest of Denver)",
+        "name": "J&W Classic Car Wash",
+        "address": "701 25th St, Greeley, CO 80631",
+        "phone": ""
+      },
+      {
+        "market": "Front Range (North/Northwest of Denver)",
+        "name": "Scottys Super Spray Car Wash",
+        "address": "2141 9th Ave, Greeley, CO 80631",
+        "phone": ""
+      },
+      {
+        "market": "Front Range (North/Northwest of Denver)",
+        "name": "Lucky Star Car Wash ",
+        "address": "1420 Main St, Longmont, CO 80501",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Connecticut",
+    "shops": [],
+    "washes": []
+  },
+  {
+    "state": "Delaware",
+    "shops": [
+      {
+        "market": "Wilmington",
+        "name": "Bentley Truck Services",
+        "address": "244 Quigley Blvd, New Castle, DE 19720",
+        "phone": "(302) 328-4600"
+      }
+    ],
+    "washes": []
+  },
+  {
+    "state": "Florida",
+    "shops": [
+      {
+        "market": "Orlanda",
+        "name": "Rush Truck Center",
+        "address": "2424 N John Young Pkwy, Orlando, FL 32804",
+        "phone": "(407) 292-3515"
+      },
+      {
+        "market": "Miami/Ft Lauderdale",
+        "name": "Catskill Express",
+        "address": "1249 Hammondville Rd, Pompano Beach, FL 33069",
+        "phone": "(954) 288-0066"
+      },
+      {
+        "market": "W Palm Beach",
+        "name": "Martino Tire",
+        "address": "751 S Congress Ave, W Palm Beach, FL 33406",
+        "phone": "(561) 683-0535"
+      },
+      {
+        "market": "W Palm Beach",
+        "name": "Palm Beach Fleet Services",
+        "address": "1330 W Industrial Ave, Boynton Beach, FL 33426",
+        "phone": "(561) 509-8397"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Jacksonville",
+        "name": "Cedar Grove Truck Wash",
+        "address": "3400 Edgewood Ave N, Jacksonville, FL 32254",
+        "phone": ""
+      },
+      {
+        "market": "Miami",
+        "name": "Dade Corners",
+        "address": "17696 SW 8th St, Miami, Fl 33194",
+        "phone": ""
+      },
+      {
+        "market": "Miami",
+        "name": "Clean Getaway Car Wash",
+        "address": "7969 Pines Blvd, Pembroke Pines, FL 33024",
+        "phone": ""
+      },
+      {
+        "market": "Miami",
+        "name": "The Classic Truck Wash",
+        "address": "10190 NW 116th Way, Medley, Fl 33178",
+        "phone": ""
+      },
+      {
+        "market": "Orlando",
+        "name": "TT Washout Trucks and Trailers",
+        "address": "9565 S Orange Blossom Trail, Orlando, Fl 32837",
+        "phone": ""
+      },
+      {
+        "market": "Port St Lucie",
+        "name": "Best Car Wash",
+        "address": "544 SW Bayshore Blvd, Port St Lucie, FL 34983",
+        "phone": ""
+      },
+      {
+        "market": "Tampa",
+        "name": "Tampa Bay Truck Wash",
+        "address": "5911 E Dr M.L.K. Jr Blvd, Tampa, FL 33619",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Georgia",
+    "shops": [
+      {
+        "market": "Augusta",
+        "name": "Mathews Motors",
+        "address": "1351 Gordon Hwy, Augusta, GA 30901",
+        "phone": "(706) 722-3997"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Atlanta",
+        "name": "Blue Beacon",
+        "address": "4170 Old McDonough Rd, Conley, GA 30288",
+        "phone": ""
+      },
+      {
+        "market": "Savannah",
+        "name": "Fleet Clean USA",
+        "address": "22 Bryce Industrial Dr, Savannah, GA 31405",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Idaho",
+    "shops": [],
+    "washes": []
+  },
+  {
+    "state": "Illinois",
+    "shops": [
+      {
+        "market": "Chicago",
+        "name": "Advantage Chevrolet",
+        "address": "6299 East Ave, Hodgkins, IL 60525",
+        "phone": ""
+      }
+    ],
+    "washes": [
+      {
+        "market": "Chicago",
+        "name": "Navarro's Truck Wash",
+        "address": "5821 Ogden Ave, Cicero, IL 60804",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Indiana",
+    "shops": [
+      {
+        "market": "Indianapolis",
+        "name": "M & K Truck",
+        "address": "1401 Harding Ct, Indianapolis, IN 46217",
+        "phone": "(317) 784-3740"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Indianapolis",
+        "name": "Blue Beacon",
+        "address": "4550 S Harding St, Indianapolis, IN 46217",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Iowa",
+    "shops": [],
+    "washes": [
+      {
+        "market": "Aimes",
+        "name": "Kwik Connect Car Wash",
+        "address": "116 Beedle Dr, Aimes, IA 50014",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Kansas",
+    "shops": [],
+    "washes": []
+  },
+  {
+    "state": "Kentucky",
+    "shops": [],
+    "washes": []
+  },
+  {
+    "state": "Louisiana",
+    "shops": [
+      {
+        "market": "New Orleans",
+        "name": "Leson Isuzu",
+        "address": "1501 Westbank Expy, Harvey, LA 70058",
+        "phone": "(504) 366-4381"
+      }
+    ],
+    "washes": [
+      {
+        "market": "New Orleans",
+        "name": "On the Move Truck Wash",
+        "address": "4022 Louisa St, New Orleans, LA 70126",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Maine",
+    "shops": [],
+    "washes": []
+  },
+  {
+    "state": "Maryland",
+    "shops": [
+      {
+        "market": "DC area",
+        "name": "Central Isuzu",
+        "address": "3839 Ironwood Pl, Landover, MD 20785",
+        "phone": "(240) 487-3360"
+      }
+    ],
+    "washes": [
+      {
+        "market": "DC area",
+        "name": "Kenilworth Car Wash",
+        "address": "3501 Kenilworth Ave, Bladensburg, MD 20781",
+        "phone": ""
+      },
+      {
+        "market": "Baltimore",
+        "name": "VIP Quality Express",
+        "address": "7535 Montevido Rd, Jessup, MD 20794",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Massachusetts",
+    "shops": [
+      {
+        "market": "Boston",
+        "name": "Liberty Isuzu",
+        "address": "90 Bay State Rd, Wakefield, MA 01880",
+        "phone": "(888) 387-6422"
+      },
+      {
+        "market": "Boston",
+        "name": "Salami Isuzu",
+        "address": "124 Norfolk Ave, Roxbury, MA 02119",
+        "phone": "(617) 442-1225"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Boston",
+        "name": "A-1 Crystal Clean Services",
+        "address": "180 Commercial St, Lynn, MA 01901",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Michigan",
+    "shops": [
+      {
+        "market": "Detroit",
+        "name": "Sellers Truck Center",
+        "address": "24630 Hathaway St, Farmington, MI 48335",
+        "phone": "(833) 762-1164"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Ann Arbor",
+        "name": "Blue Beacon",
+        "address": "98 Baker Rd, Dexter, MI 48130",
+        "phone": ""
+      },
+      {
+        "market": "Detroit",
+        "name": "Eastside Truck Wash",
+        "address": "25803 Sherwood Ave, Warren, MI 48130",
+        "phone": ""
+      },
+      {
+        "market": "Jackson",
+        "name": "Wisner Street Car Wash",
+        "address": "315 N Wisner St, Jackson, MI 49202",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Minnesota",
+    "shops": [],
+    "washes": [
+      {
+        "market": "Minneapolis/St Paul",
+        "name": "Lakeville Truck Wash",
+        "address": "21178 Kendrick Ave, Lakeville, MN 55044",
+        "phone": ""
+      },
+      {
+        "market": "Minneapolis/St Paul",
+        "name": "LQuala Truck Wash (debit/credit card ONLY)",
+        "address": "200 Grand Ave East, South St Paul, MN 55075",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Mississippi",
+    "shops": [],
+    "washes": []
+  },
+  {
+    "state": "Missouri",
+    "shops": [
+      {
+        "market": "St Louis",
+        "name": "Degel Truck Center",
+        "address": "5480 Brown Rd, Hazelwood, MO 63042",
+        "phone": "(314) 731-7600"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Kansas City",
+        "name": "Blue Beacon",
+        "address": "1201 N Corrington Ave, Kansas City, MO 64120",
+        "phone": ""
+      },
+      {
+        "market": "St Louis",
+        "name": "Commercial Truck Wash Bay",
+        "address": "720 S Theresa Ave, St. Louis, MO 63103",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Montana",
+    "shops": [],
+    "washes": []
+  },
+  {
+    "state": "Nebraska",
+    "shops": [],
+    "washes": []
+  },
+  {
+    "state": "Nevada",
+    "shops": [
+      {
+        "market": "Las Vegas",
+        "name": "Vegas Valley Fleet & Auto",
+        "address": "5375 S Procyon St #102, Las Vegas, NV 89118",
+        "phone": "(702) 473-9939"
+      }
+    ],
+    "washes": []
+  },
+  {
+    "state": "New Hampshire",
+    "shops": [
+      {
+        "market": "Nashua",
+        "name": "Bust Truck and Trailer Enterprises",
+        "address": "72 Old Derry Rd, Hudson, NH 03051",
+        "phone": "(603) 785-6138"
+      }
+    ],
+    "washes": []
+  },
+  {
+    "state": "New Jersey",
+    "shops": [],
+    "washes": [
+      {
+        "market": "Elizabeth",
+        "name": "Super Clean Truck Wash",
+        "address": "98 North Ave, Elizabeth, NJ 07201",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "New Mexico",
+    "shops": [],
+    "washes": [
+      {
+        "market": "Albuquerque",
+        "name": "Corning Truck Wash",
+        "address": "9920 Avalon Rd, Albuquerque, NM 87121",
+        "phone": ""
+      },
+      {
+        "market": "Santa Fe",
+        "name": "Chevron Car Wash",
+        "address": "3900 Rodeo Rd, Santa Fe, NM 87121",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "New York",
+    "shops": [
+      {
+        "market": "Long Island",
+        "name": "Capo Brothers Inc",
+        "address": "1971 Lakeland Ave, Ronkonkoma, NY 11779",
+        "phone": "(631) 471-1971"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Brooklyn",
+        "name": "Brooklyn Truck Wash",
+        "address": "184 Maspeth Ave, Brooklyn, NY 11211",
+        "phone": ""
+      },
+      {
+        "market": "Buffalo",
+        "name": "Buffalo Truck Wash ",
+        "address": "75 Miami St, Buffalo, NY 14204",
+        "phone": ""
+      },
+      {
+        "market": "Syracuse",
+        "name": "Big Dog Washout",
+        "address": "3546 Walters Rd, Syracuse, NY 13209",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "North Carolina",
+    "shops": [
+      {
+        "market": "Asheville",
+        "name": "MHC Kenworth",
+        "address": "1895 Old Haywood Rd, Asheville, NC 28806",
+        "phone": "(828) 667-8771"
+      },
+      {
+        "market": "Greensboro",
+        "name": "TranSource Truck and Trailer",
+        "address": "8700 Triad Drive, Colfax, NC 27235",
+        "phone": "(335) 996-6060"
+      },
+      {
+        "market": "Raleigh",
+        "name": "MHC Kenworth",
+        "address": "7500 Reba Drive, Raleigh, NC 27616",
+        "phone": "(919) 876-2972"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Charlotte",
+        "name": "Bayside Truck Detailing",
+        "address": "2665 Zion Church Rd, Concord, NC 28025",
+        "phone": ""
+      },
+      {
+        "market": "Raleigh",
+        "name": "Triangle Tank and Truck",
+        "address": "104 Thomas Mill Rd, Holly Springs, NC 27540",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "North Dakota",
+    "shops": [
+      {
+        "market": "Minot",
+        "name": "Dakota Truck and Farm",
+        "address": "1604 20th Ave SE, Minot, ND 58701",
+        "phone": "(701) 852-5481"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Minot",
+        "name": "Blue Beacon",
+        "address": "1712 20th Ave, Minot, ND 58701",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Ohio",
+    "shops": [
+      {
+        "market": "Cleveland",
+        "name": "Valley Ford",
+        "address": "5715 Canal Rd, Cleveland, OH 44125",
+        "phone": "(216) 524-2400"
+      },
+      {
+        "market": "Columbus",
+        "name": "DeMary Truck",
+        "address": "1055 Dublin Rd, Columbus, OH 43215",
+        "phone": "(216) 524-2400"
+      },
+      {
+        "market": "Youngstown",
+        "name": "R&R Truck Centers",
+        "address": "44 Victoria Rd, Youngstown, OH 44515",
+        "phone": "(330) 799-1536"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Cleveland",
+        "name": "United Truck Wash",
+        "address": "3950 Broadway Ave, Cleveland, OH 44115",
+        "phone": ""
+      },
+      {
+        "market": "Columbus",
+        "name": "Professional Truck Washing",
+        "address": "4255 Roberts Rd, Columbus, OH 43228",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Oklahoma",
+    "shops": [],
+    "washes": [
+      {
+        "market": "Oklahoma City",
+        "name": "Blue Beacon (West)",
+        "address": "300 S Morgan Rd, Oklahoma City, OK 73128",
+        "phone": ""
+      },
+      {
+        "market": "Oklahoma City",
+        "name": "Blue Beacon (North)",
+        "address": "7720 N Bryant Ave, Oklahoma City, OK 73111",
+        "phone": ""
+      },
+      {
+        "market": "Tulsa",
+        "name": "Semi Crazy Truck Wash",
+        "address": "16136 E Admiral Pl, Tulsa, OK 74116",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Oregon",
+    "shops": [],
+    "washes": [
+      {
+        "market": "Portland",
+        "name": "JLE Truck Wash",
+        "address": "10500 N Vancouver Way, Portland, OR 97217",
+        "phone": ""
+      },
+      {
+        "market": "Portland",
+        "name": "The Big Truck Wash (East of town)",
+        "address": "2021 NW Sundial Rd, Troutdale, OR 97060",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Pennsylvania",
+    "shops": [
+      {
+        "market": "Pittsburgh",
+        "name": "Allegheny Ford",
+        "address": "5 South 6th St, Pittsburgh, PA 15203",
+        "phone": "(412) 481-9600"
+      },
+      {
+        "market": "York",
+        "name": "Keystone",
+        "address": "100 West Crone Rd, York, PA 17406",
+        "phone": "(717) 764-7077"
+      }
+    ],
+    "washes": []
+  },
+  {
+    "state": "Rhode Island",
+    "shops": [
+      {
+        "market": "Providence",
+        "name": "Rhode Island Truck Center",
+        "address": "1100 Warren Ave East, Providence, RI 02914",
+        "phone": "(401) 434-3540"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Providence",
+        "name": "RI Branch Truck Wash",
+        "address": "155 Amaral St, Riverside, RI 02915",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "South Carolina",
+    "shops": [
+      {
+        "market": "Charleston",
+        "name": "Crews Chevrolet",
+        "address": "8199 Rivers Ave, North Charleston, SC 29406",
+        "phone": "(843) 405-0055"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Charleston",
+        "name": "Quala",
+        "address": "2015 Tellico Rd, North Charleston, SC 29405",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "South Dakota",
+    "shops": [],
+    "washes": [
+      {
+        "market": "Sioux Falls",
+        "name": "Wet Rhino Truck Wash",
+        "address": "5120 N Granite Ln, Sioux Falls, SD 57107",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Tennessee",
+    "shops": [
+      {
+        "market": "Memphis",
+        "name": "Summit Truck Group",
+        "address": "1750 E Brooks Rd, Memphis, TN 38116",
+        "phone": "(901) 345-6275"
+      },
+      {
+        "market": "Nashville",
+        "name": "Neely Coble",
+        "address": "319 Fesslers Ln, Nashville, TN 37210",
+        "phone": "(615) 244-8900"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Knoxville",
+        "name": "Blue Beacon",
+        "address": "1501 Everett Rd, Knoxville, TN 37932",
+        "phone": ""
+      },
+      {
+        "market": "Memphis",
+        "name": "Blue Beacon",
+        "address": "3435 US Hwy 78, Memphis, TN 38118",
+        "phone": ""
+      },
+      {
+        "market": "Nashville",
+        "name": "Truck Shine Inc",
+        "address": "332 Wilhagan Rd, Nashville, TN 37217",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Texas",
+    "shops": [
+      {
+        "market": "Austin",
+        "name": "Donco Truck",
+        "address": "826 Kramer Lane, Austin, TX 78758",
+        "phone": "(512) 836-1990"
+      },
+      {
+        "market": "Austin",
+        "name": "Centex Truck and Trailer (North of Austin)",
+        "address": "1750 E Ave H, Nolanville, TX 76559",
+        "phone": "(254) 698-0111"
+      },
+      {
+        "market": "Dallas/ Fort Worth",
+        "name": "Friendly Fleet Services",
+        "address": "9429 Lakefield Blvd, Dallas, TX 75220",
+        "phone": "(214) 352-1392"
+      },
+      {
+        "market": "Dallas/ Fort Worth",
+        "name": "James Woods (North of Dallas) ",
+        "address": "3409 State School Rd, Denton, TX 76206",
+        "phone": "(940) 539-9530"
+      },
+      {
+        "market": "Houston",
+        "name": "Hayes Truck Group",
+        "address": "8455 North Freeway I-45, Houston, TX 77037",
+        "phone": "(281) 405-0950"
+      },
+      {
+        "market": "Laredo",
+        "name": "Rush Truck Center",
+        "address": "10216 Union Pacific Blvd, Laredo, TX 78045",
+        "phone": "(956) 764-1400"
+      },
+      {
+        "market": "Rio Grande Valley",
+        "name": "Clark Chevrolet",
+        "address": "801 West Business 83, McAllen, TX 78501",
+        "phone": "(956) 307-6557"
+      },
+      {
+        "market": "San Antonio",
+        "name": "Santex",
+        "address": "1380 Ackerman Rd, San Antonio, TX 8219",
+        "phone": "(210) 661-8371"
+      },
+      {
+        "market": "San Antonio",
+        "name": "Erik's Automotive",
+        "address": "5504 Bandera Rd, San Antonio, TX 78238",
+        "phone": "(210) 681-8891"
+      },
+      {
+        "market": "West Texas",
+        "name": "Roberts Truck Center (Summit)",
+        "address": "4378 Canyon Dr, Amarillo, TX 79109",
+        "phone": "(806) 355-9771"
+      },
+      {
+        "market": "West Texas",
+        "name": "Hargraves Tire and Auto",
+        "address": "1617 Pullman St, San Angelo, TX 76905",
+        "phone": "(325) 653-4251"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Beaumont",
+        "name": "Blue Beacon",
+        "address": "7144 IH-10 West, Orange, TX 77632",
+        "phone": ""
+      },
+      {
+        "market": "Dallas/Fort Worth",
+        "name": "Blue Beacon",
+        "address": "34245 LBJ Freeway, Dallas, TX 75241",
+        "phone": ""
+      },
+      {
+        "market": "Houston",
+        "name": "Blue Beacon",
+        "address": "8991 N Loop East, Houston, TX 77029",
+        "phone": ""
+      },
+      {
+        "market": "Houston",
+        "name": "Jensen Car & Truck Wash",
+        "address": "8310 Jensen Dr, Houston, TX 77093",
+        "phone": ""
+      },
+      {
+        "market": "Rio Grande Valley",
+        "name": "Circle Universal Truck Wash",
+        "address": "2627 N Cage Blvd, Pharr, TX 78577",
+        "phone": ""
+      },
+      {
+        "market": "San Antonio",
+        "name": "Blue Beacon",
+        "address": "6809 I-10, San Antonio, TX 78219",
+        "phone": ""
+      },
+      {
+        "market": "West Texas",
+        "name": "Blue Beacon",
+        "address": "2200 S Whitaker Rd, Amarillo, TX 79118",
+        "phone": ""
+      },
+      {
+        "market": "West Texas",
+        "name": "Lubbock Allstar Truck Wash",
+        "address": "4620 Avenue A, Lubbock, TX 79404",
+        "phone": ""
+      },
+      {
+        "market": "West Texas",
+        "name": "Big Tex Truck Wash",
+        "address": "3605 Avenue A, Lubbock, TX 79404",
+        "phone": ""
+      },
+      {
+        "market": "West Texas",
+        "name": "Blue Beacon",
+        "address": "2103 West I-20, Odessa, TX 79766",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Utah",
+    "shops": [
+      {
+        "market": "Salt Lake City",
+        "name": "Jerry Seiner Isuzu",
+        "address": "10487 S Jordan Gateway, S Jordan, UT 84095",
+        "phone": "(801) 495-6800"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Provo",
+        "name": "Mountain Springs Truck Wash",
+        "address": "1450 N 1750 W st, Springville, UT 84663",
+        "phone": ""
+      },
+      {
+        "market": "Salt Lake City",
+        "name": "Blue Beacon ",
+        "address": "2020 S 900 W, Salt Lake City, UT 84104",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Vermont",
+    "shops": [],
+    "washes": []
+  },
+  {
+    "state": "Virginia",
+    "shops": [
+      {
+        "market": "DC Area",
+        "name": "Truck Enterprises",
+        "address": "9599 Hawkins Dr, Manassas, VA 20109",
+        "phone": "(571) 921-1127"
+      },
+      {
+        "market": "Richmond",
+        "name": "Colonial Isuzu Truck",
+        "address": "1833 Commerce Rd, Richmond, VA 23224",
+        "phone": "(804) 232-4502"
+      }
+    ],
+    "washes": []
+  },
+  {
+    "state": "Washington",
+    "shops": [
+      {
+        "market": "Seattle",
+        "name": "RWC Group",
+        "address": "13123 48th Ave S., Seattle, WA 98168",
+        "phone": "(206) 433-3466"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Tacoma",
+        "name": "JLE Truck Wash",
+        "address": "2320 136th Ave, Sumner, WA 98390",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "West Virginia",
+    "shops": [],
+    "washes": []
+  },
+  {
+    "state": "Wisconsin",
+    "shops": [
+      {
+        "market": "Milwaukee",
+        "name": "Badger Truck Center",
+        "address": "2326 W St Paul Ave, Milwaukee, WI 53233",
+        "phone": "(414) 344-9500"
+      }
+    ],
+    "washes": [
+      {
+        "market": "Milwaukee",
+        "name": "Blue Beacon (South)",
+        "address": "9625 S 20th St, Oak Creek, WI 53154",
+        "phone": ""
+      },
+      {
+        "market": "Milwaukee",
+        "name": "Milwaukee Truck Wash",
+        "address": "11340 W Brown Deer Rd, Milwaukee, WI 53224",
+        "phone": ""
+      }
+    ]
+  },
+  {
+    "state": "Wyoming",
+    "shops": [],
+    "washes": []
+  }
+]

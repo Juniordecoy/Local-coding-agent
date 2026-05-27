@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+{% block title %}Driver Portal | Do It Outdoors{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <h1>Welcome do it outdoors drivers!</h1>
+  </section>
+
+  <section class="portal">
+    <div class="button-stack">
+      <a class="portal-btn btn-gray" href="{{ url_for('postingphotos') }}">Upload Posting Photos</a>
+      <a class="portal-btn btn-tan" href="{{ url_for('ucr') }}">UCR - Unit Condition Report</a>
+      <a class="portal-btn btn-gold" href="{{ url_for('vehicleinfo') }}">Vehicle Info</a>
+      <a class="portal-btn btn-purple" href="{{ url_for('driver_expense') }}">Driver Expense Form (digital!)</a>
+      <!-- <a class="portal-btn btn-dark" href="{{ url_for('driver_questions') }}">Driver Questions</a> -->
+      <a class="portal-btn btn-dark" href="{{ url_for('truck_return_checklist') }}">Truck Return Checklist</a>
+    </div>
+  </section>
+
+  <section class="tiles">
+    <div class="tile">
+      <div class="tile-title">Days Since Last<br/>Accident!</div>
+      <div class="timer" data-start="{{ incident_a_start }}">
+        <div class="timer-row">
+          <div class="timebox"><div class="num" data-part="days">0</div><div class="label">Days</div></div>
+          <div class="timebox"><div class="num" data-part="hours">0</div><div class="label">Hours</div></div>
+          <div class="timebox"><div class="num" data-part="minutes">0</div><div class="label">Minutes</div></div>
+          <div class="timebox"><div class="num" data-part="seconds">0</div><div class="label">Seconds</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile">
+      <div class="tile-title">Days Since Last<br/>Incident!</div>
+      <div class="timer" data-start="{{ incident_b_start }}">
+        <div class="timer-row">
+          <div class="timebox"><div class="num" data-part="days">0</div><div class="label">Days</div></div>
+          <div class="timebox"><div class="num" data-part="hours">0</div><div class="label">Hours</div></div>
+          <div class="timebox"><div class="num" data-part="minutes">0</div><div class="label">Minutes</div></div>
+          <div class="timebox"><div class="num" data-part="seconds">0</div><div class="label">Seconds</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider line -->
+  <div class="home-divider"></div>
+
+  <!-- Section 1: Social Media Header -->
+  <section class="home-section-header">
+    <div class="stream-header-box">
+      <h3>do it outdoors<br>social media stream</h3>
+      <p>Updated often so come back regularly to see what we're up to</p>
+    </div>
+  </section>
+
+  <!-- Section 2: Blank Content Area (for future articles) -->
+  <section class="home-stream-container">
+    <div class="stream-header-box" style="center">
+      <h3>social media stream<br>Coming Soon!!!</h3>
+    <!-- Future articles/cards will go here -->
+    </div>
+  </section>
+
+  <!-- Referral Popup -->
+  <div id="referralModal" class="referral-modal" aria-hidden="true">
+    <div class="referral-backdrop"></div>
+
+    <div class="referral-card" role="dialog" aria-modal="true" aria-labelledby="referralTitle">
+      <button type="button" class="referral-close" id="referralClose" aria-label="Close popup">
+        &times;
+      </button>
+
+      <div class="referral-badge">Driver Referrals</div>
+      <h2 id="referralTitle" class="referral-title">Refer a driver to <strong>Earn $750</strong>.</h2>
+
+      <p class="referral-text">
+        Know someone who would be a great driver?
+      </p>
+
+      <p class="referral-subtext">
+        If you know someone dependable, professional, and ready to work, send them our way.
+      </p>
+
+      <div class="referral-actions">
+        <a href="{{ url_for('static', filename='pdfs/EE_Referral_Program_Rev 03.2026.pdf') }}" target="_blank"
+           class="referral-btn referral-btn--primary">Learn More</a>
+        <button type="button" class="referral-btn referral-btn--secondary" id="referralLater">Maybe Later</button>
+      </div>
+      <label class="referral-check"> <input type="checkbox" id="referralHideToday"> Don’t show this again today </label>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function pad2(n){ return String(n).padStart(2,'0'); }
+
+  function updateTimer(timerEl){
+    const startStr = timerEl.getAttribute("data-start");
+    const start = new Date(startStr);
+    const now = new Date();
+    let diffMs = now - start;
+    if (isNaN(diffMs) || diffMs < 0) diffMs = 0;
+
+    const totalSeconds = Math.floor(diffMs / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    timerEl.querySelector('[data-part="days"]').textContent = days;
+    timerEl.querySelector('[data-part="hours"]').textContent = pad2(hours);
+    timerEl.querySelector('[data-part="minutes"]').textContent = pad2(minutes);
+    timerEl.querySelector('[data-part="seconds"]').textContent = pad2(seconds);
+  }
+
+  const timers = document.querySelectorAll(".timer");
+  function tick(){
+    timers.forEach(updateTimer);
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // Referral popup
+  (function () {
+    const modal = document.getElementById("referralModal");
+    const closeBtn = document.getElementById("referralClose");
+    const laterBtn = document.getElementById("referralLater");
+    const hideToday = document.getElementById("referralHideToday");
+
+    if (!modal) return;
+
+    const storageKey = "referral_popup_hide_until";
+    const oneDayMs = 24 * 60 * 60 * 1000;
+
+    function setHideUntilMidnight() {
+      const now = new Date();
+      const midnight = new Date();
+
+      midnight.setHours(24, 0, 0, 0); // next midnight
+
+      localStorage.setItem(storageKey, String(midnight.getTime()));
+    }
+
+    function clearHidePreference() {
+      localStorage.removeItem(storageKey);
+    }
+
+    function shouldHidePopup() {
+      const hiddenUntil = Number(localStorage.getItem(storageKey) || "0");
+
+      if (!hiddenUntil) return false;
+
+      // if expired, clear it out and allow popup again
+      if (Date.now() >= hiddenUntil) {
+        clearHidePreference();
+        return false;
+      }
+
+      return true;
+    }
+
+    // optional manual reset with ?resetReferral=1
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("resetReferral") === "1") {
+      clearHidePreference();
+    }
+
+    if (shouldHidePopup()) {
+      return;
+    }
+
+    modal.style.display = "block";
+    modal.setAttribute("aria-hidden", "false");
+
+    requestAnimationFrame(() => {
+      modal.classList.add("show");
+    });
+
+    function closeModal() {
+      if (hideToday && hideToday.checked) {
+        setHideUntilMidnight();   // 👈 swapped
+      } else {
+        clearHidePreference();
+      }
+
+      modal.classList.remove("show");
+      modal.classList.add("closing");
+      modal.setAttribute("aria-hidden", "true");
+
+      setTimeout(() => {
+        modal.classList.remove("closing");
+        modal.style.display = "none";
+      }, 300);
+    }
+
+    closeBtn?.addEventListener("click", closeModal);
+    laterBtn?.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", function (e) {
+      if (e.target.classList.contains("referral-backdrop")) {
+        closeModal();
+      }
+    });
+  })();
+</script>
+{% endblock %}

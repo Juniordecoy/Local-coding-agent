@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Lead Polo Shirt Order{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <div class="shop-wrap">
+    <h1 class="shop-title">Lead Polo Shirt Order - $13</h1>
+    {% if submitted %}
+      <div class="success-msg">Order submitted ✅</div>
+    {% endif %}
+    <div class="shop-image-wrap">
+      <img
+        src="{{ url_for('static', filename='img/polo_shirt.jpg') }}"
+        alt="Lead Polo Shirt"
+        class="shop-image"
+      >
+    </div>
+
+    <div class="shop-card">
+      {% if submitted %}
+        <div class="success-msg">Order submitted ✅</div>
+      {% endif %}
+
+      <form method="POST" class="shop-form">
+        <div class="shop-grid">
+          <div class="form-group">
+            <label for="name">* Your Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">* Email Address</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="size">* Size</label>
+            <select id="size" name="size" required>
+              <option value="">- Select -</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">2XL</option>
+
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="quantity">* Quantity</label>
+            <select id="quantity" name="quantity" required>
+              <option value="">- Select -</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="shop-divider"></div>
+
+        <div style="position:absolute; left:-9999px;">
+            <input type="text" name="do_not_fill" autocomplete="off">
+        </div>
+
+        <div class="shop-submit-wrap">
+          <button type="submit" class="shop-submit-btn">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

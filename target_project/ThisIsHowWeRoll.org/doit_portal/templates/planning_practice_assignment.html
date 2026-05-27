@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}M-M Planning Practice Assignment{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">New Driver<br>Travel / Market to Market (M-M)<br>Planning Practice Assignment</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your assignment was submitted.</div>
+  {% endif %}
+
+  <form class="ojt-form" method="POST" action="{{ url_for('planning_practice_assignment') }}">
+
+    <div class="ojt-grid-2">
+      <div class="field">
+        <label for="your_name">Your name</label>
+        <input id="your_name" name="your_name" type="text" required>
+      </div>
+
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input id="email" name="email" type="text" required>
+      </div>
+    </div>
+
+    <div class="quiz-block">
+      <h3>Scenario</h3>
+      <p>
+        You are in a York, PA hotel on a Sunday night after ending a campaign.
+        Tomorrow, you'll be flying from Baltimore, MD to Raleigh, NC to pick up a unit.
+        Once you have the unit, you will be driving it to Orlando, FL to run a campaign.
+      </p>
+    </div>
+
+    <div class="quiz-block">
+      <h3>Details</h3>
+      <p>You do <strong>NOT</strong> have a rental car in York.</p>
+      <p>Your flight out of Baltimore/BWI departs at <strong>1:00 PM</strong> and arrives at <strong>5:00 PM</strong> in Raleigh/RDU.</p>
+      <p>Storage in Raleigh is fairly close to the airport.</p>
+    </div>
+
+    <p class="quiz-note">
+      Directions: Fill in the blanks as to how you would plan for each day.
+    </p>
+
+    <div class="quiz-block">
+      <h3>Monday</h3>
+      <p>
+        You will need to check out of the hotel, travel to BWI, fly to RDU,
+        pick up the unit from storage, drive to a M-M hotel, and check in for the night.
+      </p>
+
+      <label>1. What time do you leave the hotel?</label>
+      <textarea name="monday_leave_hotel" rows="2" required></textarea>
+
+      <div class="quiz-grid-2">
+        <div>
+          <label>2(a). How are you traveling to BWI?</label>
+          <textarea name="monday_travel_to_bwi" rows="2" required></textarea>
+        </div>
+
+        <div>
+          <label>2(b). What time will you arrange your ride?</label>
+          <textarea name="monday_ride_time_bwi" rows="2" required></textarea>
+        </div>
+      </div>
+
+      <div class="quiz-grid-2">
+        <div>
+          <label>3(a). How are you getting to storage from RDU?</label>
+          <textarea name="monday_rdu_to_storage" rows="2" required></textarea>
+        </div>
+
+        <div>
+          <label>3(b). When will you arrange your ride?</label>
+          <textarea name="monday_ride_time_rdu" rows="2" required></textarea>
+        </div>
+      </div>
+
+      <div class="quiz-grid-2">
+        <div>
+          <label>4(a). Who books your hotel in Raleigh for Monday night?</label>
+          <textarea name="monday_hotel_who_books" rows="2" required></textarea>
+        </div>
+
+        <div>
+          <label>4(b). When will you request your hotel?</label>
+          <textarea name="monday_hotel_when_request" rows="2" required></textarea>
+        </div>
+      </div>
+
+      <label>4(c). If person from question 4(a) doesn't answer, who do you contact?</label>
+      <textarea name="monday_leave_hotel" rows="2" required></textarea>
+    </div>
+
+
+
+    <div class="quiz-block">
+      <h3>Tuesday</h3>
+      <p>
+        You will need to check out of your hotel, start the drive to Florida,
+        and check in at a M-M hotel.
+      </p>
+
+      <label>1. What time will you depart your hotel in Raleigh?</label>
+      <textarea name="tuesday_depart_raleigh" rows="2" required></textarea>
+
+      <label>2. Who books hotel for tonight?</label>
+      <textarea name="tuesday_hotel_who_books" rows="2" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <h3>Wednesday</h3>
+      <p>
+        You will need to check out of the hotel, finish driving to Orlando, FL,
+        check in at the campaign hotel, pick up vinyls at the hotel desk, and install them.
+      </p>
+
+      <label>1. What time will you check out of the hotel you stayed in last night?</label>
+      <textarea name="wednesday_checkout_time" rows="2" required></textarea>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button class="submit-btn" type="submit">Submit</button>
+
+  </form>
+</section>
+{% endblock %}

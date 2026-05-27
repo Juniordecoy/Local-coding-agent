@@ -1,0 +1,227 @@
+[
+  {
+    "storage_id": "peoria_storage",
+    "name": "Peoria Storage",
+    "street": "9649 W Olive Ave",
+    "city": "Peoria",
+    "state": "AZ",
+    "zip": "85345",
+    "phone": "16238729000"
+  },
+  {
+    "storage_id": "ontario_storage",
+    "name": "Ontario Storage",
+    "street": "1372 E 5th St",
+    "city": "Ontario",
+    "state": "CA",
+    "zip": "91764",
+    "phone": "19092184551"
+  },
+  {
+    "storage_id": "aurora_storage",
+    "name": "Aurora Storage",
+    "street": "500 Laredo St",
+    "city": "Aurora",
+    "state": "CO",
+    "zip": "80011",
+    "phone": "13033600433"
+  },
+  {
+    "storage_id": "denver_storage",
+    "name": "Denver Storage",
+    "street": "14750 E 40th Ave",
+    "city": "Denver",
+    "state": "CO",
+    "zip": "80239",
+    "phone": "13033710999"
+  },
+  {
+    "storage_id": "davenport_storage",
+    "name": "Davenport Storage",
+    "street": "100 Lake Davenport Blvd",
+    "city": "Davenport",
+    "state": "FL",
+    "zip": "33897",
+    "phone": "18634242310"
+  },
+  {
+    "storage_id": "orlando_storage",
+    "name": "Orlando Storage",
+    "street": "4252 N Orange Blossom Trail",
+    "city": "Orlando",
+    "state": "FL",
+    "zip": "32804",
+    "phone": "14072952230"
+  },
+  {
+    "storage_id": "pompano_storage",
+    "name": "Pompano Storage",
+    "street": "4350 N Powerline Rd",
+    "city": "Pompano Beach",
+    "state": "FL",
+    "zip": "33073",
+    "phone": "19547253707"
+  },
+  {
+    "storage_id": "port_st_lucie_storage",
+    "name": "Port St. Lucie Storage",
+    "street": "8663 US-1",
+    "city": "Port St Lucie",
+    "state": "FL",
+    "zip": "34952",
+    "phone": "17728075771"
+  },
+  {
+    "storage_id": "jonesboro_storage",
+    "name": "Jonesboro Storage",
+    "street": "2846 Mt Zion Rd",
+    "city": "Jonesboro",
+    "state": "GA",
+    "zip": "30236",
+    "phone": "17706806733"
+  },
+  {
+    "storage_id": "augusta_storage",
+    "name": "Augusta Storage",
+    "street": "122 Davis Rd",
+    "city": "Martinez",
+    "state": "GA",
+    "zip": "30907",
+    "phone": "17069093675"
+  },
+  {
+    "storage_id": "indy_storage",
+    "name": "Indy Storage",
+    "street": "5260 Commerce Circle",
+    "city": "Indianapolis",
+    "state": "IN",
+    "zip": "46227",
+    "phone": "13174747789"
+  },
+  {
+    "storage_id": "nola_storage",
+    "name": "NOLA Storage",
+    "street": "4901 Airline Drive",
+    "city": "Metairie",
+    "state": "LA",
+    "zip": "70001",
+    "phone": "15048331717"
+  },
+  {
+    "storage_id": "rowland_storage",
+    "name": "Rowland Storage",
+    "street": "2810 Rowland Road",
+    "city": "Raleigh",
+    "state": "NC",
+    "zip": "27615",
+    "phone": "19198787171"
+  },
+  {
+    "storage_id": "Southwest_fwy_storage",
+    "name": "Southwest Fwy Storage",
+    "street": "4341 Southwest Fwy",
+    "city": "Houston",
+    "state": "TX",
+    "zip": "77027",
+    "phone": "18338123120"
+  },
+  {
+    "storage_id": "gresham_storage",
+    "name": "Gresham Storage",
+    "street": "2700 Gresham Lake Rd",
+    "city": "Raleigh",
+    "state": "NC",
+    "zip": "27615",
+    "phone": "19198787171"
+  },
+  {
+    "storage_id": "cedar_park_storage",
+    "name": "Cedar Park Storage",
+    "street": "13406 Anderson Mill Rd",
+    "city": "Cedar Park",
+    "state": "TX",
+    "zip": "78613",
+    "phone": "15122193274"
+  },
+  {
+    "storage_id": "garland_storage",
+    "name": "Garland Storage",
+    "street": "10740 Garland Road",
+    "city": "Dallas",
+    "state": "TX",
+    "zip": "75218",
+    "phone": "12143049142"
+  },
+  {
+    "storage_id": "ft_worth_storage",
+    "name": "Ft. Worth Storage",
+    "street": "1401 Longhorn Rd",
+    "city": "Ft Worth",
+    "state": "TX",
+    "zip": "76179",
+    "phone": "18179005520"
+  },
+  {
+    "storage_id": "cypress_creek_storage",
+    "name": "Cypress Creek Storage",
+    "street": "9576 Cypress Creek Parkway",
+    "city": "Houston",
+    "state": "TX",
+    "zip": "77070",
+    "phone": "18324786527"
+  },
+  {
+    "storage_id": "leon_valley_storage",
+    "name": "Leon Valley Storage",
+    "street": "6200 Grissom Road",
+    "city": "San Antonio",
+    "state": "TX",
+    "zip": "78238",
+    "phone": "12109609063"
+  },
+  {
+    "storage_id": "crestway_storage",
+    "name": "Crestway Storage",
+    "street": "6517 Crestway Drive",
+    "city": "San Antonio",
+    "state": "TX",
+    "zip": "78239",
+    "phone": "12104606588"
+  },
+  {
+    "storage_id": "spring_storage",
+    "name": "Spring Storage",
+    "street": "1220 W Riley Fuzzel Rd",
+    "city": "Spring",
+    "state": "TX",
+    "zip": "77373",
+    "phone": "12813501570"
+  },
+  {
+    "storage_id": "seattle_storage",
+    "name": "Seattle Storage",
+    "street": "35205 Pacific Hwy S",
+    "city": "Federal Way",
+    "state": "WA",
+    "zip": "98003",
+    "phone": "12539411111"
+  },
+  {
+    "storage_id": "york_hub",
+    "name": "York Hub",
+    "street": "3111 Farmtrail Rd",
+    "city": "York",
+    "state": "PA",
+    "zip": "17406",
+    "phone": "17175992074"
+  },
+  {
+    "storage_id": "vegas_hub",
+    "name": "Vegas Hub",
+    "street": "5840 Wynn Rd",
+    "city": "Las Vegas",
+    "state": "NV",
+    "zip": "89118",
+    "phone": "17178440253"
+  }
+]

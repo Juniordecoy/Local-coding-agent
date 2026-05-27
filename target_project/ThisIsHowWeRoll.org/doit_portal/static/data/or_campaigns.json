@@ -1,0 +1,191 @@
+[
+  {
+    "campaign_id": "open001",
+    "contract_number": "",
+    "campaign": "Open Market",
+    "city": "York",
+    "state": "PA",
+    "start_date": "",
+    "end_date": "",
+    "run_days": [],
+    "notes": "No campaign scheduled",
+    "day_codes": {
+      "2026-01-05": "2",
+      "2026-02-01": "2",
+      "2026-01-02": "1"
+    }
+  },
+  {
+    "campaign_id": "2128a355",
+    "contract_number": "9871",
+    "campaign": "testing",
+    "city": "York",
+    "state": "PA",
+    "start_date": "2026-05-21",
+    "end_date": "2026-05-30",
+    "run_days": [
+      "Wed"
+    ],
+    "notes": "das",
+    "day_codes": {
+      "2026-01-02": "T"
+    }
+  },
+  {
+    "campaign_id": "ac6b28eb",
+    "contract_number": "2635-5",
+    "campaign": "testing",
+    "city": "York",
+    "state": "CA",
+    "start_date": "2026-05-20",
+    "end_date": "2026-05-28",
+    "notes": "test"
+  },
+  {
+    "campaign_id": "b7f18597",
+    "contract_number": "9871-9",
+    "campaign": "Test Campaign",
+    "city": "Waxahchie",
+    "state": "TX",
+    "start_date": "2026-05-21",
+    "end_date": "2026-05-30",
+    "notes": "test 2",
+    "day_codes": {
+      "2026-01-08": "B",
+      "2026-02-01": "Z",
+      "2026-01-02": "3"
+    }
+  },
+  {
+    "campaign_id": "b7f18547",
+    "contract_number": "9871-10",
+    "campaign": "Test Campaign",
+    "city": "Waxahchie",
+    "state": "TX",
+    "start_date": "2026-05-21",
+    "end_date": "2026-05-30",
+    "notes": "test 2",
+    "day_codes": {
+      "2026-01-08": "R2",
+      "2026-02-01": "Z",
+      "2026-01-02": "3"
+    }
+  },
+  {
+    "campaign_id": "b7f18595",
+    "contract_number": "9871-10",
+    "campaign": "Test Campaign",
+    "city": "Waxahchie",
+    "state": "TX",
+    "start_date": "2026-05-21",
+    "end_date": "2026-05-30",
+    "notes": "test 2",
+    "day_codes": {
+      "2026-01-08": "R2",
+      "2026-02-01": "Z",
+      "2026-01-02": "B"
+    }
+  },
+  {
+    "campaign_id": "b7f18596",
+    "contract_number": "9871-10",
+    "campaign": "Test Campaign",
+    "city": "Waxahchie",
+    "state": "TX",
+    "start_date": "2026-05-21",
+    "end_date": "2026-05-30",
+    "notes": "test 2",
+    "day_codes": {
+      "2026-01-08": "R2",
+      "2026-02-01": "Z",
+      "2026-01-02": "3"
+    }
+  },
+  {
+    "campaign_id": "b7f18593",
+    "contract_number": "9871-10",
+    "campaign": "Test Campaign",
+    "city": "Waxahchie",
+    "state": "TX",
+    "start_date": "2026-05-21",
+    "end_date": "2026-05-30",
+    "notes": "test 2",
+    "day_codes": {
+      "2026-01-08": "R2",
+      "2026-02-01": "Z",
+      "2026-01-02": "3",
+      "2026-01-13": "S"
+    }
+  },
+  {
+    "campaign_id": "b7f18592",
+    "contract_number": "9871-10",
+    "campaign": "Test Campaign",
+    "city": "Waxahchie",
+    "state": "TX",
+    "start_date": "2026-05-21",
+    "end_date": "2026-05-30",
+    "notes": "test 2",
+    "day_codes": {
+      "2026-01-08": "TH",
+      "2026-02-01": "Z",
+      "2026-01-02": "3"
+    }
+  },
+  {
+    "campaign_id": "b7f18591",
+    "contract_number": "9871-10",
+    "campaign": "Test Campaign",
+    "city": "Waxahchie",
+    "state": "TX",
+    "start_date": "2026-05-21",
+    "end_date": "2026-05-30",
+    "notes": "test 2",
+    "day_codes": {
+      "2026-01-08": "R2",
+      "2026-02-01": "Z",
+      "2026-01-02": "3"
+    }
+  },
+  {
+    "campaign_id": "b7f18580",
+    "contract_number": "9871-10",
+    "campaign": "Test Campaign",
+    "city": "Waxahchie",
+    "state": "TX",
+    "start_date": "2026-05-21",
+    "end_date": "2026-05-30",
+    "notes": "test 2",
+    "day_codes": {
+      "2026-01-08": "R2",
+      "2026-02-01": "Z",
+      "2026-01-02": "3"
+    }
+  },
+  {
+    "campaign_id": "b7f18591",
+    "contract_number": "9871-10",
+    "campaign": "Test Campaign",
+    "city": "Waxahchie",
+    "state": "TX",
+    "start_date": "2026-05-21",
+    "end_date": "2026-05-30",
+    "notes": "test 2",
+    "day_codes": {
+      "2026-01-08": "R2",
+      "2026-02-01": "Z",
+      "2026-01-02": "3"
+    }
+  },
+  {
+    "campaign_id": "be434682",
+    "contract_number": "new number",
+    "campaign": "pluto",
+    "city": "Miami",
+    "state": "FL",
+    "start_date": "2026-05-21",
+    "end_date": "2026-05-28",
+    "notes": "check",
+    "day_codes": {}
+  }
+]

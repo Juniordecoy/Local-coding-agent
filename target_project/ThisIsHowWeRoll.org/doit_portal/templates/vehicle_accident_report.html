@@ -1,0 +1,1250 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="panel">
+  <div class="ucr-header">
+    <h1 class="ucr-title">Vehicle Accident Report</h1>
+    <p class="ucr-subtitle">Complete this form as soon as possible after an accident or incident.</p>
+  </div>
+
+  {% if submitted %}
+    <div class="success-msg">✅ Submitted.</div>
+  {% endif %}
+
+  <div class="lookup-card">
+    <form method="POST" action="/accident-report-lookup" class="lookup-form">
+
+      <label for="report_id" class="lookup-label">
+        Lookup Accident Report
+      </label>
+
+      <div class="lookup-row">
+        <input
+          type="text"
+          name="report_id"
+          placeholder="Enter Report ID (ACC-20260427-143522)"
+          required
+          class="lookup-input"
+        >
+
+        <button type="submit" class="lookup-btn primary">
+          Load
+        </button>
+
+        <button type="button" id="unlock-edit-btn" class="lookup-btn secondary">
+          Unlock
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <form class="ucr-form accident-form {% if view_mode %}view-mode{% endif %}" method="POST" action="/vehicle-accident-report" enctype="multipart/form-data">
+    <input type="hidden" name="report_id" value="{{ form_data.get('report_id', '') if form_data else '' }}">
+    <input type="hidden" name="edit_resubmitter_name" id="edit_resubmitter_name">
+    <input type="hidden" name="edit_resubmitter_comment" id="edit_resubmitter_comment">
+    <!-- DRIVER INFO -->
+    <fieldset class="ucr-block">
+      <legend>Driver Information</legend>
+      <div class="form-grid accident-grid-4">
+        <div class="field span-3">
+          <label for="name">* Name</label>
+          <input maxlength="40" id="name" name="name" value="{{ form_data.get('name', '') if form_data else '' }}" type="text" required>
+        </div>
+
+        <div class="field span-1">
+          <label for="age">Age</label>
+          <input maxlength="3" id="age" name="age" value="{{ form_data.get('age', '') if form_data else '' }}" type="number" min="0">
+        </div>
+
+        <div class="field span-2">
+          <label for="address">Address</label>
+          <input maxlength="80" id="address" name="address" value="{{ form_data.get('address', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field span-2">
+          <label for="city_state_zip">City, State and Zip</label>
+          <input maxlength="80" id="city_state_zip" name="city_state_zip" value="{{ form_data.get('city_state_zip', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="drivers_license">Driver’s License #</label>
+          <input maxlength="15" id="drivers_license" name="drivers_license" value="{{ form_data.get('drivers_license', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="license_state">License State</label>
+          <input maxlength="20" id="license_state" name="license_state" value="{{ form_data.get('license_state', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="license_plate">License Plate #</label>
+          <input maxlength="15" id="license_plate" name="license_plate" value="{{ form_data.get('license_plate', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="plate_state">Plate State</label>
+          <input maxlength="20" id="plate_state" name="plate_state" value="{{ form_data.get('plate_state', '') if form_data else '' }}" type="text">
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- INJURIES -->
+    <fieldset class="ucr-block">
+      <legend>Injuries</legend>
+
+      <div class="form-grid accident-grid-2">
+        <div class="field full">
+          <label for="driver_injury">Driver Injury</label>
+          <input maxlength="150" id="driver_injury" name="driver_injury" value="{{ form_data.get('driver_injury', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="passenger_name">Passenger Name</label>
+          <input maxlength="40" id="passenger_name" name="passenger_name" value="{{ form_data.get('passenger_name', '') if form_data else '' }}" type="text">
+        </div>
+        <div class="field">
+          <label for="passenger_injury">Passenger Injury</label>
+          <input maxlength="150" id="passenger_injury" name="passenger_injury" value="{{ form_data.get('passenger_injury', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="other_driver_name">Other Driver Name</label>
+          <input maxlength="40" id="other_driver_name" name="other_driver_name" value="{{ form_data.get('other_driver_name', '') if form_data else '' }}" type="text">
+        </div>
+        <div class="field">
+          <label for="other_driver_injury">Other Driver Injury</label>
+          <input maxlength="150" id="other_driver_injury" name="other_driver_injury" value="{{ form_data.get('other_driver_injury', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="other_passenger_name">Other Passenger Name</label>
+          <input maxlength="40" id="other_passenger_name" name="other_passenger_name" value="{{ form_data.get('other_passenger_name', '') if form_data else '' }}" type="text">
+        </div>
+        <div class="field">
+          <label for="other_passenger_injury">Other Passenger Injury</label>
+          <input maxlength="150" id="other_passenger_injury" name="other_passenger_injury" value="{{ form_data.get('other_passenger_injury', '') if form_data else '' }}" type="text">
+        </div>
+      </div>
+
+      <div id="other-injuries-wrap" class="dynamic-stack">
+        <div class="form-grid accident-grid-2 other-injury-group">
+          <div class="field">
+            <label for="other_name_1">Other Name</label>
+            <input maxlength="40" id="other_name_1" name="other_name_1" value="{{ form_data.get('other_name_1', '') if form_data else '' }}" type="text">
+          </div>
+          <div class="field">
+            <label for="other_injury_1">Injury</label>
+            <input maxlength="150" id="other_injury_1" name="other_injury_1" value="{{ form_data.get('other_injury_1', '') if form_data else '' }}" type="text">
+          </div>
+        </div>
+      </div>
+
+      <div class="add-row-btn-wrap">
+        <button type="button" class="ucr-secondary-btn" id="add-other-injury-btn">
+          + Add Other Injured Person
+        </button>
+      </div>
+    </fieldset>
+
+    <!-- POLICE -->
+    <fieldset class="ucr-block">
+      <legend>Police Officer Assisting</legend>
+
+      <div class="form-grid accident-grid-2">
+        <div class="field">
+          <label for="officer_name">Name</label>
+          <input maxlength="60" id="officer_name" name="officer_name" value="{{ form_data.get('officer_name', '') if form_data else '' }}" type="text">
+        </div>
+
+        <fieldset class="field">
+          <legend>Police Report Made?</legend>
+          <div class="radio-row">
+            <label class="radio">
+              <input type="radio" name="police_report_made" value="Yes"
+                {% if form_data and form_data.get('police_report_made') == 'Yes' %}checked{% endif %}>
+              <span>Yes</span>
+            </label>
+
+            <label class="radio">
+              <input type="radio" name="police_report_made" value="No"
+                {% if form_data and form_data.get('police_report_made') == 'No' %}checked{% endif %}>
+              <span>No</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="headquarters">Headquarters</label>
+          <input maxlength="30" id="headquarters" name="headquarters" value="{{ form_data.get('headquarters', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="badge_number">Badge #</label>
+          <input maxlength="10" id="badge_number" name="badge_number" value="{{ form_data.get('badge_number', '') if form_data else '' }}" type="text">
+        </div>
+
+        <fieldset class="field">
+          <legend>Driver Citation(s) Issued</legend>
+          <div class="radio-row">
+            <label class="radio">
+              <input type="radio" name="driver_citation_issued" value="Yes"
+                {% if form_data and form_data.get('driver_citation_issued') == 'Yes' %}checked{% endif %}>
+              <span>Yes</span>
+            </label>
+
+            <label class="radio">
+              <input type="radio" name="driver_citation_issued" value="No"
+                {% if form_data and form_data.get('driver_citation_issued') == 'No' %}checked{% endif %}>
+              <span>No</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="driver_citation_reason">If yes, state reason</label>
+          <textarea maxlength="150"
+            id="driver_citation_reason"
+            name="driver_citation_reason"
+            rows="1"
+            class="citation-reason-textarea">{{ form_data.get('driver_citation_reason', '') if form_data else '' }}</textarea>
+        </div>
+
+        <fieldset class="field">
+          <legend>Other Driver Citation(s) Issued</legend>
+          <div class="radio-row">
+            <label class="radio">
+              <input type="radio" name="other_driver_citation_issued" value="Yes"
+                {% if form_data and form_data.get('other_driver_citation_issued') == 'Yes' %}checked{% endif %}>
+              <span>Yes</span>
+            </label>
+
+            <label class="radio">
+              <input type="radio" name="other_driver_citation_issued" value="No"
+                {% if form_data and form_data.get('other_driver_citation_issued') == 'No' %}checked{% endif %}>
+              <span>No</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="other_driver_citation_reason">If yes, state reason</label>
+          <textarea maxlength="150"
+            id="other_driver_citation_reason"
+            name="other_driver_citation_reason"
+            rows="1"
+            class="citation-reason-textarea">{{ form_data.get('other_driver_citation_reason', '') if form_data else '' }}</textarea>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- PROPERTY DAMAGE -->
+    <fieldset class="ucr-block">
+      <legend>Property Damage</legend>
+
+      <div class="form-grid accident-grid-2">
+        <div class="field full">
+          <label for="driver_vehicle_damage">Driver Vehicle</label>
+          <textarea maxlength="250" id="driver_vehicle_damage" name="driver_vehicle_damage" rows="3">{{ form_data.get('driver_vehicle_damage', '') if form_data else '' }}</textarea>
+        </div>
+
+        <div class="field full">
+          <label for="other_vehicle_damage">Other Vehicle</label>
+          <textarea maxlength="250" id="other_vehicle_damage" name="other_vehicle_damage" rows="3">{{ form_data.get('other_vehicle_damage', '') if form_data else '' }}</textarea>
+        </div>
+
+        <div class="field">
+          <label for="other_driver_contact_name">Other Driver Name</label>
+          <input maxlength="40" id="other_driver_contact_name" name="other_driver_contact_name" value="{{ form_data.get('other_driver_contact_name', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="other_driver_phone">Phone #</label>
+          <input maxlength="15" id="other_driver_phone" name="other_driver_phone" value="{{ form_data.get('other_driver_phone', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="other_driver_license">License #</label>
+          <input maxlength="20" id="other_driver_license" name="other_driver_license" value="{{ form_data.get('other_driver_license', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="other_vehicle_make">Vehicle Make</label>
+          <input maxlength="20" id="other_vehicle_make" name="other_vehicle_make" value="{{ form_data.get('other_vehicle_make', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="other_vehicle_owner">Other Vehicle Owner</label>
+          <input maxlength="40" id="other_vehicle_owner" name="other_vehicle_owner" value="{{ form_data.get('other_vehicle_owner', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="other_owner_phone">Owner Phone #</label>
+          <input maxlength="15" id="other_owner_phone" name="other_owner_phone" value="{{ form_data.get('other_owner_phone', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="insurance_company">Insurance Company</label>
+          <input maxlength="60" id="insurance_company" name="insurance_company" value="{{ form_data.get('insurance_company', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="insurance_phone">Insurance Phone #</label>
+          <input maxlength="15" id="insurance_phone" name="insurance_phone" value="{{ form_data.get('insurance_phone', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field full">
+          <label for="other_property_damage">Other Property Damage</label>
+          <textarea maxlength="250" id="other_property_damage" name="other_property_damage" rows="3">{{ form_data.get('other_property_damage', '') if form_data else '' }}</textarea>
+        </div>
+
+        <div class="field">
+          <label for="property_owner">Property Owner</label>
+          <input maxlength="40" id="property_owner" name="property_owner" value="{{ form_data.get('property_owner', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field">
+          <label for="property_owner_phone">Property Owner Phone #</label>
+          <input maxlength="15" id="property_owner_phone" name="property_owner_phone" value="{{ form_data.get('property_owner_phone', '') if form_data else '' }}" type="text">
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- WITNESSES -->
+    <fieldset class="ucr-block">
+      <legend>Witnesses</legend>
+
+      <div id="witnesses-wrap" class="dynamic-stack">
+
+        <div class="witness-group">
+          <div class="form-grid accident-grid-2">
+            <div class="field">
+              <label for="witness_1_name">Name</label>
+              <input maxlength="40" id="witness_1_name" name="witness_1_name" value="{{ form_data.get('witness_1_name', '') if form_data else '' }}" type="text">
+            </div>
+            <div class="field">
+              <label for="witness_1_phone">Phone #</label>
+              <input maxlength="15" id="witness_1_phone" name="witness_1_phone" value="{{ form_data.get('witness_1_phone', '') if form_data else '' }}" type="text">
+            </div>
+            <div class="field full">
+              <label for="witness_1_address">Address</label>
+              <input maxlength="80" id="witness_1_address" name="witness_1_address" value="{{ form_data.get('witness_1_address', '') if form_data else '' }}" type="text">
+            </div>
+          </div>
+        </div>
+
+        <div class="witness-group">
+          <div class="form-grid accident-grid-2">
+            <div class="field">
+              <label for="witness_2_name">Name</label>
+              <input maxlength="40" id="witness_2_name" name="witness_2_name" value="{{ form_data.get('witness_2_name', '') if form_data else '' }}" type="text">
+            </div>
+            <div class="field">
+              <label for="witness_2_phone">Phone #</label>
+              <input maxlength="15" id="witness_2_phone" name="witness_2_phone" value="{{ form_data.get('witness_2_phone', '') if form_data else '' }}" type="text">
+            </div>
+            <div class="field full">
+              <label for="witness_2_address">Address</label>
+              <input maxlength="80" id="witness_2_address" name="witness_2_address" value="{{ form_data.get('witness_2_address', '') if form_data else '' }}" type="text">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="add-row-btn-wrap">
+        <button type="button" class="ucr-secondary-btn" id="add-witness-btn">
+          + Add Witness
+        </button>
+      </div>
+    </fieldset>
+
+    <!-- ACCIDENT INFORMATION -->
+    <fieldset class="ucr-block">
+      <legend>Accident Information</legend>
+
+      <div class="form-grid accident-grid-4">
+        <div class="field">
+          <label for="accident_date">Date</label>
+          <input id="accident_date" name="accident_date" value="{{ form_data.get('accident_date', '') if form_data else '' }}" type="date">
+        </div>
+
+        <div class="field">
+          <label for="accident_time">Time</label>
+          <input id="accident_time" name="accident_time" value="{{ form_data.get('accident_time', '') if form_data else '' }}" type="time">
+        </div>
+
+        <fieldset class="field">
+          <legend>A.M. / P.M.</legend>
+          <div class="radio-row">
+            <label class="radio">
+              <input type="radio" name="am_pm" value="AM"
+                {% if form_data and form_data.get('am_pm') == 'AM' %}checked{% endif %}>
+              <span>A.M.</span>
+            </label>
+
+            <label class="radio">
+              <input type="radio" name="am_pm" value="PM"
+                {% if form_data and form_data.get('am_pm') == 'PM' %}checked{% endif %}>
+              <span>P.M.</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Light</legend>
+          <div class="radio-row">
+            <label class="radio">
+              <input type="radio" name="light_condition" value="Daylight"
+                {% if form_data and form_data.get('light_condition') == 'Daylight' %}checked{% endif %}>
+              <span>Daylight</span>
+            </label>
+
+            <label class="radio">
+              <input type="radio" name="light_condition" value="Dark"
+                {% if form_data and form_data.get('light_condition') == 'Dark' %}checked{% endif %}>
+              <span>Dark</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Your Direction</legend>
+          <div class="radio-row">
+            {% for d in ["N", "E", "S", "W"] %}
+             <label class="radio">
+                <input type="radio" name="your_direction" value="{{ d }}"
+                  {% if form_data and form_data.get('your_direction') == d %}checked{% endif %}>
+                <span>{{ d }}</span>
+             </label>
+            {% endfor %}
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Other Direction</legend>
+          <div class="radio-row">
+            {% for d in ["N", "E", "S", "W"] %}
+              <label class="radio">
+                <input type="radio" name="other_direction" value="{{ d }}"
+                  {% if form_data and form_data.get('other_direction') == d %}checked{% endif %}>
+                <span>{{ d }}</span>
+             </label>
+            {% endfor %}
+          </div>
+        </fieldset>
+
+        <div class="field span-2">
+          <label for="street_or_highway">Name of Street or Highway Number</label>
+          <input maxlength="80" id="street_or_highway" name="street_or_highway" value="{{ form_data.get('street_or_highway', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field span-2">
+          <label for="closest_intersection">Closest Intersection or Landmark</label>
+          <input maxlength="80" id="closest_intersection" name="closest_intersection" value="{{ form_data.get('closest_intersection', '') if form_data else '' }}" type="text">
+        </div>
+
+        <div class="field span-2">
+          <label for="city_county_state">City, County, State</label>
+          <input maxlength="80" id="city_county_state" name="city_county_state" value="{{ form_data.get('city_county_state', '') if form_data else '' }}" type="text">
+        </div>
+
+        <fieldset class="field">
+          <legend>Driver</legend>
+          <div class="radio-row">
+            <label for="driver_speed_posted"><input id="driver_speed_posted" name="driver_speed_posted" value="{{ form_data.get('driver_speed_posted', '') if form_data else '' }}" type="text">Speed Posted</label>
+            <label for="driver_speed_actual"><input id="driver_speed_actual" name="driver_speed_actual" value="{{ form_data.get('driver_speed_actual', '') if form_data else '' }}" type="text">Actual Speed</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Other Driver</legend>
+          <div class="radio-row">
+            <label for="other_speed_posted"><input id="other_speed_posted" name="other_speed_posted" value="{{ form_data.get('other_speed_posted', '') if form_data else '' }}" type="text">Speed Posted</label>
+            <label for="other_speed_actual"><input id="other_speed_actual" name="other_speed_actual" value="{{ form_data.get('other_speed_actual', '') if form_data else '' }}" type="text">Actual Speed</label>
+          </div>
+        </fieldset>
+      </div>
+    </fieldset>
+
+    <!-- CONDITIONS / ENVIRONMENT -->
+    <fieldset class="ucr-block">
+      <legend>Scene Conditions</legend>
+
+      <div class="form-grid accident-grid-2">
+        <fieldset class="field">
+          <legend>Weather</legend>
+          <div class="check-grid">
+            {% for item in ["Clear", "Raining / Fog", "Snowing", "Fog", "Sleeting", "Dust/Smoke", "High Wind", "Other"] %}
+              <label class="check">
+                <input
+                  type="checkbox"
+                  name="weather"
+                  value="{{ item }}"
+                  {% if form_data and item in form_data.get('weather', []) %}checked{% endif %}>
+                <span>{{ item }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Traffic Control</legend>
+          <div class="check-grid">
+            {% for item in ["Stop Sign", "1 Way", "2 Way", "3 Way", "4 Way", "Yield", "RR", "Police/Flag Person", "Uncont. Intersection", "Not an Intersection"] %}
+              <label class="check">
+                <input type="checkbox" name="traffic_control" value="{{ item }}" {% if form_data and item in form_data.get('traffic_control', []) %}checked{% endif %}>
+                <span>{{ item }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Area</legend>
+          <div class="radio-row">
+            {% for item in ["Residential", "Commercial", "Rural", "Other"] %}
+              <label class="radio">
+                <input type="radio" name="area" value="{{ item }}" {% if form_data and form_data.get('area') == item %}checked{% endif %}>
+                <span>{{ item }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Pavement</legend>
+          <div class="radio-row radio-wrap">
+            {% for item in ["Asphalt", "Concrete", "Gravel/Dirt", "Brick/Stone", "Steel", "Wood", "Other"] %}
+              <label class="radio">
+                <input type="radio" name="pavement" value="{{ item }}" {% if form_data and form_data.get('pavement') == item %}checked{% endif %}>
+                <span>{{ item }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Conditions</legend>
+          <div class="check-grid">
+            {% for item in ["Dry", "Wet", "Slippery", "Pot Holes", "Other"] %}
+              <label class="check">
+                <input type="checkbox" name="conditions" value="{{ item }}" {% if form_data and item in form_data.get('conditions', []) %}checked{% endif %}>
+                <span>{{ item }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </fieldset>
+
+        <div class="field-stack">
+          <fieldset class="field">
+            <legend>Seat Belt Used</legend>
+            <div class="radio-row">
+            <label class="radio">
+              <input type="radio" name="seat_belt_used" value="Yes"
+                {% if form_data and form_data.get('seat_belt_used') == 'Yes' %}checked{% endif %}>
+              <span>Yes</span>
+            </label>
+
+            <label class="radio">
+              <input type="radio" name="seat_belt_used" value="No"
+                {% if form_data and form_data.get('seat_belt_used') == 'No' %}checked{% endif %}>
+              <span>No</span>
+            </label>
+          </div>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend>Air Bag Inflated</legend>
+            <div class="radio-row">
+            <label class="radio">
+              <input type="radio" name="air_bag_inflated" value="Yes"
+                {% if form_data and form_data.get('air_bag_inflated') == 'Yes' %}checked{% endif %}>
+              <span>Yes</span>
+            </label>
+
+            <label class="radio">
+              <input type="radio" name="air_bag_inflated" value="No"
+                {% if form_data and form_data.get('air_bag_inflated') == 'No' %}checked{% endif %}>
+              <span>No</span>
+            </label>
+          </div>
+          </fieldset>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- DESCRIPTION -->
+    <fieldset class="ucr-block">
+      <legend>Accident Description</legend>
+      <div class="field">
+        <label for="accident_description">
+          Briefly tell how the accident happened. Indicate movement of involved vehicles when hazard was first noticed, warning or evasive action taken, and length/position of any skid marks.
+        </label>
+        <textarea maxlength="500" id="accident_description" name="accident_description" rows="8" placeholder="Type accident description here...">{{ form_data.get('accident_description', '') if form_data else '' }}</textarea>
+      </div>
+    </fieldset>
+
+    <!-- SKETCH -->
+    <fieldset class="ucr-block">
+      <legend>Accident Sketch</legend>
+
+      <div class="accident-sketch-card">
+        <p class="sketch-help">
+          Tap a tool, then tap the map to place it.
+        </p>
+
+        <div class="sketch-map-wrap">
+          <div class="sketch-map" id="sketch-map">
+            <img
+              src="{{ url_for('static', filename='img/accident_report/accident-sketch-template.png') }}"
+              alt="Accident sketch diagram"
+              class="sketch-image"
+            >
+
+            <div id="sketch-markers" class="sketch-markers"></div>
+          </div>
+        </div>
+
+        <div class="sketch-toolbar">
+          <p class="sketch-toolbar-title">Vehicles</p>
+          <div class="sketch-tool-grid">
+            <button type="button" class="sketch-tool" data-tool="driver_vehicle">
+              <img src="{{ url_for('static', filename='img/accident_report/driver_vehicle.png') }}" alt="">
+              <span>Driver Vehicle</span>
+            </button>
+
+            <button type="button" class="sketch-tool" data-tool="other_vehicle_1">
+              <img src="{{ url_for('static', filename='img/accident_report/other_vehicle.png') }}" alt="">
+              <span>Other Vehicle</span>
+            </button>
+
+            <button type="button" class="sketch-tool" data-tool="other_vehicle_2">
+              <img src="{{ url_for('static', filename='img/accident_report/other_vehicle.png') }}" alt="">
+              <span>Other Vehicle 2</span>
+            </button>
+          </div>
+
+          <p class="sketch-toolbar-title">Objects</p>
+          <div class="sketch-tool-grid">
+            <button type="button" class="sketch-tool" data-tool="pedestrian">
+              <img src="{{ url_for('static', filename='img/accident_report/pedestrian.png') }}" alt="">
+              <span>Pedestrian</span>
+            </button>
+
+            <button type="button" class="sketch-tool" data-tool="stop_sign">
+              <img src="{{ url_for('static', filename='img/accident_report/stop_sign.png') }}" alt="">
+              <span>Stop Sign</span>
+            </button>
+
+            <button type="button" class="sketch-tool" data-tool="yield_sign">
+              <img src="{{ url_for('static', filename='img/accident_report/yield_sign.png') }}" alt="">
+              <span>Yield</span>
+            </button>
+
+            <button type="button" class="sketch-tool" data-tool="railroad">
+              <img src="{{ url_for('static', filename='img/accident_report/railroad_sign.png') }}" alt="">
+              <span>Railroad</span>
+            </button>
+
+            <button type="button" class="sketch-tool" data-tool="red_x">
+              <img src="{{ url_for('static', filename='img/accident_report/red_x.png') }}" alt="">
+              <span>Point of Impact</span>
+            </button>
+          </div>
+
+          <!-- <p class="sketch-toolbar-title">Impact Type</p>
+          <div class="sketch-tool-grid">
+            <button type="button" class="sketch-tool" data-tool="impact_head_on">
+              <img src="{{ url_for('static', filename='img/accident_report/impact/impact_head_on.png') }}" alt="">
+              <span>Head On</span>
+            </button>
+
+            <button type="button" class="sketch-tool" data-tool="impact_object">
+              <img src="{{ url_for('static', filename='img/accident_report/impact/impact_object.png') }}" alt="">
+              <span>Object</span>
+            </button>
+
+            <button type="button" class="sketch-tool" data-tool="impact_pedestrian">
+              <img src="{{ url_for('static', filename='img/accident_report/impact/impact_pedestrian.png') }}" alt="">
+              <span>Pedestrian</span>
+            </button>
+
+            <button type="button" class="sketch-tool" data-tool="impact_rear_end">
+              <img src="{{ url_for('static', filename='img/accident_report/impact/impact_rear_end.png') }}" alt="">
+              <span>Rear End</span>
+            </button>
+
+            <button type="button" class="sketch-tool" data-tool="impact_side">
+              <img src="{{ url_for('static', filename='img/accident_report/impact/impact_side.png') }}" alt="">
+              <span>Side</span>
+            </button>
+
+            <button type="button" class="sketch-tool" data-tool="impact_truck_issue">
+              <img src="{{ url_for('static', filename='img/accident_report/impact/impact_truck_issue.png') }}" alt="">
+              <span>Truck Issue</span>
+            </button>
+          </div> -->
+
+          <div class="sketch-actions">
+            <button type="button" class="ucr-secondary-btn" id="remove-selected-sketch-btn">Remove Selected</button>
+            <button type="button" class="ucr-secondary-btn" id="clear-sketch-btn">Clear Sketch</button>
+          </div>
+        </div>
+
+        <input type="hidden" name="accident_sketch_data" id="accident_sketch_data" value="{{ form_data.get('accident_sketch_data', '') if form_data else '' }}">
+        <input type="hidden" name="accident_sketch_image" id="accident_sketch_image" value="{{ form_data.get('accident_sketch_image', '') if form_data else '' }}">
+      </div>
+    </fieldset>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <div class="ucr-actions">
+      <button class="ucr-submit" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+(function () {
+
+  /* =========================
+     DYNAMIC ROWS
+  ========================= */
+
+  const maxOtherInjuries = 6;
+  const maxWitnesses = 6;
+
+  const otherWrap = document.getElementById("other-injuries-wrap");
+  const addOtherBtn = document.getElementById("add-other-injury-btn");
+
+  const witnessWrap = document.getElementById("witnesses-wrap");
+  const addWitnessBtn = document.getElementById("add-witness-btn");
+
+  let otherInjuryCount = otherWrap ? otherWrap.querySelectorAll(".other-injury-group").length : 0;
+  let witnessCount = witnessWrap ? witnessWrap.querySelectorAll(".witness-group").length : 0;
+
+  if (addOtherBtn && otherWrap) {
+    addOtherBtn.addEventListener("click", function () {
+      if (otherInjuryCount >= maxOtherInjuries) return;
+
+      otherInjuryCount += 1;
+
+      const row = document.createElement("div");
+      row.className = "form-grid accident-grid-2 other-injury-group";
+      row.innerHTML = `
+        <div class="field">
+          <label for="other_name_${otherInjuryCount}">Other Name</label>
+          <input maxlength="60" id="other_name_${otherInjuryCount}" name="other_name_${otherInjuryCount}" type="text">
+        </div>
+        <div class="field">
+          <label for="other_injury_${otherInjuryCount}">Injury</label>
+          <input maxlength="60" id="other_injury_${otherInjuryCount}" name="other_injury_${otherInjuryCount}" type="text">
+        </div>
+      `;
+
+      otherWrap.appendChild(row);
+
+      if (otherInjuryCount >= maxOtherInjuries) {
+        addOtherBtn.style.display = "none";
+      }
+    });
+  }
+
+  if (addWitnessBtn && witnessWrap) {
+    addWitnessBtn.addEventListener("click", function () {
+      if (witnessCount >= maxWitnesses) return;
+
+      witnessCount += 1;
+
+      const group = document.createElement("div");
+      group.className = "witness-group";
+      group.innerHTML = `
+        <div class="form-grid accident-grid-2">
+          <div class="field">
+            <label for="witness_${witnessCount}_name">Name</label>
+            <input maxlength="60" id="witness_${witnessCount}_name" name="witness_${witnessCount}_name" type="text">
+          </div>
+          <div class="field">
+            <label for="witness_${witnessCount}_phone">Phone #</label>
+            <input maxlength="60" id="witness_${witnessCount}_phone" name="witness_${witnessCount}_phone" type="text">
+          </div>
+          <div class="field full">
+            <label for="witness_${witnessCount}_address">Address</label>
+            <input maxlength="60" id="witness_${witnessCount}_address" name="witness_${witnessCount}_address" type="text">
+          </div>
+        </div>
+      `;
+
+      witnessWrap.appendChild(group);
+
+      if (witnessCount >= maxWitnesses) {
+        addWitnessBtn.style.display = "none";
+      }
+    });
+  }
+
+  /* =========================
+     SKETCH LOGIC
+  ========================= */
+
+  const sketchMap = document.getElementById("sketch-map");
+  const sketchMarkers = document.getElementById("sketch-markers");
+  const sketchDataInput = document.getElementById("accident_sketch_data");
+  const sketchTools = document.querySelectorAll(".sketch-tool");
+  const removeSelectedSketchBtn = document.getElementById("remove-selected-sketch-btn");
+  const clearSketchBtn = document.getElementById("clear-sketch-btn");
+  const accidentForm = document.querySelector(".accident-form");
+  const sketchImageInput = document.getElementById("accident_sketch_image");
+
+  if (!sketchMap || !sketchMarkers || !sketchDataInput || !sketchTools.length) return;
+
+  let activeTool = "";
+  let placedItems = [];
+  let selectedItemIndex = -1;
+
+  let dragItemIndex = -1;
+  let isDraggingMarker = false;
+  let dragMoved = false;
+
+  const toolConfig = {
+    driver_vehicle: {
+      src: "/static/img/accident_report/driver_vehicle.png",
+      label: "Driver Vehicle",
+      max: 1,
+      type: "vehicle"
+    },
+    other_vehicle_1: {
+      src: "/static/img/accident_report/other_vehicle.png",
+      label: "Other Vehicle",
+      max: 1,
+      type: "vehicle"
+    },
+    other_vehicle_2: {
+      src: "/static/img/accident_report/other_vehicle.png",
+      label: "Other Vehicle 2",
+      max: 1,
+      type: "vehicle"
+    },
+    pedestrian: {
+      src: "/static/img/accident_report/pedestrian.png",
+      label: "Pedestrian",
+      max: 6,
+      type: "object"
+    },
+    stop_sign: {
+      src: "/static/img/accident_report/stop_sign.png",
+      label: "Stop Sign",
+      max: 4,
+      type: "object"
+    },
+    yield_sign: {
+      src: "/static/img/accident_report/yield_sign.png",
+      label: "Yield",
+      max: 4,
+      type: "object"
+    },
+    railroad: {
+      src: "/static/img/accident_report/railroad_sign.png",
+      label: "Railroad",
+      max: 2,
+      type: "object"
+    },
+    red_x: {
+      src: "/static/img/accident_report/red_x.png",
+      label: "Point of Impact",
+      max: 2,
+      type: "object"
+    },
+    impact_head_on: {
+      src: "/static/img/accident_report/impact/impact_head_on.png",
+      label: "Head On",
+      max: 2,
+      type: "impact"
+    },
+    impact_object: {
+      src: "/static/img/accident_report/impact/impact_object.png",
+      label: "Object",
+      max: 2,
+      type: "impact"
+    },
+    impact_pedestrian: {
+      src: "/static/img/accident_report/impact/impact_pedestrian.png",
+      label: "Pedestrian Impact",
+      max: 2,
+      type: "impact"
+    },
+    impact_rear_end: {
+      src: "/static/img/accident_report/impact/impact_rear_end.png",
+      label: "Rear End",
+      max: 2,
+      type: "impact"
+    },
+    impact_side: {
+      src: "/static/img/accident_report/impact/impact_side.png",
+      label: "Side Impact",
+      max: 2,
+      type: "impact"
+    },
+    impact_truck_issue: {
+      src: "/static/img/accident_report/impact/impact_truck_issue.png",
+      label: "Truck Issue",
+      max: 2,
+      type: "impact"
+    }
+  };
+
+  if (accidentForm && sketchMap && sketchImageInput) {
+    accidentForm.addEventListener("submit", function (e) {
+      const isUnlockedEdit = accidentForm.dataset.editUnlocked === "true";
+
+      if (isUnlockedEdit) {
+        const editorName = prompt("Enter your name for the edit log:");
+        if (!editorName) {
+          e.preventDefault();
+          alert("Edit name is required.");
+          return;
+        }
+
+        const editorComment = prompt("Enter a short comment about what you changed:");
+        if (!editorComment) {
+          e.preventDefault();
+          alert("Edit comment is required.");
+          return;
+        }
+
+        document.getElementById("edit_resubmitter_name").value = editorName;
+        document.getElementById("edit_resubmitter_comment").value = editorComment;
+      }
+
+      // prevent submit if no sketch items
+      if (!placedItems || placedItems.length === 0) {
+        e.preventDefault();
+        alert("Please add at least one item to the accident sketch before submitting.");
+        return;
+      }
+      e.preventDefault();
+
+      html2canvas(sketchMap, {
+        backgroundColor: null,
+        useCORS: true
+      }).then((canvas) => {
+        sketchImageInput.value = canvas.toDataURL("image/png");
+        accidentForm.submit();
+      });
+    });
+  }
+
+  function syncSketchData() {
+    sketchDataInput.value = JSON.stringify(placedItems);
+  }
+
+  function clearActiveTool() {
+    activeTool = "";
+    sketchTools.forEach(btn => btn.classList.remove("active"));
+  }
+
+  function getNextDirection(direction) {
+    const directions = ["E", "SE", "S", "SW", "W", "NW", "N", "NE"];
+    const currentIndex = directions.indexOf(direction);
+    return directions[(currentIndex + 1) % directions.length];
+  }
+
+  function getVehicleTransform(direction) {
+    const map = {
+      E:  "rotate(0deg) scaleX(1)",
+      SE: "rotate(45deg) scaleX(1)",
+      S:  "rotate(90deg) scaleX(1)",
+      SW: "rotate(45deg) scaleX(-1)",
+      W:  "rotate(0deg) scaleX(-1)",
+      NW: "rotate(-45deg) scaleX(-1)",
+      N:  "rotate(-90deg) scaleX(1)",
+      NE: "rotate(-45deg) scaleX(1)"
+    };
+
+    return map[direction] || "rotate(0deg) scaleX(1)";
+  }
+
+  function getMapPercentPosition(clientX, clientY) {
+    const rect = sketchMap.getBoundingClientRect();
+
+    let x = ((clientX - rect.left) / rect.width) * 100;
+    let y = ((clientY - rect.top) / rect.height) * 100;
+
+    x = Math.max(0, Math.min(100, x));
+    y = Math.max(0, Math.min(100, y));
+
+    return {
+      x: Number(x.toFixed(2)),
+      y: Number(y.toFixed(2))
+    };
+  }
+
+  function renderMarkers() {
+    sketchMarkers.innerHTML = "";
+
+    placedItems.forEach((item, itemIndex) => {
+      const marker = document.createElement("div");
+      marker.className = "placed-marker";
+
+      if (itemIndex === selectedItemIndex) {
+        marker.classList.add("selected");
+      }
+
+      marker.style.position = "absolute";
+      marker.style.left = `${item.x}%`;
+      marker.style.top = `${item.y}%`;
+      marker.style.transform = "translate(-50%, -50%)";
+      marker.style.pointerEvents = "auto";
+      marker.style.cursor = "pointer";
+
+      marker.addEventListener("mousedown", function (e) {
+        e.stopPropagation();
+        selectedItemIndex = itemIndex;
+        dragItemIndex = itemIndex;
+        isDraggingMarker = true;
+        dragMoved = false;
+      });
+
+      marker.addEventListener("touchstart", function (e) {
+        e.stopPropagation();
+        selectedItemIndex = itemIndex;
+        dragItemIndex = itemIndex;
+        isDraggingMarker = true;
+        dragMoved = false;
+      }, { passive: true });
+
+      const img = document.createElement("img");
+      img.src = toolConfig[item.tool].src;
+      img.alt = toolConfig[item.tool].label;
+      img.style.display = "block";
+      const isMobile = window.innerWidth <= 640;
+
+      img.style.width =
+        item.type === "vehicle"
+          ? (isMobile ? "35px" : "60px")
+          : (isMobile ? "25px" : "42px");
+      img.style.height = "auto";
+      if (item.type === "vehicle") {
+        img.style.transform = getVehicleTransform(item.direction || "E");
+        img.style.transformOrigin = "center center";
+      }
+
+      marker.appendChild(img);
+      marker.addEventListener("click", function (e) {
+        e.stopPropagation();
+        selectedItemIndex = itemIndex;
+
+        if (item.type === "vehicle") {
+          placedItems[itemIndex].direction = getNextDirection(item.direction || "E");
+        }
+
+        renderMarkers();   // 👈 ADD THIS
+        syncSketchData();
+      });
+
+      sketchMarkers.appendChild(marker);
+    });
+  }
+
+  function moveDraggedMarker(clientX, clientY) {
+    if (!isDraggingMarker) return;
+    if (dragItemIndex < 0 || dragItemIndex >= placedItems.length) return;
+
+    const pos = getMapPercentPosition(clientX, clientY);
+    placedItems[dragItemIndex].x = pos.x;
+    placedItems[dragItemIndex].y = pos.y;
+
+    dragMoved = true;
+    renderMarkers();
+    syncSketchData();
+  }
+
+  document.addEventListener("mousemove", function (e) {
+    moveDraggedMarker(e.clientX, e.clientY);
+  });
+
+  document.addEventListener("touchmove", function (e) {
+    if (!isDraggingMarker) return;
+    if (!e.touches || !e.touches.length) return;
+
+    e.preventDefault();
+    moveDraggedMarker(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: false });
+
+  document.addEventListener("mouseup", function () {
+    isDraggingMarker = false;
+    dragItemIndex = -1;
+  });
+
+  document.addEventListener("touchend", function () {
+    isDraggingMarker = false;
+    dragItemIndex = -1;
+  });
+
+  function countPlaced(toolName) {
+    return placedItems.filter(item => item.tool === toolName).length;
+  }
+
+  sketchTools.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const toolName = btn.dataset.tool;
+
+      if (activeTool === toolName) {
+        clearActiveTool();
+        return;
+      }
+
+      activeTool = toolName;
+      sketchTools.forEach(x => x.classList.remove("active"));
+      btn.classList.add("active");
+    });
+  });
+
+  sketchMap.addEventListener("click", function (e) {
+    if (!activeTool) return;
+    if (e.target.closest(".sketch-tool")) return;
+
+    const config = toolConfig[activeTool];
+    if (!config) return;
+
+    if (countPlaced(activeTool) >= config.max) {
+      clearActiveTool();
+      return;
+    }
+
+    const rect = sketchMap.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+    placedItems.push({
+      tool: activeTool,
+      type: config.type,
+      x: Number(x.toFixed(2)),
+      y: Number(y.toFixed(2)),
+      direction: config.type === "vehicle" ? "E" : ""
+    });
+
+    renderMarkers();
+    syncSketchData();
+    clearActiveTool();
+    });
+
+    if (removeSelectedSketchBtn) {
+      removeSelectedSketchBtn.addEventListener("click", function () {
+        if (selectedItemIndex < 0 || selectedItemIndex >= placedItems.length) return;
+
+        placedItems = placedItems.filter((_, i) => i !== selectedItemIndex);
+        selectedItemIndex = -1;
+        renderMarkers();
+        syncSketchData();
+      });
+    }
+
+  if (clearSketchBtn) {
+    clearSketchBtn.addEventListener("click", function () {
+      placedItems = [];
+      selectedItemIndex = -1;
+      renderMarkers();
+      syncSketchData();
+      clearActiveTool();
+    });
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      const tag = e.target.tagName.toLowerCase();
+
+      // allow enter in textarea only
+      if (tag !== "textarea") {
+        e.preventDefault();
+      }
+    }
+  });
+
+  // 🔥 LOAD SAVED SKETCH (THIS IS THE MISSING PIECE)
+  if (sketchDataInput && sketchDataInput.value) {
+    try {
+      placedItems = JSON.parse(sketchDataInput.value);
+      renderMarkers();
+    } catch (error) {
+      console.error("Could not reload saved sketch:", error);
+    }
+  }
+
+  syncSketchData();
+
+    // 🔒 VIEW MODE - disable all fields
+  const isViewMode = {{ 'true' if view_mode else 'false' }};
+
+  if (isViewMode) {
+    const form = document.querySelector(".accident-form");
+
+    if (form) {
+      const fields = form.querySelectorAll("input, textarea, select, button");
+
+      fields.forEach(field => {
+        // don't disable hidden inputs
+        // don't disable lookup form
+        if (
+          field.type !== "hidden" &&
+          !field.closest("form[action='/accident-report-lookup']")
+        ) {
+          field.disabled = true;
+        }
+      });
+    }
+  }
+
+  // 🔓 UNLOCK EDIT
+  const unlockBtn = document.getElementById("unlock-edit-btn");
+
+  if (unlockBtn) {
+    unlockBtn.addEventListener("click", async function () {
+      const pw = prompt("Enter edit password:");
+      if (!pw) return;
+
+      try {
+        const res = await fetch("/unlock-accident-report", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ password: pw })
+        });
+
+        if (res.ok) {
+          const form = document.querySelector(".accident-form");
+
+          if (form) {
+            form.classList.remove("view-mode");
+            form.dataset.editUnlocked = "true";
+
+            const fields = form.querySelectorAll("input, textarea, select, button");
+
+            fields.forEach(field => {
+              if (field.type !== "hidden") {
+                field.disabled = false;
+              }
+            });
+          }
+
+          alert("Edit mode unlocked");
+        } else {
+          alert("Incorrect password");
+        }
+
+      } catch (err) {
+        console.error(err);
+        alert("Error unlocking edit mode");
+      }
+    });
+  }
+})();
+</script>
+
+{% endblock %}

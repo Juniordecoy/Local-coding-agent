@@ -1,0 +1,104 @@
+{% extends "or_base.html" %}
+
+{% block content %}
+<div class="or-page">
+  <div class="or-card">
+
+    <div class="or-board-head">
+      <h2>Unit Log</h2>
+
+      <button class="portal-btn btn-dark" type="button" id="openUnitModal">
+        + Add Unit
+      </button>
+    </div>
+
+    <div class="or-table-wrap">
+      <table class="or-table">
+        <thead>
+          <tr>
+            <th>Unit #</th>
+            <th>Status</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Storage Location</th>
+            <th>Current Driver</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for unit in unit_rows %}
+            <tr>
+              <td>{{ unit.unit_number }}</td>
+              <td>{{ unit.status }}</td>
+              <td>{{ unit.city }}</td>
+              <td>{{ unit.state }}</td>
+              <td>{{ unit.storage_location }}</td>
+              <td>{{ unit.current_driver }}</td>
+              <td>{{ unit.notes }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<div id="unitModal" class="or-modal">
+  <div class="or-modal-box">
+
+    <div class="or-modal-header">
+      <h2>Add Unit</h2>
+
+      <button type="button" class="or-modal-close" id="closeUnitModal">
+        ×
+      </button>
+    </div>
+
+    <form method="POST" action="{{ url_for('or_add_unit') }}">
+
+      <label>Unit #</label>
+      <input type="text" name="unit_number" required>
+
+      <label>Status</label>
+      <select name="status" required>
+        <option value="Available">Available</option>
+        <option value="In Use">In Use</option>
+        <option value="Storage">Storage</option>
+        <option value="Shop">Shop</option>
+        <option value="Not Available">Not Available</option>
+      </select>
+
+      <label>City</label>
+      <input type="text" name="city">
+
+      <label>State</label>
+      <input type="text" name="state" maxlength="2">
+
+      <label>Storage Location</label>
+
+      <select name="storage_location">
+        <option value="">Select Storage</option>
+
+        {% for storage in storage_locations %}
+          <option value="{{ storage.name }}">
+            {{ storage.name }} - {{ storage.city }}, {{ storage.state }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <label>Notes</label>
+      <textarea name="notes" rows="3"></textarea>
+
+      <div class="or-modal-actions">
+        <button type="submit" class="portal-btn btn-dark">
+          Save Unit
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}

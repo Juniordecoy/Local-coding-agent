@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Dan Kelly Voting{% endblock %}
+
+{% block content %}
+<div class="dkv-wrap">
+  <div class="panel">
+
+    <h1 class="dkv-title">{{ page_title }}</h1>
+    <div class="dkv-sub">{{ page_subtitle_1 }}</div>
+    <div class="dkv-sub">{{ page_subtitle_2 }}</div>
+
+    {% if submitted %}
+      <div class="success-msg">Thanks — your vote was submitted.</div>
+    {% endif %}
+
+    <form method="POST" class="ojt-form">
+      <div class="ojt-grid-2">
+        <div class="field">
+          <label for="your_name"><span class="req"></span>Name</label>
+          <input id="your_name" name="your_name" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="email"><span class="req"></span>Email Address</label>
+          <input id="email" name="email" type="text" required>
+        </div>
+      </div>
+
+      <div class="dkv-label">* Images</div>
+
+      <div class="dkv-list">
+        {% for p in photos %}
+          <label class="dkv-card">
+            <input class="dkv-radio" type="radio" name="vote_choice" value="{{ p.id }}" required>
+            <div class="dkv-photo">
+              <img src="{{ url_for('static', filename=p.src) }}" alt="Photo {{ p.id }}">
+            </div>
+            <div class="dkv-id">{{ p.id }}</div>
+          </label>
+        {% endfor %}
+      </div>
+
+      <div style="position:absolute; left:-9999px;">
+        <input type="text" name="do_not_fill" autocomplete="off">
+      </div>
+
+      <button class="dkv-submit" type="submit">Submit Vote</button>
+    </form>
+
+  </div>
+</div>
+{% endblock %}

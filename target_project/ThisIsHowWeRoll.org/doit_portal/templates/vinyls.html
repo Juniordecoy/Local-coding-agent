@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Vinyls{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Vinyls</h2>
+
+  <div class="btn-stack">
+
+    <a class="btn-pill"
+      href="{{ url_for('ourvinylsystem') }}">
+      Our Vinyl System
+    </a>
+
+    <a class="btn-pill"
+      href="{{ url_for('vinyltroubleshooting') }}">
+      Trouble shooting your vinyls
+    </a>
+
+    <a class="btn-pill"
+      href="{{ url_for('perfectvinyls') }}">
+      How your vinyls should look
+    </a>
+
+  </div>
+
+</section>
+{% endblock %}

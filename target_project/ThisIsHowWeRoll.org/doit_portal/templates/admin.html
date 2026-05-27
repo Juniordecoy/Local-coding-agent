@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block title %}Admin | Do It Outdoors{% endblock %}
+
+{% block content %}
+<section class="panel admin-panel">
+  <h1 class="panel-title">Admin Tools</h1>
+  <p class="admin-subtext">Internal tools page.</p>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <div class="admin-stats">
+    <div class="admin-card">
+      <div class="admin-card-label">Total Submissions</div>
+      <div class="admin-card-value">{{ summary.total_submissions }}</div>
+    </div>
+
+    <div class="admin-card">
+      <div class="admin-card-label">Today</div>
+      <div class="admin-card-value">{{ summary.today_submissions }}</div>
+    </div>
+
+    <div class="admin-card">
+      <div class="admin-card-label">Last 7 Days</div>
+      <div class="admin-card-value">{{ summary.week_submissions }}</div>
+    </div>
+
+    <div class="admin-card">
+      <div class="admin-card-label">Failed Emails</div>
+      <div class="admin-card-value">{{ summary.failed_submissions }}</div>
+    </div>
+
+    <div class="admin-card">
+      <div class="admin-card-label">Emails with photos</div>
+      <div class="admin-card-value">{{ summary.with_attachments }}</div>
+    </div>
+  </div>
+
+  <div class="admin-section">
+    <h2 class="admin-section-title">Top Forms</h2>
+
+    {% if summary.top_forms %}
+      <div class="admin-top-forms">
+        {% for form_name, count in summary.top_forms %}
+          <div class="admin-top-form-row">
+            <span class="admin-top-form-name">{{ form_name }}</span>
+            <span class="admin-top-form-count">{{ count }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="admin-empty">No log data yet.</p>
+    {% endif %}
+  </div>
+
+  <div class="admin-actions-wrap admin-grid">
+
+    <!-- 1 (full width) -->
+    <form method="POST" class="admin-actions full-width">
+      <input type="hidden" name="action" value="download_quiz_log">
+      <label for="quiz_id" class="admin-label">Monthly Quiz Log</label>
+      <select name="quiz_id" id="quiz_id" class="admin-select" required>
+        <option value="">Select Month</option>
+        {% for option in quiz_options %}
+          <option value="{{ option.value }}">{{ option.label }}</option>
+        {% endfor %}
+      </select>
+
+      <button type="submit" class="portal-btn btn-dark">
+        Download Quiz Log
+      </button>
+    </form>
+
+    <!-- 2 -->
+    <form method="POST" class="admin-actions">
+      <input type="hidden" name="action" value="download_main_log">
+      <button type="submit" class="portal-btn btn-dark">
+        Download Log CSV
+      </button>
+    </form>
+
+    <!-- 3 -->
+    <form method="POST" class="admin-actions">
+      <input type="hidden" name="action" value="download_security_log">
+      <button type="submit" class="portal-btn btn-dark">
+        Download Security Log
+      </button>
+    </form>
+
+    <!-- 4 -->
+    <div class="admin-actions">
+      <a class="portal-btn btn-dark" href="{{ url_for('merge_pdfs') }}">
+        Merge PDFs
+      </a>
+    </div>
+
+    <!-- 5
+    <form method="POST" class="admin-actions">
+      <input type="hidden" name="action" value="resend_failed">
+
+      <label for="email_id" class="admin-label">Re-send Failed Email</label>
+      <input
+        type="text"
+        name="email_id"
+        id="email_id"
+        class="admin-select"
+        placeholder="Enter email_id"
+        required
+      >
+      <button type="submit" class="portal-btn btn-dark">
+        Re-send by Email ID
+      </button>
+    </form>  -->
+
+    <!-- 6 -->
+    <form action="/admin/download-accident-report-log" method="GET" class="admin-actions">
+      <button type="submit" class="portal-btn btn-dark">Download Accident Report Log</button>
+    </form>
+
+    <div class="admin-actions">
+      <a href="{{ url_for('or_login') }}" class="portal-btn btn-dark">
+        Occupancy Report Area
+      </a>
+    </div>
+
+    <form method="POST" class="admin-actions">
+      <input type="hidden" name="action" value="download_return_checklist_log">
+      <button type="submit" class="portal-btn btn-dark">
+        Download Truck Return Checklist Log
+      </button>
+    </form>
+  </div>
+
+</section>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block title %}February Safety Quiz{% endblock %}
+
+{% block content %}
+
+<section class="panel">
+
+  <h2 class="panel-title">February 2026 Safety Quiz</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your quiz was submitted.</div>
+  {% endif %}
+
+    <form method="POST" class="quiz-form">
+
+    <div class="two-col">
+
+    <div>
+
+    <div class="field">
+      <label for="your_name"><span class="req"></span> Your name</label>
+      <input id="your_name" name="your_name" type="text" required>
+    </div>
+
+    <div class="field">
+      <label for="email"><span class="req"></span> Email</label>
+      <input id="email" name="email" type="text" required>
+    </div>
+
+    </div>
+
+    <div class="hq-q">
+      <p><strong>1. Why is proper sleep important for truck drivers?</strong></p>
+
+      <label><input type="radio" name="q1" value="a" required> A. It improves radio reception</label>
+      <label><input type="radio" name="q1" value="b"> B. It reduces fatigue and reaction time delays</label>
+      <label><input type="radio" name="q1" value="c"> C. It lowers fuel costs</label>
+      <label><input type="radio" name="q1" value="d"> D. It keeps tires from wearing out</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>2. What is a common sign of driver fatigue?</strong></p>
+
+      <label><input type="radio" name="q2" value="a" required> A. Increased focus</label>
+      <label><input type="radio" name="q2" value="b"> B. Frequent yawning and drifting from lane</label>
+      <label><input type="radio" name="q2" value="c"> C. Faster reaction time</label>
+      <label><input type="radio" name="q2" value="d"> D. Improved memory</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>3. If you begin to feel drowsy while driving, you should:</strong></p>
+
+      <label><input type="radio" name="q3" value="a" required> A. Turn up the radio</label>
+      <label><input type="radio" name="q3" value="b"> B. Open a window</label>
+      <label><input type="radio" name="q3" value="c"> C. Safely pull over and rest</label>
+      <label><input type="radio" name="q3" value="d"> D. Speed up to finish faster</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>4. Why is regular stretching important for truck drivers?</strong></p>
+
+      <label><input type="radio" name="q4" value="a" required> A. It helps prevent muscle stiffness and injury</label>
+      <label><input type="radio" name="q4" value="b"> B. It increases fuel economy</label>
+      <label><input type="radio" name="q4" value="c"> C. It replaces required breaks</label>
+      <label><input type="radio" name="q4" value="d"> D. It improves GPS signal</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>5. Why is it important to take scheduled breaks during long drives?</strong></p>
+
+      <label><input type="radio" name="q5" value="a" required> A. To reduce fuel costs</label>
+      <label><input type="radio" name="q5" value="b"> B. To improve tire wear</label>
+      <label><input type="radio" name="q5" value="c"> C. To reduce fatigue and maintain alertness</label>
+      <label><input type="radio" name="q5" value="d"> D. To avoid traffic lights</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>6. A Medical Examiner’s Certificate verifies that a driver:</strong></p>
+
+      <label><input type="radio" name="q6" value="a" required> A. Has insurance</label>
+      <label><input type="radio" name="q6" value="b"> B. Owns the vehicle</label>
+      <label><input type="radio" name="q6" value="c"> C. Is medically qualified to operate a commercial vehicle</label>
+      <label><input type="radio" name="q6" value="d"> D. Completed training</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>7. What should a driver do if experiencing dizziness or chest pain while driving?</strong></p>
+
+      <label><input type="radio" name="q7" value="a" required> A. Ignore it</label>
+      <label><input type="radio" name="q7" value="b"> B. Finish the route</label>
+      <label><input type="radio" name="q7" value="c"> C. Safely pull over and seek medical attention</label>
+      <label><input type="radio" name="q7" value="d"> D. Drink coffee</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>8. Wearing your seatbelt while operating a commercial vehicle:</strong></p>
+
+      <label><input type="radio" name="q8" value="a" required> A. Is optional in most states</label>
+      <label><input type="radio" name="q8" value="b"> B. Is required and significantly reduces injury risk</label>
+      <label><input type="radio" name="q8" value="c"> C. Is only required on highways</label>
+      <label><input type="radio" name="q8" value="d"> D. Is not necessary at low speeds</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>9. Maintaining three points of contact when entering or exiting a truck helps prevent:</strong></p>
+
+      <label><input type="radio" name="q9" value="a" required> A. Traffic tickets</label>
+      <label><input type="radio" name="q9" value="b"> B. Fuel spills</label>
+      <label><input type="radio" name="q9" value="c"> C. Slips and falls</label>
+      <label><input type="radio" name="q9" value="d"> D. Tire damage</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>10. Healthy eating on the road helps drivers:</strong></p>
+
+      <label><input type="radio" name="q10" value="a" required> A. Reduce fatigue and maintain steady energy levels</label>
+      <label><input type="radio" name="q10" value="b"> B. Avoid required breaks</label>
+      <label><input type="radio" name="q10" value="c"> C. Drive longer hours</label>
+      <label><input type="radio" name="q10" value="d"> D. Eliminate inspections</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>11. What’s your personal reason for making safety a priority on the road?</strong></p>
+      <textarea name="q11" rows="3" required></textarea>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button type="submit" class="submit-btn">Submit Quiz</button>
+
+    </div>
+    </form>
+</section>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Cleaning the air cabin filter in the new gas units{% endblock %}
+
+{% block content %}
+
+<section class="panel">
+
+  <h1 class="panel-title">Cleaning the air cabin filter in the new gas units</h1>
+
+  <div class="hf-body">
+    <ul>
+      <li>The filter is located in the compartment just below the glove compartment.</li>
+      <li>To access, the glove compartment needs to be open so the lower panel can be removed.</li>
+      <li>2 clips/screws on the lower portion of the compartment below the glove compartment need to be removed.</li>
+      <li>The clips must be loosened enough to get a flat head screw driver behind the clips to gently pop the clip off.</li>
+      <li>The entire lower compartment panel is then removed.</li>
+      <li>Filter is located just above the Black blower motor labeled “Denso 462/12V.”</li>
+      <li>It slides out like the ones in the other units.</li>
+    </ul>
+  </div>
+
+  <div class="dk-gallery">
+    <img src="{{ url_for('static', filename='img/maintenance/gas_filter_1.jpg') }}"
+         alt="Gas air cabin filter step 1">
+    <img src="{{ url_for('static', filename='img/maintenance/gas_filter_2.jpg') }}"
+         alt="Gas air cabin filter step 2">
+    <img src="{{ url_for('static', filename='img/maintenance/gas_filter_3.jpg') }}"
+         alt="Gas air cabin filter step 3">
+    <img src="{{ url_for('static', filename='img/maintenance/gas_filter_4.jpg') }}"
+         alt="Gas air cabin filter step 4">
+  </div>
+
+</section>
+
+{% endblock %}

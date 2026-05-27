@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container" style="max-width: 400px; margin: 60px auto; text-align: center;">
+
+    <h2 style="margin-bottom: 20px;">Occupancy Report</h2>
+    <p style="margin-bottom: 20px;">Enter password to continue</p>
+
+    {% if error %}
+        <p style="color: red; margin-bottom: 15px;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <input 
+            type="password" 
+            name="password" 
+            placeholder="Enter Password" 
+            required
+            style="width: 100%; padding: 10px; margin-bottom: 15px;"
+        >
+
+        <button type="submit" class="portal-btn btn-dark" style="width: 100%;">
+            Enter
+        </button>
+    </form>
+
+</div>
+{% endblock %}

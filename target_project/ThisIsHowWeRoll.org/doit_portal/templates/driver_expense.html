@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Driver Expense Form{% endblock %}
+
+{% block content %}
+<div class="panel">
+  <h1 class="page-title">Online Driver Expense Form</h1>
+
+  <div class="forms-text">
+    <p><strong>Click link below</strong></p>
+
+    <ul>
+      <li>
+        (If using your phone, you <strong>MUST</strong> select
+        <span class="forms-red">"Continue in Browser"</span>)
+      </li>
+      <li>Enter Name and Email Address to open the form</li>
+      <li>Enter First and Last Name</li>
+      <li>
+        Enter first receipt Date, Paid To, Purpose/City-State / Unit #, Job/Campaign and Receipt Amount
+        <ul>
+          <li>Choose column for Comdata if funds were withdrawn</li>
+          <li>Choose Personal Cash column if paid “out of pocket”</li>
+        </ul>
+      </li>
+      <li>Repeat for additional receipts as needed</li>
+      <li>Click on Signature to Sign</li>
+      <li>Click on Done (top right corner) to submit</li>
+    </ul>
+  </div>
+
+  <div class="forms-btnwrap">
+    <!-- Placeholder link for now -->
+    <a class="btn-pill btn-wide" href="https://pdf.ac/9JwDB6" target="_blank" rel="noopener">
+      Driver Expense form (digital)
+    </a>
+  </div>
+</div>
+{% endblock %}

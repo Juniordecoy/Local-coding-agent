@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Insurance Info{% endblock %}
+
+{% block content %}
+<div class="panel">
+  <h1 class="page-title">Insurance Cards</h1>
+
+  <!-- 2-column button grid -->
+  <div class="btn-grid two-col">
+    <!-- Left column -->
+    <a class="panel-btn" href="{{ url_for('static', filename='pdfs/PA_insurance_cards.pdf') }}" target="_blank" rel="noopener">PA Trucks</a>
+    <a class="panel-btn" href="{{ url_for('static', filename='pdfs/NV_insurance_cards.pdf') }}" target="_blank" rel="noopener">NV Trucks</a>
+  </div>
+
+</div>
+{% endblock %}

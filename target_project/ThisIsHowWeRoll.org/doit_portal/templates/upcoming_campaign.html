@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block title %}Upcoming Campaign Questionnaire{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Upcoming Campaign Questionnaire</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your test was submitted.</div>
+  {% endif %}
+
+  <form class="ojt-form" method="POST" action="{{ url_for('upcoming_campaign') }}">
+
+    <!-- Top info row (matches your quiz style) -->
+      <div class="ojt-grid-2">
+        <div class="field">
+          <label for="your_name"><span class="req"></span>Your name</label>
+          <input id="your_name" name="your_name" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="email"><span class="req"></span>Email Address</label>
+          <input id="email" name="email" type="text" required>
+        </div>
+
+      </div>
+
+    <div class="quiz-block">
+      <label>* Who is your lead driver?</label>
+      <textarea name="q0_questions" rows="2" required></textarea>
+    </div>
+
+    <p class="quiz-note">
+      If you are not sure about any of the following questions, please reach out to your lead driver for answers.
+    </p>
+
+    <div class="quiz-block">
+      <label>* 1. What is your campaign (client) name?</label>
+      <textarea name="q1_questions" rows="3" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 2. Where is your campaign located? (City and State)</label>
+      <textarea name="q2_questions" rows="3" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 3. What date and time does your campaign start?</label>
+      <textarea name="q3_questions" rows="3" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 4. How are you getting there? (Flight / Rental / Mobile Billboard / Other)</label>
+      <textarea name="q4_questions" rows="3" required></textarea>
+    </div>
+
+    <fieldset class="quiz-block">
+      <legend>* 5. Will you need a Market 2 Market (travel) hotel?</legend>
+
+      <label class="radio-row">
+        <input type="radio" name="q5_m2m_hotel" value="Yes" required>
+        A. Yes
+      </label>
+
+      <label class="radio-row">
+        <input type="radio" name="q5_m2m_hotel" value="No">
+        B. No
+      </label>
+
+      <label class="radio-row">
+        <input type="radio" name="q5_m2m_hotel" value="I'm not sure">
+        C. I'm not sure
+      </label>
+    </fieldset>
+
+    <div class="quiz-block">
+      <label>* 6. What unit (mobile billboard) number will you be using for your campaign?</label>
+      <textarea name="q6_questions" rows="3" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 7. Do you know where the unit is located and how to access it?</label>
+      <textarea name="q7_questions" rows="3" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 8. Do you know how to log into the tablet? Including XRS and RoadNet?</label>
+      <textarea name="q8_questions" rows="3" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 9. Do you have your routing information?</label>
+      <textarea name="q9_questions" rows="3" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 10. Do you have your hotel information? (If applicable)</label>
+      <textarea name="q10_questions" rows="3" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 11. Do you know when/where your vinyls are being delivered?</label>
+      <textarea name="q11_questions" rows="3" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 12. When and where do you need to send POSTING photos?</label>
+      <textarea name="q12_questions" rows="3" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 13. When are your first set of CAMPAIGN photos due?</label>
+      <textarea name="q13_questions" rows="3" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 14. Do you have any questions regarding your upcoming campaign?</label>
+      <textarea name="q14_questions" rows="3" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 15. What excites you most about your upcoming campaign?</label>
+      <textarea name="q15_excited" rows="3" required></textarea>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+        <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button class="submit-btn" type="submit">Submit</button>
+  </form>
+</section>
+{% endblock %}

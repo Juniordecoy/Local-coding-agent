@@ -1,0 +1,301 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="panel">
+  <div class="ucr-header">
+    <h1 class="ucr-title">UCR - Unit Condition Report</h1>
+    <p class="ucr-subtitle">To be completed anytime you pick up or drop off a vehicle</p>
+  </div>
+
+  {% if submitted %}
+    <div class="success-msg">✅ Submitted.</div>
+  {% endif %}
+
+  <form class="ucr-form" method="POST" enctype="multipart/form-data">
+    <!-- Top info -->
+    <div class="form-grid">
+      <div class="field">
+        <label for="name">* Name</label>
+        <input id="name" name="name" type="text" required>
+      </div>
+
+      <div class="field">
+        <label for="date_time">* Date and Time</label>
+        <input id="date_time" name="date_time" type="datetime-local" required>
+      </div>
+
+      <div class="field">
+        <label for="unit_number">* Unit Number</label>
+        <input id="unit_number" name="unit_number" type="text" required>
+      </div>
+
+      <div class="field">
+        <label for="current_mileage">* Current Mileage</label>
+        <input id="current_mileage" name="current_mileage" type="number" min="0" required>
+      </div>
+
+      <div class="field full">
+        <label for="email">* Email</label>
+        <input id="email" name="email" type="email" required>
+      </div>
+    </div>
+
+    <!-- Lead driver -->
+    <fieldset class="ucr-block">
+      <legend>* Who is your "Home Based" Lead Driver?</legend>
+      <div class="radio-grid">
+        {% for d in ["Jermaine Bridges","Carlos Villalobos","Mark Hooper","Robbie Lezama","Gary Rausin","Rene Santiago","Michael Morales","Cassandra Bell"] %}
+          <label class="radio">
+            <input type="radio" name="lead_driver" value="{{ d }}" required>
+            <span>{{ d }}</span>
+          </label>
+        {% endfor %}
+      </div>
+    </fieldset>
+
+    <!-- Doing with unit -->
+    <fieldset class="ucr-block">
+      <legend>* What are you doing with this unit?</legend>
+      <div class="radio-row">
+        {% for x in ["Picking up","Dropping off","Monthly Check"] %}
+          <label class="radio">
+            <input type="radio" name="unit_action" value="{{ x }}" required>
+            <span>{{ x }}</span>
+          </label>
+        {% endfor %}
+      </div>
+    </fieldset>
+
+    <!-- DOT -->
+    <div class="form-grid">
+      <div class="field">
+        <label for="inspection_exp">* DOT/PA inspection expiration date</label>
+        <input id="inspection_exp" name="inspection_exp" type="date" required>
+      </div>
+
+      <fieldset class="field">
+        <legend>* DOT credential type</legend>
+        <div class="radio-row">
+          {% for x in ["Sticker","Paperwork","Both","None"] %}
+            <label class="radio">
+              <input type="radio" name="dot_credential_type" value="{{ x }}" required>
+              <span>{{ x }}</span>
+            </label>
+          {% endfor %}
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Condition questions (Yes/No) -->
+    <fieldset class="ucr-block">
+      <legend>* Is exterior in good condition?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="exterior_ok" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="exterior_ok" value="No" required><span>No - Insert comment below</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="ucr-block">
+      <legend>* Is interior in good condition? Does it have 13'6&quot; clearance sticker? Does it have a no smoking sticker?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="interior_ok" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="interior_ok" value="No" required><span>No - Insert comment below</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="ucr-block">
+      <legend>* Is rear of unit in good condition? Door functioning properly? Floor not rotted? “Do not enter beyond this point” sign?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="rear_ok" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="rear_ok" value="No" required><span>No - Insert comment below</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="ucr-block">
+      <legend>* Are the vinyl frame doors in good condition and functioning properly?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="frame_doors_ok" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="frame_doors_ok" value="No" required><span>No - Insert comment below</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="ucr-block">
+      <legend>* Are vinyl system pulleys and brackets in good condition?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="pulleys_ok" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="pulleys_ok" value="No" required><span>No - Insert comment below</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="ucr-block">
+      <legend>* Is the vinyl cable in good condition?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="cable_ok" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="cable_ok" value="No" required><span>No - Insert comment below</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="ucr-block">
+      <legend>* Is the vinyl pole in good working condition, including a functioning flashlight?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="pole_ok" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="pole_ok" value="No" required><span>No - Insert comment below</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="ucr-block">
+      <legend>* Corner caps + integrity of the mobile billboard box good?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="corner_caps_ok" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="corner_caps_ok" value="No" required><span>No - Insert comment below</span></label>
+      </div>
+    </fieldset>
+
+    <div class="form-grid">
+      <div class="field">
+        <label for="vinyl_clips">* How many vinyl clips are with the unit?</label>
+        <input id="vinyl_clips" name="vinyl_clips" type="number" min="0" value="0" required>
+      </div>
+    </div>
+
+    <fieldset class="ucr-block">
+      <legend>* Required tools for vinyls (pliers/hammer/flathead) present?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="tools_ok" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="tools_ok" value="No" required><span>No - Insert comment below</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="ucr-block">
+      <legend>* All 3 required safety items present (extinguisher, 3 triangles, spare fuses)?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="safety_ok" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="safety_ok" value="No" required><span>No - Insert comment below</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="ucr-block">
+      <legend>* Sufficient cleaning supplies?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="cleaning_ok" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="cleaning_ok" value="No" required><span>No - Insert comment below</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="ucr-block">
+      <legend>* Clean, solid, separate supply bins? No cracks/spills?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="bins_ok" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="bins_ok" value="No" required><span>No - Insert comment below</span></label>
+      </div>
+    </fieldset>
+
+    <!-- Merchants packet -->
+    <fieldset class="ucr-block">
+      <legend>Merchants packet (check ONLY items missing)</legend>
+      <div class="check-grid">
+        {% for x in ["Valid Registration","Valid Insurance Card","XRS Cab Card","Accident Form","Valid Fuel Card","DOT Exemption Form","Tow Acknowledgment Form"] %}
+          <label class="check">
+            <input type="checkbox" name="missing_items" value="{{ x }}">
+            <span>{{ x }}</span>
+          </label>
+        {% endfor %}
+      </div>
+    </fieldset>
+
+    <div class="form-grid">
+      <div class="field">
+        <label for="reg_exp">* Registration expiration</label>
+        <input id="reg_exp" name="reg_exp" type="date" required>
+      </div>
+      <div class="field">
+        <label for="ins_exp">* Insurance expiration</label>
+        <input id="ins_exp" name="ins_exp" type="date" required>
+      </div>
+    </div>
+
+    <fieldset class="ucr-block">
+      <legend>* Is tablet in good condition?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="tablet_ok" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="tablet_ok" value="No" required><span>No - Insert comment below</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="ucr-block">
+      <legend>* OBD port: if picking up plug in / if dropping off unplug?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="obd_ok" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="obd_ok" value="No" required><span>No</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="ucr-block">
+      <legend>* Additional spare key in the appropriate spot?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="spare_key_ok" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="spare_key_ok" value="No" required><span>No - Insert comment below</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset class="ucr-block">
+      <legend>* Fully SANITIZED unit according to policy?</legend>
+      <div class="radio-row">
+        <label class="radio"><input type="radio" name="sanitized" value="Yes" required><span>Yes</span></label>
+        <label class="radio"><input type="radio" name="sanitized" value="No" required><span>No</span></label>
+      </div>
+    </fieldset>
+
+    <div class="field">
+      <label for="comments">Insert any comments here</label>
+      <textarea id="comments" name="comments" rows="5" placeholder="Type comments..."></textarea>
+    </div>
+
+    <!-- ONE upload button, multiple photos -->
+    <div class="ucr-upload">
+      <label class="upload-btn">
+        <input type="file" id="ucr_photos" name="ucr_photos" accept="image/*" multiple>
+        <span>📎 Attach UCR photos (multiple)</span>
+      </label>
+      <p class="upload-note">You can select multiple photos at once.</p>
+
+      <div id="ucr-file-list" class="upload-file-list"></div>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+
+    <div class="ucr-actions">
+      <button class="ucr-submit" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  (function () {
+    const input = document.getElementById("ucr_photos");
+    const fileList = document.getElementById("ucr-file-list");
+
+    if (!input || !fileList) return;
+
+    input.addEventListener("change", function () {
+      const files = Array.from(input.files || []);
+
+      if (!files.length) {
+        fileList.innerHTML = "";
+        return;
+      }
+
+      fileList.innerHTML = `
+        <p><strong>Selected files:</strong></p>
+        <ul>
+          ${files.map(file => `<li>${file.name}</li>`).join("")}
+        </ul>
+      `;
+    });
+  })();
+</script>
+
+{% endblock %}

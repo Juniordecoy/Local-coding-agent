@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}Week 2 Post Hire Test{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Week 2 Post Hire Test</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your test was submitted.</div>
+  {% endif %}
+
+  <form class="quiz-form" method="POST" action="{{ url_for('week_test', week=2) }}">
+
+    <div class="photo-grid">
+      <div class="field">
+        <label for="your_name"><span class="req"></span> Your name</label>
+        <input id="your_name" name="your_name" type="text" required>
+      </div>
+
+      <div class="field">
+        <label for="email"><span class="req"></span> Email</label>
+        <input id="email" name="email" type="text" required>
+      </div>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* Who is your "Mentor" Lead Driver?</label>
+
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Mark Hooper" required> Mark Hooper</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Jermaine Bridges"> Jermaine Bridges</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Gary Rausin"> Gary Rausin</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Rene Santiago"> Rene Santiago</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Carlos Villalobos"> Carlos Villalobos</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Robbie Lezama"> Robbie Lezama</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Cassandra Bell"> Cassandra Bell</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Michael Morales"> Michael Morales</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 1. What is the # 1 goal of do it outdoors media?</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="A" required> A. Present the cleanest mobile billboard to the client</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="B"> B. Be the # 1 mobile billboard advertising company in the US</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="C"> C. For our drivers to be on time, and on the route, where they are supposed to be</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="D"> D. For our drivers to be professional and pleasant to the public and the client</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 2. A Unit Condition Report (UCR) needs to be completed when:</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="A" required> A. You are picking up a vehicle to use for a campaign</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="B"> B. Transferring from one unit to another</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="C"> C. Dropping off a vehicle to storage, a main hub, or a shop after a campaign</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="D"> D. Monthly, if you are in the truck &gt; 30 days</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="E"> E. All of the above</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 3. When is cell phone use permitted while operating a Mobile Advertising Vehicle (MAV) or company rental car?</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="A" required> A. Any time, as long as using a hands-free device</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="B"> B. Never</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="C"> C. Only when you are stopped in traffic, and using a hands-free device</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 4. How do you log into Roadnet?</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="A" required> A. Email address and password created by OPS</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="B"> B. Your 6-digit employee number and password created by you</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="C"> C. After your pre-trip, it auto-switches to Roadnet—tap the curved arrow to refresh, select the correct route and date, then tap Load Route</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="D"> D. The driver ID given to you on the routing document</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 5. How do you submit campaign photos?</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="A" required> A. Upload via ShareFile according to the photo schedule</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="B"> B. Text them to your Lead Driver</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="C"> C. Both A. and B.</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 6. If your scheduled start time is 9:00 a.m., when must you be in your overall routing area (geofence)?</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="A" required> A. 8:30 a.m.</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="B"> B. 8:45 a.m.</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="C"> C. 9:00 a.m.</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="D"> D. 9:15 a.m.</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="E"> E. 9:30 a.m.</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 7. Your log book, whether digital or paper, should always reflect the time zone of your home terminal (York, PA).</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="True" required> A. True</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="False"> B. False</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 8. How do you clock in and/or change Labor Codes on the Paylocity app?</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="A" required> A. Don’t worry about clocking in, they’ll see you’re working and know what you’re doing.</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="B"> B. Always use the TRANSFER function when clocking in and select the correct Labor Code.</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="C"> C. Always use the TRANSFER function when changing Labor Codes.</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="D"> D. Both B. and C.</label>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+
+  </form>
+
+</section>
+{% endblock %}

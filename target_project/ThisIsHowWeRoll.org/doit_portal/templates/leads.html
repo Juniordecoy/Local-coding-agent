@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="page leads-page">
+  <div class="panel leads-card">
+
+    <h1 class="page-title">LEAD DRIVERS!</h1>
+
+    <div class="leads-buttons">
+
+      <!-- <div class="leads-row two">
+        <a class="lead-btn lead-btn-red" href="{{ url_for('lead_applicant_feedback') }}">Lead Driver Applicant Ratings</a>
+      </div> -->
+
+      <div class="leads-row one">
+        <a class="lead-btn lead-btn-gray wide" href="{{ url_for('lead_shop') }}">Lead Driver Polo Shirt Orders</a>
+        <a class="lead-btn lead-btn-red" href="{{ url_for('driver_feedback') }}">Driver Evaluation Feedback</a>
+      </div>
+
+      <div class="leads-row two">
+        <a class="lead-btn lead-btn-gray" href="{{ url_for('static', filename='pdfs/temp_training_sop.pdf') }}" target="_blank"
+           rel="noopener">Temp Driver Training SOP</a>
+        <a class="lead-btn lead-btn-gray" href="https://app.animaker.com/animo/BKPp4UzPJZ2CNpfE/">Temp Driver Training Video</a>
+      </div>
+
+      <div class="leads-row two small">
+        <a class="lead-btn lead-btn-gray" href="{{ url_for('static', filename='pdfs/active_drivers.pdf') }}" target="_blank"
+           rel="noopener">Active Drivers List!</a>
+        <a class="lead-btn lead-btn-gray" href="{{ url_for('static', filename='pdfs/ojt_checklist.pdf') }}" target="_blank"
+           rel="noopener">OJT Checklist PRINT</a>
+      </div>
+
+      <div class="leads-row two small">
+        <a class="lead-btn lead-btn-gray" href="{{ url_for('static', filename='pdfs/storage_locations.pdf') }}" target="_blank"
+           rel="noopener">Storage Location List</a>
+        <a class="lead-btn lead-btn-gray" href="{{ url_for('static', filename='pdfs/spot_check_form_2025.pdf') }}" target="_blank"
+           rel="noopener">Spot Check Form</a>
+      </div>
+
+      <div class="leads-row one">
+        <!-- <a class="lead-btn lead-btn-gray wide" href="">Deactivated - Lead Driver Harassment Training</a> -->
+      </div>
+
+      <div class="leads-row two">
+        <a class="lead-btn lead-btn-red" href="{{ url_for('ojt_checklist') }}">OJT Checklist SUBMIT</a>
+        <a class="lead-btn lead-btn-red" href="{{ url_for('contactreport') }}">Driver Feedback / Contact Report</a>
+      </div>
+
+    </div>
+
+    <!-- Optional image at bottom (swap src to your static path) -->
+    <div class="leads-image">
+      <img src="{{ url_for('static', filename='img/lead_drivers_image.jpg') }}" alt="Do It Outdoors" />
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Vehicle Info{% endblock %}
+
+{% block content %}
+<div class="panel">
+  <h1 class="page-title">Vehicle Info</h1>
+
+  <!-- Top wide button -->
+  <div class="btn-grid one-col" style="padding-bottom: 20px">
+    <a class="panel-btn danger btn-wide" href="{{ url_for('preferred_shops') }}">
+      Preferred Shops and Washes
+    </a>
+  </div>
+
+  <!-- 2-column button grid -->
+  <div class="btn-grid two-col">
+    <!-- Left column -->
+    <a class="panel-btn" href="{{ url_for('insurance') }}">Insurance Cards</a>
+    <a class="panel-btn" href="{{ url_for('static', filename='pdfs/maintenance_repair_guide.pdf') }}" target="_blank" rel="noopener">Maintenance Repair Guide</a>
+
+    <a class="panel-btn" href="{{ url_for('dot') }}">D.O.T. Info</a>
+    <a class="panel-btn" href="https://pdf.ac/PTFnDNdB" target="_blank" rel="noopener">Spotted Lanternfly Inspection</a>
+
+    <a class="panel-btn" href="{{ url_for('static', filename='pdfs/xrs_cab_card.pdf') }}" target="_blank" rel="noopener">XRS Cab Card</a>
+    <a class="panel-btn" href="{{ url_for('static', filename='pdfs/Fluid_Chart_Update.pdf') }}" target="_blank" rel="noopener">Fluid &amp; Chemical Chart</a>
+
+    <a class="panel-btn" href="{{ url_for('maintenance') }}">Maintenance Info</a>
+    <a class="panel-btn" href="{{ url_for('static', filename='pdfs/dot_exemption_form.pdf') }}" target="_blank" rel="noopener">DOT Exemption Form</a>
+  </div>
+
+  <!-- Bottom wide button -->
+  <div class="btn-grid one-col">
+    <a class="panel-btn" href="{{ url_for('static', filename='pdfs/Provision_DVR_Hardware_SOP.pdf') }}" target="_blank" rel="noopener">
+      Pro·Vision Setup SOP
+    </a>
+    <a class="panel-btn danger btn-wide" href="{{ url_for('static', filename='pdfs/Stop_tow_trucks_from_hitting_bridges_Flyer.pdf') }}" target="_blank" rel="noopener">
+      Tow Truck Bridge Warning
+    </a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends "or_base.html" %}
+
+{% block content %}
+
+<div class="or-page">
+
+  <div class="or-header-wrap">
+    <div class="or-header">
+      <div>
+        <h1>OR Testing Area</h1>
+        <p>Logistics dashboard environment</p>
+      </div>
+
+      <button class="portal-btn btn-dark" type="button" id="openCampaignModal">
+        + Add Schedule Entry
+      </button>
+    </div>
+  </div>
+
+  <div class="or-card">
+    <h2>Occupancy Report Overview for {{ today }}</h2>
+
+    <div class="or-table-wrap">
+      <table class="or-table">
+        <thead>
+          <tr>
+            <th>Unit #</th>
+            <th>Status</th>
+            <th>Driver</th>
+            <th>Campaign</th>
+            <th>Contract #</th>
+            <th>Market / City</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Run Days</th>
+            <th>Notes</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for row in schedule_rows %}
+            <tr>
+              <td>{{ row.unit }}</td>
+
+              <td><span class="or-badge available">Open</span></td> <!-- status -->
+
+              <td>{{ row.driver }}</td>
+              <td>{{ row.campaign }}</td>
+              <td>{{ row.contract_number or "—" }}</td>
+              <td>{{ row.city }}, {{ row.state }}</td>
+              <td>{{ row.start_date }}</td>
+              <td>{{ row.end_date }}</td>
+              <td>
+                {% if row.run_days %}
+                  {{ row.run_days | join(", ") }}
+                {% else %}
+                  —
+                {% endif %}
+              </td>
+              <td>{{ row.notes }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="or-action-btn edit-btn"
+                  data-id="{{ row.campaign_id }}"
+                  data-contract="{{ row.get('contract_number', '') }}"
+                  data-campaign="{{ row.campaign }}"
+                  data-city="{{ row.city }}"
+                  data-state="{{ row.state }}"
+                  data-start="{{ row.start_date }}"
+                  data-end="{{ row.end_date }}"
+                  data-days='{{ row.get("run_days", []) | tojson }}'
+                  data-notes="{{ row.notes }}"
+                >
+                  Edit
+                </button>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div id="campaignModal" class="or-modal">
+  <div class="or-modal-box">
+
+    <div class="or-modal-header">
+      <h2>Add Campaign</h2>
+      <button type="button" id="closeCampaignModal" class="or-modal-close">×</button>
+    </div>
+
+    <form method="POST" action="{{ url_for('or_add_campaign') }}">
+      <input type="hidden" name="campaign_id" id="campaign_id">
+      <label>Campaign Name</label>
+      <input type="text" name="campaign" required>
+
+      <label>Contract #</label>
+      <input type="text" name="contract_number" placeholder="12345">
+
+      <div class="or-field-row">
+        <div>
+          <label>Market / City</label>
+          <input type="text" name="city" placeholder="Miami" required>
+        </div>
+
+        <div>
+          <label>State</label>
+          <input type="text" name="state" placeholder="FL" maxlength="2" required>
+        </div>
+      </div>
+
+      <label>Start Date</label>
+      <input type="date" name="start_date" required>
+
+      <label>End Date</label>
+      <input type="date" name="end_date" required>
+
+      <label>Notes</label>
+      <textarea name="notes" rows="3"></textarea>
+
+      <div class="or-modal-actions">
+        <button type="submit" class="portal-btn btn-dark">
+          Save Edit
+        </button>
+
+        <button type="button" class="portal-btn btn-dark or-delete-btn" id="deleteCampaignBtn">
+          Delete
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+{% endblock %}

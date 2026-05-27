@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}Week 6 Post Hire Test{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Week 6 Post Hire Test</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your test was submitted.</div>
+  {% endif %}
+
+  <form class="quiz-form" method="POST" action="{{ url_for('week_test', week=6) }}">
+
+    <div class="photo-grid">
+      <div class="field">
+        <label for="your_name"><span class="req"></span> Your name</label>
+        <input id="your_name" name="your_name" type="text" required>
+      </div>
+
+      <div class="field">
+        <label for="email"><span class="req"></span> Email</label>
+        <input id="email" name="email" type="text" required>
+      </div>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* Who is your "Mentor" Lead Driver?</label>
+
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Mark Hooper" required> Mark Hooper</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Jermaine Bridges"> Jermaine Bridges</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Gary Rausin"> Gary Rausin</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Rene Santiago"> Rene Santiago</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Carlos Villalobos"> Carlos Villalobos</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Robbie Lezama"> Robbie Lezama</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Cassandra Bell"> Cassandra Bell</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Michael Morales"> Michael Morales</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 1. How do you log in to the XRS system?</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="A" required> A. Your personal email address and password you created</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="B"> B. Your 6-digit employee number and password you created</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="C"> C. Your email address and password created by OPS</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 2. When stopping at a weigh station, you are required to have the following with you:</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="A" required> A. Properly updated DOT logc</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="B"> B. Current DOT medical certification card</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="C"> C. Proof of valid insurance</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="D"> D. Valid vehicle registration</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="E"> E. Valid DOT inspection sticker or DOT documentation</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="F"> F. Valid Driver License</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="G"> G. All of the above</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 3. According to DOT Hours of Service rules, how many hours can you drive before a 10-hour off-duty reset is required?</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="A" required> A. 14</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="B"> B. 11</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="C"> C. 10</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="D"> D. 8</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 4. Who do you call if you are going to be late starting your campaign?</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="A" required> A. The client</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="B"> B. Your Lead Driver and/or the GPS Coordinator</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="C"> C. The Police</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="D"> D. Nobody - no one will know</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 5. What are the requirements for Posting Photos?</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="A" required> A. Upload to thisishowweroll.org > Upload Posting Photos</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="B"> B. Submit anytime after you start running</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="C"> C. Include both sides of the unit</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="D"> D. Submit before you start running, preferably the day before</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="E"> E. Both A. and B.</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="F"> F. A., C. and D.</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 6. What happens if you incur a moving violation while running a campaign, and the violation is sent to the company:</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="A" required> A. The company pays for it; ; no action needed from you</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="B"> B. The company pays the ticket, , but you must include the violation on your Annual Driver Certification</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="C"> C. The company may deduct it from your pay, and you must report it on your Annual Driver Certification</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 7. If you receive a notification about an upcoming campaign or event, it is your responsibility to:</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="A" required> A. Respond to the text/email ASAP, preferably same day</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="B"> B. Call the office</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="C"> C. Do nothing - they will assume you received and understand</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 8. What steps do you need to follow when you are arrive for a new campaign?</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="A" required> A. Check to make sure the vinyls received exactly match the Routing document</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="B"> B. Review the Routing and Calendar to be sure you start / stop on time</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="C"> C. Put up the vinyls and go run</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="D"> D. Both A. and B.</label>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+
+  </form>
+
+</section>
+{% endblock %}

@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block title %}Truck Return Checklist{% endblock %}
+
+{% block content %}
+
+<section class="page">
+  <div class="panel">
+      <h1>Truck Return Checklist</h1>
+
+      <form method="POST">
+
+        <div class="ojt-grid-2">
+          <div class="field">
+            <label>Unit Number</label>
+            <input type="text" name="unit_number">
+          </div>
+
+          <div class="field">
+            <label>Date</label>
+            <input type="date" name="checklist_date">
+          </div>
+        </div>
+
+        <p class="truck-check-note">
+          Please only checkmark items that are missing or need attention.
+        </p>
+
+        <div class="truck-checklist-grid">
+            <div class="truck-check-section">
+                <h3>Does Unit Have?</h3>
+                {% set unit_items = [
+                  "2 Sets of Keys",
+                  "4 Thumb Screws & L-Bracket",
+                  "Vinyl Pole",
+                  "Max Height Stickers",
+                  "Extra Fuses Bag (12 fuses)",
+                  "Fire Extinguisher",
+                  "Wheel Simulators",
+                  "Safety Triangles",
+                  "DOT/FMCSA Decal on Both Cab Doors",
+                  "Graphics on Backdoor",
+                  "X2 Storage Bins (Clips, Fluids)"
+                ] %}
+                {% for item in unit_items %}
+                  <label class="checkbox-row">
+                    <input type="checkbox" name="does_unit_have" value="{{ item }}">
+                    {{ item }}
+                  </label>
+                {% endfor %}
+                <div class="field">
+                  <label>Comments</label>
+                  <input type="text" name="comment_1">
+                </div>
+            </div>
+
+            <div class="truck-check-section">
+                <h3>Working Components</h3>
+                {% set working_items = [
+                  "Running Lights",
+                  "Billboard Lights",
+                  "Brake Lights",
+                  "Heater/A/C",
+                  "Tablet",
+                  "Inverter",
+                  "Vinyl System Inspection/Working",
+                  "Camera System Tested",
+                  "XRS System with Mount Installed",
+                  "Samsara",
+                  "Review under cab"
+                ] %}
+                {% for item in working_items %}
+                  <label class="checkbox-row">
+                    <input type="checkbox" name="working_components" value="{{ item }}">
+                    {{ item }}
+                  </label>
+                {% endfor %}
+                <div class="field">
+                  <label>Comments</label>
+                  <input type="text" name="comment_2">
+                </div>
+            </div>
+
+            <div class="truck-check-section">
+                <h3>Paperwork</h3>
+                {% set paperwork_items = [
+                  "DOT/State Inspection",
+                  "Registration Card",
+                  "Insurance Card",
+                  "Merchants Packet",
+                  "Fuel Card",
+                  "Accident Form",
+                  "Tow Form",
+                  "Spotted Lantern-fly Inspection",
+                  "Photos Tips & Tricks",
+                  "OMNITRACS XRS Cab Card",
+                  "DOT Exemption Form"
+                ] %}
+                {% for item in paperwork_items %}
+                  <label class="checkbox-row">
+                    <input type="checkbox" name="paperwork" value="{{ item }}">
+                    {{ item }}
+                  </label>
+                {% endfor %}
+                <div class="field">
+                  <label>Comments</label>
+                  <input type="text" name="comment_3">
+                </div>
+            </div>
+
+            <div class="truck-check-section">
+                <h3>Bin #1</h3>
+                {% set bin1_items = [
+                  "Screw Driver",
+                  "Lug Wrench",
+                  "Extender",
+                  "Channel locks",
+                  "Clips"
+                ] %}
+                {% for item in bin1_items %}
+                  <label class="checkbox-row">
+                    <input type="checkbox" name="bin_1" value="{{ item }}">
+                    {{ item }}
+                  </label>
+                {% endfor %}
+                <div class="field">
+                  <label>Comments</label>
+                  <input type="text" name="comment_4">
+                </div>
+            </div>
+
+            <div class="truck-check-section">
+                <h3>Bin #2: All Trucks</h3>
+                {% set bin2_all_items = [
+                  "Windshield Washer Fluid",
+                  "Rain-X 2 in 1 Glass Cleaner",
+                  "Disinfecting Wipes",
+                  "Simple Green All Purpose Cleaner",
+                  "Black Magic Tire Wet",
+                  "Black Magic No Scrub Wheel Cleaner"
+                ] %}
+                {% for item in bin2_all_items %}
+                  <label class="checkbox-row">
+                    <input type="checkbox" name="bin_2_all_trucks" value="{{ item }}">
+                    {{ item }}
+                  </label>
+                {% endfor %}
+                <div class="field">
+                  <label>Comments</label>
+                  <input type="text" name="comment_5">
+                </div>
+            </div>
+
+            <div class="truck-check-section">
+                <h3>Bin #2: New Gas</h3>
+                {% set bin2_new_gas_items = [
+                  "Engine Oil (5W-30)",
+                  "Coolant (50/50 Dexcool)",
+                  "Power Steering Fluid (Dexron VI)",
+                  "Brake Fluid (DOT 3)",
+                  "Transmission Fluid (Dexron VI)"
+                ] %}
+                {% for item in bin2_new_gas_items %}
+                  <label class="checkbox-row">
+                    <input type="checkbox" name="bin_2_new_gas" value="{{ item }}">
+                    {{ item }}
+                  </label>
+                {% endfor %}
+                <div class="field">
+                  <label>Comments</label>
+                  <input type="text" name="comment_6">
+                </div>
+            </div>
+
+            <div class="truck-check-section">
+                <h3>Bin #2: New Diesel</h3>
+                {% set bin2_new_diesel_items = [
+                  "Engine Oil (15W-40)",
+                  "Isuzu Coolant Green",
+                  "Power Steering Fluid (Dexron VI)",
+                  "Brake Fluid (DOT 3)",
+                  "Isuzu SCS Transmission Fluid",
+                  "DEF (Diesel Exhaust Fluid)"
+                ] %}
+                {% for item in bin2_new_diesel_items %}
+                  <label class="checkbox-row">
+                    <input type="checkbox" name="bin_2_new_diesel" value="{{ item }}">
+                    {{ item }}
+                  </label>
+                {% endfor %}
+                <div class="field">
+                  <label>Comments</label>
+                  <input type="text" name="comment_7">
+                </div>
+            </div>
+
+            <div class="truck-check-section">
+                <h3>Bin #2: Old Diesel</h3>
+                {% set bin2_old_diesel_items = [
+                  "Engine Oil (15W-40)",
+                  "Coolant (50/50 Color Match)",
+                  "Power Steering Fluid (Dexron VI)",
+                  "Brake Fluid (DOT 3)",
+                  "Transmission Fluid (Dexron VI)"
+                ] %}
+                {% for item in bin2_old_diesel_items %}
+                  <label class="checkbox-row">
+                    <input type="checkbox" name="bin_2_old_diesel" value="{{ item }}">
+                    {{ item }}
+                  </label>
+                {% endfor %}
+                <div class="field">
+                  <label>Comments</label>
+                  <input type="text" name="comment_8">
+                </div>
+            </div>
+
+            <label>Who completed inspection?</label>
+            <input type="text" name="completed_by" required>
+
+            <button type="submit" class="submit-btn">Submit Checklist</button>
+           </div>
+      </form>
+  </div>
+</section>
+
+{% endblock %}

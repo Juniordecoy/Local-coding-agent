@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Driver Dress Code{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Driver Dress Code</h2>
+
+  <p class="dc-intro">
+    Driver Dress Code Effective Jan 1, 2015, do it outdoors media is implementing a dress code for all Drivers.
+    Drivers are expected to wear the following when assigned to a campaign, unless directed otherwise:
+  </p>
+
+  <ul class="dc-list">
+    <li><strong>Pants</strong> – black dress jeans, black Dickies / Dockers style or black cargo shorts. Blue jeans may continue to be worn but the company prefers black. The jeans and shorts must be belted with a tucked in shirt. No baggy jeans; must be plain 5-pocket jeans.</li>
+    <li><strong>Shirts</strong> – light gray, black or red polo shirt or button-down shirt, short or long-sleeved.</li>
+    <li><strong>Hat</strong> – optional; if worn, must be plain black or a do it outdoors media hat.</li>
+    <li><strong>Outerwear</strong> – use discretion with outerwear. No large logo brands, no team-oriented items.</li>
+    <li><strong>Footwear</strong> – a solid plain shoe (preferably black or brown); no open-toes or open-heels.</li>
+  </ul>
+
+  <p class="dc-note">
+    Basically we need Drivers to be neat, clean and pressed (think UPS-style). Drivers are representing our company
+    and our clients and therefore need to be presentable at all times.
+  </p>
+
+  <p class="dc-note">
+    When traveling market-to-market, Drivers may wear blue jeans and plain (no pocket or graphics) black, gray or red
+    t-shirts. If preferred, Drivers may dress the same whether on a campaign or traveling.
+  </p>
+
+  <p class="dc-note">
+    Drivers are expected to be 100% in compliance by Jun 30, 2015.
+  </p>
+
+  <!-- Images at the bottom -->
+  <div class="dc-images">
+    <!-- Replace the filenames below with your actual saved image names -->
+    <img src="{{ url_for('static', filename='img/dresscode_1.jpg') }}" alt="Dress code example 1">
+    <img src="{{ url_for('static', filename='img/dresscode_2.jpg') }}" alt="Dress code example 2">
+  </div>
+
+</section>
+{% endblock %}

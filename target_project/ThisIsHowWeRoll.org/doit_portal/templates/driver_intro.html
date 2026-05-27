@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% block title %}Driver Introduction{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <h2 class="panel-title">Driver Introduction</h2>
+
+  <h3 class="panel-subtitle intro-sub">
+    Please watch the video above, then scroll down to complete the questionnaire.
+  </h3>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <div class="videos-wrap">
+    <div class="video-block">
+      <div class="video-embed">
+        <iframe
+          src="https://www.youtube.com/embed/Frw-Mm6gJs0"
+          title="#20hotyears"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <form class="quiz-form" method="POST" action="{{ url_for('driver_intro') }}">
+
+    <div class="photo-grid">
+      <div class="field">
+        <label for="your_name"><span class="req"></span> Your name</label>
+        <input id="your_name" name="your_name" type="text" required>
+      </div>
+
+      <div class="field">
+        <label for="email"><span class="req"></span> Email</label>
+        <input id="email" name="email" type="text" required>
+      </div>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 1. Do you currently hold a valid Commercial Driver License (CDL)?</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="Yes" required> Yes</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="No"> No</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q" for="q2">2. If yes, what year did you obtain your CDL?
+        <span class="hint">(required if Yes above)</span>
+      </label>
+      <input id="q2" name="q2" type="text" class="textline">
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 3. Do you currently have a valid DOT Medical Certificate?</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="Yes" required> Yes</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="No"> No</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q" for="q4">4. If yes, what is the expiration date of your DOT Medical Certificate?
+        <span class="hint">(required if Yes above)</span>
+      </label>
+      <input id="q4" name="q4" type="date" class="textline">
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 5. Are you able to lift 35 pounds to waist level as part of the job duties?</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="Yes" required> Yes</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="No"> No</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 6. Our professional dress code includes dark blue, gray or black jeans/slacks and nice shirts (no t-shirts or graphics). Are you able to comply with this dress code?</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="Yes" required> Yes</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="No"> No</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="Discuss"> Need to Discuss</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 7. To protect our brand and the brands of our clients, the use of tobacco products (including smoking, chewing tobacco, or vaping) is not permitted in or near our Mobile Advertising Vehicles. Do you agree to comply with this policy?</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="Yes" required> Yes</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="No"> No</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="Discuss"> Need to Discuss</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 8. Are you able and willing to travel by air when required for the position?</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="Yes" required> Yes</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="No"> No</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="Discuss"> Need to Discuss</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 9. For travel purposes, a REAL ID or valid passport is required for domestic flights. Do you currently have a REAL ID or a passport?</label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="Yes" required> Yes</label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="No"> No</label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="Discuss"> Need to Discuss</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 10. Based on the position description provided, are you able to perform the essential functions of the position with or without reasonable accommodation?</label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="Yes" required> Yes</label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="No"> No</label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="Discuss"> Need to Discuss</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 11. This position requires obtaining and maintaining a valid DOT Medical Certificate. Are you able to meet this requirement?</label>
+      <label class="quiz-opt"><input type="radio" name="q11" value="Yes" required> Yes</label>
+      <label class="quiz-opt"><input type="radio" name="q11" value="No"> No</label>
+      <label class="quiz-opt"><input type="radio" name="q11" value="Discuss"> Need to Discuss</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 12. Please confirm you are still available for your scheduled interview?</label>
+      <label class="quiz-opt"><input type="radio" name="q12" value="Yes" required> Yes</label>
+      <label class="quiz-opt"><input type="radio" name="q12" value="No"> No</label>
+      <label class="quiz-opt"><input type="radio" name="q12" value="Discuss"> Need to Discuss</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q" for="add_comments">Any Additional Comments or Questions?</label>
+      <input id="add_comments" name="add_comments" type="text" class="textline">
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+
+    <button type="submit" class="submit-btn">Submit</button>
+
+  </form>
+
+
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+  const q1Radios = document.querySelectorAll('input[name="q1"]');
+  const q2Input = document.getElementById("q2");
+
+  const q3Radios = document.querySelectorAll('input[name="q3"]');
+  const q4Input = document.getElementById("q4");
+
+  function updateConditionalFields() {
+    // Q1 → Q2
+    const q1Value = document.querySelector('input[name="q1"]:checked')?.value;
+    if (q1Value === "Yes") {
+      q2Input.required = true;
+    } else {
+      q2Input.required = false;
+      q2Input.value = "";
+    }
+
+    // Q3 → Q4
+    const q3Value = document.querySelector('input[name="q3"]:checked')?.value;
+    if (q3Value === "Yes") {
+      q4Input.required = true;
+    } else {
+      q4Input.required = false;
+      q4Input.value = "";
+    }
+  }
+
+  // attach listeners
+  q1Radios.forEach(r => r.addEventListener("change", updateConditionalFields));
+  q3Radios.forEach(r => r.addEventListener("change", updateConditionalFields));
+</script>
+{% endblock %}

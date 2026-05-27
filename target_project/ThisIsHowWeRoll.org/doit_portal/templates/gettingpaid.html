@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Getting Paid{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <div class="gp-grid">
+
+    <!-- Left column -->
+    <div class="gp-left">
+      <!-- Replace filename with your actual logo file in static/img -->
+      <img class="gp-logo"
+           src="{{ url_for('static', filename='img/Paylocity_Logo_Logo.jpg') }}"
+           alt="Paylocity">
+
+      <h3 class="gp-heading">LABOR CODE LIST:</h3>
+
+      <ul class="gp-list">
+        <li>
+          <strong>5 - Drive Time (on a campaign ONLY)</strong>
+          <div class="gp-sub">In a mobile advertising vehicle and running a campaign</div>
+        </li>
+
+        <li>
+          <strong>10 - Drive Time (Market-to-Market ONLY)</strong>
+          <div class="gp-sub">
+            In a mobile advertising vehicle driving from one market to another. Excluding campaigns where you are requested
+            to travel during campaign time, in which case use code 5.
+          </div>
+        </li>
+
+        <li>
+          <strong>15 - Driver or Truck Pick up</strong>
+          <div class="gp-sub">
+            Picking up/dropping off a driver at the airport, dropping off/picking up a unit from the shop/storage/etc.
+            DO NOT use this code when travelling to a new market to pick up a unit, only for local travel.
+          </div>
+        </li>
+
+        <li>
+          <strong>20 - Training/Driver Meetings/Misc.</strong>
+          <div class="gp-sub">Driver meetings, training, uploading photos/paperwork.</div>
+        </li>
+
+        <li>
+          <strong>25 - Travel Time (non-driving, such as flights)</strong>
+          <div class="gp-sub">Any time you are flying, or driving a rental car, or riding with another driver.</div>
+        </li>
+
+        <li>
+          <strong>30 - Stretching Vinyls</strong>
+          <div class="gp-sub">Vinyls only!</div>
+        </li>
+
+        <li>
+          <strong>35 - Truck Maintenance</strong>
+          <div class="gp-sub">
+            Do not use this for pre/post trips (use code 5, or 10) do not use if its only a quick repair during campaign time.
+            Use this code for items such as tightening a belt, replacing a mirror, waiting at shop if quick fix.
+          </div>
+        </li>
+
+        <li>
+          <strong>45 - Truck Wash</strong>
+          <div class="gp-sub">Truck wash only!</div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right column -->
+    <div class="gp-right">
+      <!-- <a class="panel-btn"
+         href="{{ url_for('static', filename='pdfs/2025_pay_schedule.pdf') }}"
+         target="_blank">
+         2025 Pay Schedule
+      </a> -->
+      <a class="panel-btn"
+         href="{{ url_for('static', filename='pdfs/Paylocity_Direct_Deposit_Change.pdf') }}"
+         target="_blank">
+         Direct Deposit Instructions
+      </a>
+      <a class="panel-btn"
+         href="{{ url_for('static', filename='pdfs/Paylocity_W2_Instructions.pdf') }}"
+         target="_blank">
+         Paylocity W-4 Instructions
+      </a>
+      <a class="panel-btn"
+         href="{{ url_for('static', filename='pdfs/Paylocity_SS_Expenses.pdf') }}"
+         target="_blank">
+         Paylocity Expense SOP
+      </a>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

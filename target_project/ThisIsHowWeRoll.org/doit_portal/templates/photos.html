@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Photos!{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <h2 class="panel-title">Photos and Videos</h2>
+
+  <div class="btn-grid two-col">
+    <a class="panel-btn center-large" href="{{ url_for('postingphotos') }}">Posting Photos</a>
+    <a class="panel-btn danger center-large" href="{{ url_for('dankellyaward') }}">Dan Kelly Award</a>
+
+    <a class="panel-btn" href="{{ url_for('photoexamples') }}">Example Photos</a>
+    <a class="panel-btn" href="{{ url_for('pops') }}">P.O.P. Examples</a>
+
+    <a class="panel-btn" href="{{ url_for('contestwinners') }}">Contest Winners</a>
+    <a class="panel-btn" href="{{ url_for('contestrules') }}">Contest Rules</a>
+
+    <a class="panel-btn" href="{{ url_for('tipsandtricks') }}">Tips and Tricks</a>
+    <a class="panel-btn" href="{{ url_for('videos') }}">Campaign Videos</a>
+  </div>
+</section>
+{% endblock %}

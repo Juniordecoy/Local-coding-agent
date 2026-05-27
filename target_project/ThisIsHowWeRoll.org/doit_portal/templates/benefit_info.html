@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Benefit Info{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <div class="btn-grid one-col" style="max-width: 520px; margin: auto;">
+
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='pdfs/blue365_faq.pdf') }}"
+       target="_blank">
+       Blue 365 FAQ
+    </a>
+
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='pdfs/blue365_fitness_your_way.pdf') }}"
+       target="_blank">
+       Blue365 - Fitness Your Way
+    </a>
+
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='pdfs/highmark_member_discounts.pdf') }}"
+       target="_blank">
+       HighMark - Member Discounts
+    </a>
+
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='pdfs/dental_mobile_app.pdf') }}"
+       target="_blank">
+       Dental Mobile App
+    </a>
+
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='pdfs/dental_online_resources.pdf') }}"
+       target="_blank">
+       Dental Online Resources
+    </a>
+
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='pdfs/nva_benefit_summary.pdf') }}"
+       target="_blank">
+       NVA Benefit Summary
+    </a>
+
+  </div>
+
+</section>
+{% endblock %}

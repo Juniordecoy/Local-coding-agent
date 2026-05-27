@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+{% block title %}Return to Work Questionnaire{% endblock %}
+
+{% block content %}
+<section class="page ojt-page">
+  <div class="panel">
+  <h2 class="panel-title">Return to Work Questionnaire</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Submitted. Thank you!</div>
+  {% endif %}
+
+  <form class="ojt-form" method="POST" action="{{ url_for('return_to_work_quiz') }}">
+
+    <div class="ojt-grid-2">
+      <div class="field">
+        <label for="your_name"><span class="req"></span>Your name</label>
+        <input id="your_name" name="your_name" type="text" required>
+      </div>
+
+      <div class="field">
+        <label for="date"><span class="req"></span>Date</label>
+        <input id="date" name="date" type="text" required>
+      </div>
+    </div>
+
+    <!-- 1 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 1. Who is your first point of contact?</label>
+      <textarea name="q1_first_contact" rows="1" required></textarea>
+    </div>
+
+    <!-- 2 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 2. How many campaign photos should be included in each "batch"?</label>
+      <textarea name="q2_batch_count" rows="1" required></textarea>
+    </div>
+
+    <!-- 3 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 3. What is the maximum speed limit while driving on campaign time?</label>
+      <label class="quiz-opt"><input type="radio" name="q3_campaign_speed" value="55" required> 55 mph</label>
+      <label class="quiz-opt"><input type="radio" name="q3_campaign_speed" value="60"> 60 mph</label>
+      <label class="quiz-opt"><input type="radio" name="q3_campaign_speed" value="65"> 65 mph</label>
+      <label class="quiz-opt"><input type="radio" name="q3_campaign_speed" value="70"> 70 mph</label>
+    </div>
+
+    <!-- 4 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 4. What do you do if you can't find one of your target locations?</label>
+      <textarea name="q4_missing_target" rows="2" required></textarea>
+    </div>
+
+    <!-- 5 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 5. Your hotel is 30 minutes away from your geofence, but an hour away from your specific route for the day. How early should you start?</label>
+      <label class="quiz-opt"><input type="radio" name="q5_start_time" value="scheduled" required> At my scheduled start time</label>
+      <label class="quiz-opt"><input type="radio" name="q5_start_time" value="30_early"> 30 minutes early</label>
+      <label class="quiz-opt"><input type="radio" name="q5_start_time" value="1hr_early"> 1 hour early</label>
+      <label class="quiz-opt"><input type="radio" name="q5_start_time" value="45_late"> 45 minutes late</label>
+    </div>
+
+    <!-- 6 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 6. What is required of you if on a “shadowfencing” campaign?</label>
+      <textarea name="q6_shadowfencing" rows="2" required></textarea>
+    </div>
+
+    <!-- 7 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 7. If you are having an issue logging in to the tablet, is this a valid excuse for a late start on a campaign day?</label>
+      <label class="quiz-opt"><input type="radio" name="q7_tablet_excuse" value="yes" required> Yes</label>
+      <label class="quiz-opt"><input type="radio" name="q7_tablet_excuse" value="no"> No</label>
+    </div>
+
+    <!-- 8 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 8. Who do you call if your truck has mechanical issues?</label>
+      <label class="quiz-opt"><input type="radio" name="q8_mechanical" value="Merchants" required> Merchants</label>
+      <label class="quiz-opt"><input type="radio" name="q8_mechanical" value="Lead Driver"> Lead Driver</label>
+      <label class="quiz-opt"><input type="radio" name="q8_mechanical" value="Donlen"> Donlen</label>
+      <label class="quiz-opt"><input type="radio" name="q8_mechanical" value="OMT"> OMT</label>
+    </div>
+
+    <!-- 9 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 9. T/F you are required to have your routing printed out at all times.</label>
+      <label class="quiz-opt"><input type="radio" name="q9_printed_routing" value="true" required> True</label>
+      <label class="quiz-opt"><input type="radio" name="q9_printed_routing" value="false"> False</label>
+    </div>
+
+    <!-- 10 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 10. What are “labor codes” used for?</label>
+      <label class="quiz-opt"><input type="radio" name="q10_labor_codes" value="Roadnet Data Points" required> Roadnet Data Points</label>
+      <label class="quiz-opt"><input type="radio" name="q10_labor_codes" value="Paylocity/Payroll"> Paylocity/Payroll</label>
+      <label class="quiz-opt"><input type="radio" name="q10_labor_codes" value="Workers Compensation Claims"> Workers Compensation Claims</label>
+      <label class="quiz-opt"><input type="radio" name="q10_labor_codes" value="Commodity info in XRS"> Commodity info in XRS</label>
+    </div>
+
+    <!-- 11 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 11. A pre/post trip inspection should be logged for a minimum of how many minutes?</label>
+      <label class="quiz-opt"><input type="radio" name="q11_prepost_min" value="1" required> 1 minute</label>
+      <label class="quiz-opt"><input type="radio" name="q11_prepost_min" value="5"> 5 minutes</label>
+      <label class="quiz-opt"><input type="radio" name="q11_prepost_min" value="10"> 10 minutes</label>
+      <label class="quiz-opt"><input type="radio" name="q11_prepost_min" value="15"> 15 minutes</label>
+      <label class="quiz-opt"><input type="radio" name="q11_prepost_min" value="none"> There is no minimum</label>
+    </div>
+
+    <!-- 12 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 12. Where do you upload your campaign photos?</label>
+      <textarea name="q12_campaign_upload" rows="2" required></textarea>
+    </div>
+
+    <!-- 13 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 13. Where do you send posting photos? And when?</label>
+      <textarea name="q13_posting_when" rows="2" required></textarea>
+    </div>
+
+    <!-- 14 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 14. If you are involved in an incident/accident, which of the following should you NOT do?</label>
+      <label class="quiz-opt"><input type="radio" name="q14_do_not" value="Call Jason or a member of OMT" required> Call Jason or a member of OMT</label>
+      <label class="quiz-opt"><input type="radio" name="q14_do_not" value="Call the police"> Call the police</label>
+      <label class="quiz-opt"><input type="radio" name="q14_do_not" value="Take photos"> Take photos</label>
+      <label class="quiz-opt"><input type="radio" name="q14_do_not" value='Say "I&#39;m sorry" to other parties involved'> Say "I'm sorry" to other parties involved</label>
+      <label class="quiz-opt"><input type="radio" name="q14_do_not" value="Collect information"> Collect information</label>
+    </div>
+
+    <!-- 15 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 15. What 3 instances do UCR’s need to be completed?</label>
+      <textarea name="q15_ucr_instances" rows="2" required></textarea>
+    </div>
+
+    <!-- 16 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 16. What is your specific user id for XRS?</label>
+      <textarea name="q16_xrs_userid" rows="2" required></textarea>
+    </div>
+
+    <!-- 17 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 17. When and where do you submit expenses?</label>
+      <textarea name="q17_expenses" rows="2" required></textarea>
+    </div>
+
+    <!-- 18 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 18. What is your OnRoad card used for?</label>
+      <textarea name="q18_onroad_card" rows="2" required></textarea>
+    </div>
+
+    <!-- 19 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 19. What 3 “main” items should you find in the Merchants Packet?</label>
+      <textarea name="q19_merchants_packet" rows="2" required></textarea>
+    </div>
+
+    <!-- 20 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 20. What is the maximum speed limit while driving market-to-market?</label>
+      <label class="quiz-opt"><input type="radio" name="q20_m2m_speed" value="55" required> 55 mph</label>
+      <label class="quiz-opt"><input type="radio" name="q20_m2m_speed" value="60"> 60 mph</label>
+      <label class="quiz-opt"><input type="radio" name="q20_m2m_speed" value="65"> 65 mph</label>
+      <label class="quiz-opt"><input type="radio" name="q20_m2m_speed" value="75"> 75 mph</label>
+    </div>
+
+    <!-- 21 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 21. How many clips go on one vinyl, AND how many total clips should you have with your unit?</label>
+      <label class="quiz-opt"><input type="radio" name="q21_clips" value="20_and_80" required> 20 and 80</label>
+      <label class="quiz-opt"><input type="radio" name="q21_clips" value="20_and_160"> 20 and 160</label>
+      <label class="quiz-opt"><input type="radio" name="q21_clips" value="40_and_160"> 40 and 160</label>
+      <label class="quiz-opt"><input type="radio" name="q21_clips" value="80_and_200"> 80 and 200</label>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <div class="quiz-block">
+        <button class="submit-btn" type="submit">Submit</button>
+    </div>
+
+  </form>
+  </div>
+</section>
+{% endblock %}

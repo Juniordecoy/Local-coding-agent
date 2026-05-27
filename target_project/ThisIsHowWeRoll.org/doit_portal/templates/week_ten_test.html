@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}Week 10 Post Hire Test{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Week 10 Post Hire Test</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your test was submitted.</div>
+  {% endif %}
+
+  <form class="quiz-form" method="POST" action="{{ url_for('week_test', week=10) }}">
+
+    <div class="photo-grid">
+      <div class="field">
+        <label for="your_name"><span class="req"></span> Your name</label>
+        <input id="your_name" name="your_name" type="text" required>
+      </div>
+
+      <div class="field">
+        <label for="email"><span class="req"></span> Email</label>
+        <input id="email" name="email" type="text" required>
+      </div>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* Who is your "Mentor" Lead Driver?</label>
+
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Mark Hooper" required> Mark Hooper</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Jermaine Bridges"> Jermaine Bridges</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Gary Rausin"> Gary Rausin</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Rene Santiago"> Rene Santiago</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Carlos Villalobos"> Carlos Villalobos</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Robbie Lezama"> Robbie Lezama</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Cassandra Bell"> Cassandra Bell</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Michael Morales"> Michael Morales</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 1. If your XRS or tablet stops working while traveling market-to-market, what must you do?</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="A" required> A. Do nothing; the system will back-fill later</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="B"> B. Alert Operations</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="C"> C. Notify your Lead Driver and complete a paper log</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="D"> D. Go to a Verizon store for repairs</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 2. Notifying OPS in your inspection report is all that is required for unit defects.</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="True" required> A. True - OPS will see it and handle the issue</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="False"> B. False - you must notify your Lead Driver as soon as possible</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 3. What is the maximum speed you should be driving with vinyls on a mobile billboard unit?</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="A" required> A. 55 mph</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="B"> B. 60 mph</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="C"> C. 65 mph</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="D"> D. The posted speed limit</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 4. What is the maximum speed you should be driving in a mobile billboard with no vinyls on?</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="A" required> A. Dark jeans or slacks, nice shirt (no T-shirts), closed-toe shoes</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="B"> B. Anything comfortable</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="C"> C. No clothing with logos</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="D"> D. Both A. and C.</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 5. You are not allowed to smoke in the vehicle, but vaping is allowed.</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="True" required> A. True</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="False"> B. False</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 6. When taking campaign photos, you should:</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="A" required> A. Never take photos from inside the cab</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="B"> B. Include photos of both sides of the unit</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="C"> C. Take photos as instructed in your Routing document under “Photo Focus”; always include people and high-traffic areas</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="D"> D. Target children and schools</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="E"> E. A.,B. and C.</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 7. What should you do first if dangerous weather conditions develop while you’re driving?</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="A" required> A. Pull into a safe spot and contact your Lead Driver</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="B"> B. Go back to your hotel or home</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="C"> C. Continue driving as scheduled</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="D"> D. Try to outrun the storm</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 8. If facing delays that may cause me to start my campaign late, what do I do?</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="A" required> A. Communicate immediately with my Lead Driver</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="B"> B. Notify OMT if the cause is critical</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="C"> C. Just concentrate on what you’re doing</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="D"> D. It’s no big deal to start late, the time can always be made up</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="E"> E. Both A. and B.</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="F"> F. Both A. and D.</label>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+
+  </form>
+
+</section>
+{% endblock %}

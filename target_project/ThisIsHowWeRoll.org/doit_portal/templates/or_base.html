@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}OR Logistics Platform{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="or-platform-body">
+
+  <header class="or-platform-header">
+    <div class="or-platform-brand">
+      <strong>do it outdoors media</strong>
+      <span>Operations Logistics Platform</span>
+    </div>
+
+    <nav class="or-platform-nav">
+      <a href="{{ url_for('index') }}">Driver Portal</a>
+      <a href="{{ url_for('or_dashboard') }}">OR Dashboard</a>
+      <a href="{{ url_for('or_calendar') }}">OR Calendar</a>
+      <a href="{{ url_for('or_units') }}">Unit Log</a>
+      <a href="{{ url_for('or_codes') }}">Code Legend</a>
+      <a href="#">Etc...</a>
+    </nav>
+  </header>
+
+  <main class="or-platform-main">
+    {% block content %}{% endblock %}
+  </main>
+
+<script src="{{ url_for('static', filename='js/or_area.js') }}"></script>
+</body>
+</html>

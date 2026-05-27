@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Comdata{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <!-- Top Logo Image -->
+  <img class="comdata-logo"
+       src="{{ url_for('static', filename='img/comdata_logo.png') }}"
+       alt="Comdata">
+
+  <!-- Big Button -->
+  <div class="btn-grid one-col" style="max-width: 520px;">
+    <a class="panel-btn" href="{{ url_for('perdiem') }}">Per Diem Premium Cities.</a>
+  </div>
+
+  <!-- Content Block -->
+  <div class="comdata-text">
+    <p><strong>While out on a campaign, you may require money for a business expense.</strong><br></p>
+
+    <p><strong>To make a request notify your Lead Driver and they will pass the message along</strong><br></p>
+
+    <p><strong>Plan Ahead for weekends/evenings!</strong><br>
+      1) Make your request by Friday at 4:00 pm<br>
+      2) For weekend emergencies, <span class="red">get in touch with your lead. Lead will reach out to OMT.</span><br>
+      3) For evening emergencies, <span class="red">get in touch with your lead. Lead will reach out to OMT.</span>
+    </p>
+
+    <p><strong>Use whichever option you prefer, however you must always provide:</strong><br>
+      1) Your name<br>
+      2) The amount needed<br>
+      3) The reason for the expense
+    </p>
+
+    <p><strong>Legitimate reasons for an expense request:</strong><br>
+      Cleaning supplies<br>
+      Truck washes<br>
+      Tolls<br>
+      Parking or storage fees<br>
+      DOT log books<br>
+      Rental car fuel
+    </p>
+  </div>
+
+</section>
+{% endblock %}

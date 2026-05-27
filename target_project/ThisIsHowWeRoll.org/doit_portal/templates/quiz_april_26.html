@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block title %}April Safety Quiz{% endblock %}
+
+{% block content %}
+
+<section class="panel">
+
+  <h2 class="panel-title">April 2026 Safety Quiz</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your quiz was submitted.</div>
+  {% endif %}
+
+  <form method="POST" class="quiz-form">
+
+    <div class="two-col">
+
+    <div>
+
+    <div class="field">
+      <label for="your_name"><span class="req"></span> Your name</label>
+      <input id="your_name" name="your_name" type="text" required>
+    </div>
+
+    <div class="field">
+      <label for="email"><span class="req"></span> Email</label>
+      <input id="email" name="email" type="text" required>
+    </div>
+
+    </div>
+
+    <div class="hq-q">
+      <p><strong>1. Taking your eyes off the road for more than a few seconds significantly increases crash risk.</strong></p>
+
+      <label><input type="radio" name="q1" value="True" required> A. True</label>
+      <label><input type="radio" name="q1" value="False"> B. False</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>2. Even hands-free phone conversations can reduce your attention while driving.</strong></p>
+
+      <label><input type="radio" name="q2" value="True" required> A. True</label>
+      <label><input type="radio" name="q2" value="False"> B. False</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>3. Checking a text for just a second or two is safe if you keep one hand on the wheel.</strong></p>
+
+      <label><input type="radio" name="q3" value="True" required> A. True</label>
+      <label><input type="radio" name="q3" value="False"> B. False</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>4. Eating or drinking while driving can distract you enough to increase crash risk.</strong></p>
+
+      <label><input type="radio" name="q4" value="True" required> A. True</label>
+      <label><input type="radio" name="q4" value="False"> B. False</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>5. Adjusting your GPS while driving is considered a form of distraction.</strong></p>
+
+      <label><input type="radio" name="q5" value="True" required> A. True</label>
+      <label><input type="radio" name="q5" value="False"> B. False</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>6. If you’re stopped at a red light, it’s completely risk-free to use your phone.</strong></p>
+
+      <label><input type="radio" name="q6" value="True" required> A. True</label>
+      <label><input type="radio" name="q6" value="False"> B. False</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>7. Using voice-to-text while driving completely eliminates distraction.</strong></p>
+
+      <label><input type="radio" name="q7" value="True" required> A. True</label>
+      <label><input type="radio" name="q7" value="False"> B. False</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>8. Listening to loud music can affect your awareness of what’s happening around you.</strong></p>
+
+      <label><input type="radio" name="q8" value="True" required> A. True</label>
+      <label><input type="radio" name="q8" value="False"> B. False</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>9. Multitasking while driving is a safe way to save time.</strong></p>
+
+      <label><input type="radio" name="q9" value="True" required> A. True</label>
+      <label><input type="radio" name="q9" value="False"> B. False</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>10. The safest way to handle a phone call or text is to pull over to a safe location.</strong></p>
+
+      <label><input type="radio" name="q10" value="True" required> A. True</label>
+      <label><input type="radio" name="q10" value="False"> B. False</label>
+      </div>
+
+      <div class="hq-q">
+      <p><strong>11. Who is the reason you want to make it home safely at the end of the day?</strong></p>
+      <textarea name="q11" rows="3" required></textarea>
+      </div>
+
+      <div style="position:absolute; left:-9999px;">
+        <input type="text" name="do_not_fill" autocomplete="off">
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Quiz</button>
+     </div>
+    </form>
+</section>
+
+{% endblock %}

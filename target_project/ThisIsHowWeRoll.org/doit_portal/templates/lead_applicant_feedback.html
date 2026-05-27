@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}Lead Driver Applicant Feedback{% endblock %}
+
+{% block content %}
+
+<div class="panel">
+
+<h1 class="page-title">Feedback for Lead Driver Applicants</h1>
+
+{% if submitted %}
+<div class="success-msg">Application Feedback has been sent.</div>
+{% endif %}
+
+<form method="POST" class="quiz-form">
+
+<div class="field">
+<label for="your_name"><span class="req"></span> Your name</label>
+<input id="your_name" name="your_name" type="text" required>
+</div>
+
+<label>Applicant Name</label>
+
+<div class="radio-group">
+<label><input type="radio" name="applicant" value="Aispuro"> Aispuro</label>
+<label><input type="radio" name="applicant" value="Ansel"> Ansel</label>
+<label><input type="radio" name="applicant" value="Bell"> Bell</label>
+<label><input type="radio" name="applicant" value="Lunsford"> Lunsford</label>
+<label><input type="radio" name="applicant" value="Maynard"> Maynard</label>
+<label><input type="radio" name="applicant" value="Mesecher"> Mesecher</label>
+<label><input type="radio" name="applicant" value="Rausin"> Rausin</label>
+<label><input type="radio" name="applicant" value="Schlarman"> Schlarman</label>
+</div>
+
+<div class="field">
+  <label for="date"><span class="req"></span> Date</label>
+  <input id="date" name="date" type="date" required>
+</div>
+
+<p class="form-note">
+Please rate the applicant in the following categories using a scale of 1–5 with 1 being inferior and 5 being excellent. If unknown, select "Unknown".
+</p>
+
+
+<!-- Rating Template -->
+
+    <div class="rating-group">
+      <p><span class="req"></span>Communication</p>
+      <label><input type="radio" name="understands_business" value="1" required> 1</label>
+      <label><input type="radio" name="understands_business" value="2"> 2</label>
+      <label><input type="radio" name="understands_business" value="3"> 3</label>
+      <label><input type="radio" name="understands_business" value="4"> 4</label>
+      <label><input type="radio" name="understands_business" value="5"> 5</label>
+      <label><input type="radio" name="understands_business" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span>Adaptability</p>
+      <label><input type="radio" name="meaningful_questions" value="1" required> 1</label>
+      <label><input type="radio" name="meaningful_questions" value="2"> 2</label>
+      <label><input type="radio" name="meaningful_questions" value="3"> 3</label>
+      <label><input type="radio" name="meaningful_questions" value="4"> 4</label>
+      <label><input type="radio" name="meaningful_questions" value="5"> 5</label>
+      <label><input type="radio" name="meaningful_questions" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span>Problem Solving Skills</p>
+      <label><input type="radio" name="accepts_coaching" value="1" required> 1</label>
+      <label><input type="radio" name="accepts_coaching" value="2"> 2</label>
+      <label><input type="radio" name="accepts_coaching" value="3"> 3</label>
+      <label><input type="radio" name="accepts_coaching" value="4"> 4</label>
+      <label><input type="radio" name="accepts_coaching" value="5"> 5</label>
+      <label><input type="radio" name="accepts_coaching" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span>Self-confidence</p>
+      <label><input type="radio" name="technological_expertise" value="1" required> 1</label>
+      <label><input type="radio" name="technological_expertise" value="2"> 2</label>
+      <label><input type="radio" name="technological_expertise" value="3"> 3</label>
+      <label><input type="radio" name="technological_expertise" value="4"> 4</label>
+      <label><input type="radio" name="technological_expertise" value="5"> 5</label>
+      <label><input type="radio" name="technological_expertise" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span>Patience</p>
+      <label><input type="radio" name="printed_route" value="1" required> 1</label>
+      <label><input type="radio" name="printed_route" value="2"> 2</label>
+      <label><input type="radio" name="printed_route" value="3"> 3</label>
+      <label><input type="radio" name="printed_route" value="4"> 4</label>
+      <label><input type="radio" name="printed_route" value="5"> 5</label>
+      <label><input type="radio" name="printed_route" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span>Job Knowledge</p>
+      <label><input type="radio" name="retains_information" value="1" required> 1</label>
+      <label><input type="radio" name="retains_information" value="2"> 2</label>
+      <label><input type="radio" name="retains_information" value="3"> 3</label>
+      <label><input type="radio" name="retains_information" value="4"> 4</label>
+      <label><input type="radio" name="retains_information" value="5"> 5</label>
+      <label><input type="radio" name="retains_information" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span>Company Knowledge</p>
+      <label><input type="radio" name="sense_of_urgency" value="1" required> 1</label>
+      <label><input type="radio" name="sense_of_urgency" value="2"> 2</label>
+      <label><input type="radio" name="sense_of_urgency" value="3"> 3</label>
+      <label><input type="radio" name="sense_of_urgency" value="4"> 4</label>
+      <label><input type="radio" name="sense_of_urgency" value="5"> 5</label>
+      <label><input type="radio" name="sense_of_urgency" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span>DOT Knowledge</p>
+      <label><input type="radio" name="chain_of_command" value="1" required> 1</label>
+      <label><input type="radio" name="chain_of_command" value="2"> 2</label>
+      <label><input type="radio" name="chain_of_command" value="3"> 3</label>
+      <label><input type="radio" name="chain_of_command" value="4"> 4</label>
+      <label><input type="radio" name="chain_of_command" value="5"> 5</label>
+      <label><input type="radio" name="chain_of_command" value="unknown"> Unknown</label>
+    </div>
+
+    <div class="rating-group">
+      <p><span class="req"></span>Team Player</p>
+      <label><input type="radio" name="client_interest" value="1" required> 1</label>
+      <label><input type="radio" name="client_interest" value="2"> 2</label>
+      <label><input type="radio" name="client_interest" value="3"> 3</label>
+      <label><input type="radio" name="client_interest" value="4"> 4</label>
+      <label><input type="radio" name="client_interest" value="5"> 5</label>
+      <label><input type="radio" name="client_interest" value="unknown"> Unknown</label>
+    </div>
+
+
+<label>Additional Comments</label>
+<textarea name="comments" rows="4"></textarea>
+
+<div style="position:absolute; left:-9999px;">
+    <input type="text" name="do_not_fill" autocomplete="off">
+</div>
+
+<button type="submit" class="submit-btn">Submit</button>
+
+</form>
+
+</div>
+
+{% endblock %}

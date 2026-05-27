@@ -1,0 +1,734 @@
+{% extends "base.html" %}
+{% block title %}Post-Training Recap{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Post-Training Recap</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your recap was submitted.</div>
+  {% endif %}
+
+  <form class="ojt-form" method="POST" action="{{ url_for('post_training_recap') }}">
+
+    <div class="ojt-grid-2">
+      <div class="field">
+        <label for="your_name"><span class="req"></span> 1. Your name</label>
+        <input id="your_name" name="your_name" type="text" required>
+      </div>
+
+      <div class="field">
+        <label for="email"><span class="req"></span>2. Email</label>
+        <input id="email" name="email" type="text" required>
+      </div>
+
+      <div class="field ojt-span-2">
+        <label for="date_time"><span class="req"></span> 3. Date and Time</label>
+        <input id="date_time" name="date_time" type="datetime-local" required>
+      </div>
+    </div>
+
+    <!-- 1 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 1) What is the number one goal of do it outdoors?</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="a" required> a. Present the cleanest mobile billboard to the client.</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="b"> b. Be the number one mobile billboard advertising company in the US</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="c"> c. For our drivers to be on time, and on the route, where they are supposed to be.</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="d"> d. For our drivers to be professional and pleasant to the public and the client.</label>
+    </div>
+
+    <!-- 2 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 2) Drivers are guaranteed hours every week.</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="false"> b. False</label>
+    </div>
+
+    <!-- 3 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 3) The do it outdoors dress code calls for:</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="a" required> a. Hat – optional; if worn, must be plain or a do it outdoors hat; cannot be worn backwards or sideways. Cannot have any logos.</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="b"> b. Outerwear – Use discretion with outerwear. No large logo brands or team-oriented</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="c"> c. Footwear - A solid plain shoe (preferably black or brown); no open-toes or open-heels</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="d"> d. Shirts – must be a nice shirt, collared shirt (polo-style or button-down) preferred. Company colors of gray, black, red, or white preferred. NO T-shirts and NO graphics.</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="e"> e. Pants – black, gray or dark blue dress jeans/pants or shorts (think UPS style). Belted with a tucked in shirt. No baggy jeans/shorts; must be plain 5-pocket jeans.</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="f"> f. All of the above</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="g"> g. A, B, and D</label>
+    </div>
+
+    <!-- 4 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 4) Being drug free is a condition of employment.</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="false"> b. False</label>
+    </div>
+
+    <!-- 5 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 5) When do you use the Paylocity payroll app?</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="a" required> a. When punching in and out for your shift</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="b"> b. When taking a lunch break on a campaign day</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="c"> c. When changing labor codes</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="d"> d. When checking your paystub</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="e"> e. When using the mobile for personal conveyance (personal use)</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="f"> f. A, C and D</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="g"> g. A, B, D and E</label>
+    </div>
+
+    <!-- 6 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 6) You are required to stop at open weigh stations/port of entries when……</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="a" required> a. You are traveling market to market</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="b"> b. You have items in the rear of your mobile</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="c"> c. You are traveling from State to State</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="d"> d. None of the above</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="e"> e. The weigh station is open</label>
+    </div>
+
+    <!-- 7 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 7) When stopping at a weigh station, you are required to have with you:</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="a" required> a. Properly completed DOT log (electronic or paper)</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="b"> b. Your current DOT physical examination card</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="c"> c. Valid proof of insurance card and registration</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="d"> d. None of the above</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="e"> e. All of the above</label>
+    </div>
+
+    <!-- 8-13 short answers -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 8) Where do you send Receipts? (email or location)</label>
+      <textarea name="q8" rows="2" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 9) Where do you send Posting Photos? (email or location)</label>
+      <textarea name="q9" rows="2" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 10) Where do you send DOT Logs? (email or location)</label>
+      <textarea name="q10" rows="2" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 11) Where do you send Campaign Photos? (email or location)</label>
+      <textarea name="q11" rows="2" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 12) Where do you send UCR’s &amp; Hotel Folios? (email or location)</label>
+      <textarea name="q12" rows="2" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label class="quiz-q">* 13) If you forget where to send items, where do you go to find this info?</label>
+      <textarea name="q13" rows="2" required></textarea>
+    </div>
+
+    <!-- 14 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 14) If a police officer or security personnel tell you to move the mobile billboard, you should:</label>
+      <label class="quiz-opt"><input type="radio" name="q14" value="a" required> a. Do exactly what they say and notify your Lead Driver and/or the GPS Specialist as soon as you can pull over and do so</label>
+      <label class="quiz-opt"><input type="radio" name="q14" value="b"> b. Do what they say, drive around for an hour and then return to the same spot</label>
+      <label class="quiz-opt"><input type="radio" name="q14" value="c"> c. Argue because the client wants us there</label>
+      <label class="quiz-opt"><input type="radio" name="q14" value="d"> d. All of the above</label>
+    </div>
+
+    <!-- 15 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 15) Good attendance and punctuality are important to the efficient operation of the company</label>
+      <label class="quiz-opt"><input type="radio" name="q15" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q15" value="false"> b. False</label>
+    </div>
+
+    <!-- 16 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 16) When you need to be off the schedule, it’s ok to inform OMT the day before?</label>
+      <label class="quiz-opt"><input type="radio" name="q16" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q16" value="false"> b. False</label>
+    </div>
+
+    <!-- 17 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 17) I can drive market to market with my vinyls on?</label>
+      <label class="quiz-opt"><input type="radio" name="q17" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q17" value="false"> b. False</label>
+    </div>
+
+    <!-- 18 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 18) Once you are hired, it doesn’t matter if you receive any moving traffic violations</label>
+      <label class="quiz-opt"><input type="radio" name="q18" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q18" value="false"> b. False</label>
+    </div>
+
+    <!-- 19 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 19) do it outdoors will pay for the following moving violations when you are running behind for a campaign:</label>
+      <label class="quiz-opt"><input type="radio" name="q19" value="a" required> a. Speeding when there isn’t much traffic</label>
+      <label class="quiz-opt"><input type="radio" name="q19" value="b"> b. Failure to yield when there wasn’t much traffic</label>
+      <label class="quiz-opt"><input type="radio" name="q19" value="c"> c. Failure to stop at a stop sign when there are no cars coming</label>
+      <label class="quiz-opt"><input type="radio" name="q19" value="d"> d. None of the above</label>
+      <label class="quiz-opt"><input type="radio" name="q19" value="e"> e. All of the above</label>
+    </div>
+
+    <!-- 20 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 20) When should you arrive at the airport for a departing flight?</label>
+      <label class="quiz-opt"><input type="radio" name="q20" value="a" required> a. 30 mins before departure</label>
+      <label class="quiz-opt"><input type="radio" name="q20" value="b"> b. 2 hours before departure</label>
+      <label class="quiz-opt"><input type="radio" name="q20" value="c"> c. 5 minutes before departure</label>
+      <label class="quiz-opt"><input type="radio" name="q20" value="d"> d. 4 hours before departure</label>
+    </div>
+
+    <!-- 21 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 21) How many miles are you permitted to drive per day during an average campaign?</label>
+      <label class="quiz-opt"><input type="radio" name="q21" value="a" required> a. 100 - 125</label>
+      <label class="quiz-opt"><input type="radio" name="q21" value="b"> b. 225 – 250</label>
+      <label class="quiz-opt"><input type="radio" name="q21" value="c"> c. 200 – 225</label>
+      <label class="quiz-opt"><input type="radio" name="q21" value="d"> d. 125 – 150</label>
+    </div>
+
+    <!-- 22 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 22) When I am notified that my vinyls are delivering to my campaign hotel, I must call the hotel before arriving and confirm that my vinyls have delivered.</label>
+      <label class="quiz-opt"><input type="radio" name="q22" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q22" value="false"> b. False</label>
+    </div>
+
+    <!-- 23 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 23) It is against company policy to drive between the hours of midnight and 5:00am.</label>
+      <label class="quiz-opt"><input type="radio" name="q23" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q23" value="false"> b. False</label>
+    </div>
+
+    <!-- 24 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 24) When do you clock out for lunch?</label>
+      <label class="quiz-opt"><input type="radio" name="q24" value="a" required> a. When driving a campaign.</label>
+      <label class="quiz-opt"><input type="radio" name="q24" value="b"> b. When flying and/or driving a rental car market to market</label>
+      <label class="quiz-opt"><input type="radio" name="q24" value="c"> c. When you are hungry</label>
+      <label class="quiz-opt"><input type="radio" name="q24" value="d"> d. All of the above</label>
+      <label class="quiz-opt"><input type="radio" name="q24" value="e"> e. None of the above</label>
+    </div>
+
+    <!-- 25 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 25) If your Lead Driver or Ops needs to get in touch with you while you are driving, how will this be accomplished?</label>
+      <textarea name="q25" rows="2" required></textarea>
+    </div>
+
+    <!-- 26 drug testing -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 26) If you are notified that you have been selected for random drug testing, what must you do?</label>
+      <textarea name="q26" rows="2" required></textarea>
+    </div>
+
+    <!-- 27 (your text says "*26) It's okay..." -> we treat as 27) -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 27) It’s okay to use the company Uber account for personal use, do it outdoors will just deduct the amount from your pay.</label>
+      <label class="quiz-opt"><input type="radio" name="q27" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q27" value="false"> b. False</label>
+    </div>
+
+    <!-- 28 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 28) You are allowed to use the company Uber account when in your home market.</label>
+      <label class="quiz-opt"><input type="radio" name="q28" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q28" value="false"> b. False</label>
+    </div>
+
+    <!-- 29 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 29) When are Drivers eligible to receive per diem? And when are OnRoad cards loaded?</label>
+      <textarea name="q29" rows="2" required></textarea>
+    </div>
+
+    <!-- 30 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 30) How do you know that funds have been loaded to your Blue Comdata card?</label>
+      <textarea name="q30" rows="2" required></textarea>
+    </div>
+
+    <!-- 31 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 31) The best thing to do with leftover Blue Card Comdata funds is:</label>
+      <label class="quiz-opt"><input type="radio" name="q31" value="a" required> a. Use what I requested the $$ for and pocket the rest</label>
+      <label class="quiz-opt"><input type="radio" name="q31" value="b"> b. Keep Comdata funds separate and use only for work-related expenses that I can turn in a receipt for</label>
+      <label class="quiz-opt"><input type="radio" name="q31" value="c"> c. Use it for whatever I want and then ask for more</label>
+      <label class="quiz-opt"><input type="radio" name="q31" value="d"> d. None of the above</label>
+    </div>
+
+    <!-- 32 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 32) I can call Operations anytime of the day or any day I please to have Comdata funds added to my account.</label>
+      <label class="quiz-opt"><input type="radio" name="q32" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q32" value="false"> b. False</label>
+    </div>
+
+    <!-- 33 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 33) When turning in receipts, you must do the following:</label>
+      <label class="quiz-opt"><input type="radio" name="q33" value="a" required> a. Complete a Driver Receipts Submittal Form</label>
+      <label class="quiz-opt"><input type="radio" name="q33" value="b"> b. Email them to receipts@doitoutdoors.com weekly</label>
+      <label class="quiz-opt"><input type="radio" name="q33" value="c"> c. Submit by midnight on the Sunday prior to payroll week</label>
+      <label class="quiz-opt"><input type="radio" name="q33" value="d"> d. All of the above</label>
+    </div>
+
+    <!-- 34 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 34) Misuse of Comdata funds may lead to payroll deductions, disciplinary action and even termination.</label>
+      <label class="quiz-opt"><input type="radio" name="q34" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q34" value="false"> b. False</label>
+    </div>
+
+    <!-- 35 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 35) If I leave a market unexpectedly during the week and have already received my per diem, I get to keep the unearned funds.</label>
+      <label class="quiz-opt"><input type="radio" name="q35" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q35" value="false"> b. False</label>
+    </div>
+
+    <!-- 36 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 36) What is the OnRoad Comdata card for?</label>
+      <textarea name="q36" rows="2" required></textarea>
+    </div>
+
+    <!-- 37 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 37) What is the BLUE Comdata card for?</label>
+      <textarea name="q37" rows="2" required></textarea>
+    </div>
+
+    <div class="section-title">SAFETY</div>
+
+    <!-- 38 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 38) Drivers should never be:</label>
+      <label class="quiz-opt"><input type="radio" name="q38" value="a" required> a. On a ladder</label>
+      <label class="quiz-opt"><input type="radio" name="q38" value="b"> b. On the rear deck</label>
+      <label class="quiz-opt"><input type="radio" name="q38" value="c"> c. In the back of the mobile</label>
+      <label class="quiz-opt"><input type="radio" name="q38" value="d"> d. All of the above</label>
+    </div>
+
+    <!-- 39 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 39) Why is the use of electronic devices prohibited while driving?</label>
+      <label class="quiz-opt"><input type="radio" name="q39" value="a" required> a. It is Company Policy</label>
+      <label class="quiz-opt"><input type="radio" name="q39" value="b"> b. It takes away from your ability to focus 100% on driving</label>
+      <label class="quiz-opt"><input type="radio" name="q39" value="c"> c. Your brain does not multi task</label>
+      <label class="quiz-opt"><input type="radio" name="q39" value="d"> d. All of the above</label>
+    </div>
+
+    <!-- 40 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 40) What is the #1 job priority while working for do it outdoors?</label>
+      <label class="quiz-opt"><input type="radio" name="q40" value="a" required> a. Campaign driving instructions followed exactly</label>
+      <label class="quiz-opt"><input type="radio" name="q40" value="b"> b. Unit always clean and looking its best</label>
+      <label class="quiz-opt"><input type="radio" name="q40" value="c"> c. Working and staying safe is always the first priority</label>
+      <label class="quiz-opt"><input type="radio" name="q40" value="d"> d. Take great pictures and upload on time</label>
+    </div>
+
+    <!-- 41 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 41) When your phone rings while you are driving, the best thing for you to do is:</label>
+      <label class="quiz-opt"><input type="radio" name="q41" value="a" required> a. Slow down and answer the phone</label>
+      <label class="quiz-opt"><input type="radio" name="q41" value="b"> b. Ask the caller to hold while you pull over to a safe area</label>
+      <label class="quiz-opt"><input type="radio" name="q41" value="c"> c. Talk using a hands-free device</label>
+      <label class="quiz-opt"><input type="radio" name="q41" value="d"> d. Wait until your scheduled stop, then return calls</label>
+    </div>
+
+    <!-- 42 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 42) What is the recommended height clearance for ALL of our mobiles?</label>
+      <label class="quiz-opt"><input type="radio" name="q42" value="a" required> a. 12’-7”</label>
+      <label class="quiz-opt"><input type="radio" name="q42" value="b"> b. 13”-2”</label>
+      <label class="quiz-opt"><input type="radio" name="q42" value="c"> c. 12”-2”</label>
+      <label class="quiz-opt"><input type="radio" name="q42" value="d"> d. 13”-6”</label>
+    </div>
+
+    <!-- 43 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 43) If you pull up to a bridge or overpass and can’t go under it. What should you do?</label>
+      <textarea name="q43" rows="2" required></textarea>
+    </div>
+
+    <!-- 44 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 44) How many points of contact are you required to use when entering a mobile &amp; what does it mean?</label>
+      <textarea name="q44" rows="2" required></textarea>
+    </div>
+
+    <!-- 45 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 45) If you are involved in an accident, you must do the following:</label>
+      <label class="quiz-opt"><input type="radio" name="q45" value="a" required> a. Follow the Accident Protocol Checklist card</label>
+      <label class="quiz-opt"><input type="radio" name="q45" value="b"> b. Call law enforcement regardless of whether someone was hurt</label>
+      <label class="quiz-opt"><input type="radio" name="q45" value="c"> c. Call for medical aid if necessary</label>
+      <label class="quiz-opt"><input type="radio" name="q45" value="d"> d. Call Jason Beck if reachable or Operations Management Team if he is not available</label>
+      <label class="quiz-opt"><input type="radio" name="q45" value="e"> e. Do not move the vehicle unless instructed to do so</label>
+      <label class="quiz-opt"><input type="radio" name="q45" value="f"> f. Do not discuss the accident with other parties who were involved</label>
+      <label class="quiz-opt"><input type="radio" name="q45" value="g"> g. A and C</label>
+      <label class="quiz-opt"><input type="radio" name="q45" value="h"> h. B and C</label>
+      <label class="quiz-opt"><input type="radio" name="q45" value="i"> i. All of the above</label>
+    </div>
+
+    <!-- 46 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 46) What is the companywide MAX speed limit without vinyls and what is the MAX speed limit if your unit has vinyls on?</label>
+      <textarea name="q46" rows="2" required></textarea>
+    </div>
+
+    <!-- 47 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 47) When you need to use the safety triangles for a vehicle breakdown, what is the recommended distance between the rear of our unit and the placement of each triangle (1st, 2nd, 3rd)?</label>
+      <label class="quiz-opt"><input type="radio" name="q47" value="a" required> a. 100’, 200’, 300’</label>
+      <label class="quiz-opt"><input type="radio" name="q47" value="b"> b. 25’, 50’, 100’</label>
+      <label class="quiz-opt"><input type="radio" name="q47" value="c"> c. 10’, 100’, 200’</label>
+      <label class="quiz-opt"><input type="radio" name="q47" value="d"> d. Whatever distances we feel like</label>
+    </div>
+
+    <div class="section-title">GPS / Routing</div>
+
+    <!-- 48 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 48) If you get lost on your campaign, you should:</label>
+      <label class="quiz-opt"><input type="radio" name="q48" value="a" required> a. Call the client and ask for directions</label>
+      <label class="quiz-opt"><input type="radio" name="q48" value="b"> b. Call your Lead Driver or Operations Specialist and ask for directions</label>
+      <label class="quiz-opt"><input type="radio" name="q48" value="c"> c. Use the GPS or Google Maps provided in your unit; if still having issues, call your Lead Driver immediately</label>
+      <label class="quiz-opt"><input type="radio" name="q48" value="d"> d. Call AAA</label>
+    </div>
+
+    <!-- 49 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 49) When should you be within your route area (geofence)?</label>
+      <label class="quiz-opt"><input type="radio" name="q49" value="a" required> a. Any time before the campaign start time</label>
+      <label class="quiz-opt"><input type="radio" name="q49" value="b"> b. Within 15 minutes of the campaign start time</label>
+      <label class="quiz-opt"><input type="radio" name="q49" value="c"> c. Within 30 minutes of the campaign start time</label>
+      <label class="quiz-opt"><input type="radio" name="q49" value="d"> d. Any time after the campaign start time</label>
+    </div>
+
+    <!-- 50 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 50) I can run any days of the week and any hours of the day I prefer. What is listed on my routing are just loose guidelines.</label>
+      <label class="quiz-opt"><input type="radio" name="q50" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q50" value="false"> b. False</label>
+    </div>
+
+    <!-- 51 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 51) If I have any questions on my route, whom do I contact?</label>
+      <textarea name="q51" rows="2" required></textarea>
+    </div>
+
+    <!-- 52 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 52) When running a campaign, if you are going off route or are going to stop for more than thirty minutes, you should:</label>
+      <label class="quiz-opt"><input type="radio" name="q52" value="a" required> a. Do nothing with the log book</label>
+      <label class="quiz-opt"><input type="radio" name="q52" value="b"> b. Notify your Lead Driver or the GPS Specialist</label>
+      <label class="quiz-opt"><input type="radio" name="q52" value="c"> c. As long as you are safe and the vehicle is safe, do nothing</label>
+      <label class="quiz-opt"><input type="radio" name="q52" value="d"> d. A and B</label>
+      <label class="quiz-opt"><input type="radio" name="q52" value="e"> e. A and C</label>
+    </div>
+
+    <!-- 53 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 53) If you are late or going to be late starting your route while on campaign you should...</label>
+      <label class="quiz-opt"><input type="radio" name="q53" value="a" required> a. Call the client</label>
+      <label class="quiz-opt"><input type="radio" name="q53" value="b"> b. Call the police</label>
+      <label class="quiz-opt"><input type="radio" name="q53" value="c"> c. Text or email the GPS Specialist</label>
+      <label class="quiz-opt"><input type="radio" name="q53" value="d"> d. Don’t worry about it</label>
+    </div>
+
+    <!-- 54 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 54) Stops while driving a campaign should be no more than 15 minutes except when?</label>
+      <label class="quiz-opt"><input type="radio" name="q54" value="a" required> a. On a 30 minute lunch</label>
+      <label class="quiz-opt"><input type="radio" name="q54" value="b"> b. Requested by the client and/or OMT</label>
+      <label class="quiz-opt"><input type="radio" name="q54" value="c"> c. If necessary due to weather</label>
+      <label class="quiz-opt"><input type="radio" name="q54" value="d"> d. All of the above</label>
+    </div>
+
+    <!-- 55 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 55) If I have an extended stop/late start/early out, I do not have to report this, especially on the weekends.</label>
+      <label class="quiz-opt"><input type="radio" name="q55" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q55" value="false"> b. False</label>
+    </div>
+
+    <!-- 56 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 56) If you’re running late due to traffic and there’s an event that starts in 20 minutes and you’re 15 minutes from the location what should you do?</label>
+      <label class="quiz-opt"><input type="radio" name="q56" value="a" required> a. Do a drive by on the locations you missed</label>
+      <label class="quiz-opt"><input type="radio" name="q56" value="b"> b. Go right to the event even if your tablet tells you to turn around</label>
+      <label class="quiz-opt"><input type="radio" name="q56" value="c"> c. Go about your normal route and call ops and tell them you couldn’t make it to the event</label>
+      <label class="quiz-opt"><input type="radio" name="q56" value="d"> d. Hit all locations for the correct amount of time and arrive late to event but take pictures to still prove you were there</label>
+    </div>
+
+    <!-- 57 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 57) What should you do if you’re not sure if a store is a competitor or not?</label>
+      <label class="quiz-opt"><input type="radio" name="q57" value="a" required> a. Go into the store and ask if they are a competitor of our client</label>
+      <label class="quiz-opt"><input type="radio" name="q57" value="b"> b. Pull into the parking lot and target it anyway</label>
+      <label class="quiz-opt"><input type="radio" name="q57" value="c"> c. Call your Lead Driver or Operations and ask</label>
+      <label class="quiz-opt"><input type="radio" name="q57" value="d"> d. Don’t target the location unless you’re sure</label>
+      <label class="quiz-opt"><input type="radio" name="q57" value="e"> e. All of the above</label>
+      <label class="quiz-opt"><input type="radio" name="q57" value="f"> f. C and D</label>
+    </div>
+
+    <!-- 58 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 58) I have to follow Roadnet routing turn by turn on every campaign I’m on?</label>
+      <label class="quiz-opt"><input type="radio" name="q58" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q58" value="false"> b. False</label>
+    </div>
+
+    <!-- 59 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 59) If I’m not sure if I run today or not sure what time I start, how do I find out this information?</label>
+      <textarea name="q59" rows="2" required></textarea>
+    </div>
+
+    <!-- 60 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 60) If I encounter some inclement weather (high winds, snow, ice, severe t-storms, etc.) during the day, what should I do?</label>
+      <label class="quiz-opt"><input type="radio" name="q60" value="a" required> a. Just keep driving</label>
+      <label class="quiz-opt"><input type="radio" name="q60" value="b"> b. Contact your lead driver, GPS coordinator, or a member of OMT to discuss the situation</label>
+      <label class="quiz-opt"><input type="radio" name="q60" value="c"> c. Make a decision on your own and shut down for the day</label>
+    </div>
+
+    <div class="section-title">MOBILES</div>
+
+    <!-- 61 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 61) Who is our fleet maintenance provider and how do I find their contact information?</label>
+      <textarea name="q61" rows="2" required></textarea>
+    </div>
+
+    <!-- 62 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 62) On a regular basis (as often as needed) I must clean the inside, outside and vinyls on my mobile and wipe it down daily during my stops.</label>
+      <label class="quiz-opt"><input type="radio" name="q62" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q62" value="false"> b. False</label>
+    </div>
+
+    <!-- 63 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 63) I can purchase fuel at fuel stations with the following:</label>
+      <label class="quiz-opt"><input type="radio" name="q63" value="a" required> a. Height requirement of 13’6” or higher</label>
+      <label class="quiz-opt"><input type="radio" name="q63" value="b"> b. Allows pay at the pump</label>
+      <label class="quiz-opt"><input type="radio" name="q63" value="c"> c. Sells the proper fuel for my vehicle</label>
+      <label class="quiz-opt"><input type="radio" name="q63" value="d"> d. Easy and safe access from the road</label>
+      <label class="quiz-opt"><input type="radio" name="q63" value="e"> e. All of the above</label>
+    </div>
+
+    <!-- 64 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 64) Smoking/using tobacco products/vaping is allowed in or around the vehicle</label>
+      <label class="quiz-opt"><input type="radio" name="q64" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q64" value="false"> b. False</label>
+    </div>
+
+    <!-- 65 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 65) If XRS on the tablet will not let me log a pre-trip, what is the first thing to check?</label>
+      <textarea name="q65" rows="2" required></textarea>
+    </div>
+
+    <!-- 66 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 66) Fuel additive should be used ONLY in cold weather.</label>
+      <label class="quiz-opt"><input type="radio" name="q66" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q66" value="false"> b. False</label>
+    </div>
+
+    <!-- 67 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 67) How often do I need to make sure my vinyls are still stretched properly, and if not, fix them?</label>
+      <textarea name="q67" rows="2" required></textarea>
+    </div>
+
+    <!-- 68 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 68) What three basic safety items are required to be in your mobile at all times?</label>
+      <textarea name="q68" rows="2" required></textarea>
+    </div>
+
+    <!-- 69 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 69) Your vehicle suddenly breaks down. Who do you call?</label>
+      <textarea name="q69" rows="2" required></textarea>
+    </div>
+
+    <!-- 70 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 70) Vehicle clearance refers to:</label>
+      <label class="quiz-opt"><input type="radio" name="q70" value="a" required> a. Having proper DOT documentation in the vehicle</label>
+      <label class="quiz-opt"><input type="radio" name="q70" value="b"> b. Having enough room around and behind the truck to avoid hitting anything</label>
+      <label class="quiz-opt"><input type="radio" name="q70" value="c"> c. Vehicle height requirements</label>
+      <label class="quiz-opt"><input type="radio" name="q70" value="d"> d. B and C</label>
+      <label class="quiz-opt"><input type="radio" name="q70" value="e"> e. None of the above</label>
+    </div>
+
+    <!-- 71 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 71) When do you perform a post-trip Inspection?</label>
+      <textarea name="q71" rows="2" required></textarea>
+    </div>
+
+    <!-- 72 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 72) What are the three instances when you need to fill out a Unit Condition Report (UCR)?</label>
+      <textarea name="q72" rows="2" required></textarea>
+    </div>
+
+    <!-- 73 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 73) During your post-trip inspection, you notice body damage. You should:</label>
+      <label class="quiz-opt"><input type="radio" name="q73" value="a" required> a. Call Merchants Fleet Service</label>
+      <label class="quiz-opt"><input type="radio" name="q73" value="b"> b. Notify your Lead Driver or a member of the Operations Management Team (OMT) as soon as reasonably possible</label>
+      <label class="quiz-opt"><input type="radio" name="q73" value="c"> c. Take the unit directly to a repair shop as soon as possible</label>
+      <label class="quiz-opt"><input type="radio" name="q73" value="d"> d. Call the police</label>
+    </div>
+
+    <!-- 74 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 74) Whenever I park my mobile, I should:</label>
+      <label class="quiz-opt"><input type="radio" name="q74" value="a" required> a. Leave the keys in the ignition</label>
+      <label class="quiz-opt"><input type="radio" name="q74" value="b"> b. Use the parking brake</label>
+      <label class="quiz-opt"><input type="radio" name="q74" value="c"> c. Back into parking spots</label>
+      <label class="quiz-opt"><input type="radio" name="q74" value="d"> d. Park in a visible area</label>
+      <label class="quiz-opt"><input type="radio" name="q74" value="e"> e. Lock the doors, from the outside, with the key</label>
+      <label class="quiz-opt"><input type="radio" name="q74" value="f"> f. Leave the windows down</label>
+      <label class="quiz-opt"><input type="radio" name="q74" value="g"> g. B, C, D and E</label>
+      <label class="quiz-opt"><input type="radio" name="q74" value="h"> h. All of the above</label>
+    </div>
+
+    <!-- 75 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 75) Other than the pre-trip and post-trip inspections, what other maintenance am I responsible to perform?</label>
+      <textarea name="q75" rows="2" required></textarea>
+    </div>
+
+    <!-- 76 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 76) When do I need to unplug the OBD (On Board Diagnostic) port?</label>
+      <label class="quiz-opt"><input type="radio" name="q76" value="a" required> a. When starting your campaign day</label>
+      <label class="quiz-opt"><input type="radio" name="q76" value="b"> b. When dropping off a unit at a storage location</label>
+      <label class="quiz-opt"><input type="radio" name="q76" value="c"> c. When dropping off a unit at one of the offices</label>
+      <label class="quiz-opt"><input type="radio" name="q76" value="d"> d. At the end of your campaign day</label>
+      <label class="quiz-opt"><input type="radio" name="q76" value="e"> e. B and C</label>
+      <label class="quiz-opt"><input type="radio" name="q76" value="f"> f. All of the above</label>
+    </div>
+
+    <!-- 77 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 77) If driving a diesel unit, when should you drain your fuel separator regardless of the weather conditions?</label>
+      <label class="quiz-opt"><input type="radio" name="q77" value="a" required> a. Once a month</label>
+      <label class="quiz-opt"><input type="radio" name="q77" value="b"> b. Twice a week</label>
+      <label class="quiz-opt"><input type="radio" name="q77" value="c"> c. When the warning light comes on</label>
+      <label class="quiz-opt"><input type="radio" name="q77" value="d"> d. Every day</label>
+    </div>
+
+    <!-- 78 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 78) If you accidentally fill your mobile with the wrong fuel type, what should you NOT do?</label>
+      <textarea name="q78" rows="2" required></textarea>
+    </div>
+
+    <!-- 79 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 79) As long as I log into XRS on the tablet at the start of my shift, I do not have to upload my Roadnet route.</label>
+      <label class="quiz-opt"><input type="radio" name="q79" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q79" value="false"> b. False</label>
+    </div>
+
+    <!-- 80 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 80) When driving one of the gasoline powered MBBs (units 104 and up), I must make sure the hotspot on the tablet is turned on daily to activate the MDVR Camera system?</label>
+      <label class="quiz-opt"><input type="radio" name="q80" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q80" value="false"> b. False</label>
+    </div>
+
+    <div class="section-title">PHOTOS</div>
+
+    <!-- 81 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 81) On an average campaign you only need to take photos if instructed to do so.</label>
+      <label class="quiz-opt"><input type="radio" name="q81" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q81" value="false"> b. False</label>
+    </div>
+
+    <!-- 82 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 82) When taking campaign photographs, the Driver should:</label>
+      <label class="quiz-opt"><input type="radio" name="q82" value="a" required> a. Include the entire mobile in the picture</label>
+      <label class="quiz-opt"><input type="radio" name="q82" value="b"> b. Always include traffic and/or people (unless instructed not to do so)</label>
+      <label class="quiz-opt"><input type="radio" name="q82" value="c"> c. Make sure your vinyls are stretched properly</label>
+      <label class="quiz-opt"><input type="radio" name="q82" value="d"> d. Make sure your mobile is clean</label>
+      <label class="quiz-opt"><input type="radio" name="q82" value="e"> e. All of the above</label>
+      <label class="quiz-opt"><input type="radio" name="q82" value="f"> f. None of the above</label>
+    </div>
+
+    <!-- 83 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 83) What are the circumstances when I send in posting photos and when should I send them in?</label>
+      <textarea name="q83" rows="2" required></textarea>
+    </div>
+
+    <!-- 84 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 84) It is acceptable to only upload 5 photos in a batch as long as they are good quality.</label>
+      <label class="quiz-opt"><input type="radio" name="q84" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q84" value="false"> b. False</label>
+    </div>
+
+    <!-- 85 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 85) Campaign photos are required for any targeted events on your route.</label>
+      <label class="quiz-opt"><input type="radio" name="q85" value="true" required> a. True</label>
+      <label class="quiz-opt"><input type="radio" name="q85" value="false"> b. False</label>
+    </div>
+
+    <!-- 86 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 86) For a 5 day campaign, how many total batches of photos should you upload?</label>
+      <label class="quiz-opt"><input type="radio" name="q86" value="a" required> a. 1 set at the end of the campaign</label>
+      <label class="quiz-opt"><input type="radio" name="q86" value="b"> b. 5 sets. One per day</label>
+      <label class="quiz-opt"><input type="radio" name="q86" value="c"> c. 2 sets. One on the 2nd day, and one on the last day</label>
+      <label class="quiz-opt"><input type="radio" name="q86" value="d"> d. None. Photos aren’t important for short campaigns</label>
+    </div>
+
+    <!-- 87 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 87) T/F – Shorter campaigns require more photos. Please explain why.</label>
+      <textarea name="q87" rows="2" required></textarea>
+    </div>
+
+    <!-- 88 -->
+    <div class="quiz-block">
+      <label class="quiz-q">* 88) Check the following statements that you believe are true.</label>
+
+      <label class="quiz-opt"><input type="checkbox" name="q88_a" value="true"> a. It’s okay if the vinyls are loose as long as there are people in your photos</label>
+      <label class="quiz-opt"><input type="checkbox" name="q88_b" value="true"> b. Vinyls should be checked throughout the day to make sure they look good every campaign day</label>
+      <label class="quiz-opt"><input type="checkbox" name="q88_c" value="true"> c. People and/or traffic are required in all photos</label>
+      <label class="quiz-opt"><input type="checkbox" name="q88_d" value="true"> d. The entire mobile must be within the frame of all photos</label>
+      <label class="quiz-opt"><input type="checkbox" name="q88_e" value="true"> e. It’s okay to target schools as long as you are not advertising for alcohol/tobacco/marijuana</label>
+      <label class="quiz-opt"><input type="checkbox" name="q88_f" value="true"> f. It’s okay to veer from Roadnet to find good photo opportunities</label>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button class="submit-btn" type="submit">Submit</button>
+
+  </form>
+
+</section>
+{% endblock %}

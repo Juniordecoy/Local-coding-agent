@@ -1,12 +1,8 @@
 from pathlib import Path
 
 
-CURRENT_PROJECT_DIR = Path(__file__).parent
+CURRENT_PROJECT_DIR = Path(__file__).resolve().parent
 
-TARGET_PROJECT_DIR = Path(
-    r"C:\Users\Jrah8\Desktop\ai_test_file\doitoutdoors"
-)
-
-## C:\Users\erodriguez\Desktop\ai_test_file\ThisIsHowWeRoll.org = work
-
-## C:\Users\Jrah8\Desktop\ai_test_file\doitoutdoors = home
+AGENT_PROJECT_DIR = CURRENT_PROJECT_DIR
+TARGET_PROJECT_DIR = CURRENT_PROJECT_DIR / "target_project"
+ACTIVE_PROJECT_DIR = AGENT_PROJECT_DIR

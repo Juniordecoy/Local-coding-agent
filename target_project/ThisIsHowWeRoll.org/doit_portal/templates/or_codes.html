@@ -1,0 +1,70 @@
+{% extends "or_base.html" %}
+
+{% block content %}
+
+<div class="or-page">
+  <div class="or-card">
+    <h1>OR Code Legend</h1>
+
+    <div class="or-code-layout">
+
+      <table class="or-code-table">
+        <thead>
+          <tr>
+            <th colspan="2">Valid Entries</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>OOM Billable Day</td></tr>
+          <tr><td>2</td><td>IM Billable Day</td></tr>
+          <tr><td>3</td><td>IM w/ Per Diem</td></tr>
+          <tr><td>S</td><td>Storage</td></tr>
+          <tr><td>O</td><td>$0 Days</td></tr>
+          <tr><td>X</td><td>M2M Day (Max 500mi in Unit)</td></tr>
+          <tr><td>XH</td><td>M2M Home</td></tr>
+          <tr><td>XTH</td><td>M2M Home w/ Travel</td></tr>
+          <tr><td>XT</td><td>M2M w/ Travel</td></tr>
+          <tr><td>A</td><td>OOM Bonus Day</td></tr>
+          <tr><td>B</td><td>IM Bonus Day</td></tr>
+          <tr><td>P</td><td>Per Diem</td></tr>
+          <tr><td>T</td><td>Travel Day-Driver Home (Trains, Planes, Automobiles)</td></tr>
+          <tr><td>TH</td><td>Travel Day-Driver Home</td></tr>
+          <tr><td>R1</td><td>Running Not Billed OOM</td></tr>
+          <tr><td>R2</td><td>Running Not Billed IM</td></tr>
+          <tr><td>Z</td><td>Placeholder</td></tr>
+          <tr><td>H</td><td>Hotel - no per diem</td></tr>
+        </tbody>
+      </table>
+
+      <div class="or-code-notes">
+        <p><strong><u>Smoking Units = 67, 95, 97</u></strong></p>
+
+        <p><strong>AV days all are coded with A or B</strong></p>
+
+        <p><span class="legend-swatch green"></span> Unit # indicates shadowfencing</p>
+
+        <div class="color-key">
+          <p><span class="legend-swatch pink"></span> Missed day, make-up required</p>
+          <p><span class="legend-swatch magenta"></span> Missed day, make-up scheduled/done</p>
+          <p><span class="legend-swatch yellow"></span> Not sure days of week campaign will run</p>
+          <p><span class="legend-swatch blue-dark"></span> Weather day</p>
+          <p><span class="legend-swatch blue"></span> Partial weather day</p>
+          <p><span class="legend-swatch cyan"></span> Does not need to be made up</p>
+          <p><span class="legend-swatch olive"></span> M/U day not made up within contract time</p>
+          <p><span class="legend-swatch gray"></span> Market higher per diem</p>
+        </div>
+
+        <p><strong>For SubContractors - Enter as IM, no per diem</strong></p>
+        <p><strong>Music Format:</strong> MP3 is best and most universal. If we can only get it on CD, we can convert.</p>
+        <p><strong>Starting with unit 120, new trucks have vents</strong></p>
+
+        <div class="or-code-note-box">
+          <strong>Note</strong> Bonus Days include PMX days
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

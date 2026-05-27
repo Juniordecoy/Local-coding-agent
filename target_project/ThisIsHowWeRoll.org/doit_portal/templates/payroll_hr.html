@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Payroll & HR{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <h2 class="panel-title">Payroll and<br>Human Resources</h2>
+
+  <div class="btn-grid one-col first-btn-group">
+    <a class="panel-btn btn-accent" href="{{ url_for('employee_navigator') }}">
+      Employee Navigator
+    </a>
+  </div>
+
+  <div class="btn-grid two-col">
+    <a class="panel-btn" href="{{ url_for('static', filename='pdfs/2023 Driver Handbook Rev 05.2026.pdf') }}" target="_blank">
+      Driver Handbook
+    </a>
+    <a class="panel-btn" href="{{ url_for('static', filename='pdfs/2021 Driver Handbook Rev 04.22.pdf') }}" target="_blank">
+      SOP Handbook
+    </a>
+
+    <a class="panel-btn" href="{{ url_for('benefits') }}">Benefits</a>
+    <a class="panel-btn" href="{{ url_for('dresscode') }}">Dress Code</a>
+
+    <a class="panel-btn" href="{{ url_for('gettingpaid') }}">Getting paid</a>
+    <a class="panel-btn" href="{{ url_for('static', filename='pdfs/Uber SOP.pdf') }}" target="_blank">Uber SOP</a>
+
+    <a class="panel-btn" href="{{ url_for('labor_law_posters') }}">Labor Law Posters</a>
+    <a class="panel-btn" href="{{ url_for('comdata') }}">Comdata</a>
+  </div>
+
+  <div class="btn-grid one-col">
+    <!-- <a class="panel-btn danger" href="">Deactivated - Harassment Training - Drivers</a> -->
+    <!-- <a class="panel-btn danger" href="#">Harassment Training - Staff</a> -->
+    <!-- <a class="panel-btn danger" href="">Deactivated - Harassment Training for Managers</a> -->
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Near Miss Reporting{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Anonymously Report a Near Miss Incident</h2>
+
+  {% if submitted %}
+    <div class="success-msg">
+      Thank you. Your report has been submitted.
+    </div>
+  {% endif %}
+
+  <form class="photo-form" method="POST" action="{{ url_for('near_miss_reporting') }}">
+
+    <!-- Use same grid system as Posting Photos -->
+    <div class="photo-grid">
+
+      <div>
+        <label>* Date of occurrence</label>
+        <input type="date" name="date" required>
+      </div>
+
+      <div>
+        <label>* Time of occurrence</label>
+        <input type="time" name="time" required>
+      </div>
+
+      <!-- Full-width row (spans both columns) -->
+      <div class="grid-full">
+        <label>* Brief Description of what happened</label>
+        <textarea name="description" rows="5" required></textarea>
+      </div>
+
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button class="submit-btn" type="submit">Submit</button>
+
+  </form>
+
+</section>
+{% endblock %}

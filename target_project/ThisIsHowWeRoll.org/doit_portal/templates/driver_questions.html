@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Driver Survey{% endblock %}
+
+{% block content %}
+<div class="panel">
+  <h1 class="page-title">Driver Survey</h1>
+
+  {% if submitted %}
+    <div class="success-msg">Submitted. Thank you!</div>
+  {% endif %}
+
+  <form class="driver-form" method="POST" enctype="multipart/form-data">
+    <div class="form-row">
+      <label for="first_name"><span class="req"></span> First Name</label>
+      <input id="first_name" name="first_name" type="text" required>
+    </div>
+
+    <div class="form-row">
+      <label for="last_name"><span class="req"></span> Last Name</label>
+      <input id="last_name" name="last_name" type="text" required>
+    </div>
+
+    <div class="form-row">
+      <label for="favorite_campaign">
+        <span class="req"></span> What has been your favorite campaign or location? Why?
+      </label>
+      <textarea id="favorite_campaign" name="favorite_campaign" rows="3" required></textarea>
+    </div>
+
+    <div class="form-row">
+      <label for="most_unique">
+        <span class="req"></span> What has been the most unique thing you have seen or done on a campaign or in a campaign location?
+      </label>
+      <textarea id="most_unique" name="most_unique" rows="3" required></textarea>
+    </div>
+
+    <div class="form-row">
+      <label class="upload-btn" for="favorite_photo">
+        <input type="file" id="favorite_photo" name="favorite_photo" accept="image/*" multiple >
+        <span>Upload Your Favorite Campaign's Photo here — <em>Optional</em></span>
+      </label>
+      <p class="upload-note">You can select multiple photos at once.</p>
+
+      <div id="ucr-file-list" class="upload-file-list"></div>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+  </form>
+</div>
+
+
+<script>
+  (function () {
+    const input = document.getElementById("ucr_photos");
+    const fileList = document.getElementById("ucr-file-list");
+
+    if (!input || !fileList) return;
+
+    input.addEventListener("change", function () {
+      const files = Array.from(input.files || []);
+
+      if (!files.length) {
+        fileList.innerHTML = "";
+        return;
+      }
+
+      fileList.innerHTML = `
+        <p><strong>Selected files:</strong></p>
+        <ul>
+          ${files.map(file => `<li>${file.name}</li>`).join("")}
+        </ul>
+      `;
+    });
+  })();
+</script>
+{% endblock %}

@@ -1,0 +1,32 @@
+[
+  {
+    "unit_id": "unit_101",
+    "unit_number": "101",
+    "status": "Available",
+    "city": "York",
+    "state": "PA",
+    "storage_location": "York Yard",
+    "current_driver": "",
+    "notes": "Ready for assignment"
+  },
+  {
+    "unit_id": "unit_102",
+    "unit_number": "102",
+    "status": "In Storage",
+    "city": "York",
+    "state": "PA",
+    "storage_location": "Main Storage",
+    "current_driver": "",
+    "notes": ""
+  },
+  {
+    "unit_id": "unit_103",
+    "unit_number": "103",
+    "status": "Not Available",
+    "city": "Las Vegas",
+    "state": "NV",
+    "storage_location": "",
+    "current_driver": "",
+    "notes": ""
+  }
+]

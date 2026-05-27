@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Temp Driver Training and User Guides{% endblock %}
+
+{% block content %}
+<section class="panel hub">
+
+  <h2 class="panel-title">Temp Driver Training And<br/>User Guides</h2>
+
+  <!-- top 2-wide buttons -->
+  <div class="hub-top">
+    <!-- placeholders for now; swap hrefs later -->
+    <a class="hub-btn hub-btn-warn" href="{{ url_for('static', filename='docs/XRS_Instructions.docx') }}"
+      download>TABLET LOGIN INSTRUCTIONS</a>
+    <a class="hub-btn hub-btn-warn" href="{{ url_for('static', filename='pdfs/example_photos.pdf') }}"
+       target="_blank">Example Photos</a>
+  </div>
+
+  <!-- stacked buttons -->
+  <div class="hub-stack">
+    <a class="hub-btn hub-btn-warn" href="{{ url_for('static', filename='pdfs/temp_expectations.pdf') }}"
+       target="_blank">What We Expect From You</a>
+    <!-- <a class="hub-btn" href="">Deactived - Temp Acknowledgement Form</a> -->
+    <a class="hub-btn" href="{{ url_for('static', filename='pdfs/temp_driver_handbook.pdf') }}"
+       target="_blank">Temp Driver Handbook</a>
+    <a class="hub-btn" href="{{ url_for('static', filename='pdfs/temp_tablet_instructions.pdf') }}"
+       target="_blank">Tablet Instructions PDF</a>
+    <a class="hub-btn" href="{{ url_for('static', filename='pdfs/temp_photo_upload.pdf') }}"
+       target="_blank">Campaign Photo Instructions</a>
+    <a class="hub-btn" href="{{ url_for('postingphotos') }}">* * * UPLOAD POSTING PHOTOS * * *</a>
+  </div>
+
+  <div class="videos-wrap">
+    <h3 class="hub-subtitle">How to lift the cab</h3>
+    <div class="video-block">
+      <div class="video-embed">
+        <iframe
+          src="https://www.youtube.com/embed/bNDc-1pf7Os"
+          title="#20hotyears"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <h3 class="hub-subtitle">How to adjust your vinyls</h3>
+    <div class="video-block">
+      <div class="video-embed">
+        <iframe
+          src="https://www.youtube.com/embed/i7NHgAtR4A0"
+          title="#20hotyears"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <h3 class="hub-subtitle">Where to find the keys</h3>
+    <div class="video-block">
+      <div class="hub-video">
+        <video controls preload="metadata">
+          <source src="{{ url_for('static', filename='videos/find_keys.mov') }}" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+{% endblock %}

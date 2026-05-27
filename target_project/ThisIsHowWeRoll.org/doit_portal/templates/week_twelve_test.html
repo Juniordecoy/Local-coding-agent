@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}Week 12 Post Hire Test{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Week 12 Post Hire Test</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your test was submitted.</div>
+  {% endif %}
+
+  <form class="quiz-form" method="POST" action="{{ url_for('week_test', week=12) }}">
+
+    <div class="photo-grid">
+      <div class="field">
+        <label for="your_name"><span class="req"></span> Your name</label>
+        <input id="your_name" name="your_name" type="text" required>
+      </div>
+
+      <div class="field">
+        <label for="email"><span class="req"></span> Email</label>
+        <input id="email" name="email" type="text" required>
+      </div>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* Who is your "Mentor" Lead Driver?</label>
+
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Mark Hooper" required> Mark Hooper</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Jermaine Bridges"> Jermaine Bridges</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Gary Rausin"> Gary Rausin</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Rene Santiago"> Rene Santiago</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Carlos Villalobos"> Carlos Villalobos</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Robbie Lezama"> Robbie Lezama</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Cassandra Bell"> Cassandra Bell</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Michael Morales"> Michael Morales</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 1. You are running a retail campaign; a store manager is upset you didn’t target his location. It’s not in your Routing document. What should you do?</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="A" required> A. Apologize and add his location to your route</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="B"> B. Show him it is not listed and continue your route</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="C"> C. Politely explain that you’ll notify the home office, and call OMT for guidance</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 2. According to DOT regulations, how many previous days must be recorded in your log book?</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="A" required> A. 3 days</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="B"> B. 7 days</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="C"> C. 8 days</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="D"> D. 14 days</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 3. You can call anytime to have Comdata funds added to your account.</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="True" required> A. True</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="False"> B. False</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 4. When are you required to stop at weigh stations/port of entry?</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="A" required> A. Every time, even if they are closed</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="B"> B. Every time they are open</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="C"> C. You don’t need to stop because a CDL license is not required for our trucks</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 5. For reimbursement, receipts and the receipt submission form must be submitted within how many days of purchase?</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="A" required> A. 30</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="B"> B. 60</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="C"> C. 90</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="D"> D. Any time</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 6. You must follow the Roadnet route exactly without any deviation.</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="A" required> A. Yes, unless specified otherwise</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="B"> B. No, unless specified otherwise</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="C"> C. You can drive wherever you want as long as you are driving</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 7. You are allowed to use a ladder to fix your vinyls, even if you have no one spotting you.</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="True" required> A. True</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="False"> B. False</label>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+
+  </form>
+
+</section>
+{% endblock %}

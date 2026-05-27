@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Benefits{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <h2 class="panel-title">Benefits</h2>
+
+  <div class="btn-grid one-col">
+
+
+
+    <a class="panel-btn danger" href="{{ url_for('employee_navigator') }}">Employee Navigator</a>
+
+    <a class="panel-btn" href="{{ url_for('benefit_info') }}">Benefits Info</a>
+
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='pdfs/pst_policy.pdf') }}"
+       target="_blank">
+       PST Policy
+    </a>
+
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='pdfs/401k_summary_plan.pdf') }}"
+       target="_blank">
+       401K Summary Plan Description
+    </a>
+
+  </div>
+</section>
+{% endblock %}

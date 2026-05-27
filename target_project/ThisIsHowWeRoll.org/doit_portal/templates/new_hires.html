@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}New Hire Orientation{% endblock %}
+
+{% block content %}
+<div class="panel hub">
+
+  <h1 class="panel-title">New Hire Orientation</h1>
+
+  <div class="hub-stack new-hire-grid">
+
+    <a class="hub-pill hub-pill--red" href="{{ url_for('upcoming_campaign') }}" >
+      Upcoming Campaign Questionnaire
+    </a>
+
+    <a class="hub-pill" href="{{ url_for('week_test', week=2) }}">2 Week Post Hire Test</a>
+    <a class="hub-pill" href="{{ url_for('week_test', week=4) }}">4 Week Post Hire Test</a>
+    <a class="hub-pill" href="{{ url_for('week_test', week=6) }}">6 Week Post Hire Test</a>
+    <a class="hub-pill" href="{{ url_for('week_test', week=8) }}">8 Week Post Hire Test</a>
+    <a class="hub-pill" href="{{ url_for('week_test', week=10) }}">10 Week Post Hire Test</a>
+    <a class="hub-pill" href="{{ url_for('week_test', week=12) }}">12 Week Post Hire Test</a>
+
+    <a class="hub-pill" href="{{ url_for('return_to_work_quiz') }}">Return to Work Quiz</a>
+    <!-- <a class="hub-pill" href="{{ url_for('photo_quiz') }}">Photo Quality Quiz</a> -->
+    <a class="hub-pill" href="{{ url_for('dot_compliance_test') }}">DOT Compliance Test</a>
+    <a class="hub-pill" href="{{ url_for('post_training_recap') }}">Post Training Recap</a>
+    <a class="hub-pill" href="{{ url_for('planning_practice_assignment') }}">M-M Planning Practice Assignment</a>
+
+  </div>
+
+</div>
+{% endblock %}

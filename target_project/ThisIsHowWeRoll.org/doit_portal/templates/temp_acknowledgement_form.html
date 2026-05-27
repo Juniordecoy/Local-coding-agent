@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% block title %}Temp Driver Acknowledgement Form{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Temp Driver Acknowledgement Form</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your answers have been submitted.</div>
+  {% endif %}
+
+  <form class="ojt-form" method="POST" action="{{ url_for('acknowledgement_form') }}">
+
+    <!-- 1 - 6 Text Fields -->
+
+    <div class="quiz-block">
+      <label>* 1. Your Full Name</label>
+      <textarea name="q1_questions" rows="1" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 2. What is your phone number?</label>
+      <textarea name="q2_questions" rows="1" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 3. Who did your initial training?</label>
+      <textarea name="q3_questions" rows="1" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 4. Who is your Lead Driver?</label>
+      <textarea name="q4_questions" rows="1" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 5. What campaign will you be running?</label>
+      <textarea name="q5_questions" rows="1" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 6. What unit # will you be driving?</label>
+      <textarea name="q6_questions" rows="1" required></textarea>
+    </div>
+
+    <!-- 7 -->
+    <fieldset class="quiz-block">
+      <legend>7. Do you understand how to find, and where to leave the keys for the vehicle?</legend>
+      <label class="radio-row">
+        <input type="radio" name="keys_understanding" value="Yes" required> Yes
+      </label>
+      <label class="radio-row">
+        <input type="radio" name="keys_understanding" value="No"> No
+      </label>
+    </fieldset>
+
+    <!-- 8 -->
+    <fieldset class="quiz-block">
+      <legend>* 8. Do you have your routing printed out?</legend>
+      <label class="radio-row">
+        <input type="radio" name="routing_printed" value="Yes" required> Yes
+      </label>
+      <label class="radio-row">
+        <input type="radio" name="routing_printed" value="No"> No
+      </label>
+      <label class="radio-row">
+        <input type="radio" name="routing_printed" value="No but will"> No, but I will
+      </label>
+    </fieldset>
+
+    <!-- 9 -->
+    <fieldset class="quiz-block">
+      <legend>* 9. Did you review the handbook?</legend>
+      <label class="radio-row">
+        <input type="radio" name="review_handbook" value="Yes" required> Yes
+      </label>
+      <label class="radio-row">
+        <input type="radio" name="review_handbook" value="No"> No
+      </label>
+      <label class="radio-row">
+        <input type="radio" name="review_handbook" value="No but will"> No, but I will
+      </label>
+    </fieldset>
+
+    <!-- Initial fields 10 - 18 -->
+
+    {% for i in range(10, 19) %}
+    {% endfor %}
+
+    <div class="quiz-block">
+      <label>* 10. I understand that the tablets are for business purposes only... (Initials)</label>
+        <textarea name="q10_questions" rows="1" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 11. I will keep the truck clean - inside and out. (Initials)</label>
+      <textarea name="q11_questions" rows="1" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 12. I will not smoke in or around the truck. (Initials)</label>
+      <textarea name="q12_questions" rows="1" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 13. I will not use my cellphone while driving. (Initials)</label>
+      <textarea name="q13_questions" rows="1" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 14. I will not exceed 55 MPH while driving. (Initials)</label>
+      <textarea name="q14_questions" rows="1" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 15. I will keep work to an 8 hour day. (Initials)</label>
+      <textarea name="q15_questions" rows="1" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 16. I will work the hours listed in my routing. (Initials)</label>
+      <textarea name="q16_questions" rows="1" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 17. I am allowed ONE 30 minute break. (Initials)</label>
+      <textarea name="q17_questions" rows="1" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 18. Stops over 15 minutes must be reported. (Initials)</label>
+      <textarea name="q18_questions" rows="1" required></textarea>
+    </div>
+
+    <!-- 19 -->
+    <div class="quiz-block">
+      <label>* 19. I will alert my lead driver of any stops longer than 15 minutes (Initials)</label>
+      <textarea name="q19_questions" rows="1" required></textarea>
+    </div>
+
+    <!-- 20 -->
+    <fieldset class="quiz-block">
+      <legend>20. I understand the fuel card must remain with the truck.</legend>
+      <label class="radio-row">
+        <input type="radio" name="fuel_card" value="Yes" required> Yes
+      </label>
+      <label class="radio-row">
+        <input type="radio" name="fuel_card" value="No"> No
+      </label>
+    </fieldset>
+
+    <!-- 21-23 initials -->
+
+    <div class="quiz-block">
+      <label>* 21. Tablet use is required. (Initials)</label>
+      <textarea name="q21_questions" rows="1" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 22. Tablet remains inside vehicle. (Initials)</label>
+      <textarea name="q22_questions" rows="1" required></textarea>
+    </div>
+
+    <div class="quiz-block">
+      <label>* 23. Photos must be uploaded regularly. (Initials)</label>
+      <textarea name="q23_questions" rows="1" required></textarea>
+    </div>
+
+    <!-- 24 -->
+    <div class="quiz-block">
+      <label>* 24. Do you understand what type of photos and how many we are looking for?</label>
+      <textarea name="q24_questions" rows="1" required></textarea>
+    </div>
+
+    <!-- 25 -->
+    <div class="quiz-block">
+      <label>* 25. Tablet and keys must remain with vehicle (Initials)</label>
+      <textarea name="q25_questions" rows="1" required></textarea>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button class="submit-btn" type="submit">Submit</button>
+
+  </form>
+
+</section>
+{% endblock %}

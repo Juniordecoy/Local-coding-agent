@@ -1,0 +1,443 @@
+{% extends "base.html" %}
+{% block title %}Harassment Training - Drivers{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Harassment Training - Drivers</h2>
+
+  <ul class="hq-instructions">
+    <li>You must go through the entire PDF presentation below. You can view/download through the button.</li>
+    <li>After you finish reading the document you MUST acknowledge that you have done so using the form below the button.</li>
+    <li>Once you have done that - please complete the quiz below. YOU MUST CLICK SUBMIT after all questions have been answered.</li>
+  </ul>
+
+  <!-- PDF Button -->
+  <div class="btn-grid one-col" style="max-width: 680px;">
+    <a class="panel-btn" href="{{ url_for('static', filename='pdfs/Discrimination_Sexual_Harassment.pdf') }}" target="_blank">
+      Driver Discrimination Harassment/Sexual Harassment Training
+    </a>
+  </div>
+
+  <!-- FORM 1: Acknowledgement -->
+  <div class="hq-box">
+    <h3 class="hq-title">Acknowledgement</h3>
+    {% if ack_submitted %}
+      <div class="form-success">Acknowledgement submitted ✅</div>
+    {% endif %}
+    <form method="POST" action="{{ url_for('harassment_training', role='drivers') }}">
+      <input type="hidden" name="form_name" value="ack">
+
+      <div class="field">
+        <label for="ack_name"><span class="req"></span> Your name</label>
+        <input id="ack_name" name="ack_name" type="text" required>
+      </div>
+
+      <div class="hq-radio">
+        <label>
+          <input type="radio" name="ack_complete" value="yes" required>
+          I have finished viewing the Driver’s Discrimination Harassment/Sexual Harassment presentation in it's entirety
+        </label>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div>
+
+  <!-- FORM 2: Quiz -->
+  <div class="hq-box">
+    <h3 class="hq-title">Harassment Training Quiz</h3>
+    {% if quiz_submitted %}
+      <div class="form-success">Quiz submitted ✅</div>
+    {% endif %}
+    <form method="POST" action="{{ url_for('harassment_training', role='drivers') }}">
+     <input type="hidden" name="form_name" value="quiz">
+      <div class="photo-grid">
+        <div class="field">
+          <label for="your_name"><span class="req"></span> Your name</label>
+          <input id="your_name" name="your_name" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="email"><span class="req"></span> Email</label>
+          <input id="email" name="email" type="text" required>
+        </div>
+      </div>
+
+      <!-- Q1 Example -->
+      <div class="hq-q">
+        <p><strong>* 1. If everyone else thinks a Driver’s behavior is okay, you should just accept it, even if it bothers you.</strong></p>
+        <label><input type="radio" name="q1" value="true" required> True</label>
+        <label><input type="radio" name="q1" value="false"> False</label>
+
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <template class="explain-true">
+          <strong>Incorrect: The correct answer is False. If the behavior makes you uncomfortable, you should say something right away. If you don’t feel comfortable saying something directly to the offender, you should contact a Lead Driver, Operations Manager, or Human Resources.</strong>
+        </template>
+
+        <template class="explain-false">
+          <strong>Correct: If the behavior makes you uncomfortable, you should say something right away. If you don’t feel comfortable saying something directly to the offender, you should contact a Lead Driver, Operations Manager, or Human Resources.</strong>
+        </template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 2. Which of these is NOT considered sexual harassment?</strong></p>
+        <label><input type="radio" name="q2" value="a" required>a. Unwelcome sexual advances</label>
+        <label><input type="radio" name="q2" value="b">b. Complimenting a colleague’s appearance</label>
+        <label><input type="radio" name="q2" value="c">c. Requests for sexual favors</label>
+        <label><input type="radio" name="q2" value="d">d. Verbal or physical conduct of a sexual nature</label>
+
+        <!-- Feedback container -->
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <!-- Correct answer template -->
+        <template class="explain-b"><strong>Correct: Complimenting a colleague’s appearance is <em>generally</em> NOT considered harassment.</strong></template>
+
+        <!-- Incorrect templates -->
+        <template class="explain-a"><strong>Incorrect: The correct answer is B. Complimenting a colleague’s appearance is generally NOT considered harassment.</strong></template>
+        <template class="explain-c"><strong>Incorrect: The correct answer is B. Complimenting a colleague’s appearance is generally NOT considered harassment.</strong></template>
+        <template class="explain-d"><strong>Incorrect: The correct answer is B. Complimenting a colleague’s appearance is generally NOT considered harassment.</strong></template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 3. In order for it to be determined sexual harassment, the victim has to be of the opposite sex of the harasser.</strong></p>
+        <label><input type="radio" name="q3" value="true" required> True</label>
+        <label><input type="radio" name="q3" value="false"> False</label>
+
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <template class="explain-true">
+          <strong>Incorrect: The correct answer is False. Harassment can occur in any combination of genders. By the same token, this applies to all forms of harassment, i.e. race, religion, age, ethnicity – the harasser may be the same or different.</strong>
+        </template>
+
+        <template class="explain-false">
+          <strong>Correct: Harassment can occur in any combination of genders. By the same token, this applies to all forms of harassment, i.e. race, religion, age, ethnicity – the harasser may be the same or different.</strong>
+        </template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 4. In order for something to qualify as harassment/discrimination, it must be a supervisor engaging in the offensive conduct.</strong></p>
+        <label><input type="radio" name="q4" value="true" required> True</label>
+        <label><input type="radio" name="q4" value="false"> False</label>
+
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <template class="explain-true">
+          <strong>Incorrect: The correct answer is False. Harassment can come from a direct supervisor, a supervisor in another area, a co-worker or a non-employee such as a vendor, supplier, or customer.</strong>
+        </template>
+
+        <template class="explain-false">
+          <strong>Correct: Harassment can come from a direct supervisor, a supervisor in another area, a co-worker or a non-employee such as a vendor, supplier, or customer.</strong>
+        </template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 5. Henry and Christine are Drivers that often joke about things of a sexual nature. They are friends, and neither one of them is offended by their banter. Sally is working with them, and is uncomfortable with these exchanges. This is harassment.</strong></p>
+        <label><input type="radio" name="q5" value="true" required> True</label>
+        <label><input type="radio" name="q5" value="false"> False</label>
+
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <template class="explain-true">
+          <strong>Correct: The answer is True, but this one is tricky. While Henry and Christine are indeed not guilty of harassing one another, their conduct -- even though consensual -- has made Sally, a third-party to the conduct, uncomfortable. In addition, although Henry and Christine may not be uncomfortable with the sexual bantering, it is likely still against their company’s policy to engage in such behavior in the workplace.</strong>
+        </template>
+
+        <template class="explain-false">
+          <strong>Incorrect: The correct answer is True, but this one is tricky. While Henry and Christine are indeed not guilty of harassing one another, their conduct -- even though consensual -- has made Sally, a third-party to the conduct, uncomfortable. In addition, although Henry and Christine may not be uncomfortable with the sexual bantering, it is likely still against their company’s policy to engage in such behavior in the workplace.</strong>
+        </template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 6. To be considered discrimination/harassment, the offensive conduct must occur in which of the following places?</strong></p>
+        <label><input type="radio" name="q6" value="a" required>a. In the office</label>
+        <label><input type="radio" name="q6" value="b">b. Off-site at work functions</label>
+        <label><input type="radio" name="q6" value="c">c. While traveling for business</label>
+        <label><input type="radio" name="q6" value="d">d. At client offices or events</label>
+        <label><input type="radio" name="q6" value="e">e. Online</label>
+        <label><input type="radio" name="q6" value="f">f. Any or all of the above</label>
+
+        <!-- Feedback container -->
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <!-- Correct answer template -->
+        <template class="explain-f"><strong>Correct: Discrimination and/or harassment may occur at any of these places.</strong></template>
+
+        <!-- Incorrect templates -->
+        <template class="explain-a"><strong>Incorrect:The correct answer is F. Discrimination and/or harassment may occur at any of these places.</strong></template>
+        <template class="explain-b"><strong>Incorrect:The correct answer is F. Discrimination and/or harassment may occur at any of these places.</strong></template>
+        <template class="explain-c"><strong>Incorrect:The correct answer is F. Discrimination and/or harassment may occur at any of these places.</strong></template>
+        <template class="explain-d"><strong>Incorrect:The correct answer is F. Discrimination and/or harassment may occur at any of these places.</strong></template>
+        <template class="explain-e"><strong>Incorrect:The correct answer is F. Discrimination and/or harassment may occur at any of these places.</strong></template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 7. Which of the following is NOT considered sexual harassment?</strong></p>
+        <label><input type="radio" name="q7" value="a" required>a. Asking another Driver for a date</label>
+        <label><input type="radio" name="q7" value="b">b. Dating or having a relationship with a Driver</label>
+        <label><input type="radio" name="q7" value="c">c. Paying a compliment to a Driver or Thecia</label>
+        <label><input type="radio" name="q7" value="d">d. All of the above</label>
+
+        <!-- Feedback container -->
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <!-- Correct answer template -->
+        <template class="explain-d"><strong>Correct: Although it is recommend to proceed with caution because repetitive requests may be considered harassment..</strong></template>
+
+        <!-- Incorrect templates -->
+        <template class="explain-a"><strong>Incorrect: The correct answer is D. Recommend proceeding with caution because repetitive requests may be considered harassment..</strong></template>
+        <template class="explain-b"><strong>Incorrect: The correct answer is D. Recommend proceeding with caution because repetitive requests may be considered harassment..</strong></template>
+        <template class="explain-c"><strong>Incorrect: The correct answer is D. Recommend proceeding with caution because repetitive requests may be considered harassment..</strong></template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 8. The goal of this training is for all Drivers to treat each other with R E S P E C T and to ensure that your behavior meets our expectations.</strong></p>
+        <label><input type="radio" name="q8" value="true" required> True</label>
+        <label><input type="radio" name="q8" value="false"> False</label>
+
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <template class="explain-true">
+          <strong>Correct: True. We have a diverse group of Drivers and we want everyone to treat each other with respect.</strong>
+        </template>
+
+        <template class="explain-false">
+          <strong>Incorrect: The correct answer is True. We have a diverse group of Drivers and we want everyone to treat each other with respect.</strong>
+        </template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 9. Sexual harassment is illegal under federal AND state laws</strong></p>
+        <label><input type="radio" name="q9" value="true" required> True</label>
+        <label><input type="radio" name="q9" value="false"> False</label>
+
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <template class="explain-true">
+          <strong>Correct: Federal law prohibits harassment under Title VII of the Civil Rights Act of 1964, and many states also prohibit sexual harassment. Some states and municipalities use even stricter guidelines for sexual harassment than the federal law.</strong>
+        </template>
+
+        <template class="explain-false">
+          <strong>Incorrect: The correct answer us True. Federal law prohibits harassment under Title VII of the Civil Rights Act of 1964, and many states also prohibit sexual harassment. Some states and municipalities use even stricter guidelines for sexual harassment than the federal law.</strong>
+        </template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 10. The best solution to the problem of sexual harassment is:</strong></p>
+        <label><input type="radio" name="q10" value="a" required>a. Prevention</label>
+        <label><input type="radio" name="q10" value="b">b. Limiting outside activities such as company parties</label>
+        <label><input type="radio" name="q10" value="c">c. Writing a policy</label>
+
+        <!-- Feedback container -->
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <!-- Correct answer template -->
+        <template class="explain-a"><strong>Correct: Part of prevention is writing a policy stating that sexual harassment will not be tolerated. Prevention includes communicating that policy to employees, training employees to recognize and understand harassment, show employees how to report incidences of harassment, and enforce the policy.</strong></template>
+
+        <!-- Incorrect templates -->
+        <template class="explain-b"><strong>Incorrect: The correct answer is A. Part of prevention is writing a policy stating that sexual harassment will not be tolerated. Prevention includes communicating that policy to employees, training employees to recognize and understand harassment, show employees how to report incidences of harassment, and enforce the policy.</strong></template>
+        <template class="explain-c"><strong>Incorrect: The correct answer is A. Part of prevention is writing a policy stating that sexual harassment will not be tolerated. Prevention includes communicating that policy to employees, training employees to recognize and understand harassment, show employees how to report incidences of harassment, and enforce the policy.</strong></template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 11. If your intentions are good, your behavior cannot be considered inappropriate or harassment.</strong></p>
+        <label><input type="radio" name="q11" value="true" required> True</label>
+        <label><input type="radio" name="q11" value="false"> False</label>
+
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <template class="explain-true">
+          <strong>Incorrect: The correct answer is False. Intentions do not matter in cases of inappropriate behavior. It is measured by the impact it has on the victim, not by whether you intended to harass or make the person feel uncomfortable. By that same token, just because someone does not complain does not mean they are not offended by your behavior. Not everyone feels comfortable speaking up about unwelcome or inappropriate behavior. It is best to refrain from any behavior in the workplace that might cross the line and cause someone to be offended.</strong>
+        </template>
+
+        <template class="explain-false">
+          <strong>Correct: Intentions do not matter in cases of inappropriate behavior. It is measured by the impact it has on the victim, not by whether you intended to harass or make the person feel uncomfortable. By that same token, just because someone does not complain does not mean they are not offended by your behavior. Not everyone feels comfortable speaking up about unwelcome or inappropriate behavior. It is best to refrain from any behavior in the workplace that might cross the line and cause someone to be offended.</strong>
+        </template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 12. Whose conduct is covered under the discrimination/harassment policy?</strong></p>
+        <label><input type="radio" name="q12" value="a" required>a. Drivers at a baseball game on their day off</label>
+        <label><input type="radio" name="q12" value="b">b. Drivers putting up vinyls</label>
+        <label><input type="radio" name="q12" value="c">c. Drivers at the York or Vegas office</label>
+        <label><input type="radio" name="q12" value="d">d. Drivers meeting with a client for an event</label>
+        <label><input type="radio" name="q12" value="e">e. All of the above</label>
+
+        <!-- Feedback container -->
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <!-- Correct answer template -->
+        <template class="explain-e"><strong>Correct: All of the above</strong></template>
+
+        <!-- Incorrect templates -->
+        <template class="explain-a"><strong>Incorrect: The correct answer is E. All of the above</strong></template>
+        <template class="explain-b"><strong>Incorrect: The correct answer is E. All of the above</strong></template>
+        <template class="explain-c"><strong>Incorrect: The correct answer is E. All of the above</strong></template>
+        <template class="explain-d"><strong>Incorrect: The correct answer is E. All of the above</strong></template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 13. An employee may be fired for retaliation even if they were unjustly accused.</strong></p>
+        <label><input type="radio" name="q13" value="true" required> True</label>
+        <label><input type="radio" name="q13" value="false"> False</label>
+
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <template class="explain-true">
+          <strong>Correct: Retaliation in any way, shape or form, and for any reason, is not tolerated.</strong>
+        </template>
+
+        <template class="explain-false">
+          <strong>Incorrect: The correct answer is True. Retaliation in any way, shape or form, and for any reason, is not tolerated.</strong>
+        </template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 14. Where do you find the Company’s policy regarding Harassment and Discrimination?</strong></p>
+        <label><input type="radio" name="q14" value="a" required>a. The company doesn’t have one</label>
+        <label><input type="radio" name="q14" value="b">b. The Employee Handbook</label>
+        <label><input type="radio" name="q14" value="c">c. With my Routing</label>
+
+        <!-- Feedback container -->
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <!-- Correct answer template -->
+        <template class="explain-b"><strong>Correct: The employee handbook</strong></template>
+
+        <!-- Incorrect templates -->
+        <template class="explain-a"><strong>Incorrect: The correct answer is B. The employee handbook</strong></template>
+        <template class="explain-c"><strong>Incorrect: The correct answer is B. The employee handbook</strong></template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 15. do it outdoors media has a zero tolerance policy regarding discrimination, workplace harassment, sexual harassment.</strong></p>
+        <label><input type="radio" name="q15" value="true" required> True</label>
+        <label><input type="radio" name="q15" value="false"> False</label>
+
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <template class="explain-true">
+          <strong>Correct</strong>
+        </template>
+
+        <template class="explain-false">
+          <strong>Incorrect: The correct answer is true</strong>
+        </template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 16. The victim is the only person that has a right to accuse someone of harassment.</strong></p>
+        <label><input type="radio" name="q16" value="true" required> True</label>
+        <label><input type="radio" name="q16" value="false"> False</label>
+
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <template class="explain-true">
+          <strong>Incorrect: The correct is False. Anyone who is made to feel uncomfortable should speak up.</strong>
+        </template>
+
+        <template class="explain-false">
+          <strong>Correct: Anyone who is made to feel uncomfortable should speak up.</strong>
+        </template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 17. Witnesses in a sexual harassment case are protected from retaliation.</strong></p>
+        <label><input type="radio" name="q17" value="true" required> True</label>
+        <label><input type="radio" name="q17" value="false"> False</label>
+
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <template class="explain-true">
+          <strong>Correct: Victims as well as witnesses are protected from retaliation.</strong>
+        </template>
+
+        <template class="explain-false">
+          <strong>Incorrect: The correct answer is True. Victims as well as witnesses are protected from retaliation.</strong>
+        </template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 18. What do you do if you are a victim of harassment?</strong></p>
+        <label><input type="radio" name="q18" value="a" required>a. Approach the person and tell them what is bothering you</label>
+        <label><input type="radio" name="q18" value="b">b. Ask them to stop the behavior</label>
+        <label><input type="radio" name="q18" value="c">c. Talk to your Lead Driver, a member of the Operations Management Team, or HR</label>
+        <label><input type="radio" name="q18" value="d">d. All of the above</label>
+
+        <!-- Feedback container -->
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <!-- Correct answer template -->
+        <template class="explain-d"><strong>Correct: Do not allow harassing behavior to continue.</strong></template>
+
+        <!-- Incorrect templates -->
+        <template class="explain-a"><strong>Incorrect: The correct answer is D. Do not allow harassing behavior to continue.</strong></template>
+        <template class="explain-b"><strong>Incorrect: The correct answer is D. Do not allow harassing behavior to continue.</strong></template>
+        <template class="explain-c"><strong>Incorrect: The correct answer is D. Do not allow harassing behavior to continue.</strong></template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 19. If an employee complains about workplace harassment / discrimination and an investigation does not prove the allegations to be true, the employee may be disciplined for filing the complaint.</strong></p>
+        <label><input type="radio" name="q19" value="true" required> True</label>
+        <label><input type="radio" name="q19" value="false"> False</label>
+
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <template class="explain-true">
+          <strong>Incorrect: The correct answer is False. Retaliation for reporting sexual harassment is illegal, even if the charges are determined to be unfounded, as long as the report was made in good faith.</strong>
+        </template>
+
+        <template class="explain-false">
+          <strong>Correct: Retaliation for reporting sexual harassment is illegal, even if the charges are determined to be unfounded, as long as the report was made in good faith.</strong>
+        </template>
+      </div>
+
+      <div class="hq-q">
+        <p><strong>* 20. Sexual harassment is not limited to physical contact. It can occur any time that an individual is uncomfortable with another person’s approaches, comments or discussions.</strong></p>
+        <label><input type="radio" name="q20" value="true" required> True</label>
+        <label><input type="radio" name="q20" value="false"> False</label>
+
+        <div class="hq-feedback"><div class="hq-feedback-inner"></div></div>
+
+        <template class="explain-true">
+          <strong>Correct</strong>
+        </template>
+
+        <template class="explain-false">
+          <strong>Incorrect: The correct answer is True</strong>
+        </template>
+      </div>
+
+      <div style="position:absolute; left:-9999px;">
+        <input type="text" name="company" autocomplete="off">
+      </div>
+
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div>
+
+
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener("change", (e) => {
+    const input = e.target;
+    if (!input.matches('input[type="radio"]')) return;
+
+    const q = input.closest(".hq-q");
+    if (!q) return;
+
+    const feedback = q.querySelector(".hq-feedback");
+    const inner = q.querySelector(".hq-feedback-inner");
+    if (!feedback || !inner) return;
+
+    // decide which explanation template to show
+    const tpl = q.querySelector(`.explain-${input.value}`);
+    if (tpl) inner.innerHTML = tpl.innerHTML.trim().replace(/\n/g, "<br>");
+
+    feedback.classList.add("show");
+  });
+</script>
+{% endblock %}

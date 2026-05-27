@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Maintenance Info{% endblock %}
+
+{% block content %}
+
+<div class="panel">
+  <h1 class="mi-title">Maintenance Info</h1>
+
+  <div class="mi-layout">
+
+    <!-- left column -->
+    <div class="mi-left">
+      <div class="mi-section-title mi-section-title--red">Maintenance exemption forms</div>
+      <div class="mi-section-sub">
+        These must be in every vehicle and presented to the shop
+        when having work completed.
+      </div>
+
+      <div class="mi-left-buttons">
+        <a class="mi-btn mi-btn--small"
+           href="{{ url_for('static', filename='pdfs/multi_state_exemption.pdf') }}"
+           target="_blank">
+          Multi-state
+        </a>
+
+        <a class="mi-btn mi-btn--small"
+           href="{{ url_for('static', filename='pdfs/pennsylvania_exemption.pdf') }}"
+           target="_blank">
+          Pennsylvania
+        </a>
+      </div>
+    </div>
+
+    <!-- right column -->
+    <div class="mi-right">
+      <div class="mi-diy-title">DIY Videos</div>
+
+      <div class="mi-video-list">
+        <a class="mi-btn mi-btn--wide"
+           href="{{ url_for('static', filename='pdfs/adjusting_ac_belt.pdf') }}"
+           target="_blank">
+          DIY - Adjusting Your AC Belt
+        </a>
+
+        <a class="mi-btn mi-btn--wide"
+           href="{{ url_for('static', filename='pdfs/clean_air_cabin_filter_diesel.pdf') }}"
+           target="_blank">
+          DIY - Cleaning Your Air Cabin Filter (Diesel Units)
+        </a>
+
+        <a class="mi-btn mi-btn--wide"
+           href="{{ url_for('gas_air_cabin_filter') }}">
+          DIY - Cleaning Your Air Cabin Filter (New gas Units)
+        </a>
+
+        <a class="mi-btn mi-btn--wide"
+           href="{{ url_for('static', filename='pdfs/replacing_l_bracket.pdf') }}"
+           target="_blank">
+          DIY - Replacing L bracket
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

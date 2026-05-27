@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %}Week 4 Post Hire Test{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Week 4 Post Hire Test</h2>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your test was submitted.</div>
+  {% endif %}
+
+  <form class="quiz-form" method="POST" action="{{ url_for('week_test', week=4) }}">
+
+    <div class="photo-grid">
+      <div class="field">
+        <label for="your_name"><span class="req"></span> Your name</label>
+        <input id="your_name" name="your_name" type="text" required>
+      </div>
+
+      <div class="field">
+        <label for="email"><span class="req"></span> Email</label>
+        <input id="email" name="email" type="text" required>
+      </div>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* Who is your "Mentor" Lead Driver?</label>
+
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Mark Hooper" required> Mark Hooper</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Jermaine Bridges"> Jermaine Bridges</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Gary Rausin"> Gary Rausin</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Rene Santiago"> Rene Santiago</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Carlos Villalobos"> Carlos Villalobos</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Robbie Lezama"> Robbie Lezama</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Cassandra Bell"> Cassandra Bell</label>
+      <label class="quiz-opt"><input type="radio" name="mentor" value="Michael Morales"> Michael Morales</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 1. When submitting receipts, you must do the following:</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="A" required> A. Use the Paylocity Expense App to submit expenses</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="B"> B. Print your name and unit number on each receipt, attach receipt photos in the Paylocity App</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="C"> C. Text them to your Lead Driver</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="D"> D. Email them to receipts@doitoutdoors.com</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="E"> E. A &amp; B</label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="F"> F. All of the above</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 2. When should you use the Paylocity app during your shift?</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="A" required> A. When loading your route</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="B"> B. When checking the weather</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="C"> C. To clock in and out</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="D"> D. To change labor codes when switching tasks</label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="E"> E. Both C. and D.</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 3. What steps must you take if you are involved in a vehicle accident?</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="A" required> A. Call law enforcement, regardless of whether someone was hurt</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="B"> B. Call for medical assistance if needed</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="C"> C. Call your Lead Driver and/or Field Operations &amp; Safety Manager (Jason)</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="D"> D. Do not move the vehicle unless instructed to do so</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="E"> E. Avoid discussing the accident with other parties</label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="F"> F. All of the above</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 4. When are campaign photos due?</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="A" required> A. When it’s convenient</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="B"> B. Only if there are events</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="C"> C. For any campaign &lt; 5 days, prefer daily. At a minimum</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="D"> D. On Day 2 and the last day for a 5-day campaign</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="E"> E. On Day 5 and weekly for campaigns longer than a week</label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="F"> F. C., D. and E.</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 5. If you accidentally put the wrong fuel type in your unit, what should you do?</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="A" required> A. Nothing, continue driving as normal</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="B"> B. Do not start the vehicle; contact your Lead Driver</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="C"> C. Move the vehicle to another spot</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="D"> D. Call Merchants for instructions</label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="E"> E. Both B. and D.</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 6. You are expected to check your voicemail/email at least daily – even when not on a campaign.</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="True" required> A. True</label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="False"> B. False</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 7. If you need to go off-route or stop for more than 15 minutes during a campaign, you should:</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="A" required> A. Contact your Lead Driver/GPS Coordinator (first to answer) and explain the situation</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="B"> B. No need to notify anyone</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="C"> C. Contact the client directly</label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="D"> D. Both A. and C.</label>
+    </div>
+
+    <div class="hq-q">
+      <label class="quiz-q">* 8. How often do you need to clean the MAV (Mobile Advertising Vehicle)?</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="A" required> A. Spot clean daily</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="B"> B. Thoroughly clean weekly and when leaving vehicle</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="C"> C. Don’t bother cleaning when leaving, the next Driver can clean it</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="D"> D. For events – then it should be spit-shined!</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="E"> E. A., C. and D.</label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="F"> F. A., B. and D.</label>
+    </div>
+
+    <div style="position:absolute; left:-9999px;">
+      <input type="text" name="do_not_fill" autocomplete="off">
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+
+  </form>
+
+</section>
+{% endblock %}

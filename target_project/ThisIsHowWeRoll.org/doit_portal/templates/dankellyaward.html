@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% block title %}Dan Kelly Award{% endblock %}
+
+{% block content %}
+<section class="panel dk-panel">
+
+  <h2 class="panel-title dk-title">Dan Kelly Award<br>Photo of the Year</h2>
+
+  <!-- Top memorial row -->
+  <div class="dk-hero">
+
+    <div class="dk-hero-left">
+      <!-- Dan photo -->
+      <img class="dk-portrait"
+           src="{{ url_for('static', filename='img/dankelly_images/Dan_Kelly.avif') }}"
+           alt="In Memory of Daniel Kelly">
+
+      <div class="dk-caption">In Memory of Daniel Kelly</div>
+    </div>
+
+    <div class="dk-hero-right">
+      <!-- Ribbon/award icon -->
+      <img class="dk-ribbon"
+           src="{{ url_for('static', filename='img/dankelly_images/ribbon.png') }}"
+           alt="Award Ribbon">
+    </div>
+
+  </div>
+
+  <h3 class="dk-subtitle">The “Dan Kelly Award”</h3>
+
+  <div class="dk-text">
+    <p>
+      For those of you who didn’t know Dan Kelly, he was a Lead Driver from PA who exemplified all that a MBB driver should be.
+      He was passionate about delivering a quality campaign and sending in campaign photos that wowed our clients. Dan never hesitated
+      to take on difficult markets and assignments — smoking billboards, tandem runs, etc. He had a positive attitude, a great sense of
+      humor, and was always willing to lend a hand. He would even give you the shirt off his back if you needed it.
+    </p>
+
+    <p>
+      Dan passed away due to an illness in 2012, but his memory continues to live on with those of us that knew him.
+    </p>
+
+    <p>
+      In 2019 we started a new contest in honor of Dan Kelly for “Photo of the year”, called The Dan Kelly Award.
+      All photo contest winning photos for the year will be pooled together and Operations will vote on the finalists.
+      Drivers will vote on their favorite out of the finalists. Photo with the most votes will win the Dan Kelly Award.
+    </p>
+  </div>
+
+  <!-- ===== YEAR SECTIONS (copy/paste blocks down to 2018) ===== -->
+
+  <div class="dk-year">
+    <div class="dk-divider"></div>
+    <div class="dk-year-head">
+      <div class="dk-year-num">2024</div>
+      <div class="dk-year-name">Carlos Villalobos - Austin, TX</div>
+    </div>
+    <img class="dk-photo"
+         src="{{ url_for('static', filename='img/dankelly_images/DK_2024.avif') }}"
+         alt="2024 Dan Kelly Award Winner">
+  </div>
+
+  <div class="dk-year">
+    <div class="dk-divider"></div>
+    <div class="dk-year-head">
+      <div class="dk-year-num">2023</div>
+      <div class="dk-year-name">Merv Valentine - New York, NY</div>
+    </div>
+    <img class="dk-photo"
+         src="{{ url_for('static', filename='img/dankelly_images/DK_2023.avif') }}"
+         alt="2023 Dan Kelly Award Winner">
+  </div>
+
+  <div class="dk-year">
+    <div class="dk-divider"></div>
+    <div class="dk-year-head">
+      <div class="dk-year-num">2022</div>
+      <div class="dk-year-name">Mark Hooper - Miami, FL</div>
+    </div>
+    <img class="dk-photo"
+         src="{{ url_for('static', filename='img/dankelly_images/DK_2022.avif') }}"
+         alt="2022 Dan Kelly Award Winner">
+  </div>
+
+  <div class="dk-year">
+    <div class="dk-divider"></div>
+    <div class="dk-year-head">
+      <div class="dk-year-num">2021</div>
+      <div class="dk-year-name">Merv Valentine - New York, NY</div>
+    </div>
+    <img class="dk-photo"
+         src="{{ url_for('static', filename='img/dankelly_images/DK_2021.avif') }}"
+         alt="2021 Dan Kelly Award Winner">
+  </div>
+
+  <div class="dk-year">
+    <div class="dk-divider"></div>
+    <div class="dk-year-head">
+      <div class="dk-year-num">2020</div>
+      <div class="dk-year-name">Jason Beck - Nashville, TN</div>
+    </div>
+    <img class="dk-photo"
+         src="{{ url_for('static', filename='img/dankelly_images/DK_2020.avif') }}"
+         alt="2020 Dan Kelly Award Winner">
+  </div>
+
+  <div class="dk-year">
+    <div class="dk-divider"></div>
+    <div class="dk-year-head">
+      <div class="dk-year-num">2019</div>
+      <div class="dk-year-name">Rene Santiago - Marquette, MI</div>
+    </div>
+    <img class="dk-photo"
+         src="{{ url_for('static', filename='img/dankelly_images/DK_2019.avif') }}"
+         alt="2020 Dan Kelly Award Winner">
+  </div>
+
+  <div class="dk-year">
+    <div class="dk-divider"></div>
+    <div class="dk-year-head">
+      <div class="dk-year-num">2018</div>
+      <div class="dk-year-name">Mark Lunsford - New Orleans, LA</div>
+    </div>
+    <img class="dk-photo"
+         src="{{ url_for('static', filename='img/dankelly_images/DK_2018.avif') }}"
+         alt="2020 Dan Kelly Award Winner">
+  </div>
+
+  <!-- Add 2019 + 2018 sections the same way -->
+
+</section>
+{% endblock %}

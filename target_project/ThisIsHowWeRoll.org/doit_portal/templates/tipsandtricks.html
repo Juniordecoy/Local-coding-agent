@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Photo Tips and Tricks{% endblock %}
+
+{% block content %}
+<section class="panel tips-panel">
+
+  <h2 class="tips-title">Photo Tips and Tricks</h2>
+
+  <ul class="tips-list">
+    <li>Make sure your size is set at the lowest possible setting in your camera</li>
+    <li>The entire truck and vinyl must be visible and legible</li>
+    <li>Make sure the vinyls aren’t obstructed by trees, poles, etc.</li>
+    <li>Put traffic between yourself and the truck, in other words dont take photos of traffic behind the truck.</li>
+    <li>
+      If parked along a major street, take the time to safely walk across the street to take photos of traffic driving by
+      (don’t put traffic behind the truck)
+    </li>
+    <li>
+      Is the truck close enough in the frame to be legible, but not so close to miss the traffic/surroundings?
+    </li>
+    <li><strong>NO CHILDREN!</strong></li>
+  </ul>
+
+  <div class="tips-btn-wrap">
+    <a class="btn tips-btn" href="{{ url_for('static', filename='pdfs/Photo_Tips_Tricks.pdf') }}" target="_blank" rel="noopener">Photo Tips Tricks Full Guide</a>
+  </div>
+
+  <div class="tips-btn-wrap">
+    <a class="btn tips-btn" href="{{ url_for('photoexamples') }}">Photo Examples</a>
+  </div>
+
+</section>
+{% endblock %}

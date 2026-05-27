@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="page dcr-page">
+  <div class="panel">
+
+    <h1 class="page-title">Driver Contact Report</h1>
+
+    {% if submitted %}
+      <div class="success-msg">
+        Thank you. Your report has been submitted.
+      </div>
+    {% endif %}
+
+    <form class="dcr-form" method="POST" action="{{ url_for('contactreport') }}">
+      <!-- Top fields (2-col like your screenshot) -->
+      <div class="dcr-grid-2">
+        <div class="field">
+          <label for="your_name"><span class="req"></span> Your Name</label>
+          <input id="your_name" name="your_name" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="email"><span class="req"></span> Email Address</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+
+        <div class="field">
+          <label for="date_discussion">Date of Discussion</label>
+          <input id="date_discussion" name="date_discussion" type="date">
+        </div>
+
+        <div class="field">
+          <label for="driver_name"><span class="req"></span> Driver's Name</label>
+          <input id="driver_name" name="driver_name" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="unit_number"><span class="req"></span> Unit Number</label>
+          <input id="unit_number" name="unit_number" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="campaign"><span class="req"></span> Campaign / Market (Use This Format)</label>
+          <input id="campaign" name="campaign" type="text" placeholder="Example: Brand – City, ST" required>
+        </div>
+      </div>
+
+      <!-- Lead Driver -->
+      <div class="q">
+        <div class="q-title"><span class="req"></span> Driver's Lead</div>
+        <div class="radio-list">
+          <label class="opt"><input type="radio" name="drivers_lead" value="Mark Hooper" required> Mark Hooper</label>
+          <label class="opt"><input type="radio" name="drivers_lead" value="Jermaine Bridges"> Jermaine Bridges</label>
+          <label class="opt"><input type="radio" name="drivers_lead" value="Gary Rausin"> Gary Rausin</label>
+          <label class="opt"><input type="radio" name="drivers_lead" value="Rene Santiago"> Rene Santiago</label>
+          <label class="opt"><input type="radio" name="drivers_lead" value="Carlos Villalobos"> Carlos Villalobos</label>
+          <label class="opt"><input type="radio" name="drivers_lead" value="Cassandra Bell"> Cassandra Bell</label>
+          <label class="opt"><input type="radio" name="drivers_lead" value="Robbie Lezama"> Robbie Lezama</label>
+          <label class="opt"><input type="radio" name="drivers_lead" value="Michael Morales"> Michael Morales</label>
+        </div>
+      </div>
+
+      <!-- Text areas -->
+      <div class="q">
+        <div class="q-title"><span class="req"></span> Please Describe Performance Concern or Issue (Please Provide Examples)</div>
+        <textarea name="performance_concern" rows="5" required></textarea>
+      </div>
+
+      <div class="q">
+        <div class="q-title"><span class="req"></span> Describe Agreed Upon Solution(s) or Course of Action</div>
+        <textarea name="solution_action" rows="5" required></textarea>
+      </div>
+
+      <!-- Rating -->
+      <div class="q">
+        <div class="q-title"><span class="req"></span> Driver's Overall Performance Rating</div>
+
+        <!-- hidden real value -->
+        <input type="hidden" id="rating_value" name="rating_value" required>
+
+        <div class="stars" role="radiogroup" aria-label="Performance rating">
+          <button type="button" class="star" data-value="1" aria-label="1 star">☆</button>
+          <button type="button" class="star" data-value="2" aria-label="2 stars">☆</button>
+          <button type="button" class="star" data-value="3" aria-label="3 stars">☆</button>
+          <button type="button" class="star" data-value="4" aria-label="4 stars">☆</button>
+          <button type="button" class="star" data-value="5" aria-label="5 stars">☆</button>
+        </div>
+
+        <div class="star-scale">
+          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+        </div>
+      </div>
+
+      <!-- Signature -->
+      <div class="q">
+        <div class="q-title"><span class="req"></span> Signature</div>
+
+        <input type="hidden" id="signature_data" name="signature_data" required>
+
+        <div class="sig-wrap">
+          <canvas id="sig_canvas" class="sig-canvas" width="720" height="180"></canvas>
+        </div>
+
+        <div class="sig-help">Use your mouse or finger to draw your signature</div>
+
+        <div class="sig-actions">
+          <button type="button" class="btn-lite" id="sig_clear">Clear Signature</button>
+        </div>
+      </div>
+
+      <!-- Date submitted -->
+      <div class="q">
+        <div class="q-title"><span class="req"></span> Date Submitted</div>
+        <input class="textline" type="date" name="date_submitted" required>
+      </div>
+
+      <div style="position:absolute; left:-9999px;">
+        <input type="text" name="do_not_fill" autocomplete="off">
+      </div>
+
+      <div class="form-actions">
+        <button class="btn" type="submit">Submit</button>
+      </div>
+
+    </form>
+
+  </div>
+</section>
+
+<script>
+  // ----- STAR RATING -----
+  (function () {
+    const stars = document.querySelectorAll(".star");
+    const ratingInput = document.getElementById("rating_value");
+
+    function setRating(val) {
+      ratingInput.value = val;
+      stars.forEach(btn => {
+        const v = parseInt(btn.dataset.value, 10);
+        btn.textContent = (v <= val) ? "★" : "☆";
+        btn.classList.toggle("active", v <= val);
+      });
+    }
+
+    stars.forEach(btn => {
+      btn.addEventListener("click", () => setRating(parseInt(btn.dataset.value, 10)));
+    });
+  })();
+
+  // ----- SIGNATURE PAD -----
+  (function () {
+    const canvas = document.getElementById("sig_canvas");
+    const ctx = canvas.getContext("2d");
+    const clearBtn = document.getElementById("sig_clear");
+    const sigInput = document.getElementById("signature_data");
+
+    // Make lines look nice
+    ctx.lineWidth = 2;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+
+    let drawing = false;
+    let lastX = 0, lastY = 0;
+
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches && e.touches[0];
+      const clientX = touch ? touch.clientX : e.clientX;
+      const clientY = touch ? touch.clientY : e.clientY;
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    function start(e) {
+      drawing = true;
+      const p = getPos(e);
+      lastX = p.x; lastY = p.y;
+      e.preventDefault();
+    }
+
+    function move(e) {
+      if (!drawing) return;
+      const p = getPos(e);
+
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+
+      lastX = p.x; lastY = p.y;
+      e.preventDefault();
+    }
+
+    function end() {
+      drawing = false;
+      // store dataURL in hidden input so form can submit it later
+      sigInput.value = canvas.toDataURL("image/png");
+    }
+
+    // Mouse
+    canvas.addEventListener("mousedown", start);
+    canvas.addEventListener("mousemove", move);
+    window.addEventListener("mouseup", end);
+
+    // Touch
+    canvas.addEventListener("touchstart", start, { passive: false });
+    canvas.addEventListener("touchmove", move, { passive: false });
+    canvas.addEventListener("touchend", end);
+
+    // Clear
+    clearBtn.addEventListener("click", () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      sigInput.value = "";
+    });
+
+    // If user submits without lifting mouse, capture anyway
+    const form = document.querySelector(".dcr-form");
+    form.addEventListener("submit", () => {
+      if (!sigInput.value) sigInput.value = canvas.toDataURL("image/png");
+    });
+  })();
+</script>
+
+{% endblock %}

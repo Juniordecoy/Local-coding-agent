@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}DOT Compliance{% endblock %}
+
+{% block content %}
+
+<section class="panel">
+
+  <h2 class="panel-title">D.O.T. Compliance</h2>
+
+  <div class="btn-grid two-col" style="max-width: 700px; margin:auto;">
+
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='pdfs/xrs_cab_card.pdf') }}"
+       target="_blank">
+       XRS Cab Card
+    </a>
+
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='pdfs/log_books_step_by_step.pdf') }}"
+       target="_blank">
+       Log Books Step by Step
+    </a>
+
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='pdfs/cvsa_stickers_explained.pdf') }}"
+       target="_blank">
+       CVSA Stickers Explained
+    </a>
+
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='pdfs/survive_a_roadside_inspection.pdf') }}"
+       target="_blank">
+       Survive a Roadside Inspection
+    </a>
+
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='excel/dot_hours_calculator.xlsx') }}"
+       download>
+       DOT Hours Calculator
+    </a>
+
+    <a class="panel-btn"
+       href="{{ url_for('static', filename='pdfs/dot_exemption_form.pdf') }}"
+       target="_blank">
+       DOT Exemption Form
+    </a>
+
+    <a class="panel-btn center-btn"
+       href="{{ url_for('static', filename='pdfs/Drug_&_Alcohol_Policy_Rev_04.2024.pdf') }}"
+       target="_blank">
+       Drug and Alcohol
+    </a>
+
+  </div>
+
+
+  <div class="dot-info">
+
+    <h3>150 air mile exemption clarified:</h3>
+
+    <ul>
+      <li>
+        If we are changing our reporting terminal for the day
+        (meaning if we are changing hotels or going from home – or
+        a separate pick-up address – to a hotel) then we need to
+        complete a log book entry for that day.
+      </li>
+
+      <li>
+        If we have a trip where we are under 150 miles, but report
+        back to the same reporting terminal on the same day
+        (a long campaign routing day, for example), we do not
+        need to log.
+      </li>
+    </ul>
+
+  </div>
+
+</section>
+
+{% endblock %}

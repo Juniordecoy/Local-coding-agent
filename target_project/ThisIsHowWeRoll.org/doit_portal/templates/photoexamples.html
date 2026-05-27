@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% block title %}Photo Examples{% endblock %}
+
+{% block content %}
+<section class="panel">
+
+  <h2 class="panel-title">Photo Examples</h2>
+
+  <!-- ===== GOOD PHOTOS ===== -->
+  <h3 class="pe-title">GOOD PHOTOS</h3>
+
+  <div class="pe-wrap">
+    <!-- desktop arrows only -->
+    <button class="pe-arrow pe-left" type="button" aria-label="Scroll left" data-target="good">‹</button>
+
+    <div class="pe-strip" id="strip-good">
+      <!-- Replace filenames with your real files -->
+      {% set good_imgs = [
+        'img/examples_good/Good-car_traffic.jpg',
+        'img/examples_good/Good-cars_city_name.jpg',
+        'img/examples_good/Good-cars_street_name.jpg',
+        'img/examples_good/Good-people_cars_1.jpg',
+        'img/examples_good/Good-people_cars_2.jpg',
+        'img/examples_good/Good-people_cars_intersection.jpg',
+        'img/examples_good/Good-people_target_location_1.jpg',
+        'img/examples_good/Good-people_target_location_2.jpg',
+        'img/examples_good/Good-people_traffic.jpg'
+      ] %}
+
+      {% for img in good_imgs %}
+        <button class="pe-card" type="button" data-full="{{ url_for('static', filename=img) }}">
+          <img
+            src="{{ url_for('static', filename=img) }}"
+            alt="Good example {{ loop.index }}"
+            loading="lazy"
+            decoding="async"
+          >
+        </button>
+      {% endfor %}
+    </div>
+
+    <button class="pe-arrow pe-right" type="button" aria-label="Scroll right" data-target="good">›</button>
+  </div>
+
+
+  <!-- ===== BAD PHOTOS ===== -->
+  <h3 class="pe-title pe-title-gap">BAD PHOTOS</h3>
+
+  <div class="pe-wrap">
+    <button class="pe-arrow pe-left" type="button" aria-label="Scroll left" data-target="bad">‹</button>
+
+    <div class="pe-strip" id="strip-bad">
+      {% set bad_imgs = [
+        'img/examples_bad/Bad-blocked_by_tree.jpg',
+        'img/examples_bad/Bad-blocked_vinyls_half_vinyls.jpg',
+        'img/examples_bad/Bad-empty_lot.jpg',
+        'img/examples_bad/Bad-half_the_vinyls.jpg',
+        'img/examples_bad/Bad-too_close_no_traffic.jpg',
+        'img/examples_bad/Bad-empty_lot.jpg',
+        'img/examples_bad/Bad-unacceptable.jpg'
+      ] %}
+
+      {% for img in bad_imgs %}
+        <button class="pe-card" type="button" data-full="{{ url_for('static', filename=img) }}">
+          <img
+            src="{{ url_for('static', filename=img) }}"
+            alt="Bad example {{ loop.index }}"
+            loading="lazy"
+            decoding="async"
+          >
+        </button>
+      {% endfor %}
+    </div>
+
+    <button class="pe-arrow pe-right" type="button" aria-label="Scroll right" data-target="bad">›</button>
+  </div>
+
+</section>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="pe-lightbox" id="peLightbox" aria-hidden="true">
+  <button class="pe-close" type="button" aria-label="Close">✕</button>
+  <!-- desktop-only arrows -->
+  <button class="pe-lb-arrow pe-lb-left" type="button" aria-label="Previous">‹</button>
+  <img id="peLightboxImg" alt="Expanded photo">
+  <button class="pe-lb-arrow pe-lb-right" type="button" aria-label="Next">›</button>
+
+  <div class="pe-caption" id="peCaption"></div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+(function () {
+  // ---- desktop arrow scrolling for strips ----
+  const scrollByCard = (strip, dir) => {
+    const card = strip.querySelector(".pe-card");
+    const step = card ? (card.offsetWidth + 12) : 320;
+    strip.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
+
+  document.querySelectorAll(".pe-arrow").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = btn.dataset.target;
+      const strip = document.getElementById(`strip-${target}`);
+      if (!strip) return;
+      const dir = btn.classList.contains("pe-left") ? -1 : 1;
+      scrollByCard(strip, dir);
+    });
+  });
+
+  // ---- lightbox open/close + next/prev ----
+  const cards = Array.from(document.querySelectorAll(".pe-card"));
+  const lightbox = document.getElementById("peLightbox");
+  const lightboxImg = document.getElementById("peLightboxImg");
+  const caption = document.getElementById("peCaption");
+  const closeBtn = lightbox.querySelector(".pe-close");
+  const prevBtn = lightbox.querySelector(".pe-lb-left");
+  const nextBtn = lightbox.querySelector(".pe-lb-right");
+
+  let currentIndex = -1;
+
+  const showAt = (idx) => {
+    if (idx < 0) idx = cards.length - 1;
+    if (idx >= cards.length) idx = 0;
+    currentIndex = idx;
+
+    const src = cards[currentIndex].dataset.full;
+    if (src) {
+      lightboxImg.src = src;
+
+      // extract filename only
+      const fileName = src.split("/").pop();
+      caption.textContent = fileName;
+    }
+  };
+
+  const openLightboxAt = (idx) => {
+    lightbox.classList.add("show");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    showAt(idx);
+  };
+
+  const closeLightbox = () => {
+    lightbox.classList.remove("show");
+    lightbox.setAttribute("aria-hidden", "true");
+    lightboxImg.src = "";
+    document.body.style.overflow = "";
+    currentIndex = -1;
+  };
+
+  // click thumbnails -> open at that index
+  cards.forEach((card, idx) => {
+    card.addEventListener("click", () => openLightboxAt(idx));
+  });
+
+  // lightbox arrows
+  prevBtn.addEventListener("click", () => showAt(currentIndex - 1));
+  nextBtn.addEventListener("click", () => showAt(currentIndex + 1));
+
+  // close actions
+  closeBtn.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  // keyboard support (desktop)
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("show")) return;
+
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") showAt(currentIndex - 1);
+    if (e.key === "ArrowRight") showAt(currentIndex + 1);
+  });
+})();
+</script>
+{% endblock %}

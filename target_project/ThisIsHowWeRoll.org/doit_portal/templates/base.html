@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Do It Outdoors Media | Driver Portal{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;700;800&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <img src="{{ url_for('static', filename='img/DO+IT+LOGO_WHITE+OUTLINE+2022.png') }}"
+           alt="Do It Outdoors Logo"
+           class="logo">
+
+      <div class="brand-text">
+        <div class="brand-title">do it outdoors media</div>
+        <div class="brand-sub">Driver's Portal</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="tab" href="{{ url_for('index') }}">Home</a>
+      <div class="dropdown">
+        <a class="tab" href="{{ url_for('payroll_hr') }}">Payroll &amp; HR</a>
+        <div class="dropdown-menu">
+          <a href="{{ url_for('employee_navigator') }}">Employee Navigator</a>
+          <a href="{{ url_for('static', filename='pdfs/2023 Driver Handbook Rev 12.2025.pdf') }}" target="_blank">Driver Handbook</a>
+          <a href="{{ url_for('static', filename='pdfs/2023_Drivers_SOP_Supplement.pdf') }}" target="_blank">SOP Handbook</a>
+          <a href="{{ url_for('benefits') }}">Benefits</a>
+          <a href="{{ url_for('dresscode') }}">Dress Code</a>
+          <a href="{{ url_for('gettingpaid') }}">Getting Paid</a>
+          <a href="{{ url_for('static', filename='pdfs/Uber SOP.pdf') }}" target="_blank">Uber SOP</a>
+          <a href="{{ url_for('labor_law_posters') }}">Labor Law Posters</a>
+          <a href="{{ url_for('comdata') }}">Comdata</a>
+          <a href="{{ url_for('perdiem') }}">Per Diem</a>
+          <!-- <a href="{{ url_for('harassment_training', role='drivers') }}">Harassment Training (Drivers)</a> -->
+          <!-- <a href="{{ url_for('harassment_training', role='managers') }}">Harassment Training (Mgmt)</a> -->
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a class="tab" href="{{ url_for('forms') }}">Driver Tools</a>
+        <div class="dropdown-menu">
+          <a href="{{ url_for('lead_login') }}">Lead Driver Portal</a>
+          <a href="{{ url_for('new_hires') }}">New Hires</a>
+          <a href="{{ url_for('week_test', week=2) }}">2 Week Test</a>
+          <a href="{{ url_for('week_test', week=4) }}">4 Week Test</a>
+          <a href="{{ url_for('week_test', week=6) }}">6 Week Test</a>
+          <a href="{{ url_for('week_test', week=8) }}">8 Week Test</a>
+          <a href="{{ url_for('week_test', week=10) }}">10 Week Test</a>
+          <a href="{{ url_for('week_test', week=12) }}">12 Week Test</a>
+          <a href="{{ url_for('forms') }}">Driver Forms</a>
+          <a href="{{ url_for('accident_forms') }}">Accident Forms</a>
+          <a href="{{ url_for('temp_driver') }}">TEMP DRIVERS</a>
+          <!-- <a href="{{ url_for('acknowledgement_form') }}">Acknowledgement Form</a> -->
+          <a href="{{ url_for('ojt_checklist') }}">OJT Checklist</a>
+          <a href="{{ url_for('contactreport') }}">Lead Driver Contact Report</a>
+          <a href="{{ url_for('upcoming_campaign') }}">Upcoming Campaign Questionnaire</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a class="tab" href="{{ url_for('vinyls') }}">Vinyls</a>
+        <div class="dropdown-menu">
+          <a href="{{ url_for('ourvinylsystem') }}">Our Vinyl System</a>
+          <a href="{{ url_for('vinyltroubleshooting') }}">Vinyl troubleshooting</a>
+          <a href="{{ url_for('perfectvinyls') }}">How your vinyls should look</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a class="tab" href="{{ url_for('photos') }}">Photos!</a>
+        <div class="dropdown-menu">
+          <a href="{{ url_for('postingphotos') }}">Posting Photos</a>
+          <a href="{{ url_for('photoexamples') }}">Photo Examples</a>
+          <a href="{{ url_for('tipsandtricks') }}">Tips and Tricks</a>
+          <!-- <a href="{{ url_for('photo_quiz') }}">Photo Quiz</a> -->
+          <a href="{{ url_for('dankellyaward') }}">Dan Kelly Award</a>
+          <a href="{{ url_for('dan_kelly_voting') }}">2024 Dan Kelly Voting</a>
+          <a href="{{ url_for('contestwinners') }}">Recent Contest Winners</a>
+          <a href="{{ url_for('contestrules') }}">Contest Rules</a>
+          <a href="{{ url_for('pops') }}">P.O.P. Examples</a>
+          <a href="{{ url_for('videos') }}">Videos</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a class="tab" href="{{ url_for('healthandsafety') }}">Safety</a>
+        <div class="dropdown-menu">
+          <a href="{{ url_for('accident_forms') }}">Accident Forms</a>
+          <a href="{{ url_for('healthandsafety') }}">Health &amp; Safety</a>
+          <a href="{{ url_for('healthandfitness') }}">Health and Fitness</a>
+          <a href="{{ url_for('safetyfirst') }}">Safety First</a>
+          <a href="{{ url_for('near_miss_reporting') }}">Near Miss Reporting</a>
+          <a href="{{ url_for('safetyvideos') }}">Safety Videos</a>
+          <a href="{{ url_for('health_crisis_2020') }}">2020 Health Crisis</a>
+          <a href="{{ url_for('dot_compliance_test') }}">DOT Compliance Test</a>
+          <a href="{{ url_for('return_to_work_quiz') }}">Return to Work Quiz</a>
+          <a href="{{ url_for('post_training_recap') }}">Post-Training Recap</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a class="tab" href="{{ url_for('contacts') }}">Contacts</a>
+      </div>
+    </nav>
+
+    <div class="search-wrap">
+      <div class="search">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input type="text" placeholder="Search..." />
+      </div>
+    </div>
+  </header>
+
+  <main class="content">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% block scripts %}{% endblock %}
+
+</body>
+</html>

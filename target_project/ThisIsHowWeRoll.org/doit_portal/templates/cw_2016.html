@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block title %}Photo Contest Winners{% endblock %}
+
+{% block content %}
+  <!-- Hero banner (black strip) -->
+    <div class="cw-hero">
+      <div class="cw-hero-inner">
+        <div class="cw-hero-text">
+          <h1 class="cw-hero-title">Photo Contest Winners</h1>
+
+          <p class="cw-hero-sub">
+            These are the best of the best photos every month. This should be what you aim to achieve
+            with your campaign photos!
+          </p>
+            <img
+              src="{{ url_for('static', filename='img/dankelly_images/ribbon.png') }}"
+              alt="Ribbon"
+              class="cw-ribbon"
+            />
+        </div>
+
+        <div class="cw-hero-media">
+          <img
+            src="{{ url_for('static', filename='img/camera.avif') }}"
+            alt="Camera"
+            class="cw-hero-camera"
+          />
+        </div>
+      </div>
+    </div>
+
+  <div class="cw-btn-wrap">
+
+    <a class="cw-btn cw-btn-wide" href="{{ url_for('dankellyaward') }}">
+      Dan Kelly Award - Photo of the Year
+    </a>
+
+    <a class="cw-btn" href="{{ url_for('contest_winners', year='2014-2015') }}">2014/15 Photo Contest Winners</a>
+    <a class="cw-btn" href="{{ url_for('contest_winners', year='2016') }}">2016 Photo Contest Winners</a>
+    <a class="cw-btn" href="{{ url_for('contest_winners', year='2017') }}">2017 Photo Contest Winners</a>
+
+    <a class="cw-btn" href="{{ url_for('contest_winners', year='2018') }}">2018 Photo Contest Winners</a>
+    <a class="cw-btn" href="{{ url_for('contest_winners', year='2019') }}">2019 Photo Contest Winners</a>
+    <a class="cw-btn" href="{{ url_for('contest_winners', year='2020') }}">2020 Photo Contest Winners</a>
+
+    <a class="cw-btn" href="{{ url_for('contest_winners', year='2021') }}">2021 Photo Contest Winners</a>
+    <a class="cw-btn" href="{{ url_for('contest_winners', year='2022') }}">2022 Photo Contest Winners</a>
+    <a class="cw-btn" href="{{ url_for('contest_winners', year='2023') }}">2023 Photo Contest Winners</a>
+
+  </div>
+<section class="panel">
+
+  <h2 class="panel-title">2016</h2>
+  <h2 class="panel-title">Contest Winners</h2>
+
+  <p style="text-align:center; margin-top:-6px;">
+    These are the best of the best photos every month.
+    This should be what you aim to achieve with your campaign photos!
+  </p>
+
+  <div class="dk-divider"></div>
+
+  <div class="dk-gallery">
+    <div class="dk-card">
+      <img class="dk-photo gallery-img" src="{{ url_for('static', filename='img/dankelly_images/dk_2024.avif') }}" alt="">
+      <div class="dk-card-text">
+        <h3>Tier 1 - Derrick Snow</h3>
+        <p>Detroit - November 2024</p>
+      </div>
+    </div>
+    <div class="dk-card">
+      <img class="dk-photo gallery-img" src="{{ url_for('static', filename='img/dankelly_images/dk_2024.avif') }}" alt="">
+      <div class="dk-card-text">
+        <h3>Tier 2 - Mike Ernst</h3>
+        <p>The Villages - November 2024</p>
+      </div>
+    </div>
+    <div class="dk-card">
+      <img class="dk-photo gallery-img" src="{{ url_for('static', filename='img/dankelly_images/dk_2024.avif') }}" alt="">
+      <div class="dk-card-text">
+        <h3>Uber - Melody Sansbury</h3>
+        <p>Ann Arbor - November 2024</p>
+      </div>
+    </div>
+    <div class="dk-card">
+      <img class="dk-photo gallery-img" src="{{ url_for('static', filename='img/dankelly_images/dk_2024.avif') }}" alt="">
+      <div class="dk-card-text">
+        <h3>Uber - Dorothy Latimer</h3>
+        <p>Auburn - November 2024</p>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+<div id="lightbox">
+  <span id="lightbox-close">&times;</span>
+
+  <img id="lightbox-img">
+
+  <div id="lightbox-caption"></div>
+
+  <div id="lightbox-prev">&#10094;</div>
+  <div id="lightbox-next">&#10095;</div>
+</div>
+
+<script>
+
+const images = document.querySelectorAll(".gallery-img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const caption = document.getElementById("lightbox-caption");
+
+const prev = document.getElementById("lightbox-prev");
+const next = document.getElementById("lightbox-next");
+const closeBtn = document.getElementById("lightbox-close");
+
+let currentIndex = 0;
+
+function showImage(index){
+
+  const img = images[index];
+
+  lightbox.style.display = "flex";
+  lightboxImg.src = img.src;
+
+  const card = img.closest(".dk-card");
+  const title = card.querySelector("h3").innerText;
+  const desc = card.querySelector("p").innerText;
+
+  caption.innerHTML = `<strong>${title}</strong><br>${desc}`;
+}
+
+images.forEach((img, index) => {
+  img.addEventListener("click", () => {
+    currentIndex = index;
+    showImage(currentIndex);
+  });
+});
+
+next.onclick = () => {
+  currentIndex = (currentIndex + 1) % images.length;
+  showImage(currentIndex);
+};
+
+prev.onclick = () => {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  showImage(currentIndex);
+};
+
+closeBtn.onclick = () => {
+  lightbox.style.display = "none";
+};
+
+document.addEventListener("keydown", (e) => {
+
+  if (lightbox.style.display !== "flex") return;
+
+  if (e.key === "ArrowRight") next.onclick();
+  if (e.key === "ArrowLeft") prev.onclick();
+  if (e.key === "Escape") lightbox.style.display = "none";
+
+});
+
+</script>
+{% endblock %}
