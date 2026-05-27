@@ -290,10 +290,10 @@ Rules:
     return "\n".join(results)
 
 def clean_ai_code(ai_text):
-    cleaned = ai_text.strip()
+    content = ai_text.strip()
 
-    if cleaned.startswith("```"):
-        lines = cleaned.splitlines()
+    if content.startswith("```"):
+        lines = content.splitlines()
 
         if lines:
             lines = lines[1:]
@@ -301,9 +301,28 @@ def clean_ai_code(ai_text):
         if lines and lines[-1].strip() == "```":
             lines = lines[:-1]
 
-        cleaned = "\n".join(lines)
+        content = "\n".join(lines)
 
-    return cleaned.strip()
+    content = content.replace("```html", "")
+    content = content.replace("```jinja", "")
+    content = content.replace("```", "")
+
+    lines = []
+
+    for line in content.splitlines():
+        stripped = line.strip()
+
+        if stripped.startswith("Here is"):
+            continue
+
+        if stripped.startswith("This code"):
+            continue
+
+        lines.append(line)
+
+    content = "\n".join(lines)
+
+    return content.strip()
 
 def add_review_header(filename, content):
     header = f"""/*
@@ -618,82 +637,99 @@ def draft_quiz_from_reference(
 
     reference_content = reference_path.read_text(encoding="utf-8")
 
-    prompt = f"""
-You are creating a new safety quiz page.
+#     prompt = f"""
+# You are creating a new safety quiz page.
+#
+# Follow the reference quiz structure EXACTLY.
+#
+# Preserve:
+# - wrapper structure
+# - classes
+# - form layout
+# - honeypot layout
+# - button structure
+# - quiz formatting
+#
+# Only replace:
+# - quiz title
+# - visible quiz heading text
+# - questions
+# - answers
+#
+# REFERENCE QUIZ:
+# {reference_content}
+#
+# NEW QUIZ NAME:
+# {new_quiz_name}
+#
+# NEW QUIZ TITLE:
+# {new_quiz_title}
+#
+# NEW QUESTIONS:
+# {new_questions}
+#
+# CRITICAL QUESTION RULE:
+# Use ONLY the questions and answer choices provided in NEW QUESTIONS.
+# Do NOT invent new questions.
+# Do NOT reuse questions from the reference quiz.
+# Do NOT keep any old reference quiz question text.
+# If NEW QUESTIONS contains only one question, the generated quiz must contain only one question.
+#
+# Question Input Format:
+# - Questions may contain:
+#   - Q1:
+#   - A.
+#   - B.
+#   - C.
+#   - D.
+# - Convert these into the same radio button structure used in the reference quiz.
+# - Preserve the existing formatting style exactly.
+#
+# Answer Key Rules:
+# - If an ANSWER line is provided, do not display it on the page.
+# - Keep the answer value letters as radio values: a, b, c, d.
+# - Do not add scoring logic unless explicitly requested.
+# - Do not change the visible quiz format to show correct answers.
+#
+# Open-Ended Question Rules:
+# - Questions without A/B/C/D answer choices should use textarea fields.
+# - Preserve the same textarea structure used in the reference quiz.
+# - Textarea questions should still follow q-number naming patterns.
+#
+# Question Rules:
+# - Multiple choice questions must use radio buttons.
+# - Preserve the existing q1/q2/q3 naming pattern.
+# - Preserve the existing label structure.
+# - Preserve required attributes on the first radio option.
+# - Open-ended questions should use textarea fields.
+# - Keep the same quiz formatting style as the reference file.
+#
+# Rules:
+# - Return ONLY raw Jinja/HTML.
+# - Do not explain.
+# - Do not redesign.
+# - Keep the same formatting patterns.
+# - Preserve the same class names.
+# - Preserve the same honeypot pattern.
+# - Preserve the same submit button structure.
+# """
 
-Follow the reference quiz structure EXACTLY.
+    generated_blocks = build_quiz_question_blocks(new_questions)
 
-Preserve:
-- wrapper structure
-- classes
-- form layout
-- honeypot layout
-- button structure
-- quiz formatting
-
-Only replace:
-- quiz title
-- visible quiz heading text
-- questions
-- answers
-
-REFERENCE QUIZ:
-{reference_content}
-
-NEW QUIZ NAME:
-{new_quiz_name}
-
-NEW QUIZ TITLE:
-{new_quiz_title}
-
-NEW QUESTIONS:
-{new_questions}
-
-Question Input Format:
-- Questions may contain:
-  - Q1:
-  - A.
-  - B.
-  - C.
-  - D.
-- Convert these into the same radio button structure used in the reference quiz.
-- Preserve the existing formatting style exactly.
-
-Answer Key Rules:
-- If an ANSWER line is provided, do not display it on the page.
-- Keep the answer value letters as radio values: a, b, c, d.
-- Do not add scoring logic unless explicitly requested.
-- Do not change the visible quiz format to show correct answers.
-
-Open-Ended Question Rules:
-- Questions without A/B/C/D answer choices should use textarea fields.
-- Preserve the same textarea structure used in the reference quiz.
-- Textarea questions should still follow q-number naming patterns.
-
-Question Rules:
-- Multiple choice questions must use radio buttons.
-- Preserve the existing q1/q2/q3 naming pattern.
-- Preserve the existing label structure.
-- Preserve required attributes on the first radio option.
-- Open-ended questions should use textarea fields.
-- Keep the same quiz formatting style as the reference file.
-
-Rules:
-- Return ONLY raw Jinja/HTML.
-- Do not explain.
-- Do not redesign.
-- Keep the same formatting patterns.
-- Preserve the same class names.
-- Preserve the same honeypot pattern.
-- Preserve the same submit button structure.
-"""
-
-    quiz_content = ask_ai(
-        "You are an expert at maintaining existing Flask/Jinja quiz templates.",
-        prompt
+    quiz_content = replace_quiz_question_area(
+        reference_content,
+        generated_blocks
     )
 
-    quiz_content = clean_ai_code(quiz_content)
+    quiz_content = quiz_content.replace(
+        "{% block title %}May Safety Quiz{% endblock %}",
+        f"{{% block title %}}{new_quiz_title}{{% endblock %}}"
+    )
+
+    quiz_content = quiz_content.replace(
+        "May 2026 Safety Quiz",
+        new_quiz_title
+    )
 
     filename = f"{new_quiz_name}.html"
 
@@ -727,6 +763,88 @@ Rules:
     )
 
     return "\n".join(results)
+
+def parse_quiz_questions(question_text):
+    questions = []
+    current = None
+
+    for line in question_text.splitlines():
+        clean_line = line.strip()
+
+        if not clean_line:
+            continue
+
+        if clean_line.upper().startswith("ANSWER:"):
+            continue
+
+        if clean_line.startswith("Q") and ":" in clean_line:
+            if current:
+                questions.append(current)
+
+            current = {
+                "question": "",
+                "answers": []
+            }
+            continue
+
+        if current is None:
+            continue
+
+        if clean_line.startswith(("A.", "B.", "C.", "D.")):
+            current["answers"].append(clean_line)
+        else:
+            if current["question"]:
+                current["question"] += " " + clean_line
+            else:
+                current["question"] = clean_line
+
+    if current:
+        questions.append(current)
+
+    return questions
+
+def build_quiz_question_blocks(question_text):
+    parsed_questions = parse_quiz_questions(question_text)
+
+    blocks = []
+
+    for index, item in enumerate(parsed_questions, start=1):
+        question = item["question"]
+        answers = item["answers"]
+
+        if answers:
+            block = f'''      <div class="hq-q">
+        <p><strong>{index}. {question}</strong></p>
+
+        <label><input type="radio" name="q{index}" value="a" required> {answers[0]}</label>
+        <label><input type="radio" name="q{index}" value="b"> {answers[1]}</label>
+        <label><input type="radio" name="q{index}" value="c"> {answers[2]}</label>
+        <label><input type="radio" name="q{index}" value="d"> {answers[3]}</label>
+      </div>'''
+        else:
+            block = f'''      <div class="hq-q">
+        <p><strong>{index}. {question}</strong></p>
+        <textarea name="q{index}" rows="3" required></textarea>
+      </div>'''
+
+        blocks.append(block)
+
+    return "\n\n".join(blocks)
+
+def replace_quiz_question_area(reference_content, generated_blocks):
+    start_marker = '      <div class="hq-q">'
+    end_marker = '      <div style="position:absolute; left:-9999px;">'
+
+    start_index = reference_content.find(start_marker)
+    end_index = reference_content.find(end_marker)
+
+    if start_index == -1 or end_index == -1:
+        return ""
+
+    before_questions = reference_content[:start_index]
+    after_questions = reference_content[end_index:]
+
+    return before_questions + generated_blocks + "\n\n" + after_questions
 
 def extract_answer_key(question_text):
     answer_lines = []

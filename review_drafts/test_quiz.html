@@ -1,0 +1,59 @@
+<!--
+AI REVIEW DRAFT
+File: test_quiz.html
+Status: NOT APPROVED
+Safe location: need_reviewed/
+Do not paste into production until reviewed.
+-->
+
+{% extends "base.html" %}
+{% block title %}Test Quiz{% endblock %}
+
+{% block content %}
+
+<section class="panel">
+
+  <h2 class="panel-title">Test Quiz</h2>
+  <h3 class="panel-title">Straight Truck DOT Compliance Test</h3>
+
+  {% if submitted %}
+    <div class="success-msg">Thanks — your quiz was submitted.</div>
+  {% endif %}
+
+  <form method="POST" class="quiz-form">
+
+    <div class="two-col">
+
+      <div>
+
+        <div class="field">
+          <label for="your_name"><span class="req"></span> Your name</label>
+          <input id="your_name" name="your_name" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="email"><span class="req"></span> Email</label>
+          <input id="email" name="email" type="text" required>
+        </div>
+
+      </div>
+
+      <div class="hq-q">
+        <p><strong>1. Test question?</strong></p>
+
+        <label><input type="radio" name="q1" value="a" required> A. One</label>
+        <label><input type="radio" name="q1" value="b"> B. Two</label>
+        <label><input type="radio" name="q1" value="c"> C. Three</label>
+        <label><input type="radio" name="q1" value="d"> D. Four</label>
+      </div>
+
+      <div style="position:absolute; left:-9999px;">
+        <input type="text" name="do_not_fill" autocomplete="off">
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Quiz</button>
+     </div>
+    </form>
+</section>
+
+{% endblock %}

@@ -681,35 +681,72 @@ def validate_draft_command(user_message):
     )
 
 def draft_quiz_from_reference_command(user_message):
-    if "|" not in user_message:
-        return (
-            "Usage:\n"
-            "draft quiz from reference reference_file.html | new_quiz_name | New Quiz Title | questions"
+    command_text = user_message.replace("draft quiz from reference", "", 1).strip()
+
+    # Old format still supported:
+    # draft quiz from reference reference.html | new_name | title | questions
+    if "|" in command_text:
+        parts = command_text.split("|", 3)
+
+        if len(parts) < 4:
+            return (
+                "Usage:\n"
+                "draft quiz from reference reference_file.html | new_quiz_name | New Quiz Title | questions"
+            )
+
+        reference_html = parts[0].strip()
+        new_quiz_name = parts[1].strip()
+        new_quiz_title = parts[2].strip()
+        new_questions = parts[3].strip()
+
+        return draft_quiz_from_reference(
+            reference_html=reference_html,
+            new_quiz_name=new_quiz_name,
+            new_quiz_title=new_quiz_title,
+            new_questions=new_questions
         )
 
-    left_side, questions = user_message.split("|", 1)
+    lines = command_text.splitlines()
 
-    parts = left_side.split()
-
-    if len(parts) < 5:
+    if not lines:
         return (
             "Usage:\n"
-            "draft quiz from reference reference_file.html | new_quiz_name | New Quiz Title | questions"
+            "draft quiz from reference reference_file.html\n"
+            "TITLE: New Quiz Title\n"
+            "OUTPUT: new_quiz_name\n"
+            "Q1:\n"
+            "..."
         )
 
-    reference_html = parts[4].strip()
+    reference_html = lines[0].strip()
+    new_quiz_title = ""
+    new_quiz_name = ""
+    question_start_index = None
 
-    remaining_parts = questions.split("|")
+    for index, line in enumerate(lines[1:], start=1):
+        clean_line = line.strip()
 
-    if len(remaining_parts) < 3:
+        if clean_line.lower().startswith("title:"):
+            new_quiz_title = clean_line.replace("TITLE:", "", 1).replace("title:", "", 1).strip()
+
+        elif clean_line.lower().startswith("output:"):
+            new_quiz_name = clean_line.replace("OUTPUT:", "", 1).replace("output:", "", 1).strip()
+
+        elif clean_line.startswith("Q1:"):
+            question_start_index = index
+            break
+
+    if not reference_html or not new_quiz_title or not new_quiz_name or question_start_index is None:
         return (
             "Usage:\n"
-            "draft quiz from reference reference_file.html | new_quiz_name | New Quiz Title | questions"
+            "draft quiz from reference reference_file.html\n"
+            "TITLE: New Quiz Title\n"
+            "OUTPUT: new_quiz_name\n"
+            "Q1:\n"
+            "..."
         )
 
-    new_quiz_name = remaining_parts[0].strip()
-    new_quiz_title = remaining_parts[1].strip()
-    new_questions = remaining_parts[2].strip()
+    new_questions = "\n".join(lines[question_start_index:]).strip()
 
     return draft_quiz_from_reference(
         reference_html=reference_html,

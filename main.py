@@ -293,12 +293,32 @@ def handle_user_message(user_message):
         ]
     }
 
+def get_user_input():
+    first_line = input("You: ")
+
+    if first_line.lower() != "multi":
+        return first_line
+
+    print("Multiline mode. Type END on its own line to finish.")
+
+    lines = []
+
+    while True:
+        line = input()
+
+        if line.strip() == "END":
+            break
+
+        lines.append(line)
+
+    return "\n".join(lines)
+
 if __name__ == "__main__":
     print("Local AI Assistant")
     print("Type 'exit' to quit.\n")
 
     while True:
-        user_message = input("You: ")
+        user_message = get_user_input()
 
         if user_message.lower() == "exit":
             save_memory(messages)

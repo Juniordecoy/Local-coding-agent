@@ -1,0 +1,5 @@
+AI DRAFT VALIDATION REPORT
+
+test_quiz.html:
+ERRORS:
+- ERROR: [QUIZ] Quiz missing textarea question/comment field.
